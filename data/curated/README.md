@@ -15,6 +15,12 @@ identiques produisent des fichiers identiques.
 | `dim_prelevement.parquet` | `Dim_Prelevement` |
 | `dim_source.parquet` | `Dim_Source` |
 | `dim_glossaire.parquet` | `Dim_Glossaire` |
+| `dim_instrument_dette.parquet` | `Dim_Instrument_Dette` |
+| `dim_detenteur.parquet` | `Dim_Detenteur` |
+| `fait_dette.parquet` | `Fait_Dette` |
+| `fait_dette_instrument.parquet` | `Fait_Dette_Instrument` |
+| `fait_detention_dette.parquet` | `Fait_Detention_Dette` |
+| `fait_taux_marche.parquet` | `Fait_Taux_Marche` |
 | `dim_millesime.parquet` | `Dim_Millesime` |
 | `dim_indicateur.parquet` | `Dim_Indicateur` |
 | `fait_comptes_apu_annuels.parquet` | `Fait_Comptes_APU_Annuels` (F01) |

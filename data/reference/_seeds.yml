@@ -176,3 +176,19 @@ seeds:
         data_tests: [unique, not_null]
       - name: terme
         data_tests: [unique, not_null]
+
+  - name: ref_instrument_dette
+    description: Instruments de la dette publique (feuilles de gov_10dd_edpt1), libellés en clair.
+    config:
+      column_types: {instrument_code: varchar, na_item: varchar, ordre_tri: integer}
+    columns:
+      - name: instrument_code
+        data_tests: [unique, not_null]
+
+  - name: ref_detenteur
+    description: Détenteurs de la dette publique (gov_10dd_ggd, contrepartie sector2), libellés en clair.
+    config:
+      column_types: {detenteur_code: varchar, sector2: varchar, ordre_tri: integer}
+    columns:
+      - name: detenteur_code
+        data_tests: [unique, not_null]

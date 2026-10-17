@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "589e4d6d66be632d7e12",
+  "displayName": "7. À qui doit-on ?",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "7319c16855def2a28517",
+      "target": "adc65eb002febb572c9e",
+      "type": "NoFilter"
+    }
+  ]
+}

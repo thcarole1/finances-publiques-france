@@ -33,6 +33,10 @@ Livrées : pages 1 à 5, page 10 (« Comparer ») et un glossaire (`powerbi/READ
 porte une phrase de synthèse calculée (mesures `Phrase : …`, dossier « 20 Pédagogie ») et un
 encadré « Comprendre ». Les segments Pays et Année sont synchronisés entre les pages.
 
+Lot 3a : page 6 (« La dette »), en deux pages : « La dette » (montant, décomposition de sa
+variation) et « À qui doit-on ? » (détenteurs, instruments, taux). L'échéancier titre par titre
+est reporté (source AFT inaccessible).
+
 ## 3. Espace « Explorer »
 
 | Page | Contenu |

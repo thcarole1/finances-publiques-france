@@ -26,7 +26,7 @@ Quand un même chiffre existe dans plusieurs sources :
 | Eurostat | `gov_10a_taxag` | Recettes fiscales et cotisations détaillées par type d'impôt | Annuelle | API SDMX | 1 |
 | Eurostat | `gov_10q_ggnfa` | Comptes non financiers trimestriels des APU | Trimestrielle | API SDMX | 3 |
 | Eurostat | `gov_10q_ggdebt` | Dette trimestrielle par sous-secteur, instrument, maturité | Trimestrielle | API SDMX | 3 |
-| Eurostat | `gov_10dd_edpt1` | Notification de déficit et dette (procédure de déficit excessif) | Semestrielle | API SDMX | 1 |
+| Eurostat | `gov_10dd_edpt1` | Notification de déficit et dette (procédure de déficit excessif), dette par instrument | Semestrielle | API SDMX | 3a |
 | Eurostat | `nama_10_gdp`, `namq_10_gdp`, `demo_pjan`, `prc_hicp_aind`, `prc_ppp_ind`, `ert_bil_eur_a` | PIB annuel et trimestriel, population, inflation, parités de pouvoir d'achat, taux de change | Variable | API SDMX | 1 |
 | INSEE | Comptes nationaux annuels, compte des APU (tableaux 3.xxx) | Comptes détaillés par sous-secteur (État, ODAC, APUL, ASSO), **transferts entre sous-secteurs** | Annuelle (fin mai) | Fichiers + API BDM **[À confirmer]** | 1–2 |
 | INSEE | Comptes trimestriels, dette trimestrielle de Maastricht | Déficit et dette trimestriels | Trimestrielle | API BDM (SDMX) | 3 |
@@ -47,7 +47,8 @@ Quand un même chiffre existe dans plusieurs sources :
 | AFT | Détention de la dette négociable par les non-résidents | Part détenue par les non-résidents | Trimestrielle | Fichiers | 3 |
 | Banque de France | Webstat | Détenteurs, taux d'émission | Mensuelle | API (clé) **[À confirmer]** | 3 |
 | BCE | Data Portal | Taux souverains, courbe des taux de la zone euro | Quotidienne/mensuelle | API SDMX | 3 |
-| Eurostat | `irt_lt_mcby_m` | Taux d'intérêt à long terme (critère de convergence), tous pays UE | Mensuelle | API SDMX | 3 |
+| Eurostat | `irt_lt_mcby_m` | Taux d'intérêt à long terme (critère de convergence), tous pays UE | Mensuelle | API SDMX | 3a |
+| Eurostat | `gov_10dd_ggd` | Dette publique par détenteur (résidents par catégorie, non-résidents) | Annuelle | API SDMX | 3a |
 | OCDE | Taux d'intérêt à long terme | Pays hors UE | Mensuelle | API SDMX | 8 |
 
 ### Budgets votés et exécutés

@@ -10,7 +10,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction","Dim_Sous_Secteur_Receveur","Fait_Transferts_APU","Pres_Flux_Sankey","Dim_Glossaire"]
+annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction","Dim_Sous_Secteur_Receveur","Fait_Transferts_APU","Pres_Flux_Sankey","Dim_Glossaire","Dim_Instrument_Dette","Dim_Detenteur","Fait_Dette","Fait_Dette_Instrument","Fait_Detention_Dette","Fait_Taux_Marche"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -34,6 +34,12 @@ ref table Dim_Sous_Secteur_Receveur
 ref table Fait_Transferts_APU
 ref table Pres_Flux_Sankey
 ref table Dim_Glossaire
+ref table Dim_Instrument_Dette
+ref table Dim_Detenteur
+ref table Fait_Dette
+ref table Fait_Dette_Instrument
+ref table Fait_Detention_Dette
+ref table Fait_Taux_Marche
 ref table _Mesures
 ref table CG_Unite
 ref table CG_Consolidation

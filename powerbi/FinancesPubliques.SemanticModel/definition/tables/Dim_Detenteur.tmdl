@@ -1,0 +1,60 @@
+/// À qui les administrations doivent leur dette.
+table Dim_Detenteur
+	lineageTag: 6047870d-6c78-4290-a918-124d7f542c20
+
+	column 'Code détenteur'
+		dataType: string
+		isHidden
+		lineageTag: 793ca4dc-dbad-4bd0-8675-0f231e27afb4
+		summarizeBy: none
+		sourceColumn: detenteur_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Détenteur'
+		dataType: string
+		lineageTag: acb0d5cd-5661-4af9-832f-af771a7a7665
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	/// Étranger, pays, non ventilé
+	column 'Groupe de détenteurs'
+		dataType: string
+		lineageTag: 8f48e273-0c50-4963-910e-b25c8b881eba
+		summarizeBy: none
+		sourceColumn: groupe
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition du détenteur'
+		dataType: string
+		lineageTag: 41111fd4-83f9-4f3e-8672-cfd4343a2f7d
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a5dca34d-d891-4a6e-b91f-3bf7bcee314f
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Detenteur = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_detenteur")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

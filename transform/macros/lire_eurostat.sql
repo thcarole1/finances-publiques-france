@@ -3,7 +3,8 @@
   - tous_millesimes=false : uniquement l'instantané le plus récent (cas général) ;
   - tous_millesimes=true  : tous les instantanés, avec leur date de collecte (table des révisions).
   Renvoie des colonnes normalisées : date_collecte, unit, sector, cofog, na_item, geo, annee,
-  valeur (double), flag, date_maj_producteur.
+  valeur (double), flag, date_maj_producteur, et periode (TIME_PERIOD brut : « 2024 »,
+  « 2024-Q4 » ou « 2024-12 ») pour les jeux infra-annuels.
 #}
 {% macro lire_eurostat(jeu, colonnes_dimensions, tous_millesimes=false) %}
   with brut as (
@@ -26,7 +27,8 @@
       {% for c in colonnes_dimensions %}{{ c }},
       {% endfor %}
       geo,
-      cast("TIME_PERIOD" as integer)                  as annee,
+      "TIME_PERIOD"                                   as periode,
+      cast(left("TIME_PERIOD", 4) as integer)         as annee,
       try_cast("OBS_VALUE" as double)                 as valeur,
       nullif("OBS_FLAG", '')                          as flag,
       cast(strptime("LAST UPDATE", '%d/%m/%y %H:%M:%S') as date) as date_maj_producteur

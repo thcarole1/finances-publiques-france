@@ -1,0 +1,79 @@
+/// F12 — Taux des emprunts d'État à 10 ans, moyenne mensuelle (en %). Non additive.
+table Fait_Taux_Marche
+	lineageTag: ce9dd4cc-829a-4c7e-ae96-16ad511c439e
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 51b26545-e465-4ec5-816d-15ff07bbf2eb
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cdd3c80c-0e28-4f10-bdb5-16a6f20120cb
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column 'Maturité'
+		dataType: string
+		isHidden
+		lineageTag: 104df2da-f9c4-4017-bf4c-8db2255e34cd
+		summarizeBy: none
+		sourceColumn: maturite
+
+		annotation SummarizationSetBy = User
+
+	column taux_pct
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 4e9a0fd0-4d6a-4675-8a12-077acf1e4e90
+		summarizeBy: none
+		sourceColumn: taux_pct
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (taux)'
+		dataType: string
+		lineageTag: a55dc7d2-a0c5-46f1-a1be-7fecfd5f2926
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: d72b00b6-eb10-4d66-b660-0a214a5676e0
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 9a92128a-f104-438b-a318-62f87d225944
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Taux_Marche = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_taux_marche")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

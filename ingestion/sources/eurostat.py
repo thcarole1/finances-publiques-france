@@ -16,6 +16,7 @@ import argparse
 import csv
 import gzip
 import io
+import re
 import sys
 from dataclasses import dataclass, field
 from datetime import date, datetime
@@ -75,6 +76,21 @@ JEUX: dict[str, Jeu] = {
             description="PIB (prix courants, volume, prix)",
         ),
         Jeu(
+            "gov_10dd_edpt1",
+            f"A.MIO_EUR+MIO_NAC.{SOUS_SECTEURS}.GD+GD_F2+GD_F31+GD_F32+GD_F41+GD_F42.{{geo}}",
+            description="Dette publique notifiée (procédure de déficit excessif), par instrument",
+        ),
+        Jeu(
+            "gov_10dd_ggd",
+            "A.GD.S1+S11_S14_S15+S121+S122_S123+S124-S129+S1_S2+S2.S13.TOTAL.MIO_EUR+MIO_NAC.{geo}",
+            description="Dette publique par détenteur",
+        ),
+        Jeu(
+            "irt_lt_mcby_m",
+            "M.MCBY.{geo}",
+            description="Taux d'intérêt à long terme (emprunts d'État à 10 ans), mensuel",
+        ),
+        Jeu(
             "nama_10_pe",
             "A.THS_PER.POP_NC.{geo}",
             description="Population (comptabilité nationale, moyenne annuelle)",
@@ -121,6 +137,13 @@ def verifier_reponse(contenu: bytes) -> None:
     raise RuntimeError(f"Réponse Eurostat inattendue : {extrait}")
 
 
+def geos_refuses(reponse) -> list[str]:
+    """Pays refusés par Eurostat (erreur 400 « GEO=XX not allowed ») ; liste vide sinon."""
+    if reponse.status_code != 400:
+        return []
+    return re.findall(r"GEO=([A-Z0-9_]+)", reponse.text)
+
+
 def date_mise_a_jour(contenu_gz: bytes) -> str | None:
     """Date de dernière mise à jour publiée par Eurostat (colonne LAST UPDATE), au format ISO."""
     texte = gzip.decompress(contenu_gz).decode("utf-8")
@@ -146,6 +169,19 @@ def collecter(code_jeu: str, date_collecte: date | None = None, racine: Path = R
     for lot in lots:
         url, params = construire_url(jeu, lot)
         reponse = session.get(url, params=params, timeout=600)
+        refuses = geos_refuses(reponse)
+        if refuses:
+            # Certains jeux ne couvrent pas tous les pays (Norvège, Suisse…) : Eurostat refuse
+            # alors toute la requête. On retire les pays refusés et on réessaie.
+            print(
+                f"  {code_jeu} : pays absents du jeu, ignorés : {', '.join(refuses)}",
+                file=sys.stderr,
+            )
+            lot = [g for g in lot if g not in refuses]
+            if not lot:
+                continue
+            url, params = construire_url(jeu, lot)
+            reponse = session.get(url, params=params, timeout=600)
         if reponse.status_code == 404:
             # Eurostat renvoie 404 quand aucune donnée ne correspond (pays absent du jeu).
             print(f"  {code_jeu} {'+'.join(lot)} : aucune donnée", file=sys.stderr)

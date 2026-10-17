@@ -1,0 +1,7 @@
+instrument_code,na_item,libelle,libelle_court,famille,duree_origine,definition,ordre_tri
+GD_F32,GD_F32,Obligations (emprunts de plus d'un an sur les marchés),Obligations,Titres,Long terme,"Titres émis sur les marchés financiers et remboursés au bout de plus d'un an : en France, les obligations assimilables du Trésor (OAT).",1
+GD_F31,GD_F31,Titres de court terme (bons du Trésor),Titres de court terme,Titres,Court terme,"Titres émis sur les marchés financiers et remboursés en un an ou moins : en France, les bons du Trésor (BTF).",2
+GD_F42,GD_F42,Prêts bancaires de long terme,Prêts de long terme,Prêts,Long terme,"Prêts de plus d'un an accordés par des banques ou des institutions comme la Banque européenne d'investissement, surtout aux collectivités locales et aux hôpitaux.",3
+GD_F41,GD_F41,Prêts bancaires de court terme,Prêts de court terme,Prêts,Court terme,Prêts d'un an ou moins.,4
+GD_F2,GD_F2,Dépôts reçus et pièces de monnaie,Dépôts et pièces,Dépôts,Court terme,"Pièces de monnaie émises par l'État et dépôts confiés au Trésor par d'autres organismes.",5
+GD_NV,,Non ventilé,Non ventilé,Non ventilé,Non ventilé,Écart entre le total publié et la somme des instruments détaillés.,9

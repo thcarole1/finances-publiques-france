@@ -27,6 +27,7 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 | QC-B09 | **Pont payeur** : Σ coefficients = 1 par prélèvement et par convention | `Map_Prelevement_Payeur` | 0,001 |
 | QC-B10 | **Identité du solde** : recettes − dépenses = besoin/capacité de financement publié (B9) | F01 | 0,05 % ou 1 M€ |
 | QC-B11 | **Scénarios valides** : chaque fichier `scenarios/*.yml` respecte le schéma, variables et années connues | F13 | 0 |
+| QC-B13 | **Cohérence de la dette** : Σ par sous-secteur (consolidé) = Σ par instrument = Σ par détenteur | F09, F09b, F10 | 0,1 % |
 | QC-B12 | **Unités** : ordre de grandeur cohérent (ex. dépenses France entre 40 et 70 % du PIB) — détecte une erreur d'échelle millions/milliards | F01, F04 | Bornes par pays |
 
 ## 3. Avertissements

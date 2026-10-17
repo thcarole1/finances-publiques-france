@@ -1,0 +1,89 @@
+/// F10 — Dette consolidée par détenteur, en fin d'année (détail publié depuis 2020 pour la plupart des pays). Semi-additive.
+table Fait_Detention_Dette
+	lineageTag: 63057af4-ec75-411c-bec2-137f1af6ea59
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: e502e53c-91d6-48ec-8f55-81b4c1009125
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 32b16f7b-7866-4153-bfb8-067c59c24aa0
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column detenteur_code
+		dataType: string
+		isHidden
+		lineageTag: 29ae9f51-258c-46cc-99b2-29515b68ca25
+		summarizeBy: none
+		sourceColumn: detenteur_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: dc61eaa4-5cc7-4446-ae4c-071284002401
+		summarizeBy: sum
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 5a056ffb-d78b-4c6b-b874-9c55c5d54c98
+		summarizeBy: sum
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (détention)'
+		dataType: string
+		lineageTag: 948eb115-1fa5-4db3-b399-343cd431180f
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 55518aaf-efc4-4e55-9fbf-033d01202c27
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 76fce049-f7b5-4f11-866b-39e3e131b46b
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Detention_Dette = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_detention_dette")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

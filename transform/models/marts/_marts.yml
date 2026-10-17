@@ -916,3 +916,279 @@ models:
     data_type: varchar
   - name: valeur_meur
     data_type: double
+- name: fait_dette
+  description: F09 — Dette publique en fin d'année par sous-secteur, avec éliminations (semi-additive).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+- name: fait_dette_instrument
+  description: F09b — Dette consolidée par instrument (semi-additive).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: instrument_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_instrument_dette')
+          field: instrument_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - instrument_code
+- name: fait_detention_dette
+  description: F10 — Dette consolidée par détenteur (semi-additive).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: detenteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_detenteur')
+          field: detenteur_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - detenteur_code
+- name: fait_taux_marche
+  description: F12 — Taux des emprunts d'État à 10 ans, moyenne mensuelle (non additive).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: maturite
+    data_type: varchar
+  - name: taux_pct
+    data_type: double
+    description: Taux en % (3.5 = 3,5 %)
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - maturite
+- name: dim_instrument_dette
+  description: Instruments de la dette publique.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: instrument_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: libelle_court
+    data_type: varchar
+  - name: famille
+    data_type: varchar
+  - name: duree_origine
+    data_type: varchar
+  - name: definition
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
+- name: dim_detenteur
+  description: Détenteurs de la dette publique.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: detenteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: groupe
+    data_type: varchar
+  - name: definition
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
