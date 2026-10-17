@@ -62,6 +62,8 @@ Une **couche pédagogique** traverse les trois : info-bulles explicatives, encad
 
 ## 6. Principes de conception visuelle
 
+- **Aucun sigle ni code technique dans un visuel** (APUL, ODAC, ASSO, codes SEC ou COFOG…) : des
+  libellés en clair ; le terme technique figure seulement dans l'info-bulle ou le glossaire.
 - Une question par page, le titre de la page **est** la question.
 - Unité toujours visible dans le titre ou le sous-titre du visuel (le groupe de calcul `CG_Unite`
   fournit un libellé dynamique).

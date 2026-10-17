@@ -1,0 +1,88 @@
+/// Flux pré-calculés du Sankey « où va l'argent ? » (table de présentation, dérivée).
+table Pres_Flux_Sankey
+	lineageTag: 32976780-7272-4d23-a061-a7183d28abf9
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: ed5d337b-26a5-4a25-8361-3ebc6b6fd16a
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bb204b7d-2b35-4394-a825-dad85ea95940
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	/// Qui verse (légal), qui supporte (économique), ou par base économique : ne filtre que l'étape 1
+	column 'Lecture du payeur'
+		dataType: string
+		lineageTag: a3786923-e7ce-45df-bb0b-7e16a0956607
+		summarizeBy: none
+		sourceColumn: lecture
+
+		annotation SummarizationSetBy = User
+
+	/// 1 : qui paie → qui encaisse ; 2 : qui encaisse → qui dépense ; 3 : qui dépense → pour quoi
+	column 'Étape'
+		dataType: int64
+		formatString: 0
+		lineageTag: 64428fc3-b59e-42eb-ad8b-c34dafece7cf
+		summarizeBy: none
+		sourceColumn: etape
+
+		annotation SummarizationSetBy = User
+
+	column 'Source du flux'
+		dataType: string
+		lineageTag: 1b3f5fe1-cf63-48fe-afd5-cf07dd65c278
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = User
+
+	column 'Destination du flux'
+		dataType: string
+		lineageTag: c5e9d2a7-0a4a-465d-b2ae-9d9c4d646122
+		summarizeBy: none
+		sourceColumn: cible
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: 55b688cd-bee1-442d-ae96-a116dce12b2b
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: ca8e920d-95c8-44a5-9ae7-9ed14a7f393f
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	partition Pres_Flux_Sankey = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("pres_flux_sankey")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

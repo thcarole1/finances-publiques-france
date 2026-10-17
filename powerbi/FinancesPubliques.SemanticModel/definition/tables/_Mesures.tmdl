@@ -146,6 +146,12 @@ table _Mesures
 		displayFolder: 05 Transferts
 		lineageTag: 1089ba6a-aae6-4696-bcbb-4132c5f71b31
 
+	/// Montant des flux du Sankey « où va l'argent ? » (Pres_Flux_Sankey). Choisir une seule lecture du payeur.
+	measure 'Flux (M€)' = SUM ( Pres_Flux_Sankey[valeur_meur] )
+		formatString: #,0
+		displayFolder: 05 Transferts
+		lineageTag: 5f4db9b7-b680-4192-8c4d-d8932ddee681
+
 	column Masquer
 		dataType: int64
 		isHidden

@@ -127,6 +127,16 @@ le ratio de dette malgré l'effet boule de neige.
 En France, l'administration centrale comprend l'État et des organismes divers (ODAC), comme
 des agences ou des opérateurs.
 
+### ODAC, APUL, ASSO
+
+**Court :** les sigles officiels des trois familles d'administrations françaises.
+
+**Long :** ODAC : organismes divers d'administration centrale, les agences et opérateurs de l'État
+(universités, CNRS, France Travail…). APUL : administrations publiques locales, les collectivités
+locales et leurs organismes. ASSO : administrations de sécurité sociale (assurance maladie,
+retraites, allocations familiales, assurance chômage, hôpitaux publics). Le dashboard les désigne en
+clair : « État et ses agences », « Collectivités locales », « Sécurité sociale ».
+
 ### Taux apparent de la dette
 
 **Court :** la charge d'intérêts d'une année rapportée à la dette de fin d'année précédente.
