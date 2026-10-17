@@ -12,7 +12,7 @@
  data/raw/<source>/<jeu>/<date_collecte>/   (instantané brut + manifeste)  → archivé en Release
         │
         ▼
- transform/  ── normalisation, codification, conversions, consolidation  (dbt-duckdb, voir 11)
+ transform/  ── normalisation, codification, conversions, consolidation  (dbt-duckdb)
         │        └── contrôles qualité : contrats de schéma + règles métier (bloquants)
         ▼
  data/curated/<table>/   (Parquet, une table par fait ou dimension du modèle)
@@ -77,7 +77,7 @@ est limité et consommé à chaque clone.
 |---|---|
 | Langage | Python 3.12, dépendances gérées avec `uv` |
 | Collecte SDMX (Eurostat, OCDE, BCE, INSEE) | `sdmx1` ou appels HTTP directs + `pandas`/`polars` |
-| Transformations | **dbt-duckdb** (SQL testé et documenté) — voir décision D1 |
+| Transformations | **dbt-duckdb** (SQL testé et documenté) — décision D1 |
 | Format | Parquet (`pyarrow`), compression ZSTD |
 | Qualité | tests dbt + contrats de schéma (`contracts/*.yml`) + règles métier SQL |
 | Tests de code | `pytest`, `ruff` |

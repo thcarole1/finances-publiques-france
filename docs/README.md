@@ -1,8 +1,8 @@
 # Spécification — sommaire
 
-> **Statut : proposition v0.1, à valider par pull request.**
-> Aucun code n'est écrit avant validation de cette spécification.
-> Les points qui demandent ton arbitrage sont regroupés dans [`11-decisions-ouvertes.md`](11-decisions-ouvertes.md).
+> **Statut : v1.0, validée le 17/10/2026 (PR #1).**
+> Les décisions d'arbitrage sont récapitulées dans [`11-decisions-ouvertes.md`](11-decisions-ouvertes.md).
+> La spécification évolue ensuite par pull request, lot après lot.
 
 | # | Document | Contenu |
 |---|---|---|
@@ -16,17 +16,15 @@
 | 08 | [Scénarios et projections](08-scenarios-projections.md) | Hypothèses, moteur de projection, bibliothèque de scénarios |
 | 09 | [Rapport](09-rapport.md) | Parcours guidé, pages d'exploration, couche pédagogique |
 | 10 | [Conventions](10-conventions.md) | Nommage, Git, versions, unités, documentation |
-| 11 | [Décisions ouvertes](11-decisions-ouvertes.md) | Points à arbitrer avant le lot 1 |
+| 11 | [Décisions](11-decisions-ouvertes.md) | Arbitrages D1 à D11 et options écartées |
 | — | [Glossaire](glossaire.md) | Notions clés (alimente aussi la table `Dim_Glossaire` du modèle) |
 
-## Comment relire
+## Comment lire
 
-1. Lire `01-cadrage.md` pour vérifier que tes choix sont fidèlement retranscrits.
-2. Parcourir `05-modele-faits.md` : c'est le cœur du modèle.
-3. Répondre aux questions de `11-decisions-ouvertes.md`, en commentaire de la pull request.
-
-Le reste peut être lu en diagonale à ce stade : ces documents serviront de référence pendant
-la construction et seront mis à jour à chaque lot.
+1. `01-cadrage.md` : les choix de conception.
+2. `05-modele-faits.md` : le cœur du modèle.
+3. Les autres documents servent de référence pendant la construction et sont mis à jour à
+   chaque lot.
 
 ## Niveaux de confiance
 

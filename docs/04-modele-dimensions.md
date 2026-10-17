@@ -51,7 +51,7 @@
 | `note_comparabilite` | « Santé largement privée… » | Texte pédagogique |
 
 Pays OCDE hors UE proposés : États-Unis, Royaume-Uni, Japon, Canada, Suisse, Norvège, Australie,
-Corée du Sud (décision D4).
+Corée du Sud (décision D4, validée).
 
 ### `Dim_Source`
 
