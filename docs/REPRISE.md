@@ -57,6 +57,10 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 
 ## 4. Accès réseau
 
+Les noms d'archives des Releases suivent `source__jeu__date.tar.gz` (le jeu peut contenir un tiret :
+`dette-trim-apu`). Avant d'ouvrir une PR qui ajoute une source, reconstruire depuis un clone vierge
+(données récupérées des Releases) pour reproduire le job CI.
+
 Eurostat refuse une requête entière si un pays n'est pas couvert par le jeu : le collecteur retire
 les pays refusés et réessaie (`geos_refuses`).
 

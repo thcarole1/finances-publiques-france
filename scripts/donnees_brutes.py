@@ -32,7 +32,7 @@ DEPOT = os.environ.get("GITHUB_REPOSITORY", "thcarole1/finances-publiques-france
 RACINE_RAW = Path("data/raw")
 API = f"https://api.github.com/repos/{DEPOT}"
 MOTIF_ASSET = re.compile(
-    r"^(?P<source>[a-z0-9_]+)__(?P<jeu>[a-z0-9_]+)__(?P<date>\d{4}-\d{2}-\d{2})\.tar\.gz$"
+    r"^(?P<source>[a-z0-9_]+)__(?P<jeu>[a-z0-9_-]+)__(?P<date>\d{4}-\d{2}-\d{2})\.tar\.gz$"
 )
 # Jeux dont tous les millésimes sont nécessaires (table des révisions, docs/05 F05).
 JEUX_TOUS_MILLESIMES = {("eurostat", "gov_10a_main"), ("eurostat", "nama_10_gdp")}
