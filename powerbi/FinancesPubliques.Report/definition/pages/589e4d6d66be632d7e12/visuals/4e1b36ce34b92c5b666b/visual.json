@@ -23,11 +23,11 @@
                       "Entity": "Dim_Instrument_Dette"
                     }
                   },
-                  "Property": "Instrument"
+                  "Property": "Instrument (court)"
                 }
               },
-              "queryRef": "Dim_Instrument_Dette.Instrument",
-              "nativeQueryRef": "Instrument"
+              "queryRef": "Dim_Instrument_Dette.Instrument (court)",
+              "nativeQueryRef": "Instrument (court)"
             }
           ]
         },

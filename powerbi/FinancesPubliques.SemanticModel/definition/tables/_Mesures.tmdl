@@ -557,15 +557,12 @@ table _Mesures
 			        ISBLANK ( _var ) || ISBLANK ( _i ) || ISBLANK ( _g ),
 			        "",
 			        "En " & _annee & ", le taux moyen payé sur la dette (" & FORMAT ( _i, "0.0 %", "fr-FR" ) & ") est "
-			            & IF ( _i > _g, "supérieur", "inférieur" ) & " à la croissance de l'économie, inflation comprise ("
+			            & IF ( _i > _g, "supérieur", "inférieur" ) & " à la croissance de l'économie ("
 			            & FORMAT ( _g, "0.0 %", "fr-FR" ) & ") : "
 			            & IF ( _i > _g, "la dette grossit d'elle-même (effet boule de neige). ", "la croissance allège le poids de la dette. " )
-			            & "Au total, la dette a " & IF ( _var >= 0, "augmenté", "diminué" ) & " de "
+			            & "Sur l'année, elle a " & IF ( _var >= 0, "augmenté", "diminué" ) & " de "
 			            & FORMAT ( ABS ( _var ), "0.0", "fr-FR" ) & " points de richesse produite"
-			            & IF ( _def > 0,
-			                ", notamment parce que les dépenses hors intérêts ont dépassé les recettes ("
-			                    & FORMAT ( _def, "0.0", "fr-FR" ) & " points).",
-			                "." )
+			            & IF ( _def > 0, ", dont " & FORMAT ( _def, "0.0", "fr-FR" ) & " points dus au déficit hors intérêts.", "." )
 			    )
 		displayFolder: 20 Pédagogie
 		lineageTag: 4fdd1844-a0e2-40bd-97fd-3b4a332db895
@@ -791,8 +788,8 @@ table _Mesures
 			        ISBLANK ( _md ),
 			        "Choisissez un pays pour afficher les chiffres.",
 			        "Au " & [Dernier trimestre connu] & ", la dette publique atteint " & FORMAT ( _md, "#,0", "fr-FR" )
-			            & " milliards d'euros, soit " & FORMAT ( [Dette au dernier trimestre connu (% PIB)], "0.0 %", "fr-FR" )
-			            & " de la richesse produite sur un an"
+			            & " milliards d'euros (" & FORMAT ( [Dette au dernier trimestre connu (% PIB)], "0.0 %", "fr-FR" )
+			            & " de la richesse produite sur un an)"
 			            & IF ( NOT ISBLANK ( _hausse ),
 			                ". En un an, elle a " & IF ( _hausse >= 0, "augmenté", "diminué" ) & " de "
 			                    & FORMAT ( ABS ( _hausse ), "#,0", "fr-FR" ) & " milliards d'euros, soit environ "
@@ -820,7 +817,7 @@ table _Mesures
 			            & "."
 			            & IF ( NOT ISBLANK ( _index ),
 			                " " & FORMAT ( _index, "0 %", "fr-FR" )
-			                    & " des titres de l'État sont indexés sur l'inflation : quand les prix montent, leur coût augmente aussitôt.",
+			                    & " des titres de l'État sont indexés sur l'inflation : leur coût suit la hausse des prix.",
 			                "" )
 			    )
 		displayFolder: 20 Pédagogie
