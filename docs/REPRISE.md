@@ -46,6 +46,7 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 | Tri d'une colonne | Le libellé trié doit avoir une seule valeur de tri (tests `unicite_grain` sur les référentiels) |
 | Validation | Job CI `modele-powerbi` (bibliothèque TOM) ; message d'erreur lisible dans les **annotations** du check (`gh api …/check-runs/<id>/annotations`) — les journaux bruts ne sont pas accessibles depuis la session |
 | Paramètres Power Query | Créés en requête vide : décocher « Activer le chargement » |
+| Avant chaque envoi | `uv run ruff format . && uv run ruff check . && uv run pytest` (le job `controles` vérifie la mise en forme) |
 
 ## 4. Accès réseau
 
