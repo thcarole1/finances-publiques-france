@@ -1,0 +1,19 @@
+table BrancheGitHub
+	lineageTag: 545f394a-56d6-4870-8301-7a6bed9e3890
+
+	column BrancheGitHub
+		dataType: string
+		lineageTag: bfb07d7e-e6c9-4ea7-ac2f-aed732109432
+		summarizeBy: none
+		sourceColumn: BrancheGitHub
+
+		annotation SummarizationSetBy = Automatic
+
+	partition BrancheGitHub = m
+		mode: import
+		source = "main" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

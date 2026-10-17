@@ -1,0 +1,21 @@
+expression fnLireParquet =
+		(nomTable as text) as table =>
+		let
+		    Contenu =
+		        if ModeSource = "Local" then
+		            File.Contents(DossierLocal & nomTable & ".parquet")
+		        else
+		            Web.Contents(
+		                "https://raw.githubusercontent.com",
+		                [RelativePath = "thcarole1/finances-publiques-france/"
+		                    & BrancheGitHub & "/data/curated/" & nomTable & ".parquet"]
+		            ),
+		    Table = Parquet.Document(Binary.Buffer(Contenu))
+		in
+		    Table
+	lineageTag: 83cefca5-0975-4750-8157-dbde2030246b
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
