@@ -1,0 +1,40 @@
+name: collecte
+
+# Squelette du workflow de collecte (docs/02-architecture.md, § 7).
+# Lot 0 : déclenchement manuel uniquement, aucune source encore branchée.
+# À partir du lot 1 : planification calée sur le calendrier des publications, archivage des
+# instantanés bruts en Release, contrôles qualité bloquants, puis ouverture d'une PR de données.
+
+on:
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: "Sources à collecter (séparées par des virgules), ou « toutes »"
+        default: "toutes"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  collecte:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Installer Python et les dépendances
+        run: |
+          uv python install 3.12
+          uv sync --python 3.12
+
+      - name: Collecte
+        run: echo "Aucun connecteur de source pour l'instant (arrive au lot 1)."
+
+      - name: Construction et contrôles qualité
+        run: ./scripts/construire.sh

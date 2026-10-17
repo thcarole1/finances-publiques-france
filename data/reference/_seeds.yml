@@ -1,0 +1,34 @@
+version: 2
+
+seeds:
+  - name: ref_sous_secteur
+    description: >
+      Sous-secteurs des administrations publiques (SEC 2010), avec la ligne d'élimination
+      S13_ELIM qui porte la consolidation (voir docs/04-modele-dimensions.md).
+    config:
+      column_types:
+        sous_secteur_code: varchar
+        libelle: varchar
+        libelle_court: varchar
+        niveau: integer
+        parent_code: varchar
+        est_elimination: boolean
+        ordre_tri: integer
+        definition_courte: varchar
+    columns:
+      - name: sous_secteur_code
+        data_tests: [unique, not_null]
+      - name: est_elimination
+        data_tests: [not_null]
+
+  - name: ref_periodes_historiques
+    description: Repères historiques affichés sur les graphiques temporels.
+    config:
+      column_types:
+        periode_code: varchar
+        libelle: varchar
+        date_debut: date
+        date_fin: date
+    columns:
+      - name: periode_code
+        data_tests: [unique, not_null]

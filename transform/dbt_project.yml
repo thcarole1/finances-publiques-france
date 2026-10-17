@@ -1,0 +1,35 @@
+name: finances_publiques
+version: "0.1.0"
+config-version: 2
+profile: finances_publiques
+
+# dbt est toujours lancé depuis la racine du dépôt (voir scripts/construire.sh) :
+#   les chemins de lecture/écriture de fichiers sont donc relatifs à la racine.
+model-paths: ["models"]
+seed-paths: ["../data/reference"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  dossier_curated: "data/curated"
+  date_debut: "1990-01-01"
+  date_fin: "2075-12-31"
+
+seeds:
+  finances_publiques:
+    +schema: reference
+    +quote_columns: false
+
+models:
+  finances_publiques:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      # Tables du modèle Power BI : construites dans DuckDB, puis exportées en Parquet
+      # par la macro exporter_parquet (post-hook).
+      +materialized: table
+      +schema: marts
+      +post-hook: "{{ exporter_parquet(this) }}"

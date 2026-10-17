@@ -1,0 +1,49 @@
+name: ci
+
+# Contrôles exécutés sur chaque pull request et sur main.
+# Le job « controles » est celui à rendre obligatoire dans la protection de branche (D10).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  controles:
+    name: controles
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Installer Python et les dépendances
+        run: |
+          uv python install 3.12
+          uv sync --python 3.12
+
+      - name: Lint (ruff)
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+
+      - name: Tests unitaires (pytest)
+        run: uv run pytest -q
+
+      - name: Validation des scénarios (QC-B11)
+        run: uv run python scripts/valider_scenarios.py
+
+      - name: Construction du modèle et tests de données (dbt)
+        run: ./scripts/construire.sh

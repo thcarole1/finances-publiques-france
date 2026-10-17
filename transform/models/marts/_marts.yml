@@ -1,0 +1,75 @@
+version: 2
+
+# Chaque table du modèle Power BI a un contrat appliqué (contract.enforced) :
+# noms, types et contraintes des colonnes. C'est le contrôle QC-B01 de docs/07.
+
+models:
+  - name: dim_date
+    description: Table de dates du modèle (marquée comme table de dates dans Power BI).
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: date_id
+        data_type: integer
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+      - name: date
+        data_type: date
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+      - name: annee
+        data_type: integer
+      - name: trimestre
+        data_type: integer
+        data_tests:
+          - accepted_values:
+              arguments: {values: [1, 2, 3, 4], quote: false}
+      - name: mois
+        data_type: integer
+      - name: annee_trimestre
+        data_type: varchar
+      - name: annee_mois
+        data_type: varchar
+      - name: mois_libelle
+        data_type: varchar
+      - name: decennie
+        data_type: varchar
+      - name: est_fin_mois
+        data_type: boolean
+      - name: est_fin_trimestre
+        data_type: boolean
+      - name: est_fin_annee
+        data_type: boolean
+      - name: periode_historique_code
+        data_type: varchar
+      - name: periode_historique
+        data_type: varchar
+
+  - name: dim_sous_secteur
+    description: Sous-secteurs des administrations publiques et ligne d'élimination.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: sous_secteur_code
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+      - name: libelle
+        data_type: varchar
+        constraints: [{type: not_null}]
+      - name: libelle_court
+        data_type: varchar
+      - name: niveau
+        data_type: integer
+      - name: parent_code
+        data_type: varchar
+        data_tests:
+          - relationships:
+              arguments: {to: ref('dim_sous_secteur'), field: sous_secteur_code}
+      - name: est_elimination
+        data_type: boolean
+        constraints: [{type: not_null}]
+      - name: ordre_tri
+        data_type: integer
+      - name: definition_courte
+        data_type: varchar

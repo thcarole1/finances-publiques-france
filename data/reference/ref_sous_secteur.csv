@@ -1,0 +1,8 @@
+sous_secteur_code,libelle,libelle_court,niveau,parent_code,est_elimination,ordre_tri,definition_courte
+S13,Administrations publiques,APU,0,,false,0,"Ensemble des administrations publiques, en vision consolidée"
+S1311,Administration centrale,État et ODAC,1,S13,false,10,"En France : l'État et les organismes divers d'administration centrale (agences, opérateurs)"
+S1312,États fédérés,États fédérés,1,S13,false,20,"Sous-secteur propre aux pays fédéraux (Allemagne, Autriche, Belgique, Espagne…) ; vide pour la France"
+S1313,Administrations locales,APUL,1,S13,false,30,"Collectivités territoriales (communes, intercommunalités, départements, régions) et organismes locaux"
+S1314,Administrations de sécurité sociale,ASSO,1,S13,false,40,"Régimes de sécurité sociale, Unédic, régimes complémentaires, hôpitaux publics"
+S13_ELIM,Transferts internes (éliminés),Éliminations,1,S13,true,90,"Flux entre administrations retirés pour ne compter chaque euro qu'une fois"
+_NA,Non renseigné,Non renseigné,1,S13,false,99,"Sous-secteur non renseigné dans la source"

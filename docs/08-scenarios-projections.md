@@ -80,17 +80,20 @@ description: >
 horizon: 2036
 hypotheses:                    # surcharges par rapport au scénario de base
   taux_10_ans:
-    2027: +1.5                 # en points, relatif à la base
-    2028: +1.5
+    ecart:                     # écart à la base, en points
+      2027: 1.5
+      2028: 1.5
   croissance_volume:
-    2027: 0.8                  # en %, valeur absolue
+    valeur:                    # valeur absolue, en %
+      2027: 0.8
 emission:
   part_court_terme: 0.10
   maturite_moyenne_emissions: 9
 ```
 
-- Une surcharge est **relative** (`+1.5`) ou **absolue** (`0.8`) ; les années non précisées
-  reprennent la base.
+- Une surcharge est un **écart** à la base (`ecart`) ou une **valeur absolue** (`valeur`) ; les deux
+  modes sont explicites pour éviter toute ambiguïté (en YAML, `+1.5` se lit comme `1.5`). Les années
+  non précisées reprennent la base.
 - Le schéma est validé en CI (QC-B11). Chaque modification de scénario passe par une PR :
   l'historique Git **est** l'historique de tes scénarios.
 

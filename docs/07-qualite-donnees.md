@@ -16,7 +16,7 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 
 | Code | Contrôle | Table(s) | Tolérance |
 |---|---|---|---|
-| QC-B01 | **Contrat de schéma** : colonnes, types, nullabilité conformes à `contracts/<table>.yml` | Toutes | 0 |
+| QC-B01 | **Contrat de schéma** : colonnes, types, nullabilité conformes au contrat du modèle dbt | Toutes | 0 |
 | QC-B02 | **Unicité du grain** : aucune ligne en double sur les clés du grain | Toutes | 0 |
 | QC-B03 | **Exhaustivité des feuilles** : Σ feuilles de dépense = dépenses totales publiées (OTE) ; idem recettes (TR) | F01 | 0,05 % ou 1 M€ |
 | QC-B04 | **COFOG = total** : Σ fonctions = dépenses totales de F01 (pays, année, sous-secteur) | F02 × F01 | 0,1 % |
@@ -45,7 +45,7 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 
 ## 4. Mise en œuvre
 
-- Contrôles techniques : contrats YAML + tests dbt génériques (`unique`, `not_null`,
+- Contrôles techniques : contrats de modèles dbt + tests dbt génériques (`unique`, `not_null`,
   `relationships`, `accepted_values`).
 - Contrôles comptables et de cohérence : tests dbt *singuliers* (requêtes SQL qui renvoient les
   lignes en anomalie ; zéro ligne = succès).
