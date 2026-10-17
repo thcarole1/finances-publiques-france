@@ -8,11 +8,11 @@ sémantique en **TMDL**, rapport en **PBIR**. Tout est en texte et versionné da
 Le squelette PBIP est créé **depuis Power BI Desktop**, pour garantir des fichiers conformes à
 ta version de Desktop. Je prends ensuite le relais pour écrire le modèle en TMDL.
 
-1. **Options** (Fichier → Options et paramètres → Options → **Fonctionnalités en préversion**) :
-   si elles y figurent encore, coche
-   - « Enregistrer le modèle sémantique au format TMDL »,
-   - « Stocker les rapports au format de métadonnées amélioré (PBIR) ».
-   Redémarre Desktop.
+1. **Formats** : dans les versions récentes de Desktop (2026), **PBIR et TMDL sont les formats par
+   défaut** d'un projet PBIP ; les anciennes options de préversion ont disparu. Rien à activer.
+   Si ta version les propose encore (Fichier → Options et paramètres → Options → Fonctionnalités
+   en préversion), coche « Store semantic model using TMDL format » et « Store reports using
+   enhanced metadata format (PBIR) », puis redémarre Desktop.
 2. Crée les **paramètres** et la **fonction** ci-dessous (Transformer les données → Accueil →
    Gérer les paramètres / Nouvelle source → Requête vide → Éditeur avancé).
 3. Crée les requêtes `Dim_Date` et `Dim_Sous_Secteur`, puis **Fermer et appliquer**.
@@ -21,9 +21,12 @@ ta version de Desktop. Je prends ensuite le relais pour écrire le modèle en TM
    sous le nom **`FinancesPubliques`**. Cela crée :
    ```
    powerbi/FinancesPubliques.pbip
-   powerbi/FinancesPubliques.SemanticModel/
-   powerbi/FinancesPubliques.Report/
+   powerbi/FinancesPubliques.SemanticModel/definition/*.tmdl   ← modèle en TMDL
+   powerbi/FinancesPubliques.Report/definition/               ← rapport en PBIR
    ```
+   **Vérification** : s'il y a un fichier `model.bim` au lieu du dossier `definition/` côté
+   modèle, ou un `report.json` au lieu de `definition/` côté rapport, ta version utilise encore
+   les anciens formats : signale-le avant de pousser.
 6. Pousse ces fichiers sur une branche (ou dépose-les via « Add file → Upload files » sur
    GitHub) et ouvre une pull request. Le `.gitignore` exclut déjà les fichiers locaux
    (`.pbi/localSettings.json`, `.pbi/cache.abf`).
