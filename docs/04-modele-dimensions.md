@@ -180,7 +180,13 @@ pays hors UE ou les années anciennes).
 | RDM | Non-résidents | Reste du monde |
 | _NA | Non ventilé | — |
 
-### `Map_Prelevement_Payeur` — table de répartition (pont pondéré)
+> **Mise en œuvre (lot 1b).** Plutôt qu'un pont à coefficients fixes, la répartition est
+> calculée à partir des listes nationales des impôts de la DG TAXUD (base économique de chaque
+> impôt, par pays et par année) et matérialisée dans `Fait_Prelevements_Fonction`. Les deux lectures
+> du payeur sont des attributs de `Dim_Fonction_Economique`. Voir `docs/lots/lot-1b.md`.
+> La conception initiale ci-dessous est conservée pour mémoire.
+
+### `Map_Prelevement_Payeur` — table de répartition (pont pondéré, conception initiale)
 
 | `prelevement_code` | `payeur_code` | `convention_id` | `coefficient` | `justification` |
 |---|---|---|---|---|

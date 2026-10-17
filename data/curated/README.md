@@ -19,5 +19,7 @@ identiques produisent des fichiers identiques.
 | `fait_comptes_apu_annuels.parquet` | `Fait_Comptes_APU_Annuels` (F01) |
 | `fait_depenses_fonction.parquet` | `Fait_Depenses_Fonction` (F02) |
 | `fait_prelevements.parquet` | `Fait_Prelevements` (F03) |
+| `fait_prelevements_fonction.parquet` | `Fait_Prelevements_Fonction` (F03b) |
+| `dim_fonction_economique.parquet` | `Dim_Fonction_Economique` |
 | `fait_macro_annuel.parquet` | `Fait_Macro_Annuel` (F04) |
 | `fait_revisions.parquet` | `Fait_Revisions` (F05) |

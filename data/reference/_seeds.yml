@@ -143,3 +143,26 @@ seeds:
     columns:
       - name: indicateur_code
         data_tests: [unique, not_null]
+
+  - name: ref_fonction_economique
+    description: >
+      Bases économiques des prélèvements (méthodologie « Taxation Trends » de la DG TAXUD) et
+      lecture du payeur : légale (qui verse) et économique (qui supporte).
+    config:
+      column_types: {fonction_code: varchar, ordre_tri: integer}
+    columns:
+      - name: fonction_code
+        data_tests: [unique, not_null]
+
+  - name: ref_fonction_defaut
+    description: Base économique des prélèvements absents des listes nationales, justifiée.
+    columns:
+      - name: prelevement_code
+        data_tests:
+          - unique
+          - relationships:
+              arguments: {to: ref('ref_prelevement'), field: prelevement_code}
+      - name: fonction_code
+        data_tests:
+          - relationships:
+              arguments: {to: ref('ref_fonction_economique'), field: fonction_code}

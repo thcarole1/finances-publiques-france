@@ -608,3 +608,123 @@ models:
     data_type: varchar
   - name: ordre_tri
     data_type: integer
+- name: fait_prelevements_fonction
+  description: F03b — Prélèvements répartis par base économique (DG TAXUD) ; Σ bases = Fait_Prelevements.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: prelevement_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_prelevement')
+          field: prelevement_code
+  - name: fonction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_fonction_economique')
+          field: fonction_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: type_part
+    data_type: varchar
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - NTL
+          - PROLONGEE
+          - MOYENNE_UE
+          - AGREGAT
+          - DEFAUT
+          - NV
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+        - prelevement_code
+        - fonction_code
+- name: dim_fonction_economique
+  description: Bases économiques et payeurs (lectures légale et économique).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: fonction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: payeur_legal
+    data_type: varchar
+  - name: groupe_legal
+    data_type: varchar
+  - name: payeur_economique
+    data_type: varchar
+  - name: groupe_economique
+    data_type: varchar
+  - name: explication
+    data_type: varchar
+  - name: explication_economique
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer

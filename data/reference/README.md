@@ -19,3 +19,5 @@ leurs tests sont déclarés dans `_seeds.yml`.
 | `ref_formule_prelevement.csv` | Calcul de chaque prélèvement, résidus compris | 1 |
 | `ref_source.csv` | Sources, licences, attributions | 1 |
 | `ref_indicateur.csv` | Indicateurs suivis | 1 |
+| `ref_fonction_economique.csv` | Bases économiques et payeurs (lectures légale et économique) | 1b |
+| `ref_fonction_defaut.csv` | Base des prélèvements absents des listes nationales | 1b |

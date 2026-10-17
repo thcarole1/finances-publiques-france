@@ -1,0 +1,116 @@
+/// F03b — Prélèvements répartis par base économique et payeur (DG TAXUD), M€.
+table Fait_Prelevements_Fonction
+	lineageTag: 8445e992-2960-4b3c-b8b2-d2a6bebc3fa4
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: cccb7510-274c-4d72-8add-9e3ef258cb7a
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9cb02c3e-6532-4443-bacc-a0682c7f39d5
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: a3cf92d2-8140-43a5-a5ae-1eb6fbdedf32
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column prelevement_code
+		dataType: string
+		isHidden
+		lineageTag: ce553957-08ed-484f-8fe1-7931f4201d90
+		summarizeBy: none
+		sourceColumn: prelevement_code
+
+		annotation SummarizationSetBy = User
+
+	column fonction_code
+		dataType: string
+		isHidden
+		lineageTag: f822968a-0807-44e4-9e36-37d8c1ff7afa
+		summarizeBy: none
+		sourceColumn: fonction_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: f3c70d2a-f4ea-4e45-b84e-2efd4a80e087
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 5839de23-db89-4461-ae96-286a1b3546d0
+		summarizeBy: none
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	/// NTL (liste nationale de l'année), PROLONGEE, MOYENNE_UE, AGREGAT, DEFAUT ou NV
+	column 'Origine de la répartition'
+		dataType: string
+		lineageTag: 8ab7e57b-836c-4092-a05c-97a23e951461
+		summarizeBy: none
+		sourceColumn: type_part
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (payeurs)'
+		dataType: string
+		lineageTag: caf4a283-9c80-49c9-bc19-f541478d9d25
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 7229ab9b-f34a-435b-b325-d644a44e3cd2
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: b7349956-b33f-4aee-8142-72df8c60b0c0
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Prelevements_Fonction = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_prelevements_fonction")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
