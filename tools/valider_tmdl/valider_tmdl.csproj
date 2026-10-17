@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Valide le modèle sémantique TMDL avec la bibliothèque officielle de Microsoft (TOM),
+    celle qu'utilise Power BI Desktop pour ouvrir un projet PBIP. Exécuté en CI.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AnalysisServices.NetCore.retail.amd64" Version="19.*" />
+  </ItemGroup>
+</Project>

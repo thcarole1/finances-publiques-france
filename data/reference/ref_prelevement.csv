@@ -1,0 +1,53 @@
+prelevement_code,libelle,libelle_court,categorie_sec,categorie_pedagogique,est_prelevement_obligatoire,est_non_ventile,signe,ordre_tri
+D211,Taxes du type TVA,TVA,Impôts sur la production et les importations,Consommation,true,false,1,1
+D212,"Impôts et droits sur les importations, à l'exclusion de la TVA","Impôts et droits sur les importations, à l'exclusion de la TVA",Impôts sur la production et les importations,Consommation,true,false,1,2
+D214A,Droits d'accise et impôts de consommation,"Accises (carburants, tabac, alcool…)",Impôts sur la production et les importations,Consommation,true,false,1,3
+D214B,Droits de timbre,Droits de timbre,Impôts sur la production et les importations,Consommation,true,false,1,4
+D214C,Impôts sur les transactions mobilières,Impôts sur les transactions mobilières,Impôts sur la production et les importations,Consommation,true,false,1,5
+D214D,Taxes à l'immatriculation des véhicules,Taxes à l'immatriculation des véhicules,Impôts sur la production et les importations,Consommation,true,false,1,6
+D214E,Taxes sur les spectacles et divertissements,Taxes sur les spectacles et divertissements,Impôts sur la production et les importations,Consommation,true,false,1,7
+D214F,"Impôts sur les loteries, jeux et paris","Impôts sur les loteries, jeux et paris",Impôts sur la production et les importations,Consommation,true,false,1,8
+D214G,Taxes sur les primes d'assurance,Taxes sur les primes d'assurance,Impôts sur la production et les importations,Consommation,true,false,1,9
+D214H,Autres taxes sur des services déterminés,Autres taxes sur des services déterminés,Impôts sur la production et les importations,Consommation,true,false,1,10
+D214I,Impôts généraux sur les ventes ou le chiffre d'affaires,Impôts généraux sur les ventes ou le chiffre d'affaires,Impôts sur la production et les importations,Consommation,true,false,1,11
+D214J,Bénéfices des monopoles fiscaux,Bénéfices des monopoles fiscaux,Impôts sur la production et les importations,Consommation,true,false,1,12
+D214K,Droits sur les exportations et montants compensatoires monétaires à l'exportation,Droits sur les exportations et montants compensatoires monétaires à l'exportation,Impôts sur la production et les importations,Consommation,true,false,1,13
+D214L,Autres impôts sur les produits n.c.a.,Autres impôts sur les produits n.c.a.,Impôts sur la production et les importations,Consommation,true,false,1,14
+D214_NV,Autres impôts sur les produits : non ventilé,Autres impôts sur les produits : non ventilé,Impôts sur la production et les importations,Consommation,true,true,1,15
+D21_NV,Impôts sur les produits : non ventilé,Impôts sur les produits : non ventilé,Impôts sur la production et les importations,Consommation,true,true,1,16
+D29A,"Impôts sur la propriété ou l'utilisation de terrains, bâtiments et autres constructions",Impôts fonciers des entreprises,Impôts sur la production et les importations,Patrimoine,true,false,1,17
+D29B,Impôts sur l'utilisation d'actifs fixes,Impôts sur l'utilisation d'actifs fixes,Impôts sur la production et les importations,Production des entreprises,true,false,1,18
+D29C,Impôts sur la masse salariale ou les effectifs employés,Impôts sur les salaires,Impôts sur la production et les importations,Travail,true,false,1,19
+D29D,Impôts sur les transactions internationales,Impôts sur les transactions internationales (production),Impôts sur la production et les importations,Production des entreprises,true,false,1,20
+D29E,Impôts sur les autorisations d'exercer des activités commerciales ou professionnelles,Impôts sur les autorisations d'exercer des activités commerciales ou professionnelles,Impôts sur la production et les importations,Production des entreprises,true,false,1,21
+D29F,Impôts sur les émissions polluantes,Impôts sur les émissions polluantes,Impôts sur la production et les importations,Production des entreprises,true,false,1,22
+D29G,Sous-compensation de la TVA résultant de l'application du régime forfaitaire,Sous-compensation de la TVA résultant de l'application du régime forfaitaire,Impôts sur la production et les importations,Production des entreprises,true,false,1,23
+D29H,Autres impôts sur la production n.c.a.,Autres impôts sur la production n.c.a.,Impôts sur la production et les importations,Production des entreprises,true,false,1,24
+D29_NV,Autres impôts sur la production : non ventilé,Autres impôts sur la production : non ventilé,Impôts sur la production et les importations,Production des entreprises,true,true,1,25
+D2_NV,Impôts sur la production : non ventilé,Impôts sur la production : non ventilé,Impôts sur la production et les importations,Autres,true,true,1,26
+D51A,Impôts sur le revenu des personnes physiques ou des ménages,"Impôts sur le revenu des ménages (IR, CSG…)",Impôts courants sur le revenu et le patrimoine,Revenus des ménages,true,false,1,27
+D51B,Impôts sur le revenu ou sur les bénéfices des sociétés,Impôt sur les sociétés,Impôts courants sur le revenu et le patrimoine,Bénéfices des sociétés,true,false,1,28
+D51C,Impôts sur les gains de détention,Impôts sur les gains de détention,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,29
+D51D,Impôts sur les gains des loteries et paris,Impôts sur les gains des loteries et paris,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,30
+D51E,Autres impôts sur le revenu n.c.a.,Autres impôts sur le revenu n.c.a.,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,31
+D51_NV,Impôts sur le revenu : non ventilé,Impôts sur le revenu : non ventilé,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,true,1,32
+D59A,Impôts courants sur le capital,Impôts courants sur le capital,Impôts courants sur le revenu et le patrimoine,Patrimoine,true,false,1,33
+D59B,Impôts de capitation,Impôts de capitation,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,34
+D59C,Impôts sur la dépense,Impôts sur la dépense,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,35
+D59D,Taxes acquittées par les ménages pour l'obtention de licences,Taxes acquittées par les ménages pour l'obtention de licences,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,36
+D59E,Impôts sur les transactions internationales,Impôts sur les transactions internationales (courants),Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,37
+D59F,Autres impôts courants n.c.a.,Autres impôts courants n.c.a.,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,false,1,38
+D59_NV,Autres impôts courants : non ventilé,Autres impôts courants : non ventilé,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,true,1,39
+D5_NV,Impôts sur le revenu et le patrimoine : non ventilé,Impôts sur le revenu et le patrimoine : non ventilé,Impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,true,true,1,40
+D91A,Impôts sur les transferts en capital,Droits de succession et donation,Impôts en capital,Patrimoine,true,false,1,41
+D91B,Prélèvements sur le capital,Prélèvements sur le capital,Impôts en capital,Patrimoine,true,false,1,42
+D91C,Autres impôts sur le capital n.c.a.,Autres impôts sur le capital n.c.a.,Impôts en capital,Patrimoine,true,false,1,43
+D91_NV,Impôts en capital : non ventilé,Impôts en capital : non ventilé,Impôts en capital,Patrimoine,true,true,1,44
+D611,Cotisations sociales effectives à la charge des employeurs,Cotisations employeurs,Cotisations sociales nettes,Cotisations sociales,true,false,1,45
+D612,Cotisations sociales imputées à la charge des employeurs,Cotisations imputées (employeurs),Cotisations sociales nettes,Cotisations sociales,false,false,1,46
+D613,Cotisations sociales effectives à la charge des ménages,"Cotisations des ménages (salariés, indépendants)",Cotisations sociales nettes,Cotisations sociales,true,false,1,47
+D614,Suppléments de cotisations sociales à la charge des ménages,Suppléments de cotisations sociales à la charge des ménages,Cotisations sociales nettes,Cotisations sociales,false,false,1,48
+D61SC,Rémunération du service des régimes d'assurance sociale,Rémunération du service des régimes,Cotisations sociales nettes,Cotisations sociales,false,false,-1,49
+D61_NV,Cotisations sociales : non ventilé,Cotisations sociales : non ventilé,Cotisations sociales nettes,Cotisations sociales,true,true,1,50
+D995,Transferts en capital des administrations publiques vers les secteurs concernés correspondant à des impôts et contributions sociales notifiés mais non susceptible d'être perçus,Impôts notifiés non recouvrables,Montants non recouvrables,Autres,true,false,-1,51
+TOTAL_NV,Écart d'arrondi sur le total,Écart d'arrondi sur le total,Ajustements,Autres,true,true,1,52

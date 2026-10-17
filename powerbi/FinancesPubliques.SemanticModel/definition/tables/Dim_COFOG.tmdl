@@ -1,0 +1,98 @@
+/// Fonctions des administrations (COFOG) : à quoi sert l'argent.
+table Dim_COFOG
+	lineageTag: c3e95d05-3f6c-4f07-aa61-676b93c8b1e6
+
+	column 'Code fonction'
+		dataType: string
+		lineageTag: 42b49a05-6011-4f7a-8596-aa65c5febff3
+		summarizeBy: none
+		sourceColumn: cofog_code
+
+		annotation SummarizationSetBy = User
+
+	column cofog_n1_code
+		dataType: string
+		isHidden
+		lineageTag: d65572be-48eb-4be3-a692-eb55f61e4d6c
+		summarizeBy: none
+		sourceColumn: cofog_n1_code
+
+		annotation SummarizationSetBy = User
+
+	column Fonction
+		dataType: string
+		lineageTag: 7b14e2e5-ee2f-4690-b2c4-c4fc168de4c5
+		summarizeBy: none
+		sourceColumn: cofog_n1_libelle
+		sortByColumn: cofog_n1_code
+
+		annotation SummarizationSetBy = User
+
+	column cofog_n2_code
+		dataType: string
+		isHidden
+		lineageTag: fe5a4b29-99b5-4636-ac56-099f65d628fe
+		summarizeBy: none
+		sourceColumn: cofog_n2_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Sous-fonction'
+		dataType: string
+		lineageTag: 57cc1ee4-563a-41bf-ad70-86c939776a4c
+		summarizeBy: none
+		sourceColumn: cofog_n2_libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column niveau
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 13449e3e-6fa2-4c43-b5e0-42adb3e27683
+		summarizeBy: none
+		sourceColumn: niveau
+
+		annotation SummarizationSetBy = User
+
+	column 'Non ventilé'
+		dataType: boolean
+		lineageTag: 98d184bc-82db-446a-b86c-02b90bd06003
+		summarizeBy: none
+		sourceColumn: est_non_ventile
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 66465862-0607-41a5-988d-79ad340a4111
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	hierarchy Fonctions
+		lineageTag: fc93d980-5344-4215-a35d-dc7777e32567
+
+		level Fonction
+			lineageTag: 9d20d6e7-b337-41af-b32f-f3d3d676ded4
+			column: Fonction
+
+		level 'Sous-fonction'
+			lineageTag: 73ee1a5c-cc4f-4b12-bc1e-7af6f803c2c6
+			column: 'Sous-fonction'
+
+	partition Dim_COFOG = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_cofog")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

@@ -1,21 +1,20 @@
 # Tolérances des contrôles qualité (docs/07-qualite-donnees.md).
-# Modifiables par pull request ; toute modification doit être justifiée dans la PR.
-#   relative : écart relatif admis (0.0005 = 0,05 %)
-#   absolue_meur : écart absolu admis, en millions d'euros
+# Ce fichier est passé tel quel à dbt (--vars) par scripts/construire.sh.
+# Modifiable par pull request ; toute modification doit être justifiée dans la PR.
+#   relative     : écart relatif admis (0.0005 = 0,05 %)
+#   absolue_meur : écart absolu admis, en millions d'euros (le plus permissif des deux s'applique)
 
-bloquants:
-  QC-B03_exhaustivite_feuilles:   {relative: 0.0005, absolue_meur: 1}
-  QC-B04_cofog_total:             {relative: 0.001}
-  QC-B05_consolidation:           {relative: 0.0005}
-  QC-B06_dette_t4_annuelle:       {relative: 0.001}
-  QC-B07_echeancier_aft:          {relative: 0.0001}
-  QC-B09_pont_payeur:             {absolue: 0.001}
-  QC-B10_identite_solde:          {relative: 0.0005, absolue_meur: 1}
-
-avertissements:
-  QC-A02_rupture:                 {ecarts_types: 4}
-  QC-A03_revision:                {points_pib: 0.3, relative: 0.01}
-  QC-A04_insee_eurostat:          {relative: 0.002}
-  QC-A05_transferts:              {relative: 0.02}
-  QC-A06_fraicheur:               {multiple_frequence: 1.5}
-  QC-A07_trimestriel_annuel:      {relative: 0.005}
+tolerances:
+  QC_B03_exhaustivite_feuilles:   {relative: 0.0005, absolue_meur: 1}
+  QC_B04_cofog_total:             {relative: 0.0005, absolue_meur: 1}
+  QC_B05_consolidation:           {relative: 0.0005, absolue_meur: 1}
+  QC_B06_dette_t4_annuelle:       {relative: 0.001}
+  QC_B07_echeancier_aft:          {relative: 0.0001}
+  QC_B09_pont_payeur:             {absolue: 0.001}
+  QC_B10_identite_solde:          {relative: 0.0005, absolue_meur: 1}
+  QC_B12_unites:                  {depenses_pct_pib_min: 20, depenses_pct_pib_max: 75}
+  QC_A02_rupture:                 {ecarts_types: 4}
+  QC_A03_revision:                {points_pib: 0.3}
+  QC_A04_coherence_sources:       {relative: 0.01}
+  QC_A06_fraicheur:               {multiple_frequence: 1.5}
+  QC_A07_trimestriel_annuel:      {relative: 0.005}

@@ -1,0 +1,5 @@
+indicateur_code,libelle,unite,sens_souhaitable,glossaire_id,ordre_tri
+DEPENSES_PUBLIQUES,Dépenses publiques,M€,,administrations-publiques,1
+RECETTES_PUBLIQUES,Recettes publiques,M€,,prelevements-obligatoires,2
+SOLDE_PUBLIC,Solde public,M€,Hausse,deficit-public,3
+PIB,Produit intérieur brut,M€,,,9

@@ -1,0 +1,83 @@
+/// Types d'impôts et de cotisations sociales.
+table Dim_Prelevement
+	lineageTag: a58d2974-66c5-4422-ab7f-59d28d551444
+
+	column 'Code prélèvement'
+		dataType: string
+		lineageTag: aa57af00-6270-470c-8a7f-51b3373a21a8
+		summarizeBy: none
+		sourceColumn: prelevement_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Prélèvement (libellé officiel)'
+		dataType: string
+		lineageTag: 81140835-ae2d-4c6e-a0bb-52baf9611450
+		summarizeBy: none
+		sourceColumn: libelle
+
+		annotation SummarizationSetBy = User
+
+	column 'Prélèvement'
+		dataType: string
+		lineageTag: 3f5b1406-2694-4cbc-b817-fc945dedbe14
+		summarizeBy: none
+		sourceColumn: libelle_court
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Catégorie SEC'
+		dataType: string
+		lineageTag: bc3795dd-3157-4f65-bdc1-c8e897e1617e
+		summarizeBy: none
+		sourceColumn: categorie_sec
+
+		annotation SummarizationSetBy = User
+
+	/// Sur quoi porte le prélèvement : consommation, travail, revenus, bénéfices, patrimoine…
+	column Assiette
+		dataType: string
+		lineageTag: a5881396-64b7-4880-af70-3334fbcfdfce
+		summarizeBy: none
+		sourceColumn: categorie_pedagogique
+
+		annotation SummarizationSetBy = User
+
+	column 'Prélèvement obligatoire'
+		dataType: boolean
+		lineageTag: a4372a3e-0a2d-4dc4-b29a-b8ff8fdca6ea
+		summarizeBy: none
+		sourceColumn: est_prelevement_obligatoire
+
+		annotation SummarizationSetBy = User
+
+	column 'Non ventilé'
+		dataType: boolean
+		lineageTag: 3f357053-9cd4-4d04-a7d0-3aee8d1bcd33
+		summarizeBy: none
+		sourceColumn: est_non_ventile
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7ade30d7-a65d-44c7-86a0-1ad48c255864
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Prelevement = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_prelevement")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

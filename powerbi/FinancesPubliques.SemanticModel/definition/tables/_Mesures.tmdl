@@ -1,0 +1,142 @@
+/// Mesures du modèle, rangées par dossier.
+table _Mesures
+	lineageTag: ef206ef6-c69e-4882-9f1a-936a0b2b7293
+
+	/// Somme brute de Fait_Comptes_APU_Annuels : utiliser les mesures Dépenses, Recettes, Solde.
+	measure 'Montant APU (M€)' = SUM ( Fait_Comptes_APU_Annuels[valeur_meur] )
+		isHidden
+		formatString: #,0
+		displayFolder: 00 Base
+		lineageTag: f1a86a84-6690-42d0-a2ca-d156488e55b7
+
+	/// Somme brute de Fait_Prelevements.
+	measure 'Prélèvements détaillés (M€)' = SUM ( Fait_Prelevements[valeur_meur] )
+		isHidden
+		formatString: #,0
+		displayFolder: 00 Base
+		lineageTag: 9320eda2-8d61-4d79-8e88-d06a6f150561
+
+	/// Total des dépenses des administrations publiques (comptabilité nationale).
+	measure 'Dépenses publiques (M€)' = CALCULATE ( [Montant APU (M€)], Dim_Transaction[Sens] = "Dépense" )
+		formatString: #,0
+		displayFolder: 02 Dépenses
+		lineageTag: 56d67cab-37bc-4cec-b31d-80ef9a3b780b
+
+	/// Dépenses ventilées par fonction COFOG (santé, éducation…) et nature.
+	measure 'Dépenses par fonction (M€)' = SUM ( Fait_Depenses_Fonction[valeur_meur] )
+		formatString: #,0
+		displayFolder: 02 Dépenses
+		lineageTag: d7fe01cd-238e-4a9b-8fad-57837d79f90a
+
+	/// Part de la fonction dans la dépense publique, à périmètre (pays, année, sous-secteur, nature) inchangé.
+	measure 'Part de la dépense (%)' =
+			DIVIDE (
+			    [Dépenses par fonction (M€)],
+			    CALCULATE ( [Dépenses par fonction (M€)], REMOVEFILTERS ( Dim_COFOG ) )
+			)
+		formatString: 0.0 %
+		displayFolder: 02 Dépenses
+		lineageTag: 7bdb4937-61df-4064-80a7-776eb0756373
+
+	/// Sur 1 000 € de dépense publique, montant consacré à la fonction.
+	measure 'Pour 1 000 € de dépense publique' = [Part de la dépense (%)] * 1000
+		formatString: #,0 €
+		displayFolder: 02 Dépenses
+		lineageTag: 49bdeefa-0eff-4c49-a4d5-e9646973f3a0
+
+	/// Total des recettes des administrations publiques.
+	measure 'Recettes publiques (M€)' = CALCULATE ( [Montant APU (M€)], Dim_Transaction[Sens] = "Recette" )
+		formatString: #,0
+		displayFolder: 01 Recettes
+		lineageTag: c96ea915-f43d-4044-b0bc-3ce0b6efe641
+
+	/// Impôts et cotisations sociales effectives, nets des montants non recouvrables (définition Eurostat).
+	measure 'Prélèvements obligatoires (M€)' = CALCULATE ( [Prélèvements détaillés (M€)], Dim_Prelevement[Prélèvement obligatoire] = TRUE () )
+		formatString: #,0
+		displayFolder: 01 Recettes
+		lineageTag: d6390b33-13d5-4c86-8928-16e1ccb9dcf5
+
+	/// Tous les impôts et cotisations sociales, y compris les cotisations imputées.
+	measure 'Prélèvements (M€)' = [Prélèvements détaillés (M€)]
+		formatString: #,0
+		displayFolder: 01 Recettes
+		lineageTag: e00b0e60-018a-4121-a684-54b67f03a62d
+
+	/// Prélèvements obligatoires rapportés au PIB.
+	measure 'Taux de prélèvements obligatoires' = DIVIDE ( [Prélèvements obligatoires (M€)], [PIB (M€)] )
+		formatString: 0.0 %
+		displayFolder: 01 Recettes
+		lineageTag: b2bf7cd3-2cc1-4864-94bb-c1c00ee6c77f
+
+	/// Recettes − dépenses : négatif = déficit (besoin de financement).
+	measure 'Solde public (M€)' = [Recettes publiques (M€)] - [Dépenses publiques (M€)]
+		formatString: #,0
+		displayFolder: 03 Solde
+		lineageTag: 8298f7da-4d2a-4742-977f-3fdd74736b9a
+
+	/// Intérêts versés sur la dette publique.
+	measure 'Charge d''intérêts (M€)' = CALCULATE ( [Montant APU (M€)], Dim_Transaction[Code nature] = "D41_PAY" )
+		formatString: #,0
+		displayFolder: 03 Solde
+		lineageTag: a55f158d-2275-4e95-bbb4-83a06ff1ba80
+
+	/// Solde hors charge d'intérêts : l'équilibre des comptes hors coût de la dette passée.
+	measure 'Solde primaire (M€)' = [Solde public (M€)] + [Charge d'intérêts (M€)]
+		formatString: #,0
+		displayFolder: 03 Solde
+		lineageTag: a1ecea8f-0451-44de-a131-d6d94aa66e2c
+
+	/// Solde public rapporté au PIB (la référence européenne est −3 %).
+	measure 'Solde public (% PIB)' = DIVIDE ( [Solde public (M€)], [PIB (M€)] )
+		formatString: 0.0 %
+		displayFolder: 03 Solde
+		lineageTag: ee75b578-c964-4230-869b-84d58b77894b
+
+	/// Produit intérieur brut à prix courants.
+	measure 'PIB (M€)' = SUM ( Fait_Macro_Annuel[pib_meur] )
+		formatString: #,0
+		displayFolder: 10 Contexte
+		lineageTag: b26eebc9-e9f0-4851-9ea1-b28bbd52dd08
+
+	/// Population moyenne de l'année (comptabilité nationale).
+	measure 'Population' = SUM ( Fait_Macro_Annuel[population] )
+		formatString: #,0
+		displayFolder: 10 Contexte
+		lineageTag: 1f4fa5d8-d0d0-4104-9aa1-b3708115b4bf
+
+	/// Croissance réelle du PIB (hors inflation) par rapport à l'année précédente.
+	measure 'Croissance du PIB en volume (%)' =
+			IF (
+			    HASONEVALUE ( Dim_Date[Année] ),
+			    DIVIDE ( SUM ( Fait_Macro_Annuel[croissance_volume_pct] ), 100 )
+			)
+		formatString: 0.0 %
+		displayFolder: 10 Contexte
+		lineageTag: ccd073a0-a09e-4bbd-89ba-1033c74bf537
+
+	/// Valeur d'un agrégat telle que publiée dans le millésime sélectionné.
+	measure 'Valeur publiée (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Millesime[Millésime] ),
+			    SUM ( Fait_Revisions[valeur_meur] )
+			)
+		formatString: #,0
+		displayFolder: 04 Révisions
+		lineageTag: ab822327-0d76-4087-831b-ac21eab7ef3d
+
+	column Masquer
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b6435829-c626-43dd-b3de-b5eee8ae2661
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Masquer]
+
+		annotation SummarizationSetBy = User
+
+	partition _Mesures = calculated
+		mode: import
+		source = ROW ( "Masquer", 0 )
+
+	annotation PBI_Id = f4cb550007a24396ab7c713aea14179b

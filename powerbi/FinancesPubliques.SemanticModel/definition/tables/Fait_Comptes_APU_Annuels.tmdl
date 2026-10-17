@@ -1,0 +1,99 @@
+/// F01 — Recettes et dépenses annuelles des administrations, par sous-secteur et nature (M€).
+table Fait_Comptes_APU_Annuels
+	lineageTag: 51146ee0-713a-4ddf-8913-bf5e03094772
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 2fce398b-0f1b-449f-9417-855025c5cada
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 431ba91b-64c3-41c6-ab0b-762019549728
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: 246aff05-cddb-491c-b5e0-b2648597b8f7
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column transaction_code
+		dataType: string
+		isHidden
+		lineageTag: 41c5cdff-c712-4c34-b607-43a274a905d8
+		summarizeBy: none
+		sourceColumn: transaction_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 4fc86b28-a80b-4812-9cb9-69cf3382a6f5
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: ef322a83-d398-4472-aacb-07c57620b9e5
+		summarizeBy: none
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	/// Définitif, provisoire ou estimé, selon le producteur
+	column 'Statut de la valeur'
+		dataType: string
+		lineageTag: 41669a9e-59f1-457a-8e45-5c59ced3e0ed
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: cd741750-1563-48db-b212-fc41a8ebafba
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: bad65878-6938-41d8-adc7-eedb3907f592
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Comptes_APU_Annuels = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_comptes_apu_annuels")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

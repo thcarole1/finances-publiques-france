@@ -1,5 +1,6 @@
 model Model
 	culture: fr-FR
+	discourageImplicitMeasures
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: fr-FR
 	valueFilterBehavior: independent
@@ -9,12 +10,27 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur"]
+annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table Dim_Date
 ref table Dim_Sous_Secteur
+ref table Dim_Pays
+ref table Dim_Transaction
+ref table Dim_COFOG
+ref table Dim_Prelevement
+ref table Dim_Source
+ref table Dim_Millesime
+ref table Dim_Indicateur
+ref table Fait_Comptes_APU_Annuels
+ref table Fait_Depenses_Fonction
+ref table Fait_Prelevements
+ref table Fait_Macro_Annuel
+ref table Fait_Revisions
+ref table _Mesures
+ref table CG_Unite
+ref table CG_Consolidation
 
 ref cultureInfo fr-FR
 

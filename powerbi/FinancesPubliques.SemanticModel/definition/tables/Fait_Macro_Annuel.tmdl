@@ -1,0 +1,101 @@
+/// F04 — PIB, population, croissance et prix.
+table Fait_Macro_Annuel
+	lineageTag: c97ea52c-1cdf-4afe-a4b7-b3c4a81e15ca
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 7155ed7f-6a73-4213-9a52-04ba04fcc1aa
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: bca55407-f4f2-4558-8b20-3c84f879dea2
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column pib_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: a93d53e2-bacb-4f08-add7-8da75bb331ec
+		summarizeBy: none
+		sourceColumn: pib_meur
+
+		annotation SummarizationSetBy = User
+
+	column pib_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 6332cfdb-4740-49a9-a4a2-85991a04aa47
+		summarizeBy: none
+		sourceColumn: pib_mnac
+
+		annotation SummarizationSetBy = User
+
+	column croissance_volume_pct
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: e7ad8160-7b74-49ef-8f5e-39b30dc8e57f
+		summarizeBy: none
+		sourceColumn: croissance_volume_pct
+
+		annotation SummarizationSetBy = User
+
+	column variation_deflateur_pct
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: fc2a07a9-bb4f-44e7-be34-c833cbe3869c
+		summarizeBy: none
+		sourceColumn: variation_deflateur_pct
+
+		annotation SummarizationSetBy = User
+
+	column population
+		dataType: int64
+		isHidden
+		formatString: #,0
+		lineageTag: 6f5c735d-8441-4b82-93d0-5af1efa1fa05
+		summarizeBy: none
+		sourceColumn: population
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (macro)'
+		dataType: string
+		lineageTag: d979f352-c246-4930-be8f-437b2ab24995
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: c9ebdbaa-ea08-4923-a672-ac6a5ef33fcd
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Macro_Annuel = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_macro_annuel")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

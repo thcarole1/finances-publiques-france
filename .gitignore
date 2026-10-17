@@ -34,3 +34,5 @@ transform/logs/
 .DS_Store
 Thumbs.db
 desktop.ini
+tools/valider_tmdl/bin/
+tools/valider_tmdl/obj/

@@ -1,0 +1,89 @@
+/// Sources, licences et mentions d'attribution.
+table Dim_Source
+	lineageTag: f340f4a5-b634-4fd4-a595-c7861ee32bb2
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 1e2649dd-bae0-4140-a7ae-0a60ba5749a1
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column Producteur
+		dataType: string
+		lineageTag: bd474f10-7dc6-4cc0-a621-4f391a630deb
+		summarizeBy: none
+		sourceColumn: producteur
+
+		annotation SummarizationSetBy = User
+
+	column 'Jeu de données'
+		dataType: string
+		lineageTag: f2e07b01-7b09-408f-8cad-5a9f564b8938
+		summarizeBy: none
+		sourceColumn: jeu_donnees
+
+		annotation SummarizationSetBy = User
+
+	column Source
+		dataType: string
+		lineageTag: 96415dbe-423a-4745-87d0-cad43b333dc0
+		summarizeBy: none
+		sourceColumn: libelle
+
+		annotation SummarizationSetBy = User
+
+	column Lien
+		dataType: string
+		dataCategory: WebUrl
+		lineageTag: 723f3e78-8125-4f8a-b873-3ef59e9db814
+		summarizeBy: none
+		sourceColumn: url
+
+		annotation SummarizationSetBy = User
+
+	column Licence
+		dataType: string
+		lineageTag: 089a4771-c1ff-4ae9-bf1a-892714fe349c
+		summarizeBy: none
+		sourceColumn: licence
+
+		annotation SummarizationSetBy = User
+
+	column Attribution
+		dataType: string
+		lineageTag: 66c8f0c4-a1a6-42a8-abd7-2c1ba0cee431
+		summarizeBy: none
+		sourceColumn: libelle_attribution
+
+		annotation SummarizationSetBy = User
+
+	column 'Fréquence'
+		dataType: string
+		lineageTag: 4aea6594-ecee-4737-84d3-2581b23c3975
+		summarizeBy: none
+		sourceColumn: frequence
+
+		annotation SummarizationSetBy = User
+
+	column 'Niveau de référence'
+		dataType: string
+		lineageTag: 94aed5d3-6d5e-431f-81cf-6e021ac762b2
+		summarizeBy: none
+		sourceColumn: niveau_reference
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Source = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_source")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

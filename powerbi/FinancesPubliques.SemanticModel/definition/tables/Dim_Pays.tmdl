@@ -1,0 +1,144 @@
+/// Pays et agrégats comparés.
+table Dim_Pays
+	lineageTag: 481cebe2-475a-4bca-85f3-5f1ca867b554
+
+	/// Code ISO 3166 (EU27 et EA pour les agrégats)
+	column 'Code pays'
+		dataType: string
+		lineageTag: cdea6a9a-8150-4cb5-a288-7137413d8d9a
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column code_eurostat
+		dataType: string
+		isHidden
+		lineageTag: 5cb46b66-1d07-4c22-8185-d86d16c13485
+		summarizeBy: none
+		sourceColumn: code_eurostat
+
+		annotation SummarizationSetBy = User
+
+	column code_iso3
+		dataType: string
+		isHidden
+		lineageTag: e6f1e83b-06c7-4b26-b495-d587f3ff599a
+		summarizeBy: none
+		sourceColumn: code_iso3
+
+		annotation SummarizationSetBy = User
+
+	column Pays
+		dataType: string
+		lineageTag: 45b55f88-d1fa-4e45-9e4a-e8868400b238
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	/// Pays ou agrégat (UE, zone euro)
+	column 'Type de pays'
+		dataType: string
+		lineageTag: fc254408-a6f3-4f01-9be1-528c8566e021
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = User
+
+	column 'Membre de l''UE'
+		dataType: boolean
+		lineageTag: b874853c-5c2c-4bd2-a4bc-1d6ca0ecb2ec
+		summarizeBy: none
+		sourceColumn: est_ue
+
+		annotation SummarizationSetBy = User
+
+	column 'Membre de la zone euro'
+		dataType: boolean
+		lineageTag: cf836b8d-4a07-457e-90f7-3a40333a158a
+		summarizeBy: none
+		sourceColumn: est_zone_euro
+
+		annotation SummarizationSetBy = User
+
+	column 'Membre de l''OCDE'
+		dataType: boolean
+		lineageTag: 78902506-292f-4aad-9b88-c3721bfda50c
+		summarizeBy: none
+		sourceColumn: est_ocde
+
+		annotation SummarizationSetBy = User
+
+	column 'Groupe de comparaison'
+		dataType: string
+		lineageTag: a9c95e25-4ad5-451d-9014-330fbdc30cf9
+		summarizeBy: none
+		sourceColumn: groupe_comparaison
+
+		annotation SummarizationSetBy = User
+
+	column Devise
+		dataType: string
+		lineageTag: da161b85-20cd-4434-af6e-e1c4c07856f8
+		summarizeBy: none
+		sourceColumn: devise
+
+		annotation SummarizationSetBy = User
+
+	column est_federal
+		dataType: boolean
+		isHidden
+		lineageTag: 90bb0022-6531-4bbd-81cc-2a9e4b564dcc
+		summarizeBy: none
+		sourceColumn: est_federal
+
+		annotation SummarizationSetBy = User
+
+	column 'Source de référence'
+		dataType: string
+		lineageTag: 1cc97e36-5a21-497a-b2bb-88e896476deb
+		summarizeBy: none
+		sourceColumn: source_reference
+
+		annotation SummarizationSetBy = User
+
+	column 'Comparabilité'
+		dataType: string
+		lineageTag: 4bad28c1-39f1-471a-a82a-7fde9305f267
+		summarizeBy: none
+		sourceColumn: niveau_comparabilite
+
+		annotation SummarizationSetBy = User
+
+	/// Précautions de lecture pour ce pays
+	column 'Note de comparabilité'
+		dataType: string
+		lineageTag: 669c57bd-ad99-46ae-9a55-639dc6038fa2
+		summarizeBy: none
+		sourceColumn: note_comparabilite
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ccd3bbfe-5ba7-4cc5-a41d-c6e03a6943c2
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Pays = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_pays")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

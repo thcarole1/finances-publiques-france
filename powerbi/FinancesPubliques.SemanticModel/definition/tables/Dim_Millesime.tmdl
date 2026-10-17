@@ -1,0 +1,98 @@
+/// Versions des données, telles que publiées à chaque date.
+table Dim_Millesime
+	lineageTag: bd7ea326-485b-4f04-b175-3f3d829ccdff
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: b5dcd2a3-7c07-49b5-b99a-d9202fffd4dc
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: d9e05f60-1948-4c6b-8675-bbeda0c9d9c0
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column 'Source du millésime'
+		dataType: string
+		lineageTag: fe15094d-94e9-44ff-8352-f24d8e9dd8e1
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = User
+
+	column 'Jeu du millésime'
+		dataType: string
+		lineageTag: 67960ae6-1692-4f33-954f-3643dd6b48dd
+		summarizeBy: none
+		sourceColumn: jeu
+
+		annotation SummarizationSetBy = User
+
+	column 'Date de publication'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 44f2ae89-a436-4bfe-869a-6f5c55d8285f
+		summarizeBy: none
+		sourceColumn: date_publication
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date de collecte'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 32b96ce7-4c15-4c49-9d55-25e7069b3b2d
+		summarizeBy: none
+		sourceColumn: date_collecte
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Millésime'
+		dataType: string
+		lineageTag: e3056083-82c1-486b-a02a-b6a8a435d5f2
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: 'Date de collecte'
+
+		annotation SummarizationSetBy = User
+
+	/// 1 = millésime le plus récent
+	column 'Rang de récence'
+		dataType: int64
+		formatString: 0
+		lineageTag: d81fa2f5-ebdb-4b46-a9a7-588516348a80
+		summarizeBy: none
+		sourceColumn: rang_recence
+
+		annotation SummarizationSetBy = User
+
+	column 'Dernier millésime'
+		dataType: boolean
+		lineageTag: 5ba6f06e-4dd6-4282-9858-7a59a451cd40
+		summarizeBy: none
+		sourceColumn: est_dernier
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Millesime = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_millesime")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

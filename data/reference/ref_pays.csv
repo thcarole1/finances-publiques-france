@@ -1,0 +1,33 @@
+pays_code,code_eurostat,code_iso3,libelle,type,est_ue,est_zone_euro,est_ocde,groupe_comparaison,devise,est_federal,source_reference,niveau_comparabilite,note_comparabilite,ordre_tri
+FR,FR,FRA,France,Pays,true,true,true,France,EUR,false,Eurostat,Élevé,,1
+DE,DE,DEU,Allemagne,Pays,true,true,true,Grands voisins,EUR,true,Eurostat,Élevé,,2
+IT,IT,ITA,Italie,Pays,true,true,true,Grands voisins,EUR,false,Eurostat,Élevé,,3
+ES,ES,ESP,Espagne,Pays,true,true,true,Grands voisins,EUR,true,Eurostat,Élevé,Les communautés autonomes forment le sous-secteur des États fédérés (S1312).,4
+BE,BE,BEL,Belgique,Pays,true,true,true,UE,EUR,true,Eurostat,Élevé,,10
+NL,NL,NLD,Pays-Bas,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,"Retraites largement financées par des fonds de pension privés, hors dépense publique.",11
+LU,LU,LUX,Luxembourg,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,12
+AT,AT,AUT,Autriche,Pays,true,true,true,UE,EUR,true,Eurostat,Élevé,,13
+PT,PT,PRT,Portugal,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,14
+IE,IE,IRL,Irlande,Pays,true,true,true,UE,EUR,false,Eurostat,Moyen,Le PIB irlandais est gonflé par les multinationales : les ratios en % du PIB y sont peu comparables.,15
+GR,EL,GRC,Grèce,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,16
+FI,FI,FIN,Finlande,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,17
+SE,SE,SWE,Suède,Pays,true,false,true,UE,SEK,false,Eurostat,Élevé,,18
+DK,DK,DNK,Danemark,Pays,true,false,true,UE,DKK,false,Eurostat,Élevé,"Protection sociale financée surtout par l'impôt plutôt que par des cotisations.",19
+PL,PL,POL,Pologne,Pays,true,false,true,UE,PLN,false,Eurostat,Élevé,,20
+CZ,CZ,CZE,Tchéquie,Pays,true,false,true,UE,CZK,false,Eurostat,Élevé,,21
+SK,SK,SVK,Slovaquie,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,22
+HU,HU,HUN,Hongrie,Pays,true,false,true,UE,HUF,false,Eurostat,Élevé,,23
+SI,SI,SVN,Slovénie,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,24
+HR,HR,HRV,Croatie,Pays,true,true,false,UE,EUR,false,Eurostat,Élevé,,25
+RO,RO,ROU,Roumanie,Pays,true,false,false,UE,RON,false,Eurostat,Élevé,,26
+BG,BG,BGR,Bulgarie,Pays,true,true,false,UE,EUR,false,Eurostat,Élevé,Membre de la zone euro depuis 2026 ; montants antérieurs convertis depuis le lev.,27
+EE,EE,EST,Estonie,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,28
+LV,LV,LVA,Lettonie,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,29
+LT,LT,LTU,Lituanie,Pays,true,true,true,UE,EUR,false,Eurostat,Élevé,,30
+CY,CY,CYP,Chypre,Pays,true,true,false,UE,EUR,false,Eurostat,Élevé,,31
+MT,MT,MLT,Malte,Pays,true,true,false,UE,EUR,false,Eurostat,Élevé,,32
+NO,NO,NOR,Norvège,Pays,false,false,true,OCDE hors UE,NOK,false,Eurostat,Moyen,"Recettes pétrolières et fonds souverain : solde public très excédentaire, peu comparable.",40
+CH,CH,CHE,Suisse,Pays,false,false,true,OCDE hors UE,CHF,true,Eurostat,Moyen,"Assurance maladie obligatoire privée, hors dépense publique.",41
+EU27,EU27_2020,EU27,Union européenne (27 pays),Agrégat,true,false,false,Agrégats,EUR,false,Eurostat,Élevé,,90
+EA,EA21,EA21,Zone euro (21 pays),Agrégat,false,true,false,Agrégats,EUR,false,Eurostat,Élevé,Composition fixe à 21 pays sur toute la période.,91
+_NA,,,Non renseigné,Agrégat,false,false,false,,,false,,,,99

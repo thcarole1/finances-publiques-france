@@ -19,7 +19,7 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 | QC-B01 | **Contrat de schéma** : colonnes, types, nullabilité conformes au contrat du modèle dbt | Toutes | 0 |
 | QC-B02 | **Unicité du grain** : aucune ligne en double sur les clés du grain | Toutes | 0 |
 | QC-B03 | **Exhaustivité des feuilles** : Σ feuilles de dépense = dépenses totales publiées (OTE) ; idem recettes (TR) | F01 | 0,05 % ou 1 M€ |
-| QC-B04 | **COFOG = total** : Σ fonctions = dépenses totales de F01 (pays, année, sous-secteur) | F02 × F01 | 0,1 % |
+| QC-B04 | **COFOG = total** : Σ fonctions = dépenses totales publiées dans le même jeu (`gov_10a_exp`) ; la cohérence avec F01 est l'avertissement QC-A04 | F02 | 0,05 % |
 | QC-B05 | **Consolidation** : Σ sous-secteurs + `S13_ELIM` = S13 publié | F01, F09 | 0,05 % |
 | QC-B06 | **Dette annuelle** : dette au T4 = dette annuelle notifiée | F09 | 0,1 % |
 | QC-B07 | **Échéancier AFT** : Σ encours par titre = encours total publié | F11 | 0,01 % |

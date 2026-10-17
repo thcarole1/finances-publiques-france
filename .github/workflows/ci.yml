@@ -46,4 +46,32 @@ jobs:
         run: uv run python scripts/valider_scenarios.py
 
       - name: Construction du modèle et tests de données (dbt)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./scripts/construire.sh
+
+  modele-powerbi:
+    name: modele-powerbi
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Valider le modèle TMDL (bibliothèque Microsoft, comme Power BI Desktop)
+        shell: bash
+        run: |
+          set +e
+          dotnet run --project tools/valider_tmdl -- powerbi/FinancesPubliques.SemanticModel/definition \
+            > sortie.txt 2>&1
+          code=$?
+          cat sortie.txt
+          # Le message est aussi remonté en annotation (lisible dans l'onglet Checks de la PR).
+          resume=$(grep -vE "^\s*$|warning NU|Restored|Determining" sortie.txt | tail -n 25 \
+            | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          if [ $code -ne 0 ]; then echo "::error title=Modèle TMDL invalide::${resume}"; else echo "::notice title=Modèle TMDL::${resume}"; fi
+          exit $code

@@ -32,3 +32,114 @@ seeds:
     columns:
       - name: periode_code
         data_tests: [unique, not_null]
+
+  - name: ref_pays
+    description: Pays et agrégats, avec correspondances Eurostat et ISO3 (docs/04, Dim_Pays).
+    config:
+      column_types:
+        pays_code: varchar
+        code_eurostat: varchar
+        code_iso3: varchar
+        est_ue: boolean
+        est_zone_euro: boolean
+        est_ocde: boolean
+        est_federal: boolean
+        ordre_tri: integer
+    columns:
+      - name: pays_code
+        data_tests: [unique, not_null]
+
+  - name: ref_transaction
+    description: Nature économique (feuilles SEC 2010) des recettes et des dépenses.
+    data_tests:
+      - unicite_grain:
+          arguments: {colonnes: [libelle_court]}
+      - unicite_grain:
+          arguments: {colonnes: [libelle]}
+    config:
+      column_types: {transaction_code: varchar, ordre_tri: integer}
+    columns:
+      - name: transaction_code
+        data_tests: [unique, not_null]
+      - name: sens
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["Dépense", "Recette"]}
+              config: {where: "transaction_code <> '_NA'"}
+
+  - name: ref_formule_comptes_apu
+    description: Formule de chaque feuille de Fait_Comptes_APU_Annuels à partir des postes de gov_10a_main.
+    config:
+      column_types: {transaction_code: varchar, na_item: varchar, coefficient: integer}
+    columns:
+      - name: transaction_code
+        data_tests:
+          - relationships:
+              arguments: {to: ref('ref_transaction'), field: transaction_code}
+
+  - name: ref_formule_depense_fonction
+    description: Correspondance des postes de gov_10a_exp vers les feuilles de nature.
+    config:
+      column_types: {transaction_code: varchar, na_item: varchar, coefficient: integer}
+    columns:
+      - name: na_item
+        data_tests: [unique]
+      - name: transaction_code
+        data_tests:
+          - relationships:
+              arguments: {to: ref('ref_transaction'), field: transaction_code}
+
+  - name: ref_cofog
+    description: Fonctions COFOG (feuilles de niveau 2 et résidus non ventilés).
+    data_tests:
+      - unicite_grain:
+          arguments: {colonnes: [cofog_n2_libelle]}
+    config:
+      column_types:
+        cofog_code: varchar
+        niveau: integer
+        est_non_ventile: boolean
+        ordre_tri: integer
+    columns:
+      - name: cofog_code
+        data_tests: [unique, not_null]
+
+  - name: ref_prelevement
+    description: Types de prélèvement (feuilles de gov_10a_taxag et résidus non ventilés).
+    data_tests:
+      - unicite_grain:
+          arguments: {colonnes: [libelle_court]}
+    config:
+      column_types:
+        prelevement_code: varchar
+        est_prelevement_obligatoire: boolean
+        est_non_ventile: boolean
+        signe: integer
+        ordre_tri: integer
+    columns:
+      - name: prelevement_code
+        data_tests: [unique, not_null]
+
+  - name: ref_formule_prelevement
+    description: Formule de chaque feuille de prélèvement ; Σ feuilles = total publié par construction.
+    config:
+      column_types: {prelevement_code: varchar, na_item: varchar, coefficient: integer}
+    columns:
+      - name: prelevement_code
+        data_tests:
+          - relationships:
+              arguments: {to: ref('ref_prelevement'), field: prelevement_code}
+
+  - name: ref_source
+    description: Sources de données, licences et attributions (docs/03).
+    columns:
+      - name: source_id
+        data_tests: [unique, not_null]
+
+  - name: ref_indicateur
+    description: Indicateurs du rapport (paramètres de champ, révisions, info-bulles).
+    config:
+      column_types: {ordre_tri: integer}
+    columns:
+      - name: indicateur_code
+        data_tests: [unique, not_null]
