@@ -9,7 +9,7 @@
 | Répartition | `int_prelevements__parts_fonction` : part de chaque base dans chaque prélèvement, par pays et par année ; impôt sur le revenu, CSG et CRDS ventilés avec la répartition déclarée par chaque pays (*PIT split*) |
 | Fait | `Fait_Prelevements_Fonction` (F03b) : `Fait_Prelevements` × parts ; **Σ des bases = F03 ligne à ligne** (contrôle QC-B09) |
 | Dimension | `Dim_Fonction_Economique` : base, payeur en **lecture légale** (qui verse) et **lecture économique** (qui supporte), avec explications |
-| Power BI | 3 tables, 7 relations, 2 mesures, paramètre de champ `FP_Lecture_Payeur` (légal / économique / base) |
+| Power BI | 2 tables, 7 relations, 2 mesures ; le sélecteur de lecture (paramètre de champ) se crée dans Desktop, voir `powerbi/README.md` |
 
 ## Bases économiques (méthodologie *Taxation Trends*)
 
