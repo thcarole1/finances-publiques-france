@@ -56,6 +56,12 @@ jobs:
       - name: Collecter la DG TAXUD (listes nationales des impôts)
         run: uv run python -m ingestion.sources.taxud --ignorer-existants
 
+      - name: Collecter l'INSEE (dette trimestrielle, dette négociable de l'État)
+        run: uv run python -m ingestion.sources.insee --ignorer-existants
+
+      - name: Collecter la BCE (courbe des taux de la zone euro)
+        run: uv run python -m ingestion.sources.bce --ignorer-existants
+
       - name: Construire le modèle et exécuter les contrôles qualité
         run: ./scripts/construire.sh
 

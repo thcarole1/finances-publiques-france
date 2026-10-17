@@ -1,0 +1,43 @@
+/// Agrégats des comptes trimestriels des administrations.
+table Dim_Agregat_Trimestriel
+	lineageTag: c868c8da-7e1e-4b5d-88a5-1c7a3ae0dd6c
+
+	column 'Code agrégat'
+		dataType: string
+		isHidden
+		lineageTag: 769389a3-04c7-4220-98c3-e8ab7a4edec0
+		summarizeBy: none
+		sourceColumn: agregat_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Agrégat trimestriel'
+		dataType: string
+		lineageTag: 2e40fec2-eaa9-4c6e-b4d9-85283ce54a5f
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6eab816-e5d1-4132-a04b-6235de390306
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Agregat_Trimestriel = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_agregat_trimestriel")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

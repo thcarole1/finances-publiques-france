@@ -1,0 +1,11 @@
+idbank,jeu,usage,code,libelle
+010777616,dette-trim-apu,dette_total,S13,Dette de Maastricht - ensemble
+010777610,dette-trim-apu,dette_contribution,S13111,Dette de Maastricht - État
+010777613,dette-trim-apu,dette_contribution,S13112,Dette de Maastricht - organismes divers d'administration centrale
+010777626,dette-trim-apu,dette_contribution,S1313,Dette de Maastricht - administrations publiques locales
+010777625,dette-trim-apu,dette_contribution,S1314,Dette de Maastricht - administrations de sécurité sociale
+001711531,dette-negociable-etat,dette_negociable_total,TOTAL,Encours total de la dette négociable de l'État
+001711532,dette-negociable-etat,dette_negociable,COURT_TERME,Court terme (un an et moins)
+001711533,dette-negociable-etat,dette_negociable,LONG_TERME,Moyen et long terme (plus d'un an)
+001738853,dette-negociable-etat,dette_negociable,TAUX_FIXE,Taux fixe
+001738854,dette-negociable-etat,dette_negociable,INDEXEE,Indexée sur l'inflation

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "7ce69d133b9fd2ac81a2",
+  "displayName": "9. Les taux d'intérêt",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "768a59c32a0cd5981af1",
+      "target": "2a9c2c9a85789a61adaa",
+      "type": "NoFilter"
+    },
+    {
+      "source": "768a59c32a0cd5981af1",
+      "target": "8188a96bc0540c4cca4a",
+      "type": "NoFilter"
+    },
+    {
+      "source": "807f6ddc39e983485392",
+      "target": "d420870e050c6d3a4561",
+      "type": "NoFilter"
+    }
+  ]
+}

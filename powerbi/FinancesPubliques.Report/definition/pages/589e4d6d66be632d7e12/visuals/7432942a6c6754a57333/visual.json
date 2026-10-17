@@ -3,9 +3,9 @@
   "name": "7432942a6c6754a57333",
   "position": {
     "x": 648,
-    "y": 520,
+    "y": 548,
     "z": 8000,
-    "height": 184,
+    "height": 156,
     "width": 616,
     "tabOrder": 8000
   },
@@ -42,18 +42,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Le taux moyen payé sur toute la dette suit les taux du marché avec retard : seuls les nouveaux emprunts se font au taux du moment, les anciens gardent leur taux d'origine.",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#595959"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Le détail par détenteur n'est publié que depuis 2020 pour la plupart des pays.",
+                    "value": "Le taux moyen payé suit les taux du marché avec retard : les anciens emprunts gardent leur taux d'origine. Détail par détenteur publié depuis 2020 pour la plupart des pays.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"

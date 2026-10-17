@@ -217,3 +217,27 @@ contrat, et des CP chaque année au fil des paiements.
 
 **Long :** de 2015 à 2022, l'Eurosystème a acheté massivement des titres publics pour soutenir l'économie. La Banque de France en détient ainsi une part importante, qu'elle réduit depuis 2023.
 
+### Écart de taux avec l'Allemagne
+
+**Court :** la différence entre le taux auquel un pays emprunte à 10 ans et celui de l'Allemagne.
+
+**Long :** l'Allemagne est l'emprunteur jugé le plus sûr de la zone euro. L'écart (en anglais *spread*) mesure le supplément que les prêteurs exigent pour prêter à un autre pays : il grimpe quand ils doutent de sa capacité à rembourser ou de sa stabilité politique.
+
+### Courbe des taux
+
+**Court :** les taux d'intérêt selon la durée de l'emprunt, de 1 à 30 ans.
+
+**Long :** en temps normal, prêter longtemps rapporte davantage, et la courbe monte. Quand elle s'aplatit ou s'inverse (taux courts plus élevés que les taux longs), les marchés anticipent souvent une baisse des taux directeurs ou un ralentissement.
+
+### Dette indexée sur l'inflation
+
+**Court :** des titres dont le montant remboursé suit l'évolution des prix.
+
+**Long :** l'État paie un taux plus faible au départ, mais la charge augmente aussitôt quand l'inflation monte. C'est ce qui a fait bondir la charge d'intérêts en 2022 et 2023.
+
+### Correction des variations saisonnières
+
+**Court :** un calcul qui retire les effets du calendrier (fêtes, saisons, dates d'échéance des impôts) pour comparer un trimestre au précédent.
+
+**Long :** sans cette correction, certains trimestres paraissent toujours meilleurs ou pires que d'autres, simplement parce que des impôts sont encaissés ou des dépenses versées à date fixe. Les chiffres corrigés sont notés « CVS » par les statisticiens.
+

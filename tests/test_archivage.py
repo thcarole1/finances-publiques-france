@@ -43,3 +43,19 @@ def test_verification_detecte_une_alteration(tmp_path):
         chemin = inst.ajouter("encours.xlsx", b"original", url="u")
     chemin.write_bytes(b"modifie")
     assert verifier_instantane(chemin.parent) == ["empreinte différente : encours.xlsx"]
+
+
+def test_nom_d_archive_reconnu_avec_tiret():
+    """Les jeux INSEE et BCE ont des noms avec tiret (dette-trim-apu, courbe-taux)."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("donnees_brutes", "scripts/donnees_brutes.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    for source, jeu in [
+        ("insee", "dette-trim-apu"),
+        ("eurostat", "gov_10a_main"),
+        ("bce", "courbe-taux"),
+    ]:
+        m = module.MOTIF_ASSET.match(module.nom_asset(source, jeu, "2026-10-17"))
+        assert m and m["source"] == source and m["jeu"] == jeu

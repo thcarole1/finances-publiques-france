@@ -241,3 +241,115 @@ relationship 75eb7320-b5b2-417c-8ff9-458685e1ddbb
 relationship b7227b08-a494-4f7d-aa8d-5317de7f2530
 	fromColumn: Fait_Taux_Marche.millesime_id
 	toColumn: Dim_Millesime.millesime_id
+
+relationship f95c8c30-c3f6-4168-8fe1-f696d1f6d435
+	fromColumn: Fait_Dette_Trimestrielle.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 79262e47-a740-423f-aa75-239c835f980b
+	fromColumn: Fait_Dette_Trimestrielle.date_id
+	toColumn: Dim_Date.date_id
+
+relationship f5772cd2-2958-41f6-8ee4-4022b084dbad
+	fromColumn: Fait_Dette_Trimestrielle.source_id
+	toColumn: Dim_Source.source_id
+
+relationship b0035375-dc43-4d42-8761-e8e3ee412315
+	fromColumn: Fait_Dette_Trimestrielle.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 536eb012-0fea-455c-845f-03821a3e0a58
+	fromColumn: Fait_Macro_Trimestriel.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship c225f385-6f97-4118-8e80-fec1c764ad37
+	fromColumn: Fait_Macro_Trimestriel.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 85936284-7960-411f-81e7-0f7b5838bfa0
+	fromColumn: Fait_Macro_Trimestriel.source_id
+	toColumn: Dim_Source.source_id
+
+relationship d1ae33e3-786c-4661-a24d-242c9c3b0154
+	fromColumn: Fait_Macro_Trimestriel.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 3354c791-11f3-40a0-ac89-2403073f1609
+	fromColumn: Fait_Comptes_APU_Trimestriels.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship d0f7fcd7-38a1-41ad-bb2f-73423c96d56f
+	fromColumn: Fait_Comptes_APU_Trimestriels.date_id
+	toColumn: Dim_Date.date_id
+
+relationship d769eadf-9507-40a1-b512-1127f1453461
+	fromColumn: Fait_Comptes_APU_Trimestriels.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 2435ceec-7e65-47a3-8b96-e148b2ab704a
+	fromColumn: Fait_Comptes_APU_Trimestriels.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 6fbb0ce4-b1ca-4ec1-b5d6-49cbe2559609
+	fromColumn: Fait_Dette_Contributions.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 2fd5e4e1-3ec3-4116-90d6-aa94cdd5c080
+	fromColumn: Fait_Dette_Contributions.date_id
+	toColumn: Dim_Date.date_id
+
+relationship eeffd731-9c5b-4073-8e9d-cc139873c93a
+	fromColumn: Fait_Dette_Contributions.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 3a564d1e-76cf-49a7-9884-e8b0383ee28f
+	fromColumn: Fait_Dette_Contributions.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship c189698f-7dc4-4378-8747-9ec1d3a06b4b
+	fromColumn: Fait_Dette_Negociable_Etat.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 886a655e-842c-49ba-893b-5ec986a1a3c6
+	fromColumn: Fait_Dette_Negociable_Etat.date_id
+	toColumn: Dim_Date.date_id
+
+relationship b9dfb0ba-96f8-4e47-9a27-58a090367667
+	fromColumn: Fait_Dette_Negociable_Etat.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 7a461825-7d92-4f13-ba2c-ae505b813d9a
+	fromColumn: Fait_Dette_Negociable_Etat.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship c7688c23-65fb-4130-850e-30df00670de5
+	fromColumn: Fait_Courbe_Taux.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 27d3611c-0fd7-4287-b20c-de5b26aede3d
+	fromColumn: Fait_Courbe_Taux.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 7e51bff6-b61c-4419-a9d7-eef5514252df
+	fromColumn: Fait_Courbe_Taux.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 999ecb45-0f3a-4c7a-95bc-578b4f7dbc1b
+	fromColumn: Fait_Courbe_Taux.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 2fd81fc8-7dac-488f-827e-acd474c6a934
+	fromColumn: Fait_Dette_Trimestrielle.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 248d1b06-06f8-42b4-9552-697fd165c15d
+	fromColumn: Fait_Dette_Contributions.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 83739eb7-71b9-43ea-99d5-4d50c48ccd88
+	fromColumn: Fait_Comptes_APU_Trimestriels.agregat_code
+	toColumn: Dim_Agregat_Trimestriel.'Code agrégat'
+
+relationship 44a2d83a-4ae3-40ad-bb2e-492118f585ca
+	fromColumn: Fait_Dette_Negociable_Etat.composante_code
+	toColumn: Dim_Composante_Dette_Etat.'Code composante'

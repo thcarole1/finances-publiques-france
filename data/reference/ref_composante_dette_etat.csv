@@ -1,0 +1,5 @@
+composante_code,libelle,axe,definition,ordre_tri
+COURT_TERME,Emprunts d'un an ou moins,Durée,"Bons du Trésor, remboursés en un an ou moins.",1
+LONG_TERME,Emprunts de plus d'un an,Durée,"Obligations remboursées au bout de 2 à 50 ans.",2
+TAUX_FIXE,À taux fixe,Type de taux,L'intérêt est fixé une fois pour toutes à l'émission.,3
+INDEXEE,Indexée sur l'inflation,Type de taux,"Le capital remboursé suit l'évolution des prix : quand l'inflation monte, la charge de la dette augmente aussitôt.",4

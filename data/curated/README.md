@@ -21,6 +21,14 @@ identiques produisent des fichiers identiques.
 | `fait_dette_instrument.parquet` | `Fait_Dette_Instrument` |
 | `fait_detention_dette.parquet` | `Fait_Detention_Dette` |
 | `fait_taux_marche.parquet` | `Fait_Taux_Marche` |
+| `fait_dette_trimestrielle.parquet` | `Fait_Dette_Trimestrielle` |
+| `fait_macro_trimestriel.parquet` | `Fait_Macro_Trimestriel` |
+| `fait_comptes_apu_trimestriels.parquet` | `Fait_Comptes_APU_Trimestriels` |
+| `fait_dette_contributions.parquet` | `Fait_Dette_Contributions` |
+| `fait_dette_negociable_etat.parquet` | `Fait_Dette_Negociable_Etat` |
+| `fait_courbe_taux.parquet` | `Fait_Courbe_Taux` |
+| `dim_composante_dette_etat.parquet` | `Dim_Composante_Dette_Etat` |
+| `dim_agregat_trimestriel.parquet` | `Dim_Agregat_Trimestriel` |
 | `dim_millesime.parquet` | `Dim_Millesime` |
 | `dim_indicateur.parquet` | `Dim_Indicateur` |
 | `fait_comptes_apu_annuels.parquet` | `Fait_Comptes_APU_Annuels` (F01) |

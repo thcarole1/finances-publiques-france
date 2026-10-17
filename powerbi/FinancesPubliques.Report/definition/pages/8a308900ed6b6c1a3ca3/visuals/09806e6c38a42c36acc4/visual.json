@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "09806e6c38a42c36acc4",
   "position": {
-    "x": 652,
-    "y": 548,
+    "x": 868,
+    "y": 228,
     "z": 12000,
-    "height": 156,
-    "width": 612,
+    "height": 244,
+    "width": 396,
     "tabOrder": 12000
   },
   "visual": {
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "La dette augmente chaque année du montant emprunté pour couvrir le déficit. Le graphique de droite sépare trois causes : le déficit hors intérêts (dépenses courantes supérieures aux recettes), l'écart entre le taux d'intérêt payé et la croissance de l'économie, et des opérations de trésorerie.",
+                    "value": "Le graphique de droite sépare trois causes de la variation de la dette : le déficit hors intérêts, l'écart entre le taux payé et la croissance, et des opérations de trésorerie.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"
@@ -42,7 +42,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Quand la croissance dépasse le taux payé, le poids de la dette baisse tout seul : c'est l'inverse de l'« effet boule de neige ».",
+                    "value": "Quand la croissance dépasse le taux payé, le poids de la dette baisse tout seul.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"

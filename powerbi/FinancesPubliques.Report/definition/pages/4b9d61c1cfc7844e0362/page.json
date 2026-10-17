@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "4b9d61c1cfc7844e0362",
+  "displayName": "8. Les derniers trimestres",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

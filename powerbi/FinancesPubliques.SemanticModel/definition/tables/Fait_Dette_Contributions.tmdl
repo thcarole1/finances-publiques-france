@@ -1,0 +1,79 @@
+/// F09c — France : contribution de chaque administration (État, agences, collectivités, Sécurité sociale) à la dette consolidée, en fin de trimestre (INSEE). Semi-additive.
+table Fait_Dette_Contributions
+	lineageTag: c8bfbdcf-c146-4b6f-a15a-5ba2dc15f714
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 489e3397-66af-41e9-968a-a6358e224ecf
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9c3383fb-8e16-45d2-afc7-d9d7846243a2
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: 1def3834-0bb7-41e6-b797-ff6ea80222a1
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: e6b5422d-6e8c-4575-9bb2-632066185d9e
+		summarizeBy: sum
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (contributions)'
+		dataType: string
+		lineageTag: 915c4e15-75db-4c0f-a8af-f5d8a338db0e
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 8042f2bc-c0b2-44a4-b053-37d3bd9c4279
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 53767680-36ed-4e37-a3e9-9af0b04b3843
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Dette_Contributions = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_dette_contributions")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

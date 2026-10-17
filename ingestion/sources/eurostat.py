@@ -91,6 +91,21 @@ JEUX: dict[str, Jeu] = {
             description="Taux d'intérêt à long terme (emprunts d'État à 10 ans), mensuel",
         ),
         Jeu(
+            "gov_10q_ggdebt",
+            f"Q.GD.{SOUS_SECTEURS}.MIO_EUR+MIO_NAC+PC_GDP.{{geo}}",
+            description="Dette publique trimestrielle par sous-secteur",
+        ),
+        Jeu(
+            "gov_10q_ggnfa",
+            "Q.MIO_EUR+MIO_NAC+PC_GDP.NSA+SCA.S13.TE+TR+B9+D41PAY.{geo}",
+            description="Comptes trimestriels des administrations (dépenses, recettes, solde)",
+        ),
+        Jeu(
+            "namq_10_gdp",
+            "Q.CP_MEUR+CP_MNAC.NSA+SCA.B1GQ.{geo}",
+            description="PIB trimestriel à prix courants, brut et CVS",
+        ),
+        Jeu(
             "nama_10_pe",
             "A.THS_PER.POP_NC.{geo}",
             description="Population (comptabilité nationale, moyenne annuelle)",

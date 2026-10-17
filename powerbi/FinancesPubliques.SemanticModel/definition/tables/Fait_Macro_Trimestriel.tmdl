@@ -1,0 +1,99 @@
+/// F08 — PIB trimestriel, brut et CVS, et somme des quatre derniers trimestres.
+table Fait_Macro_Trimestriel
+	lineageTag: bd905b77-70d4-4157-92a0-99473ba2d456
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: e92a9b93-5494-499f-b2d2-0e2426cdb2bb
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c6b80e37-f52c-407a-8d56-d1599f3942be
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column correction
+		dataType: string
+		isHidden
+		lineageTag: bb0b0d8a-4a8e-472b-9b71-3d740fa0ebc7
+		summarizeBy: none
+		sourceColumn: correction
+
+		annotation SummarizationSetBy = User
+
+	column pib_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: d5a11e95-fc35-4266-b275-4505bc9b1c02
+		summarizeBy: sum
+		sourceColumn: pib_meur
+
+		annotation SummarizationSetBy = User
+
+	column pib_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 76b725e9-8ae7-4563-90e2-fae7e802fd37
+		summarizeBy: sum
+		sourceColumn: pib_mnac
+
+		annotation SummarizationSetBy = User
+
+	column pib_4t_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 4364006f-6b69-4e48-b300-05edde89f315
+		summarizeBy: sum
+		sourceColumn: pib_4t_meur
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (PIB trimestriel)'
+		dataType: string
+		lineageTag: 23389b12-00f1-4907-b0bd-60c416ed3411
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: bcf16a88-5e30-4c97-b07f-ba244f5fdcdc
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: b28fde58-9f07-454a-98ee-8b5c666c09ca
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Macro_Trimestriel = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_macro_trimestriel")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

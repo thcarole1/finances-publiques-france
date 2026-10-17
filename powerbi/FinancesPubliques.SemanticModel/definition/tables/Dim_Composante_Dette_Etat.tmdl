@@ -1,0 +1,60 @@
+/// Composantes de la dette négociable de l'État.
+table Dim_Composante_Dette_Etat
+	lineageTag: adeacc74-9ac6-4bff-9b4e-96853b7bfab4
+
+	column 'Code composante'
+		dataType: string
+		isHidden
+		lineageTag: 49df93bb-dcd1-435c-8cab-ca4afe500dcb
+		summarizeBy: none
+		sourceColumn: composante_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Composante de la dette de l''État'
+		dataType: string
+		lineageTag: bceb01b1-e4b3-46be-b099-cb74ed8f5de4
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	/// Durée ou type de taux
+	column Axe
+		dataType: string
+		lineageTag: e617fa3a-9440-4c43-ba34-6d9593e8d270
+		summarizeBy: none
+		sourceColumn: axe
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition de la composante'
+		dataType: string
+		lineageTag: 0a43f709-b017-40b6-954a-df357c5acd25
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7ab8bc79-a940-4169-8e8a-96f7ca0a3a60
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Composante_Dette_Etat = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_composante_dette_etat")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

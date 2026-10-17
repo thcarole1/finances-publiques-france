@@ -1,0 +1,89 @@
+/// F09t — Dette en fin de trimestre par sous-secteur, avec éliminations. Semi-additive.
+table Fait_Dette_Trimestrielle
+	lineageTag: 8c9e30e3-fdaa-481e-9141-fb91ef06ed51
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 8a231779-7fb6-425e-84fd-1543c2d3c598
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0ab3f457-3582-48d0-83d5-46b1151aedf4
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: b6788769-a706-485f-8120-bf0ee6e20fb5
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 277139db-14d5-40d7-bf33-124f811df344
+		summarizeBy: sum
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 387b4018-d980-4287-afc3-c2e6fbec2670
+		summarizeBy: sum
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (dette trimestrielle)'
+		dataType: string
+		lineageTag: 426a8b1c-e810-46c4-89fa-3302857c6a0c
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 17a8c657-f849-4cf1-9af5-fb9d2f11bc29
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 3b7427c0-8498-4c5b-907b-1ffbfffb0a03
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Dette_Trimestrielle = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_dette_trimestrielle")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 3a (dette annuelle).
+Dernière mise à jour : 17/10/2026, après le lot 3b (dette trimestrielle et taux).
 
 ## 1. Où en est le projet
 
@@ -13,9 +13,9 @@ Dernière mise à jour : 17/10/2026, après le lot 3a (dette annuelle).
 | 2a | Transferts entre administrations (`Fait_Transferts_APU`) | ✅ fusionné (PR #7) |
 | 2b | Sankey « où va l'argent ? » (`Pres_Flux_Sankey`) | ✅ fusionné (PR #8) |
 | R1 | Rapport : 7 pages du parcours « Comprendre », glossaire, mesures en phrases | ✅ fusionné (PR #9) |
-| 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | PR ouverte (branche `feat/lot-3a-dette`) |
-| 3b | Dette et comptes trimestriels (`gov_10q_ggdebt`, `gov_10q_ggnfa`), courbe des taux BCE | à faire |
-| 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | **à faire** |
+| 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | ✅ fusionné (PR #10) |
+| 3b | Dette et comptes trimestriels, État / agences (INSEE), dette négociable de l'État, taux et courbe BCE ; pages 8 et 9 | PR ouverte (branche `feat/lot-3b-trimestriel`) |
+| 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | en partie : connecteur INSEE et détail État / agences pour la dette (lot 3b) ; reste les comptes annuels et les prélèvements |
 | 4 → 8 | Scénarios, redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
 Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
@@ -50,12 +50,17 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 | Validation | Job CI `modele-powerbi` (bibliothèque TOM) ; message d'erreur lisible dans les **annotations** du check (`gh api …/check-runs/<id>/annotations`) — les journaux bruts ne sont pas accessibles depuis la session |
 | Paramètres Power Query | Créés en requête vide : décocher « Activer le chargement » |
 | Rapport (PBIR) | Les fichiers JSON de `powerbi/FinancesPubliques.Report/definition/` sont validés contre les schémas officiels (`scripts/valider_pbir.py`, étape CI) et contre le modèle (`tests/test_pbir.py` : champs existants, aucun sigle affiché). Les pages sont produites par un générateur (non versionné, dans le dossier de travail de la session) ; vérifier avant de régénérer que le générateur reproduit à l'identique les JSON de `main` (`git status` vide), sinon le propriétaire les a retouchées dans Desktop et ce sont **les JSON qui font foi** |
+| Phrases (cartes) | Une carte trop petite coupe le texte par « … » au lieu de le faire défiler. Le générateur de pages vérifie, pour chaque phrase, que la plus longue attendue tient dans la carte (police 12 pt). Étalonnage sur Desktop : environ 0,70 × taille de police par caractère, 1,5 × par ligne, 24 px de marge verticale (une phrase de 175 caractères ne tient pas dans 616 × 92). Agrandir la carte ou raccourcir la phrase |
 | Dette | Semi-additive : les mesures prennent la dernière fin d'année de la période (`MAX(date_id)`), jamais une somme dans le temps |
 | Mesures | On n'additionne jamais des pays : les mesures de base renvoient vide si plusieurs pays sont sélectionnés. `CG_Unite` ne convertit que les mesures dont le nom contient « (M€) » |
 | Libellés | Aucun sigle ni code dans un visuel (`docs/09-rapport.md`, § 6) : libellés en clair dans les référentiels, sigles réservés au glossaire |
 | Avant chaque envoi | `uv run ruff format . && uv run ruff check . && uv run pytest` (le job `controles` vérifie la mise en forme) |
 
 ## 4. Accès réseau
+
+Les noms d'archives des Releases suivent `source__jeu__date.tar.gz` (le jeu peut contenir un tiret :
+`dette-trim-apu`). Avant d'ouvrir une PR qui ajoute une source, reconstruire depuis un clone vierge
+(données récupérées des Releases) pour reproduire le job CI.
 
 Eurostat refuse une requête entière si un pays n'est pas couvert par le jeu : le collecteur retire
 les pays refusés et réessaie (`geos_refuses`).
@@ -65,11 +70,14 @@ OCDE, BCE, OFGL, DG TAXUD (`taxation-customs.ec.europa.eu`, `webgate.ec.europa.e
 Bloqués constatés : `api.insee.fr`, `www.data.gouv.fr`, `www.aft.gouv.fr` (403). GitHub Actions a
 un accès Internet complet : en dernier recours, y faire tourner l'exploration.
 
-## 5. Prochaine étape : lot 2c (INSEE)
+## 5. Prochaine étape
 
-1. La BDM de l'INSEE (SDMX, `bdm.insee.fr/series/sdmx`, accessible) expose `CNA-2020-CSI`
-   (comptes des secteurs institutionnels, base 2020). Y chercher le détail État (S13111) /
-   organismes divers (S13112) et l'utiliser pour le niveau 2 de `Dim_Sous_Secteur`.
-2. Récupérer le taux de prélèvements obligatoires au sens de l'INSEE et documenter l'écart avec la
-   définition Eurostat (43,2 % contre 42,8 % en 2024, `docs/lots/lot-1.md`).
-3. Ensuite, selon le choix du propriétaire : lot 3 (dette), qui alimentera la page « La dette ».
+Connecteurs disponibles : Eurostat, DG TAXUD, INSEE (BDM, `ingestion/sources/insee.py`, une entrée
+par flux dans `JEUX`, séries choisies par IDBANK dans `ref_series_insee.csv`), BCE.
+
+1. **Lot 4 (scénarios et projections)** : les mesures de la dette (taux moyen payé, croissance en
+   valeur, effet boule de neige) sont la base du moteur de projection (`docs/08`).
+2. **Reste du lot 2c** : comptes annuels de l'État et des organismes (flux INSEE `CNA-2020-CSI`),
+   prélèvements obligatoires au sens de l'INSEE (43,2 % contre 42,8 % pour Eurostat en 2024).
+3. Échéancier titre par titre : AFT inaccessible depuis la session ; essai depuis GitHub Actions à
+   faire.
