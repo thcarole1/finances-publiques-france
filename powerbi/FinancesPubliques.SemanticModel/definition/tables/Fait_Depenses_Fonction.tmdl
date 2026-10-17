@@ -1,0 +1,108 @@
+/// F02 — Dépenses par fonction (COFOG) × nature × sous-secteur (M€).
+table Fait_Depenses_Fonction
+	lineageTag: 847f0e86-7eeb-4867-9278-14493976d882
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 734b5284-a74e-446f-a378-5b295a17aea4
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 89f1854a-b8f7-4a80-8fa3-bb4da8532482
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: 1f112f1e-0d46-40f4-a6d0-a0ece589227b
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column cofog_code
+		dataType: string
+		isHidden
+		lineageTag: bb97cd59-942b-42b0-b738-0ca172e73508
+		summarizeBy: none
+		sourceColumn: cofog_code
+
+		annotation SummarizationSetBy = User
+
+	column transaction_code
+		dataType: string
+		isHidden
+		lineageTag: 773f4dc4-1119-4da2-a434-cc82bf0e2f69
+		summarizeBy: none
+		sourceColumn: transaction_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 22453ae0-2bf3-42aa-85d4-c26113746c25
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 9034c2b5-c42f-4c8b-a86d-a305ffc7bc8d
+		summarizeBy: none
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	/// Définitif, provisoire ou estimé, selon le producteur
+	column 'Statut de la valeur'
+		dataType: string
+		lineageTag: 9d45096c-5899-4691-8ff2-fda973007f9f
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 3b01ae5a-2b47-4809-9362-c8aed4f2eaf3
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: ca03173b-2d08-4f64-8b91-a0108f38874b
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Depenses_Fonction = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_depenses_fonction")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

@@ -1,6 +1,7 @@
 # 06 — Mesures et calculs
 
-Les extraits DAX ci-dessous fixent l'**intention** et les **règles** ; ils seront finalisés et
+Les extraits DAX ci-dessous fixent l'**intention** et les **règles**. Les mesures réellement
+implémentées sont dans `powerbi/…/tables/_Mesures.tmdl` (lot 1 : voir `docs/lots/lot-1.md`). Elles sont finalisées et
 testés dans Power BI Desktop à chaque lot.
 
 ## 1. Organisation des mesures
@@ -37,7 +38,7 @@ CALCULATE ( [Montant APU (M€)], Dim_Transaction[sens] = "Recette" )
 Solde public (M€) = [Recettes publiques (M€)] - [Dépenses publiques (M€)]
 
 Charge d'intérêts (M€) =
-CALCULATE ( [Montant APU (M€)], Dim_Transaction[transaction_code] = "D41" )
+CALCULATE ( [Montant APU (M€)], Dim_Transaction[Code nature] = "D41_PAY" )
 
 -- Solde primaire : le solde hors charge d'intérêts.
 -- C'est lui qui dit si l'État « vit au-dessus de ses moyens » hors coût du passé.

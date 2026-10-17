@@ -1,0 +1,33 @@
+/// Bascule entre vue consolidée (transferts internes éliminés) et non consolidée (docs/04, § 3).
+table CG_Consolidation
+	lineageTag: 82a90810-acf4-49d2-8e67-dd828787039f
+
+	calculationGroup
+		precedence: 10
+
+		calculationItem 'Consolidé' = SELECTEDMEASURE ()
+			ordinal: 0
+
+		calculationItem 'Non consolidé' = CALCULATE ( SELECTEDMEASURE (), Dim_Sous_Secteur[est_elimination] = FALSE () )
+			ordinal: 1
+
+	column 'Vue'
+		dataType: string
+		lineageTag: 754ec3ae-06db-46fc-896a-20bb2fff77ff
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 81795664-5a0f-4369-aaa5-65998f1e4186
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CG_Consolidation = calculationGroup

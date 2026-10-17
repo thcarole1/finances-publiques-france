@@ -1,0 +1,81 @@
+cofog_code,cofog_n1_code,cofog_n1_libelle,cofog_n2_code,cofog_n2_libelle,niveau,est_non_ventile,ordre_tri
+GF0101,GF01,Services généraux,GF0101,"Fonctionnement des organes exécutifs et législatifs, affaires financières et fiscales, affaires étrangères",2,false,101
+GF0102,GF01,Services généraux,GF0102,Aide économique extérieure,2,false,102
+GF0103,GF01,Services généraux,GF0103,Services généraux,2,false,103
+GF0104,GF01,Services généraux,GF0104,Recherche fondamentale,2,false,104
+GF0105,GF01,Services généraux,GF0105,R & D concernant des services généraux des administrations publiques,2,false,105
+GF0106,GF01,Services généraux,GF0106,Services généraux des administrations publiques n.c.a.,2,false,106
+GF0107,GF01,Services généraux,GF0107,Opérations concernant la dette publique,2,false,107
+GF0108,GF01,Services généraux,GF0108,Transferts de caractère général entre administrations publiques,2,false,108
+GF01_NV,GF01,Services généraux,GF01_NV,Services généraux : non ventilé,2,true,199
+GF0201,GF02,Défense,GF0201,Défense militaire,2,false,201
+GF0202,GF02,Défense,GF0202,Défense civile,2,false,202
+GF0203,GF02,Défense,GF0203,Aide militaire à des pays étrangers,2,false,203
+GF0204,GF02,Défense,GF0204,R & D concernant la défense,2,false,204
+GF0205,GF02,Défense,GF0205,Défense n.c.a.,2,false,205
+GF02_NV,GF02,Défense,GF02_NV,Défense : non ventilé,2,true,299
+GF0301,GF03,Ordre et sécurité publics,GF0301,Services de police,2,false,301
+GF0302,GF03,Ordre et sécurité publics,GF0302,Services de protection civile,2,false,302
+GF0303,GF03,Ordre et sécurité publics,GF0303,Tribunaux,2,false,303
+GF0304,GF03,Ordre et sécurité publics,GF0304,Administration pénitentiaire,2,false,304
+GF0305,GF03,Ordre et sécurité publics,GF0305,R & D concernant l'ordre et la sécurité publics,2,false,305
+GF0306,GF03,Ordre et sécurité publics,GF0306,Ordre et sécurité publics n.c.a.,2,false,306
+GF03_NV,GF03,Ordre et sécurité publics,GF03_NV,Ordre et sécurité publics : non ventilé,2,true,399
+GF0401,GF04,Affaires économiques,GF0401,"Tutelle de l'économie générale, des échanges et de l'emploi",2,false,401
+GF0402,GF04,Affaires économiques,GF0402,"Agriculture, sylviculture, pêche et chasse",2,false,402
+GF0403,GF04,Affaires économiques,GF0403,Combustibles et énergie,2,false,403
+GF0404,GF04,Affaires économiques,GF0404,"Industries extractives et manufacturières, construction",2,false,404
+GF0405,GF04,Affaires économiques,GF0405,Transports,2,false,405
+GF0406,GF04,Affaires économiques,GF0406,Communications,2,false,406
+GF0407,GF04,Affaires économiques,GF0407,Autres branches d'activité,2,false,407
+GF0408,GF04,Affaires économiques,GF0408,R & D concernant les affaires économiques,2,false,408
+GF0409,GF04,Affaires économiques,GF0409,Affaires économiques n.c.a.,2,false,409
+GF04_NV,GF04,Affaires économiques,GF04_NV,Affaires économiques : non ventilé,2,true,499
+GF0501,GF05,Protection de l'environnement,GF0501,Gestion des déchets,2,false,501
+GF0502,GF05,Protection de l'environnement,GF0502,Gestion des eaux usées,2,false,502
+GF0503,GF05,Protection de l'environnement,GF0503,Lutte contre la pollution,2,false,503
+GF0504,GF05,Protection de l'environnement,GF0504,Préservation de la diversité biologique et protection de la nature,2,false,504
+GF0505,GF05,Protection de l'environnement,GF0505,R & D dans le domaine de la protection de l'environnement,2,false,505
+GF0506,GF05,Protection de l'environnement,GF0506,Protection de l'environnement n.c.a.,2,false,506
+GF05_NV,GF05,Protection de l'environnement,GF05_NV,Protection de l'environnement : non ventilé,2,true,599
+GF0601,GF06,Logement et équipements collectifs,GF0601,Logements,2,false,601
+GF0602,GF06,Logement et équipements collectifs,GF0602,Équipements collectifs,2,false,602
+GF0603,GF06,Logement et équipements collectifs,GF0603,Alimentation en eau,2,false,603
+GF0604,GF06,Logement et équipements collectifs,GF0604,Éclairage public,2,false,604
+GF0605,GF06,Logement et équipements collectifs,GF0605,R & D dans le domaine du logement et des équipements collectifs,2,false,605
+GF0606,GF06,Logement et équipements collectifs,GF0606,Logement et équipements collectifs n.c.a.,2,false,606
+GF06_NV,GF06,Logement et équipements collectifs,GF06_NV,Logement et équipements collectifs : non ventilé,2,true,699
+GF0701,GF07,Santé,GF0701,"Produits, appareils et matériels médicaux",2,false,701
+GF0702,GF07,Santé,GF0702,Services ambulatoires,2,false,702
+GF0703,GF07,Santé,GF0703,Services hospitaliers,2,false,703
+GF0704,GF07,Santé,GF0704,Services de santé publique,2,false,704
+GF0705,GF07,Santé,GF0705,R & D dans le domaine de la santé,2,false,705
+GF0706,GF07,Santé,GF0706,Santé n.c.a.,2,false,706
+GF07_NV,GF07,Santé,GF07_NV,Santé : non ventilé,2,true,799
+GF0801,GF08,"Loisirs, culture et culte",GF0801,Services récréatifs et sportifs,2,false,801
+GF0802,GF08,"Loisirs, culture et culte",GF0802,Services culturels,2,false,802
+GF0803,GF08,"Loisirs, culture et culte",GF0803,"Services de radiodiffusion, de télévision et d'édition",2,false,803
+GF0804,GF08,"Loisirs, culture et culte",GF0804,Culte et autres services communautaires,2,false,804
+GF0805,GF08,"Loisirs, culture et culte",GF0805,"R & D dans le domaine des loisirs, de la culture et du culte",2,false,805
+GF0806,GF08,"Loisirs, culture et culte",GF0806,"Loisirs, culture et culte n.c.a.",2,false,806
+GF08_NV,GF08,"Loisirs, culture et culte",GF08_NV,"Loisirs, culture et culte : non ventilé",2,true,899
+GF0901,GF09,Enseignement,GF0901,Enseignement préélémentaire et primaire,2,false,901
+GF0902,GF09,Enseignement,GF0902,Enseignement secondaire,2,false,902
+GF0903,GF09,Enseignement,GF0903,Enseignement postsecondaire non supérieur,2,false,903
+GF0904,GF09,Enseignement,GF0904,Enseignement supérieur,2,false,904
+GF0905,GF09,Enseignement,GF0905,Enseignement non défini par niveau,2,false,905
+GF0906,GF09,Enseignement,GF0906,Services annexes à l'enseignement,2,false,906
+GF0907,GF09,Enseignement,GF0907,R & D dans le domaine de l'enseignement,2,false,907
+GF0908,GF09,Enseignement,GF0908,Enseignement n.c.a.,2,false,908
+GF09_NV,GF09,Enseignement,GF09_NV,Enseignement : non ventilé,2,true,999
+GF1001,GF10,Protection sociale,GF1001,Maladie et invalidité,2,false,1001
+GF1002,GF10,Protection sociale,GF1002,Vieillesse,2,false,1002
+GF1003,GF10,Protection sociale,GF1003,Survivants,2,false,1003
+GF1004,GF10,Protection sociale,GF1004,Famille et enfants,2,false,1004
+GF1005,GF10,Protection sociale,GF1005,Chômage,2,false,1005
+GF1006,GF10,Protection sociale,GF1006,Logement,2,false,1006
+GF1007,GF10,Protection sociale,GF1007,Exclusion sociale n.c.a.,2,false,1007
+GF1008,GF10,Protection sociale,GF1008,R & D dans le domaine de la protection sociale,2,false,1008
+GF1009,GF10,Protection sociale,GF1009,Protection sociale n.c.a.,2,false,1009
+GF10_NV,GF10,Protection sociale,GF10_NV,Protection sociale : non ventilé,2,true,1099
+GF_NV,GF_NV,Fonction non ventilée,GF_NV,Fonction non ventilée,1,true,9999

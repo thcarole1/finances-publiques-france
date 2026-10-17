@@ -1,0 +1,99 @@
+/// F03 — Impôts et cotisations par sous-secteur bénéficiaire (M€).
+table Fait_Prelevements
+	lineageTag: 4d8f0449-3ba0-4839-b28c-cc12ecf4edd7
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 6c0099b7-2694-4a5a-a5c2-81163465e1ff
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: da662da5-d6b5-4460-bc35-712b145eab00
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_code
+		dataType: string
+		isHidden
+		lineageTag: 4fbc8a41-8e98-4c0f-a3dd-cbbdb686458c
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column prelevement_code
+		dataType: string
+		isHidden
+		lineageTag: c8846014-d504-4cfd-8eb0-5d585d71b38c
+		summarizeBy: none
+		sourceColumn: prelevement_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: e6921789-d5f3-4579-b1c1-5f405eeeb318
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: d07575e0-b2e3-4777-97d9-78da18f69aa4
+		summarizeBy: none
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	/// Définitif, provisoire ou estimé, selon le producteur
+	column 'Statut de la valeur'
+		dataType: string
+		lineageTag: 45ca724f-a082-429c-9288-7472d14d8231
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: ec4435e2-3c61-4d3d-9ab7-1471ff1e9d33
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 455ad09d-9ba9-47e2-ae8a-1b1045039980
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Prelevements = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_prelevements")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

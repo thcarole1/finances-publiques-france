@@ -1,0 +1,62 @@
+/// F05 — Agrégats clés pour chaque millésime (révisions).
+table Fait_Revisions
+	lineageTag: e0deaaf6-72c3-4954-b41f-2d8a67ca5b33
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: e5eb3710-c05e-4404-8dac-eb4351f3cd29
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 754059cb-2903-48de-82c1-73bb212e6658
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column indicateur_code
+		dataType: string
+		isHidden
+		lineageTag: 7f1a857c-74a0-4ab9-8944-6f4ff5b55bdf
+		summarizeBy: none
+		sourceColumn: indicateur_code
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 7013e889-8517-4a0a-8d49-a768203a0aa8
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: f9bbc3eb-831b-4ca4-a653-e9e48c0c320d
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Revisions = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_revisions")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

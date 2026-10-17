@@ -1,0 +1,28 @@
+transaction_code,libelle,libelle_court,sens,groupe_presentation,ensemble_feuilles,definition_courte,ordre_tri
+P2_PAY,Consommation intermédiaire,Achats courants,Dépense,Fonctionnement,F01_F02,"Achats de biens et services courants (énergie, fournitures, prestations…)",1
+D1_PAY,Rémunération des salariés,Masse salariale,Dépense,Fonctionnement,F01_F02,Salaires et cotisations sociales des agents publics,2
+D62_PAY,Prestations sociales en espèces,Prestations en espèces,Dépense,Prestations sociales,F01_F02,"Retraites, allocations familiales, chômage, minima sociaux…",3
+D632_PAY,Prestations sociales en nature achetées,Prestations en nature,Dépense,Prestations sociales,F01_F02,"Soins et biens remboursés aux ménages (médicaments, consultations, aides au logement…)",4
+D3_PAY,Subventions,Subventions,Dépense,Transferts aux entreprises et autres,F01_F02,Aides versées aux producteurs,5
+D41_PAY,Intérêts,Intérêts de la dette,Dépense,Charge de la dette,F01,Intérêts payés sur la dette publique,6
+D4X_PAY,Autres revenus de la propriété versés,Autres revenus de la propriété,Dépense,Transferts aux entreprises et autres,F01,Revenus de la propriété versés hors intérêts (loyers de terrains…),7
+D4_PAY,Revenus de la propriété versés (dont intérêts),Revenus de la propriété versés,Dépense,Charge de la dette,F02,Intérêts et autres revenus de la propriété (détail par fonction),8
+D7_PAY,Autres transferts courants,Autres transferts courants,Dépense,Transferts aux entreprises et autres,F01_F02,"Contribution au budget de l'UE, aides aux associations, coopération internationale…",9
+P5_PAY,Formation brute de capital,Investissement,Dépense,Investissement,F01_F02,"Investissement public : bâtiments, routes, équipements, logiciels…",10
+NP_PAY,Acquisitions nettes d'actifs non produits,Achats de terrains,Dépense,Investissement,F01_F02,Achats moins ventes de terrains et autres actifs non produits,11
+D9_PAY,Transferts en capital,Aides à l'investissement,Dépense,Investissement,F01_F02,Aides à l'investissement et autres transferts en capital versés,12
+AUTRES_PAY,Autres dépenses,Autres dépenses,Dépense,Autres,F01_F02,Impôts payés par les administrations et ajustements divers (résidu garantissant l'égalité avec le total),13
+P1_REC,Ventes et production marchande,Ventes,Recette,Ventes et revenus,F01,"Recettes tirées de la vente de biens et services (cantines, musées, redevances…)",14
+D211_REC,TVA,TVA,Recette,Impôts,F01,Taxe sur la valeur ajoutée,15
+D2X_REC,Autres impôts sur la production et les importations,Autres impôts sur la production,Recette,Impôts,F01,"Accises, taxes foncières des entreprises, impôts sur les salaires…",16
+D51A_REC,Impôts sur le revenu des ménages,Impôts sur le revenu des ménages,Recette,Impôts,F01,"Impôt sur le revenu, CSG, CRDS, prélèvements sur les revenus du capital",17
+D51B_REC,Impôts sur les bénéfices des sociétés,Impôt sur les sociétés,Recette,Impôts,F01,Impôt sur les sociétés,18
+D5X_REC,Autres impôts courants sur le revenu et le patrimoine,Autres impôts sur le revenu et le patrimoine,Recette,Impôts,F01,"Taxe d'habitation résiduelle, impôts sur la fortune immobilière…",19
+D91_REC,Impôts en capital,Impôts en capital,Recette,Impôts,F01,Droits de succession et donation…,20
+D61_REC,Cotisations sociales nettes,Cotisations sociales,Recette,Cotisations sociales,F01,"Cotisations des employeurs, des salariés et des indépendants",21
+D4_REC,Revenus de la propriété reçus,Revenus de la propriété reçus,Recette,Ventes et revenus,F01,Intérêts et dividendes reçus (participations de l'État…),22
+D7_REC,Autres transferts courants reçus,Transferts reçus,Recette,Transferts reçus,F01,"Transferts reçus d'autres secteurs (amendes, fonds européens…)",23
+D9X_REC,Transferts en capital reçus (hors impôts),Transferts en capital reçus,Recette,Transferts reçus,F01,"Aides à l'investissement reçues, notamment des fonds européens",24
+AUTRES_REC,Autres recettes,Autres recettes,Recette,Autres,F01,Subventions reçues et écarts d'arrondi (résidu garantissant l'égalité avec le total),25
+NV_PAY,Nature non ventilée,Nature non ventilée,Dépense,Autres,F02,"Dépense publiée par fonction sans détail par nature (années anciennes de certains pays)",27
+_NA,Non renseigné,Non renseigné,,Autres,,,999

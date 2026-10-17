@@ -5,4 +5,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 mkdir -p data/staging data/curated
-uv run dbt build --project-dir transform --profiles-dir transform "$@"
+
+# Instantanés bruts absents en local : récupérés depuis les Releases GitHub.
+uv run python scripts/donnees_brutes.py recuperer
+
+uv run dbt build --project-dir transform --profiles-dir transform \
+    --vars "$(cat contracts/tolerances.yml)" "$@"

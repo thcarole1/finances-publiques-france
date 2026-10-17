@@ -1,75 +1,610 @@
 version: 2
 
 # Chaque table du modèle Power BI a un contrat appliqué (contract.enforced) :
-# noms, types et contraintes des colonnes. C'est le contrôle QC-B01 de docs/07.
+# noms, types et contraintes des colonnes (QC-B01). Les faits ont un test d'unicité du grain
+# (QC-B02) et des tests d'intégrité référentielle vers leurs dimensions (QC-B08).
 
 models:
-  - name: dim_date
-    description: Table de dates du modèle (marquée comme table de dates dans Power BI).
-    config:
-      contract: {enforced: true}
-    columns:
-      - name: date_id
-        data_type: integer
-        constraints: [{type: not_null}]
-        data_tests: [unique]
-      - name: date
-        data_type: date
-        constraints: [{type: not_null}]
-        data_tests: [unique]
-      - name: annee
-        data_type: integer
-      - name: trimestre
-        data_type: integer
-        data_tests:
-          - accepted_values:
-              arguments: {values: [1, 2, 3, 4], quote: false}
-      - name: mois
-        data_type: integer
-      - name: annee_trimestre
-        data_type: varchar
-      - name: annee_mois
-        data_type: varchar
-      - name: mois_libelle
-        data_type: varchar
-      - name: decennie
-        data_type: varchar
-      - name: est_fin_mois
-        data_type: boolean
-      - name: est_fin_trimestre
-        data_type: boolean
-      - name: est_fin_annee
-        data_type: boolean
-      - name: periode_historique_code
-        data_type: varchar
-      - name: periode_historique
-        data_type: varchar
-
-  - name: dim_sous_secteur
-    description: Sous-secteurs des administrations publiques et ligne d'élimination.
-    config:
-      contract: {enforced: true}
-    columns:
-      - name: sous_secteur_code
-        data_type: varchar
-        constraints: [{type: not_null}]
-        data_tests: [unique]
-      - name: libelle
-        data_type: varchar
-        constraints: [{type: not_null}]
-      - name: libelle_court
-        data_type: varchar
-      - name: niveau
-        data_type: integer
-      - name: parent_code
-        data_type: varchar
-        data_tests:
-          - relationships:
-              arguments: {to: ref('dim_sous_secteur'), field: sous_secteur_code}
-      - name: est_elimination
-        data_type: boolean
-        constraints: [{type: not_null}]
-      - name: ordre_tri
-        data_type: integer
-      - name: definition_courte
-        data_type: varchar
+- name: dim_date
+  description: Table de dates du modèle (marquée comme table de dates dans Power BI).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: date
+    data_type: date
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: annee
+    data_type: integer
+  - name: trimestre
+    data_type: integer
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - 1
+          - 2
+          - 3
+          - 4
+          quote: false
+  - name: mois
+    data_type: integer
+  - name: annee_trimestre
+    data_type: varchar
+  - name: annee_mois
+    data_type: varchar
+  - name: mois_libelle
+    data_type: varchar
+  - name: decennie
+    data_type: varchar
+  - name: est_fin_mois
+    data_type: boolean
+  - name: est_fin_trimestre
+    data_type: boolean
+  - name: est_fin_annee
+    data_type: boolean
+  - name: periode_historique_code
+    data_type: varchar
+  - name: periode_historique
+    data_type: varchar
+- name: dim_sous_secteur
+  description: Sous-secteurs des administrations publiques et ligne d'élimination.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+    constraints:
+    - type: not_null
+  - name: libelle_court
+    data_type: varchar
+  - name: niveau
+    data_type: integer
+  - name: parent_code
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: est_elimination
+    data_type: boolean
+    constraints:
+    - type: not_null
+  - name: ordre_tri
+    data_type: integer
+  - name: definition_courte
+    data_type: varchar
+- name: fait_comptes_apu_annuels
+  description: F01 — Feuilles de recettes et de dépenses par sous-secteur, avec éliminations (docs/05).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: transaction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_transaction')
+          field: transaction_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+        - transaction_code
+- name: fait_depenses_fonction
+  description: F02 — Dépenses par fonction COFOG × nature × sous-secteur, avec éliminations (docs/05).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: cofog_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_cofog')
+          field: cofog_code
+  - name: transaction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_transaction')
+          field: transaction_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+        - cofog_code
+        - transaction_code
+- name: fait_prelevements
+  description: F03 — Impôts et cotisations par sous-secteur bénéficiaire, avec éliminations (docs/05).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: prelevement_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_prelevement')
+          field: prelevement_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+        - prelevement_code
+- name: fait_macro_annuel
+  description: F04 — PIB, population, croissance et prix (dénominateurs des ratios).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: pib_meur
+    data_type: double
+  - name: pib_mnac
+    data_type: double
+  - name: croissance_volume_pct
+    data_type: double
+  - name: variation_deflateur_pct
+    data_type: double
+  - name: population
+    data_type: bigint
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+- name: fait_revisions
+  description: F05 — Agrégats clés pour chaque millésime collecté.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: indicateur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_indicateur')
+          field: indicateur_code
+  - name: millesime_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  - name: valeur_meur
+    data_type: double
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - indicateur_code
+        - millesime_id
+- name: dim_pays
+  description: Pays et agrégats.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: code_eurostat
+    data_type: varchar
+  - name: code_iso3
+    data_type: varchar
+  - name: libelle
+    data_type: varchar
+  - name: type
+    data_type: varchar
+  - name: est_ue
+    data_type: boolean
+  - name: est_zone_euro
+    data_type: boolean
+  - name: est_ocde
+    data_type: boolean
+  - name: groupe_comparaison
+    data_type: varchar
+  - name: devise
+    data_type: varchar
+  - name: est_federal
+    data_type: boolean
+  - name: source_reference
+    data_type: varchar
+  - name: niveau_comparabilite
+    data_type: varchar
+  - name: note_comparabilite
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
+- name: dim_transaction
+  description: Nature économique (feuilles SEC 2010).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: transaction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: libelle_court
+    data_type: varchar
+  - name: sens
+    data_type: varchar
+  - name: groupe_presentation
+    data_type: varchar
+  - name: ensemble_feuilles
+    data_type: varchar
+  - name: definition_courte
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
+- name: dim_cofog
+  description: Fonctions COFOG (feuilles et non ventilés).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: cofog_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: cofog_n1_code
+    data_type: varchar
+  - name: cofog_n1_libelle
+    data_type: varchar
+  - name: cofog_n2_code
+    data_type: varchar
+  - name: cofog_n2_libelle
+    data_type: varchar
+  - name: niveau
+    data_type: integer
+  - name: est_non_ventile
+    data_type: boolean
+  - name: ordre_tri
+    data_type: integer
+- name: dim_prelevement
+  description: Types de prélèvement.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: prelevement_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: libelle_court
+    data_type: varchar
+  - name: categorie_sec
+    data_type: varchar
+  - name: categorie_pedagogique
+    data_type: varchar
+  - name: est_prelevement_obligatoire
+    data_type: boolean
+  - name: est_non_ventile
+    data_type: boolean
+  - name: ordre_tri
+    data_type: integer
+- name: dim_source
+  description: Sources, licences et attributions.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: source_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: producteur
+    data_type: varchar
+  - name: jeu_donnees
+    data_type: varchar
+  - name: libelle
+    data_type: varchar
+  - name: url
+    data_type: varchar
+  - name: licence
+    data_type: varchar
+  - name: libelle_attribution
+    data_type: varchar
+  - name: frequence
+    data_type: varchar
+  - name: niveau_reference
+    data_type: varchar
+- name: dim_millesime
+  description: 'Millésimes : un par instantané collecté.'
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: millesime_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: source_id
+    data_type: varchar
+  - name: source
+    data_type: varchar
+  - name: jeu
+    data_type: varchar
+  - name: date_publication
+    data_type: date
+  - name: date_collecte
+    data_type: date
+  - name: libelle
+    data_type: varchar
+  - name: rang_recence
+    data_type: integer
+  - name: est_dernier
+    data_type: boolean
+- name: dim_indicateur
+  description: Indicateurs du rapport.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: indicateur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: unite
+    data_type: varchar
+  - name: sens_souhaitable
+    data_type: varchar
+  - name: glossaire_id
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer

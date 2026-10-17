@@ -1,0 +1,69 @@
+/// Indicateurs suivis.
+table Dim_Indicateur
+	lineageTag: 480b8e40-2edc-46eb-95a8-ff91c1bf23cc
+
+	column indicateur_code
+		dataType: string
+		isHidden
+		lineageTag: ed01c221-e60c-47b2-bb96-78172a513cb6
+		summarizeBy: none
+		sourceColumn: indicateur_code
+
+		annotation SummarizationSetBy = User
+
+	column Indicateur
+		dataType: string
+		lineageTag: 6fb35201-b32f-440d-bc0e-db5ccb818384
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Unité de l''indicateur'
+		dataType: string
+		lineageTag: 8f6d0113-5b7c-40de-a678-f8839cc2497e
+		summarizeBy: none
+		sourceColumn: unite
+
+		annotation SummarizationSetBy = User
+
+	column sens_souhaitable
+		dataType: string
+		isHidden
+		lineageTag: a6a5aa47-1c4a-44bb-8606-ab116621b46c
+		summarizeBy: none
+		sourceColumn: sens_souhaitable
+
+		annotation SummarizationSetBy = User
+
+	column glossaire_id
+		dataType: string
+		isHidden
+		lineageTag: 9154d4f9-2159-4f6e-99b7-7aa3528f958f
+		summarizeBy: none
+		sourceColumn: glossaire_id
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9bc18764-fd3e-4ea1-9066-0ab7cdcd7720
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Indicateur = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_indicateur")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

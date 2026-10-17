@@ -17,6 +17,7 @@
 | 09 | [Rapport](09-rapport.md) | Parcours guidé, pages d'exploration, couche pédagogique |
 | 10 | [Conventions](10-conventions.md) | Nommage, Git, versions, unités, documentation |
 | 11 | [Décisions](11-decisions-ouvertes.md) | Arbitrages D1 à D11 et options écartées |
+| — | [Notes de lot](lots/) | Ce qui a été livré, vérifié et reporté à chaque lot |
 | — | [Glossaire](glossaire.md) | Notions clés (alimente aussi la table `Dim_Glossaire` du modèle) |
 
 ## Comment lire

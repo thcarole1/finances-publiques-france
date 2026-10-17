@@ -1,0 +1,103 @@
+relationship 5e689f12-45b5-43b2-84d4-32d7b29ba415
+	fromColumn: Fait_Comptes_APU_Annuels.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship c71d9b4e-0899-44f2-855f-c0ef31cae183
+	fromColumn: Fait_Comptes_APU_Annuels.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 6851d94d-b900-4146-a46d-c7804ff36e26
+	fromColumn: Fait_Comptes_APU_Annuels.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 0f9358ea-5336-4ea9-b909-95c8a8c1fc10
+	fromColumn: Fait_Comptes_APU_Annuels.transaction_code
+	toColumn: Dim_Transaction.'Code nature'
+
+relationship 19effbd6-bdf0-48b9-b9d6-6ae13f20725f
+	fromColumn: Fait_Comptes_APU_Annuels.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 1e60f4da-26a4-4e89-9aa8-5fb9170316aa
+	fromColumn: Fait_Comptes_APU_Annuels.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship a97c568d-75f7-4f30-97c0-40e534a5a210
+	fromColumn: Fait_Depenses_Fonction.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship e2c87385-94dd-4996-b810-b2b361e10ab4
+	fromColumn: Fait_Depenses_Fonction.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 3e666c99-e712-4191-8529-3ddbd259101a
+	fromColumn: Fait_Depenses_Fonction.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 2af501b6-f44f-495d-82e3-4d0eee95592e
+	fromColumn: Fait_Depenses_Fonction.transaction_code
+	toColumn: Dim_Transaction.'Code nature'
+
+relationship 1d9fe968-059c-44c9-a5bd-0ca05880e9be
+	fromColumn: Fait_Depenses_Fonction.cofog_code
+	toColumn: Dim_COFOG.'Code fonction'
+
+relationship 7302daed-7a8e-4f55-9449-17ae1f617738
+	fromColumn: Fait_Depenses_Fonction.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 849c0061-7592-4f85-96ef-c55661a57513
+	fromColumn: Fait_Depenses_Fonction.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 3668e42d-324b-425e-8852-42cb210f599b
+	fromColumn: Fait_Prelevements.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 8d501e9a-5763-403e-8535-4f503d1d7109
+	fromColumn: Fait_Prelevements.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 8651a0ff-89ca-4b5d-906d-7a367116b2fe
+	fromColumn: Fait_Prelevements.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship ad7f74bb-f336-4f80-acb0-aa6d54cdbc47
+	fromColumn: Fait_Prelevements.prelevement_code
+	toColumn: Dim_Prelevement.'Code prélèvement'
+
+relationship fe719717-e4f4-4561-bf75-edaed42c7052
+	fromColumn: Fait_Prelevements.source_id
+	toColumn: Dim_Source.source_id
+
+relationship a15c4784-4ba0-4db2-b535-ab0d133fc1ae
+	fromColumn: Fait_Prelevements.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 18c19fa6-46ac-449e-a6b0-9f531e9e6bad
+	fromColumn: Fait_Macro_Annuel.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 9087d08c-95d3-4824-94d0-151a1065c917
+	fromColumn: Fait_Macro_Annuel.date_id
+	toColumn: Dim_Date.date_id
+
+relationship bfdadfb8-490b-4074-9c84-5dfd900ad7af
+	fromColumn: Fait_Macro_Annuel.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 03589b7a-4e67-49d7-b47f-38283c4e43c7
+	fromColumn: Fait_Revisions.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship c9a4887b-50a6-4897-8e5a-e43f49c4b27c
+	fromColumn: Fait_Revisions.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 3d592509-dd76-4c83-a8b5-f9850642cdce
+	fromColumn: Fait_Revisions.indicateur_code
+	toColumn: Dim_Indicateur.indicateur_code
+
+relationship a4ef21ee-8c10-44a1-bfdd-a8336ec2cd5c
+	fromColumn: Fait_Revisions.millesime_id
+	toColumn: Dim_Millesime.millesime_id

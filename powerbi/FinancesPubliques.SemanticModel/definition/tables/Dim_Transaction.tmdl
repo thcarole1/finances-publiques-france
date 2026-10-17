@@ -1,0 +1,86 @@
+/// Nature économique des recettes et des dépenses (SEC 2010) : sous quelle forme l'argent circule.
+table Dim_Transaction
+	lineageTag: 2dfce84d-491b-48ad-906c-0d4cec87b4cb
+
+	/// Code de la feuille SEC 2010
+	column 'Code nature'
+		dataType: string
+		lineageTag: dcff6e53-ba14-472a-8e9c-254ff9d2689e
+		summarizeBy: none
+		sourceColumn: transaction_code
+
+		annotation SummarizationSetBy = User
+
+	column Nature
+		dataType: string
+		lineageTag: 4f6e2543-ab09-4e58-b3ce-3d08e8346a50
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Nature (court)'
+		dataType: string
+		lineageTag: 790a0af7-a6e2-4a27-b3e1-e702ba1ebe74
+		summarizeBy: none
+		sourceColumn: libelle_court
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	/// Dépense ou recette
+	column Sens
+		dataType: string
+		lineageTag: 7d4ea11a-7a7f-407e-8b22-21dcafd78816
+		summarizeBy: none
+		sourceColumn: sens
+
+		annotation SummarizationSetBy = User
+
+	column 'Groupe de nature'
+		dataType: string
+		lineageTag: 01749506-ce98-446b-a266-9c30544f3fd0
+		summarizeBy: none
+		sourceColumn: groupe_presentation
+
+		annotation SummarizationSetBy = User
+
+	column ensemble_feuilles
+		dataType: string
+		isHidden
+		lineageTag: 91678216-d3fc-42cf-a95c-50412b7ba23f
+		summarizeBy: none
+		sourceColumn: ensemble_feuilles
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition de la nature'
+		dataType: string
+		lineageTag: f945334d-1b56-4aea-be75-a7e2e62edad2
+		summarizeBy: none
+		sourceColumn: definition_courte
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: baae9a9a-4459-4afe-92e1-bfc2d3162214
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Transaction = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_transaction")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

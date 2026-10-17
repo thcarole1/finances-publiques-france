@@ -1,0 +1,57 @@
+/// Exprime n'importe quel montant dans l'unité choisie (docs/06, CG_Unite).
+table CG_Unite
+	lineageTag: f3084280-62e8-4407-835a-16a723b8201c
+
+	calculationGroup
+		precedence: 20
+
+		calculationItem 'Millions €' = SELECTEDMEASURE ()
+			ordinal: 0
+
+		calculationItem 'Milliards €' =
+				IF (
+				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ),
+				    SELECTEDMEASURE (),
+				    DIVIDE ( SELECTEDMEASURE (), 1000 )
+				)
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0.0 ""Md€""" )
+			ordinal: 1
+
+		calculationItem '% du PIB' =
+				IF (
+				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ),
+				    SELECTEDMEASURE (),
+				    DIVIDE ( SELECTEDMEASURE (), [PIB (M€)] )
+				)
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "0.0 %" )
+			ordinal: 2
+
+		calculationItem '€ par habitant' =
+				IF (
+				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ),
+				    SELECTEDMEASURE (),
+				    DIVIDE ( SELECTEDMEASURE () * 1000000, [Population] )
+				)
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0 ""€""" )
+			ordinal: 3
+
+	column 'Unité'
+		dataType: string
+		lineageTag: 9fafdfac-5602-4fd2-80db-97973b7a1e5a
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4c241392-ef01-4378-a47f-a97b6e28599d
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CG_Unite = calculationGroup
