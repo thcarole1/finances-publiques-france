@@ -3,6 +3,7 @@
 > **Statut : v1.0, validée le 17/10/2026 (PR #1).**
 > Les décisions d'arbitrage sont récapitulées dans [`11-decisions-ouvertes.md`](11-decisions-ouvertes.md).
 > La spécification évolue ensuite par pull request, lot après lot.
+> **Nouvelle session de travail : lire d'abord [`REPRISE.md`](REPRISE.md).**
 
 | # | Document | Contenu |
 |---|---|---|

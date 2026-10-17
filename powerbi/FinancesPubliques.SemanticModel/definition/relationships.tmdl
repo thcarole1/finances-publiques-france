@@ -129,3 +129,32 @@ relationship 58e5e6d6-9531-41d4-a2d6-da176e919c9e
 relationship 7d906d13-ef63-41aa-ba64-333992ae3c3e
 	fromColumn: Fait_Prelevements_Fonction.millesime_id
 	toColumn: Dim_Millesime.millesime_id
+
+relationship a24433bb-811a-4f88-91cd-b67fe6f93123
+	fromColumn: Fait_Transferts_APU.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship c2a0b55b-ee82-41aa-871d-978bec002417
+	fromColumn: Fait_Transferts_APU.date_id
+	toColumn: Dim_Date.date_id
+
+relationship a453a670-f59e-46c1-a4da-15b7f66ef6aa
+	fromColumn: Fait_Transferts_APU.sous_secteur_versant_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 48e806a2-a7e5-4f20-ba01-01b0dfbfbd08
+	fromColumn: Fait_Transferts_APU.sous_secteur_receveur_code
+	toColumn: Dim_Sous_Secteur_Receveur.'Code sous-secteur receveur'
+
+relationship 4576512b-cbaa-4a4f-aaeb-1fd718342efc
+	fromColumn: Fait_Transferts_APU.transaction_code
+	toColumn: Dim_Transaction.'Code nature'
+
+relationship cfae5d8f-ccae-410c-a94a-9422b6e736f2
+	fromColumn: Fait_Transferts_APU.source_id
+	toColumn: Dim_Source.source_id
+
+relationship eb3a9e94-bcf1-4b72-a154-2b2cf56c98e1
+	fromColumn: Fait_Transferts_APU.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+

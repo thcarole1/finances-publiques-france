@@ -1,0 +1,107 @@
+/// F06 — Transferts entre administrations : qui finance qui (M€). Le sous-secteur versant filtre via Dim_Sous_Secteur.
+table Fait_Transferts_APU
+	lineageTag: dfcdc180-da98-45e6-8248-c6358e2a00ec
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 5a9fed24-3476-4017-9ba6-db2e3df38f54
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e993e454-e11c-4759-b5e4-85160b67fa67
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_versant_code
+		dataType: string
+		isHidden
+		lineageTag: 742f1adf-d500-4eae-99a6-9aed5ca6a347
+		summarizeBy: none
+		sourceColumn: sous_secteur_versant_code
+
+		annotation SummarizationSetBy = User
+
+	column sous_secteur_receveur_code
+		dataType: string
+		isHidden
+		lineageTag: 003bed98-33f7-4ef0-9211-1dcf97754258
+		summarizeBy: none
+		sourceColumn: sous_secteur_receveur_code
+
+		annotation SummarizationSetBy = User
+
+	column transaction_code
+		dataType: string
+		isHidden
+		lineageTag: 57b7d9d6-8d84-4649-bf55-c1bd3ee68592
+		summarizeBy: none
+		sourceColumn: transaction_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 976d6fc3-ee42-4364-bc27-7a14295a0f73
+		summarizeBy: none
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: ddf6dc8a-84cb-49c1-9609-dd84a95c9540
+		summarizeBy: none
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (transferts)'
+		dataType: string
+		lineageTag: fd07a6bd-c1a5-461a-b038-bdc0e78ad98f
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 6b42005a-c442-4d29-9a24-edeb76a02d7b
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: dbd2328b-b320-4c13-9153-70b03f6c2eb1
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Transferts_APU = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_transferts_apu")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

@@ -140,6 +140,12 @@ table _Mesures
 		displayFolder: 01 Recettes
 		lineageTag: ca5c7259-2ff9-4b14-9da6-5e3fc2c4c9b3
 
+	/// Transferts versés d'une administration à une autre (dotations, aides à l'investissement, revenus de la propriété). Sous-secteur versant : Dim_Sous_Secteur ; receveur : Dim_Sous_Secteur_Receveur.
+	measure 'Transferts entre administrations (M€)' = SUM ( Fait_Transferts_APU[valeur_meur] )
+		formatString: #,0
+		displayFolder: 05 Transferts
+		lineageTag: 1089ba6a-aae6-4696-bcbb-4132c5f71b31
+
 	column Masquer
 		dataType: int64
 		isHidden

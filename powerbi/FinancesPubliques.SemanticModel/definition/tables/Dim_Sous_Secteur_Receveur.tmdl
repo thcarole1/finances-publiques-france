@@ -1,0 +1,87 @@
+/// Administration qui reçoit un transfert (rôle receveur de Dim_Sous_Secteur).
+table Dim_Sous_Secteur_Receveur
+	lineageTag: 1453104c-c7f5-42fe-8e9d-4ba218e93512
+
+	column 'Code sous-secteur receveur'
+		dataType: string
+		lineageTag: cedf1983-9fb3-435f-aaa8-7a2c3c2e5653
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Sous-secteur receveur'
+		dataType: string
+		lineageTag: 05fab577-f719-47c6-8d8f-3729d9351939
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Sous-secteur receveur (court)'
+		dataType: string
+		lineageTag: 48ea3c87-9f2d-4822-be6e-d28e2dc26b9a
+		summarizeBy: none
+		sourceColumn: libelle_court
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column niveau
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6b1fc596-1bb6-4c0c-8c34-ec195f2f6599
+		summarizeBy: none
+		sourceColumn: niveau
+
+		annotation SummarizationSetBy = User
+
+	column parent_code
+		dataType: string
+		isHidden
+		lineageTag: 39933782-97a4-4269-8679-d6ad923d8816
+		summarizeBy: none
+		sourceColumn: parent_code
+
+		annotation SummarizationSetBy = User
+
+	column est_elimination
+		dataType: boolean
+		isHidden
+		lineageTag: 3e1e3164-603c-4386-97bd-e44c381c2517
+		summarizeBy: none
+		sourceColumn: est_elimination
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3773aed7-96cb-45b1-a9c9-38c99c537697
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition (receveur)'
+		dataType: string
+		lineageTag: 550623a2-8d18-45cb-8bdd-859e1c4b3d9b
+		summarizeBy: none
+		sourceColumn: definition_courte
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Sous_Secteur_Receveur = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_sous_secteur_receveur")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

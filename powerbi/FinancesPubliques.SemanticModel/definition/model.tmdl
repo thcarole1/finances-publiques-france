@@ -10,7 +10,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction"]
+annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction","Dim_Sous_Secteur_Receveur","Fait_Transferts_APU"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -30,6 +30,8 @@ ref table Fait_Macro_Annuel
 ref table Fait_Revisions
 ref table Dim_Fonction_Economique
 ref table Fait_Prelevements_Fonction
+ref table Dim_Sous_Secteur_Receveur
+ref table Fait_Transferts_APU
 ref table _Mesures
 ref table CG_Unite
 ref table CG_Consolidation
