@@ -124,6 +124,22 @@ table _Mesures
 		displayFolder: 04 Révisions
 		lineageTag: ab822327-0d76-4087-831b-ac21eab7ef3d
 
+	/// Prélèvements répartis par base économique et par payeur (lecture légale ou économique).
+	measure 'Prélèvements par payeur (M€)' = SUM ( Fait_Prelevements_Fonction[valeur_meur] )
+		formatString: #,0
+		displayFolder: 01 Recettes
+		lineageTag: 770f6131-6e78-443d-b5e1-ac878d503a9b
+
+	/// Part du payeur (ou de la base) dans les prélèvements, à périmètre inchangé.
+	measure 'Part des prélèvements (%)' =
+			DIVIDE (
+			    [Prélèvements par payeur (M€)],
+			    CALCULATE ( [Prélèvements par payeur (M€)], REMOVEFILTERS ( Dim_Fonction_Economique ) )
+			)
+		formatString: 0.0 %
+		displayFolder: 01 Recettes
+		lineageTag: ca5c7259-2ff9-4b14-9da6-5e3fc2c4c9b3
+
 	column Masquer
 		dataType: int64
 		isHidden

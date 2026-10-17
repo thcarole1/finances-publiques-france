@@ -53,6 +53,9 @@ jobs:
       - name: Collecter Eurostat
         run: uv run python -m ingestion.sources.eurostat --ignorer-existants ${{ inputs.jeux }}
 
+      - name: Collecter la DG TAXUD (listes nationales des impôts)
+        run: uv run python -m ingestion.sources.taxud --ignorer-existants
+
       - name: Construire le modèle et exécuter les contrôles qualité
         run: ./scripts/construire.sh
 

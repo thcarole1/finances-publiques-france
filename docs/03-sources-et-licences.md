@@ -33,6 +33,12 @@ Quand un même chiffre existe dans plusieurs sources :
 | INSEE | Taux de prélèvements obligatoires | Définition française des PO | Annuelle | Fichiers | 1 |
 | OCDE | Comptes nationaux des APU (COFOG, déficit, dette), *Revenue Statistics* | Pays hors UE | Annuelle | API SDMX | 8 |
 
+### Fiscalité par base économique
+
+| Source | Jeu de données | Contenu | Fréquence | Accès | Lot |
+|---|---|---|---|---|---|
+| Commission européenne, DG TAXUD | Listes nationales des impôts (*National Tax Lists*) | Chaque impôt national, son code SEC, sa base économique ; répartition de l'impôt sur le revenu | Annuelle (fin mars) | XLSX | 1b |
+
 ### Dette et taux
 
 | Source | Jeu de données | Contenu | Fréquence | Accès | Lot |

@@ -142,3 +142,16 @@ Utile quand tu auras cloné le dépôt et voudras tester des données construite
 
 Aucune transformation métier dans Power Query : les types viennent du Parquet, la logique vit
 dans `transform/` (dbt).
+
+## Sélecteur « qui paie ? » (paramètre de champ, à créer une fois dans Desktop)
+
+Les paramètres de champ sont créés avec l'assistant de Desktop, qui en écrit une définition
+garantie valide (lot 1b).
+
+1. Ruban **Modélisation → Nouveau paramètre → Champs**.
+2. Nom : **`FP_Lecture_Payeur`**.
+3. Ajouter, dans cet ordre, depuis `Dim_Fonction_Economique` : **Payeur (légal)**,
+   **Payeur (économique)**, **Base économique**.
+4. Renommer les trois lignes : « Qui verse (lecture légale) », « Qui supporte (lecture économique) »,
+   « Base économique ». Laisser cochée l'option d'ajout d'un segment.
+5. Créer.

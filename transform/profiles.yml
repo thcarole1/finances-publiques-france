@@ -5,3 +5,8 @@ finances_publiques:
       type: duckdb
       path: "data/staging/finances_publiques.duckdb"
       threads: 4
+      settings:
+        # Calcul mono-fil dans DuckDB : l'ordre des additions de nombres décimaux est alors fixe,
+        # et deux constructions à partir des mêmes données donnent des fichiers identiques
+        # (pas de pull request de données sans changement réel).
+        threads: 1

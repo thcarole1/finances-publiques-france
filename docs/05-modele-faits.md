@@ -11,6 +11,7 @@ les compare ou on les rapporte l'un à l'autre (ex. dépenses ÷ PIB).
 | F01 | `Fait_Comptes_APU_Annuels` | pays × année × sous-secteur × transaction | Additive | Eurostat `gov_10a_main`, INSEE | 1 |
 | F02 | `Fait_Depenses_Fonction` | pays × année × sous-secteur × COFOG × transaction | Additive | Eurostat `gov_10a_exp` | 1 |
 | F03 | `Fait_Prelevements` | pays × année × sous-secteur bénéficiaire × prélèvement | Additive | Eurostat `gov_10a_taxag`, INSEE | 1 |
+| F03b | `Fait_Prelevements_Fonction` | F03 × base économique (payeur) | Additive | DG TAXUD (NTL) × F03 | 1b |
 | F04 | `Fait_Macro_Annuel` | pays × année | Non additive | Eurostat, OCDE | 1 |
 | F05 | `Fait_Revisions` | pays × année × agrégat clé × millésime | Non additive entre millésimes | Eurostat, INSEE | 1 |
 | F06 | `Fait_Transferts_APU` | pays × année × sous-secteur versant × sous-secteur receveur × transaction | Additive | INSEE | 2 |

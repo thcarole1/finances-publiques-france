@@ -101,3 +101,31 @@ relationship 3d592509-dd76-4c83-a8b5-f9850642cdce
 relationship a4ef21ee-8c10-44a1-bfdd-a8336ec2cd5c
 	fromColumn: Fait_Revisions.millesime_id
 	toColumn: Dim_Millesime.millesime_id
+
+relationship e081746a-81aa-413c-b4fa-dff9eb8ce316
+	fromColumn: Fait_Prelevements_Fonction.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 0f8e27aa-4f94-4b51-96ed-1cf20ae8454e
+	fromColumn: Fait_Prelevements_Fonction.date_id
+	toColumn: Dim_Date.date_id
+
+relationship e2426e70-bac5-4a40-8469-545bbffd2b75
+	fromColumn: Fait_Prelevements_Fonction.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 848f4916-dfaa-4ce3-8a1a-203c4c38d418
+	fromColumn: Fait_Prelevements_Fonction.prelevement_code
+	toColumn: Dim_Prelevement.'Code prélèvement'
+
+relationship 97f52370-6a4e-4751-b474-317fbc0efa08
+	fromColumn: Fait_Prelevements_Fonction.fonction_code
+	toColumn: Dim_Fonction_Economique.'Code base économique'
+
+relationship 58e5e6d6-9531-41d4-a2d6-da176e919c9e
+	fromColumn: Fait_Prelevements_Fonction.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 7d906d13-ef63-41aa-ba64-333992ae3c3e
+	fromColumn: Fait_Prelevements_Fonction.millesime_id
+	toColumn: Dim_Millesime.millesime_id

@@ -1,0 +1,95 @@
+/// Bases économiques des prélèvements et payeurs, en lecture légale et économique.
+table Dim_Fonction_Economique
+	lineageTag: 46084693-3e73-4939-8149-37bd931eb8ec
+
+	/// Code de la méthodologie « Taxation Trends » (DG TAXUD)
+	column 'Code base économique'
+		dataType: string
+		lineageTag: 0fd3e4b7-79bc-4949-ae38-f41bd6c511c3
+		summarizeBy: none
+		sourceColumn: fonction_code
+
+		annotation SummarizationSetBy = User
+
+	/// Sur quoi porte le prélèvement : consommation, travail, capital, patrimoine
+	column 'Base économique'
+		dataType: string
+		lineageTag: a55b6ba5-eb38-4007-805e-5795a4abfabc
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	/// Qui verse le prélèvement aux administrations
+	column 'Payeur (légal)'
+		dataType: string
+		lineageTag: 4d418830-b6fb-4212-a509-ac398c4984f4
+		summarizeBy: none
+		sourceColumn: payeur_legal
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Groupe de payeurs (légal)'
+		dataType: string
+		lineageTag: 6800e404-833f-4019-9cf4-e3e6ffcd88ca
+		summarizeBy: none
+		sourceColumn: groupe_legal
+
+		annotation SummarizationSetBy = User
+
+	/// Qui en supporte le coût, selon les hypothèses usuelles (voir Explication économique)
+	column 'Payeur (économique)'
+		dataType: string
+		lineageTag: dc18df02-b3af-4c4a-bf37-0aad7da63e78
+		summarizeBy: none
+		sourceColumn: payeur_economique
+
+		annotation SummarizationSetBy = User
+
+	column 'Groupe de payeurs (économique)'
+		dataType: string
+		lineageTag: 4dd83386-26f2-4cf0-b0d6-ee4c928d213f
+		summarizeBy: none
+		sourceColumn: groupe_economique
+
+		annotation SummarizationSetBy = User
+
+	column Explication
+		dataType: string
+		lineageTag: dbfaba6b-64e9-4cb6-87d2-9c48ac1eba54
+		summarizeBy: none
+		sourceColumn: explication
+
+		annotation SummarizationSetBy = User
+
+	column 'Explication économique'
+		dataType: string
+		lineageTag: f563a4d6-1873-452d-a644-299f256533a6
+		summarizeBy: none
+		sourceColumn: explication_economique
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c789012b-3b80-48c9-ad5c-09fc2c5f1053
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Fonction_Economique = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_fonction_economique")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

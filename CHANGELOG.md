@@ -2,6 +2,16 @@
 
 Format : une section par version ; une version mineure par lot livré (docs/10-conventions.md).
 
+## [0.3.0] — lot 1b : qui paie ?
+
+### Ajouté
+- Connecteur DG TAXUD (listes nationales des impôts, base économique de chaque impôt).
+- Répartition des prélèvements par base économique et par payeur (`Fait_Prelevements_Fonction`),
+  lectures légale et économique (`Dim_Fonction_Economique`), avec origine de chaque répartition.
+- Contrôle QC-B09 (conservation des montants) et contrôle de double compte des listes nationales.
+- Power BI : mesures « Prélèvements par payeur » et « Part » ; colonnes Payeur (légal / économique).
+- Note de lot `docs/lots/lot-1b.md` (vérification contre les fiches pays de la Commission).
+
 ## [0.2.0] — lot 1 : socle Eurostat
 
 ### Ajouté
