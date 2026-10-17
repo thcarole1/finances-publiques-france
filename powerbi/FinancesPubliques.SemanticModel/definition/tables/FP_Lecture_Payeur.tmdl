@@ -1,0 +1,52 @@
+/// Choix de la lecture de « qui paie ? » : qui verse (légal) ou qui supporte (économique).
+table 'FP_Lecture_Payeur'
+	lineageTag: 3c017309-a218-40d8-b8da-5a5ff4edda06
+
+	column 'Lecture'
+		dataType: string
+		lineageTag: 726e2540-8184-4f89-b0b4-693ef620baff
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Ordre lecture'
+
+		relatedColumnDetails
+			groupByColumn: 'Champ lecture'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Champ lecture'
+		dataType: string
+		isHidden
+		lineageTag: 6d4c17e7-019b-4680-bfdf-52a7eb5d705e
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Ordre lecture'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordre lecture'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e159a0b9-7606-4412-8bba-3799716df84b
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FP_Lecture_Payeur' = calculated
+		mode: import
+		source =
+				{
+				    ("Qui verse (lecture légale)", NAMEOF ( 'Dim_Fonction_Economique'[Payeur (légal)] ), 0),
+				    ("Qui supporte (lecture économique)", NAMEOF ( 'Dim_Fonction_Economique'[Payeur (économique)] ), 1),
+				    ("Base économique", NAMEOF ( 'Dim_Fonction_Economique'[Base économique] ), 2)
+				}
+
+	annotation PBI_Id = c2480e222ad5482a905764497d9bfa09
