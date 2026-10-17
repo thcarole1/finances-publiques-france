@@ -63,4 +63,15 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Valider le modèle TMDL (bibliothèque Microsoft, comme Power BI Desktop)
-        run: dotnet run --project tools/valider_tmdl -- powerbi/FinancesPubliques.SemanticModel/definition
+        shell: bash
+        run: |
+          set +e
+          dotnet run --project tools/valider_tmdl -- powerbi/FinancesPubliques.SemanticModel/definition \
+            > sortie.txt 2>&1
+          code=$?
+          cat sortie.txt
+          # Le message est aussi remonté en annotation (lisible dans l'onglet Checks de la PR).
+          resume=$(grep -vE "^\s*$|warning NU|Restored|Determining" sortie.txt | tail -n 25 \
+            | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          if [ $code -ne 0 ]; then echo "::error title=Modèle TMDL invalide::${resume}"; else echo "::notice title=Modèle TMDL::${resume}"; fi
+          exit $code
