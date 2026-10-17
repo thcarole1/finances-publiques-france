@@ -13,6 +13,13 @@ with jours as (
 
 periodes as (
     select * from {{ ref('ref_periodes_historiques') }}
+),
+
+-- Années pour lesquelles au moins un pays a des comptes annuels publiés (filtre des segments
+-- « Année » du rapport : on n'y propose pas 1990 ni 2075).
+annees_disponibles as (
+    select distinct date_id // 10000 as annee
+    from {{ ref('fait_comptes_apu_annuels') }}
 )
 
 select
@@ -32,8 +39,11 @@ select
     j.date = last_day(j.date) and month(j.date) in (3, 6, 9, 12)       as est_fin_trimestre,
     j.date = last_day(j.date) and month(j.date) = 12                   as est_fin_annee,
     p.periode_code                                                     as periode_historique_code,
-    p.libelle                                                          as periode_historique
+    p.libelle                                                          as periode_historique,
+    a.annee is not null                                                as est_annee_disponible
 from jours as j
 left join periodes as p
     on j.date between p.date_debut and p.date_fin
+left join annees_disponibles as a
+    on year(j.date) = a.annee
 order by j.date

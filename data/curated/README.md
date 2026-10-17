@@ -14,6 +14,7 @@ identiques produisent des fichiers identiques.
 | `dim_cofog.parquet` | `Dim_COFOG` |
 | `dim_prelevement.parquet` | `Dim_Prelevement` |
 | `dim_source.parquet` | `Dim_Source` |
+| `dim_glossaire.parquet` | `Dim_Glossaire` |
 | `dim_millesime.parquet` | `Dim_Millesime` |
 | `dim_indicateur.parquet` | `Dim_Indicateur` |
 | `fait_comptes_apu_annuels.parquet` | `Fait_Comptes_APU_Annuels` (F01) |

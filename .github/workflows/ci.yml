@@ -42,6 +42,16 @@ jobs:
       - name: Tests unitaires (pytest)
         run: uv run pytest -q
 
+      - name: Glossaire synchronisé avec docs/glossaire.md
+        run: uv run python scripts/generer_glossaire.py --verifier
+
+      - name: Rapport Power BI conforme aux schémas officiels (PBIR)
+        run: |
+          git clone --quiet --depth 1 --filter=blob:none --sparse \
+            https://github.com/microsoft/json-schemas "$RUNNER_TEMP/json-schemas"
+          git -C "$RUNNER_TEMP/json-schemas" sparse-checkout set fabric/item/report
+          uv run python scripts/valider_pbir.py --schemas "$RUNNER_TEMP/json-schemas"
+
       - name: Validation des scénarios (QC-B11)
         run: uv run python scripts/valider_scenarios.py
 

@@ -161,13 +161,29 @@ garantie valide (lot 1b).
 Power BI n'a pas de Sankey natif. Le visuel **Sankey** de Microsoft est fourni compilé dans le
 dépôt (`powerbi/visuels/`), car AppSource exige un compte professionnel ou scolaire.
 
+Depuis le lot R1, le diagramme est **déjà placé et configuré** sur la page « 5. Qui fait quoi ? ».
+Il suffit d'importer le visuel **une fois** pour qu'il s'affiche :
+
 1. Volet **Visualisations** → **…** → **Importer un visuel à partir d'un fichier** →
    `powerbi/visuels/sankey-3.5.0.0.pbiviz` (voir `powerbi/visuels/README.md`).
-2. Dans le visuel :
-   - **Source** : `Pres_Flux_Sankey` › **Source du flux** ;
-   - **Destination** : `Pres_Flux_Sankey` › **Destination du flux** ;
-   - **Weight** : mesure **Flux (M€)**.
-3. Segments indispensables (une seule valeur chacun) : `Dim_Pays` › **Pays**, `Dim_Date` › **Année**,
-   `Pres_Flux_Sankey` › **Lecture du payeur**.
-4. Facultatif : segment **Étape** pour n'afficher qu'une partie du parcours ; segment
-   **CG_Unite › Unité** pour lire les flux en % du PIB ou en € par habitant.
+2. Enregistrer (Ctrl+S) : Desktop ajoute le visuel au projet (`StaticResources`).
+
+Réglages utilisés (pour le refaire à la main au besoin) : **Source** = `Pres_Flux_Sankey` ›
+**Source du flux** ; **Destination** = **Destination du flux** ; **Weight** = mesure **Flux (Md€)** ;
+segments Pays, Année et « Qui paie ? » (Lecture du payeur) avec une seule valeur chacun.
+
+## Pages du rapport (lot R1)
+
+| Page | Question | Contenu |
+|---|---|---|
+| 1. Accueil | L'argent public en un coup d'œil | Chiffres clés, deux phrases de synthèse, encadré « Comprendre » |
+| 2. Combien ? | Quel poids pèse l'argent public dans l'économie ? | Dépenses et recettes en % du PIB depuis 1995, solde annuel |
+| 3. Qui paie ? | D'où vient l'argent public ? | Qui verse / qui supporte, assiettes des prélèvements |
+| 4. Où va l'argent ? | À quoi sert la dépense publique ? | « Sur 1 000 € », détail par domaine |
+| 5. Qui fait quoi ? | Qui encaisse, qui dépense ? | Sankey, versements entre administrations |
+| 6. Comparer | La France dépense-t-elle plus que ses voisins ? | Classements européens |
+| 7. Glossaire | Que veulent dire ces mots ? | Toutes les définitions (`docs/glossaire.md`) |
+
+Les segments **Pays** et **Année** sont synchronisés entre les pages (France et 2024 par défaut).
+Les courbes de la page 2 et les classements de la page 6 ignorent volontairement le segment
+Année ou Pays.

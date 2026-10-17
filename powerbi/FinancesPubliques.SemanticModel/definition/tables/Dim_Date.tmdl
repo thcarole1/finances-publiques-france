@@ -134,6 +134,16 @@ table Dim_Date
 
 		annotation SummarizationSetBy = User
 
+	/// Vrai si des comptes annuels sont publiés pour cette année (filtre des segments Année)
+	column 'Année disponible'
+		dataType: boolean
+		isHidden
+		lineageTag: 3ce86213-7bb1-4faa-b10b-572ac0d1c6e3
+		summarizeBy: none
+		sourceColumn: est_annee_disponible
+
+		annotation SummarizationSetBy = User
+
 	partition Dim_Date = m
 		mode: import
 		source =

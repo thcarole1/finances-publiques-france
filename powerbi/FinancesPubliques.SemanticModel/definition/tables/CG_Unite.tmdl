@@ -10,30 +10,30 @@ table CG_Unite
 
 		calculationItem 'Milliards €' =
 				IF (
-				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ),
+				    NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ),
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE (), 1000 )
 				)
 			ordinal: 1
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ), SELECTEDMEASUREFORMATSTRING (), "#,0.0 ""Md€""" )
+			formatStringDefinition = IF ( NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ), SELECTEDMEASUREFORMATSTRING (), "#,0.0 ""Md€""" )
 
 		calculationItem '% du PIB' =
 				IF (
-				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ),
+				    NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ),
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE (), [PIB (M€)] )
 				)
 			ordinal: 2
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ), SELECTEDMEASUREFORMATSTRING (), "0.0 %" )
+			formatStringDefinition = IF ( NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ), SELECTEDMEASUREFORMATSTRING (), "0.0 %" )
 
 		calculationItem '€ par habitant' =
 				IF (
-				    ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ),
+				    NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ),
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE () * 1000000, [Population] )
 				)
 			ordinal: 3
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)], [Part des prélèvements (%)] ), SELECTEDMEASUREFORMATSTRING (), "#,0 ""€""" )
+			formatStringDefinition = IF ( NOT CONTAINSSTRING ( SELECTEDMEASURENAME (), "(M€)" ), SELECTEDMEASUREFORMATSTRING (), "#,0 ""€""" )
 
 	column 'Unité'
 		dataType: string

@@ -2,15 +2,15 @@
 table _Mesures
 	lineageTag: ef206ef6-c69e-4882-9f1a-936a0b2b7293
 
-	/// Somme brute de Fait_Comptes_APU_Annuels : utiliser les mesures Dépenses, Recettes, Solde.
-	measure 'Montant APU (M€)' = SUM ( Fait_Comptes_APU_Annuels[valeur_meur] )
+	/// Somme de Fait_Comptes_APU_Annuels pour un seul pays (vide si plusieurs pays : on n'additionne jamais des pays entre eux).
+	measure 'Montant APU (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Comptes_APU_Annuels[valeur_meur] ) )
 		isHidden
 		formatString: #,0
 		displayFolder: 00 Base
 		lineageTag: f1a86a84-6690-42d0-a2ca-d156488e55b7
 
-	/// Somme brute de Fait_Prelevements.
-	measure 'Prélèvements détaillés (M€)' = SUM ( Fait_Prelevements[valeur_meur] )
+	/// Somme de Fait_Prelevements pour un seul pays.
+	measure 'Prélèvements détaillés (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Prelevements[valeur_meur] ) )
 		isHidden
 		formatString: #,0
 		displayFolder: 00 Base
@@ -23,7 +23,7 @@ table _Mesures
 		lineageTag: 56d67cab-37bc-4cec-b31d-80ef9a3b780b
 
 	/// Dépenses ventilées par fonction COFOG (santé, éducation…) et nature.
-	measure 'Dépenses par fonction (M€)' = SUM ( Fait_Depenses_Fonction[valeur_meur] )
+	measure 'Dépenses par fonction (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Depenses_Fonction[valeur_meur] ) )
 		formatString: #,0
 		displayFolder: 02 Dépenses
 		lineageTag: d7fe01cd-238e-4a9b-8fad-57837d79f90a
@@ -93,13 +93,13 @@ table _Mesures
 		lineageTag: ee75b578-c964-4230-869b-84d58b77894b
 
 	/// Produit intérieur brut à prix courants.
-	measure 'PIB (M€)' = SUM ( Fait_Macro_Annuel[pib_meur] )
+	measure 'PIB (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Macro_Annuel[pib_meur] ) )
 		formatString: #,0
 		displayFolder: 10 Contexte
 		lineageTag: b26eebc9-e9f0-4851-9ea1-b28bbd52dd08
 
 	/// Population moyenne de l'année (comptabilité nationale).
-	measure 'Population' = SUM ( Fait_Macro_Annuel[population] )
+	measure 'Population' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Macro_Annuel[population] ) )
 		formatString: #,0
 		displayFolder: 10 Contexte
 		lineageTag: 1f4fa5d8-d0d0-4104-9aa1-b3708115b4bf
@@ -125,7 +125,7 @@ table _Mesures
 		lineageTag: ab822327-0d76-4087-831b-ac21eab7ef3d
 
 	/// Prélèvements répartis par base économique et par payeur (lecture légale ou économique).
-	measure 'Prélèvements par payeur (M€)' = SUM ( Fait_Prelevements_Fonction[valeur_meur] )
+	measure 'Prélèvements par payeur (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Prelevements_Fonction[valeur_meur] ) )
 		formatString: #,0
 		displayFolder: 01 Recettes
 		lineageTag: 770f6131-6e78-443d-b5e1-ac878d503a9b
@@ -141,16 +141,238 @@ table _Mesures
 		lineageTag: ca5c7259-2ff9-4b14-9da6-5e3fc2c4c9b3
 
 	/// Transferts versés d'une administration à une autre (dotations, aides à l'investissement, revenus de la propriété). Sous-secteur versant : Dim_Sous_Secteur ; receveur : Dim_Sous_Secteur_Receveur.
-	measure 'Transferts entre administrations (M€)' = SUM ( Fait_Transferts_APU[valeur_meur] )
+	measure 'Transferts entre administrations (M€)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), SUM ( Fait_Transferts_APU[valeur_meur] ) )
 		formatString: #,0
 		displayFolder: 05 Transferts
 		lineageTag: 1089ba6a-aae6-4696-bcbb-4132c5f71b31
 
 	/// Montant des flux du Sankey « où va l'argent ? » (Pres_Flux_Sankey). Choisir une seule lecture du payeur.
-	measure 'Flux (M€)' = SUM ( Pres_Flux_Sankey[valeur_meur] )
+	measure 'Flux (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ) && HASONEVALUE ( Pres_Flux_Sankey[Lecture du payeur] ),
+			    SUM ( Pres_Flux_Sankey[valeur_meur] )
+			)
 		formatString: #,0
 		displayFolder: 05 Transferts
 		lineageTag: 5f4db9b7-b680-4192-8c4d-d8932ddee681
+
+	/// Dépenses publiques en milliards d'euros.
+	measure 'Dépenses publiques (Md€)' = DIVIDE ( [Dépenses publiques (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 0082fb8a-c805-4c3f-8ea6-67e593309146
+
+	/// Recettes publiques en milliards d'euros.
+	measure 'Recettes publiques (Md€)' = DIVIDE ( [Recettes publiques (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: f3fc3991-2f5b-433d-8778-a66f4d825cf3
+
+	/// Solde public en milliards d'euros (négatif = déficit).
+	measure 'Solde public (Md€)' = DIVIDE ( [Solde public (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: c9c56ca0-30af-4410-953c-9560f94f329f
+
+	/// Impôts et cotisations sociales, en milliards d'euros.
+	measure 'Prélèvements obligatoires (Md€)' = DIVIDE ( [Prélèvements obligatoires (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: edb56885-1fe1-44cb-8f52-c2837f5a1c9f
+
+	/// Intérêts de la dette, en milliards d'euros.
+	measure 'Charge d''intérêts (Md€)' = DIVIDE ( [Charge d''intérêts (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 0a0871c2-6906-42e8-bb2b-827f01a40030
+
+	/// Dépenses par fonction, en milliards d'euros.
+	measure 'Dépenses par fonction (Md€)' = DIVIDE ( [Dépenses par fonction (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 7dc9b66f-4169-4dcf-abab-91f97fa37a8e
+
+	/// Prélèvements par payeur, en milliards d'euros.
+	measure 'Prélèvements par payeur (Md€)' = DIVIDE ( [Prélèvements par payeur (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 7a5242b0-d0ff-446d-a7dc-7097b209bb5a
+
+	/// Transferts entre administrations, en milliards d'euros.
+	measure 'Transferts entre administrations (Md€)' = DIVIDE ( [Transferts entre administrations (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 6eeec5bd-08ed-4bf9-b642-b427a93162bb
+
+	/// Flux du diagramme « où va l'argent ? », en milliards d'euros.
+	measure 'Flux (Md€)' = DIVIDE ( [Flux (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 5569a6b8-27a4-4c29-9bc7-edacf6c2c756
+
+	/// Dépenses publiques rapportées à la richesse produite (PIB).
+	measure 'Dépenses publiques (% PIB)' = DIVIDE ( [Dépenses publiques (M€)], [PIB (M€)] )
+		formatString: "0.0 %"
+		displayFolder: 20 Pédagogie
+		lineageTag: 1669c373-ba98-48f4-9d53-071e66f7e103
+
+	/// Recettes publiques rapportées à la richesse produite (PIB).
+	measure 'Recettes publiques (% PIB)' = DIVIDE ( [Recettes publiques (M€)], [PIB (M€)] )
+		formatString: "0.0 %"
+		displayFolder: 20 Pédagogie
+		lineageTag: 2fde3ec4-a47d-4ebc-a13f-b4399d386142
+
+	/// Dépenses publiques divisées par le nombre d'habitants.
+	measure 'Dépenses publiques par habitant (€)' = DIVIDE ( [Dépenses publiques (M€)] * 1000000, [Population] )
+		formatString: "#,0 ""€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: fe6fce85-14f3-48ea-9d81-64b9d3a46b9c
+
+	/// Impôts et cotisations sociales divisés par le nombre d'habitants.
+	measure 'Prélèvements obligatoires par habitant (€)' = DIVIDE ( [Prélèvements obligatoires (M€)] * 1000000, [Population] )
+		formatString: "#,0 ""€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: 297e58d1-7433-4cf1-839c-c07c1edaa74c
+
+	/// Pour 100 € de richesse produite dans le pays, montant de dépense publique.
+	measure 'Sur 100 € de richesse produite' = [Dépenses publiques (% PIB)] * 100
+		formatString: "#,0 ""€"""
+		displayFolder: 20 Pédagogie
+		lineageTag: e050af7e-2047-4278-8177-3c12979e1227
+
+	/// Rappel du pays et de l'année affichés, ou invitation à les choisir.
+	measure 'Titre de la sélection' =
+			VAR _pays = SELECTEDVALUE ( Dim_Pays[Pays] )
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			RETURN
+			    IF (
+			        ISBLANK ( _pays ) || ISBLANK ( _annee ),
+			        "Choisissez un pays et une année",
+			        _pays & " — " & _annee
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 000fe2a8-003c-42ed-9a5b-c8e1178d0b12
+
+	/// Les dépenses publiques de l'année, en une phrase.
+	measure 'Phrase : combien ?' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _dep = [Dépenses publiques (Md€)]
+			VAR _pour100 = [Sur 100 € de richesse produite]
+			VAR _hab = [Dépenses publiques par habitant (€)]
+			RETURN
+			    IF (
+			        ISBLANK ( _annee ) || ISBLANK ( _dep ),
+			        "Choisissez un pays et une année pour afficher les chiffres.",
+			        "En " & _annee & ", les administrations publiques ont dépensé "
+			            & FORMAT ( _dep, "#,0", "fr-FR" ) & " milliards d'euros, soit "
+			            & FORMAT ( _pour100, "0", "fr-FR" ) & " € pour 100 € de richesse produite dans le pays, ou "
+			            & FORMAT ( _hab, "#,0", "fr-FR" ) & " € par habitant."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: d2d15f6f-0832-4b05-a2be-82f31b3c20bf
+
+	/// Déficit ou excédent de l'année, en une phrase.
+	measure 'Phrase : solde' =
+			VAR _rec = [Recettes publiques (Md€)]
+			VAR _solde = [Solde public (Md€)]
+			VAR _pct = ABS ( [Solde public (% PIB)] )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _solde ), "",
+			        _solde < 0,
+			            "Les recettes (" & FORMAT ( _rec, "#,0", "fr-FR" ) & " milliards d'euros) n'ont pas suffi : il a fallu emprunter "
+			                & FORMAT ( -_solde, "#,0", "fr-FR" ) & " milliards d'euros. C'est le déficit public, égal à "
+			                & FORMAT ( _pct, "0.0 %", "fr-FR" ) & " de la richesse produite.",
+			        "Les recettes (" & FORMAT ( _rec, "#,0", "fr-FR" ) & " milliards d'euros) ont dépassé les dépenses : excédent de "
+			            & FORMAT ( _solde, "#,0", "fr-FR" ) & " milliards d'euros, soit "
+			            & FORMAT ( _pct, "0.0 %", "fr-FR" ) & " de la richesse produite."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: fed4e64e-132f-41c5-844a-faacbc4f7905
+
+	/// Qui verse et qui supporte les prélèvements, en une phrase.
+	measure 'Phrase : qui paie ?' =
+			VAR _total = CALCULATE ( [Prélèvements par payeur (M€)], REMOVEFILTERS ( Dim_Fonction_Economique ) )
+			VAR _menages_eco = CALCULATE ( [Prélèvements par payeur (M€)], REMOVEFILTERS ( Dim_Fonction_Economique ), Dim_Fonction_Economique[Groupe de payeurs (économique)] = "Ménages" )
+			VAR _menages_leg = CALCULATE ( [Prélèvements par payeur (M€)], REMOVEFILTERS ( Dim_Fonction_Economique ), Dim_Fonction_Economique[Groupe de payeurs (légal)] = "Ménages" )
+			VAR _ent_leg = CALCULATE ( [Prélèvements par payeur (M€)], REMOVEFILTERS ( Dim_Fonction_Economique ), Dim_Fonction_Economique[Groupe de payeurs (légal)] = "Entreprises" )
+			RETURN
+			    IF (
+			        ISBLANK ( _total ),
+			        "Choisissez un pays et une année pour afficher les chiffres.",
+			        "Sur 100 € d'impôts et de cotisations, les entreprises en versent "
+			            & FORMAT ( DIVIDE ( _ent_leg, _total ) * 100, "0", "fr-FR" ) & " € et les ménages "
+			            & FORMAT ( DIVIDE ( _menages_leg, _total ) * 100, "0", "fr-FR" )
+			            & " €. Mais une fois les coûts répercutés sur les prix et les salaires, les ménages en supportent environ "
+			            & FORMAT ( DIVIDE ( _menages_eco, _total ) * 100, "0", "fr-FR" ) & " €."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 9432678f-5409-4fc4-86b2-b2b8a48686b7
+
+	/// Les trois premiers postes de dépense, en une phrase.
+	measure 'Phrase : où va l''argent ?' =
+			VAR _top =
+			    TOPN (
+			        3,
+			        FILTER ( VALUES ( Dim_COFOG[Fonction] ), NOT ISBLANK ( [Pour 1 000 € de dépense publique] ) ),
+			        [Pour 1 000 € de dépense publique], DESC
+			    )
+			RETURN
+			    IF (
+			        ISEMPTY ( _top ),
+			        "Choisissez un pays et une année pour afficher les chiffres.",
+			        "Sur 1 000 € de dépense publique, les trois premiers postes sont : "
+			            & CONCATENATEX (
+			                _top,
+			                Dim_COFOG[Fonction] & " (" & FORMAT ( [Pour 1 000 € de dépense publique], "#,0", "fr-FR" ) & " €)",
+			                ", ",
+			                [Pour 1 000 € de dépense publique], DESC
+			            ) & "."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 756beaaa-0aa3-4a30-a4da-b5cc63f15732
+
+	/// Classement du pays choisi parmi les pays comparés, en une phrase.
+	measure 'Phrase : comparaison' =
+			VAR _valeur = [Dépenses publiques (% PIB)]
+			VAR _pays = SELECTEDVALUE ( Dim_Pays[Pays] )
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _rang =
+			    CALCULATE (
+			        RANKX (
+			            FILTER (
+			                ALL ( Dim_Pays[Code pays], Dim_Pays[Type de pays] ),
+			                Dim_Pays[Type de pays] = "Pays" && NOT ISBLANK ( [Dépenses publiques (% PIB)] )
+			            ),
+			            [Dépenses publiques (% PIB)], _valeur, DESC
+			        ),
+			        REMOVEFILTERS ( Dim_Pays )
+			    )
+			VAR _nb =
+			    CALCULATE (
+			        COUNTROWS (
+			            FILTER (
+			                ALL ( Dim_Pays[Code pays], Dim_Pays[Type de pays] ),
+			                Dim_Pays[Type de pays] = "Pays" && NOT ISBLANK ( [Dépenses publiques (% PIB)] )
+			            )
+			        ),
+			        REMOVEFILTERS ( Dim_Pays )
+			    )
+			VAR _est_pays = SELECTEDVALUE ( Dim_Pays[Type de pays] ) = "Pays"
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _valeur ) || ISBLANK ( _annee ), "Choisissez un pays et une année pour afficher la comparaison.",
+			        NOT _est_pays,
+			            "En " & _annee & ", la dépense publique représente en moyenne " & FORMAT ( _valeur, "0.0 %", "fr-FR" )
+			                & " de la richesse produite pour l'ensemble « " & _pays & " ».",
+			        "En " & _annee & ", la dépense publique représente " & FORMAT ( _valeur, "0.0 %", "fr-FR" )
+			            & " de la richesse produite pour le pays « " & _pays & " » : rang " & _rang & " sur " & _nb
+			            & " pays comparés (1 = dépense la plus élevée)."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 7992306f-6304-401c-b1d0-22d3fbcbc7b4
 
 	column Masquer
 		dataType: int64

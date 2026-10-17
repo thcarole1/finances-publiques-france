@@ -136,7 +136,7 @@ etape3 as (
     left join imputation as i using (pays_code, date_id, fonction, sous_secteur_code)
     union all
     select a.pays_code, a.date_id, 3,
-        'Dépense : ' || s.libelle_court, 'Excédent (capacité de financement)',
+        'Dépense : ' || s.libelle_court, 'Excédent de l''année',
         a.sous_secteur_code, a.excedent
     from autres_et_emprunt as a
     join ss as s using (sous_secteur_code)

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "13b3e4bf46f7df5cf511",
+  "position": {
+    "x": 16,
+    "y": 128,
+    "z": 3000,
+    "height": 576,
+    "width": 1248,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Glossaire"
+                    }
+                  },
+                  "Property": "Terme"
+                }
+              },
+              "queryRef": "Dim_Glossaire.Terme",
+              "nativeQueryRef": "Terme"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Glossaire"
+                    }
+                  },
+                  "Property": "En bref"
+                }
+              },
+              "queryRef": "Dim_Glossaire.En bref",
+              "nativeQueryRef": "En bref"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Glossaire"
+                    }
+                  },
+                  "Property": "Pour aller plus loin"
+                }
+              },
+              "queryRef": "Dim_Glossaire.Pour aller plus loin",
+              "nativeQueryRef": "Pour aller plus loin"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Dim_Glossaire"
+                  }
+                },
+                "Property": "Terme"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "objects": {
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "220.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Dim_Glossaire.Terme"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "420.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Dim_Glossaire.En bref"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "560.0D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Dim_Glossaire.Pour aller plus loin"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

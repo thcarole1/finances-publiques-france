@@ -150,3 +150,39 @@ taux de marché, au rythme du refinancement de la dette.
 
 **Long :** une construction pluriannuelle (un porte-avions, une route) mobilise des AE l'année du
 contrat, et des CP chaque année au fil des paiements.
+
+### Dépenses publiques
+
+**Court :** tout ce que dépensent les administrations publiques en un an : salaires des agents, prestations sociales, achats, investissements, intérêts de la dette.
+
+**Long :** en France, elles représentent environ 57 % du PIB. Ce chiffre ne veut pas dire que l'État « consomme » 57 % de la richesse : une grande partie est reversée aux ménages (retraites, allocations, remboursements de soins), qui la dépensent ensuite eux-mêmes.
+
+### Recettes publiques
+
+**Court :** tout ce qu'encaissent les administrations publiques : impôts, cotisations sociales, ventes de services, revenus de leur patrimoine.
+
+**Long :** les impôts et les cotisations sociales (les prélèvements obligatoires) en représentent l'essentiel. Quand les recettes ne couvrent pas les dépenses, la différence est empruntée : c'est le déficit.
+
+### PIB (produit intérieur brut)
+
+**Court :** la richesse produite en un an dans le pays ; sert d'étalon pour comparer les montants publics dans le temps et entre pays.
+
+**Long :** exprimer une dépense « en % du PIB » permet de neutraliser la taille du pays et l'inflation : 57 % du PIB signifie que les dépenses publiques équivalent à 57 € pour 100 € de richesse produite.
+
+### Emprunt (financement du déficit)
+
+**Court :** l'argent que les administrations empruntent pour couvrir l'écart entre leurs dépenses et leurs recettes.
+
+**Long :** l'emprunt d'une année s'ajoute à la dette publique. Dans le diagramme « où va l'argent ? », il apparaît comme une source de financement à côté des impôts.
+
+### Lecture légale et lecture économique
+
+**Court :** deux façons de répondre à « qui paie ? » : qui verse l'impôt (légale) ou qui en supporte réellement le coût (économique).
+
+**Long :** les entreprises versent la TVA et les cotisations patronales, mais leur coût est en grande partie répercuté sur les prix (donc les consommateurs) et sur les salaires. La lecture économique repose sur des hypothèses usuelles, discutées par les économistes.
+
+### Fonction (à quoi sert l'argent)
+
+**Court :** le domaine d'action financé par une dépense : protection sociale, santé, enseignement, défense…
+
+**Long :** les dépenses sont classées selon une nomenclature internationale commune (COFOG), ce qui permet de comparer les pays. La protection sociale (retraites, famille, chômage, pauvreté) est de loin le premier poste en France.

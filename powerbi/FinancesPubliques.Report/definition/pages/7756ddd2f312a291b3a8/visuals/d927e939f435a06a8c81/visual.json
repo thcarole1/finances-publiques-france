@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "d927e939f435a06a8c81",
+  "position": {
+    "x": 16,
+    "y": 128,
+    "z": 4000,
+    "height": 52,
+    "width": 1248,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Ce rapport répond à des questions simples sur l'argent public : combien est dépensé, qui paie, où va l'argent, et comment la France se situe parmi ses voisins. Choisissez un pays et une année en haut à droite, puis passez d'une page à l'autre avec les onglets ci-dessus.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

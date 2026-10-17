@@ -166,3 +166,13 @@ seeds:
         data_tests:
           - relationships:
               arguments: {to: ref('ref_fonction_economique'), field: fonction_code}
+
+  - name: ref_glossaire
+    description: Glossaire pédagogique, généré depuis docs/glossaire.md (scripts/generer_glossaire.py).
+    config:
+      column_types: {glossaire_id: varchar, ordre_tri: integer}
+    columns:
+      - name: glossaire_id
+        data_tests: [unique, not_null]
+      - name: terme
+        data_tests: [unique, not_null]
