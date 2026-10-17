@@ -30,6 +30,25 @@ pédagogique pour l'explorer et y tester des scénarios budgétaires.
 | `scenarios/` | Bibliothèque de scénarios versionnés |
 | `powerbi/` | Projet Power BI (format PBIP / TMDL) |
 | `.github/workflows/` | Collecte planifiée et contrôles qualité |
+| `scripts/` | Construction du modèle, validation des scénarios |
+| `contracts/` | Tolérances des contrôles qualité |
+
+## Démarrage rapide
+
+Prérequis : [uv](https://docs.astral.sh/uv/) (installe Python 3.12 et les dépendances).
+
+```bash
+uv sync                                      # dépendances
+./scripts/construire.sh                      # référentiels → modèles → tests → data/curated/*.parquet
+uv run pytest                                # tests unitaires
+uv run python scripts/valider_scenarios.py   # validation des scénarios
+```
+
+Sous Windows, lancer `construire.sh` depuis Git Bash, ou directement :
+`uv run dbt build --project-dir transform --profiles-dir transform`
+(après avoir créé les dossiers `data/staging` et `data/curated`).
+
+Power BI : voir [`powerbi/README.md`](powerbi/README.md).
 
 ## Point d'entrée
 

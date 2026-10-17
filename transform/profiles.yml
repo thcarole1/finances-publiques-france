@@ -1,0 +1,7 @@
+finances_publiques:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "data/staging/finances_publiques.duckdb"
+      threads: 4

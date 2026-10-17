@@ -1,0 +1,5 @@
+periode_code,libelle,date_debut,date_fin
+CRISE_FIN,Crise financière,2008-01-01,2009-12-31
+CRISE_DETTES,Crise des dettes souveraines de la zone euro,2010-01-01,2012-12-31
+COVID,Crise sanitaire,2020-01-01,2021-12-31
+CHOC_ENERGIE,Choc énergétique et inflation,2022-01-01,2023-12-31

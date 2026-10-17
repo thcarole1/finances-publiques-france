@@ -1,0 +1,23 @@
+# Exemple de scénario personnel, à dupliquer pour créer les tiens.
+# Format décrit dans docs/08-scenarios-projections.md (§ 4).
+#   ecart  : écart à la trajectoire de base, en points (ex. +1.5 point de taux)
+#   valeur : valeur absolue, en % (ex. croissance de 0,8 %)
+# Les années non précisées reprennent la trajectoire de base.
+id: PERSO_EXEMPLE_CHOC_TAUX
+libelle: "Exemple : choc de taux en 2027"
+auteur: thcarole1
+base: GOUV_PLF_2026
+description: >
+  Hausse de 150 points de base du taux à 10 ans en 2027 et 2028, croissance ralentie en 2027.
+horizon: 2036
+hypotheses:
+  taux_10_ans:
+    ecart:
+      2027: 1.5
+      2028: 1.5
+  croissance_volume:
+    valeur:
+      2027: 0.8
+emission:
+  part_court_terme: 0.10
+  maturite_moyenne_emissions: 9

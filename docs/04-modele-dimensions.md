@@ -23,10 +23,11 @@
 | `date_id` | int | 20251231 | Clé |
 | `date` | date | 2025-12-31 | |
 | `annee`, `trimestre`, `mois` | int | 2025, 4, 12 | |
-| `annee_trimestre` | texte | 2025-T4 | |
+| `annee_trimestre`, `annee_mois` | texte | 2025-T4, 2025-12 | |
+| `mois_libelle` | texte | décembre | |
 | `est_fin_annee`, `est_fin_trimestre`, `est_fin_mois` | bool | | Filtres pour les grains |
 | `decennie` | texte | 2020s | |
-| `periode_historique` | texte | Crise sanitaire | Repères : 2008-09, 2020-21, 2022-23… |
+| `periode_historique_code`, `periode_historique` | texte | COVID, Crise sanitaire | Repères issus de `data/reference/ref_periodes_historiques.csv` |
 
 - Plage : **1990-01-01 → 2075-12-31** (l'échéancier des OAT va au-delà de 2070).
 - Convention de rattachement : un fait **annuel** est daté du **31/12**, un fait **trimestriel**

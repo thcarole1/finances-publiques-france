@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/thcarole1/finances-publiques-france/scenarios/_schema.json",
+  "title": "Scénario personnel",
+  "description": "Format d'un scénario personnel (docs/08-scenarios-projections.md, § 4).",
+  "type": "object",
+  "required": [
+    "id",
+    "libelle",
+    "auteur",
+    "base",
+    "horizon",
+    "hypotheses"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^PERSO_[A-Z0-9_]+$",
+      "description": "Identifiant unique, préfixé PERSO_"
+    },
+    "libelle": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "auteur": {
+      "type": "string",
+      "minLength": 1
+    },
+    "base": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$",
+      "description": "Scénario de départ (Dim_Scenario), ex. une trajectoire officielle"
+    },
+    "description": {
+      "type": "string"
+    },
+    "horizon": {
+      "type": "integer",
+      "minimum": 2025,
+      "maximum": 2075
+    },
+    "hypotheses": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {
+        "enum": [
+          "croissance_volume",
+          "deflateur_pib",
+          "inflation",
+          "taux_10_ans",
+          "taux_apparent",
+          "solde_primaire",
+          "depense_publique",
+          "prelevements_obligatoires",
+          "ajustement_stock_flux"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "minProperties": 1,
+        "additionalProperties": false,
+        "description": "'ecart' : écart à la trajectoire de base, en points ; 'valeur' : valeur absolue. Une même année ne peut figurer dans les deux.",
+        "properties": {
+          "ecart": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": {
+              "pattern": "^20[2-7][0-9]$"
+            },
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "valeur": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": {
+              "pattern": "^20[2-7][0-9]$"
+            },
+            "additionalProperties": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "emission": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "part_court_terme": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "maturite_moyenne_emissions": {
+          "type": "number",
+          "minimum": 0.25,
+          "maximum": 50
+        }
+      }
+    }
+  }
+}

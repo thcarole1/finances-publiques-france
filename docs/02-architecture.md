@@ -28,7 +28,7 @@
 | **Brut** | `data/raw/` | Fichiers exactement tels que téléchargés + `manifest.json` (URL, date, empreinte SHA-256, taille, paramètres de la requête) | Non : archivé en **Release GitHub** datée |
 | **Préparé** (*staging*) | `data/staging/` | Données typées, colonnes renommées, codes normalisés, une table par jeu source | Non : recalculable |
 | **Référentiels** | `data/reference/` | Nomenclatures et correspondances maintenues à la main (COFOG, SEC, payeurs, LOLF → COFOG, pays…) | **Oui** (CSV, petits, relus en PR) |
-| **Modèle** (*curated*) | `data/curated/` | Une table Parquet par table du modèle Power BI | Oui si < 50 Mo par fichier, sinon Release (voir § 4) |
+| **Modèle** (*curated*) | `data/curated/` | Un fichier Parquet par table du modèle Power BI (`<table>.parquet`, ou un dossier partitionné pour les grandes tables) | Oui si < 50 Mo par fichier, sinon Release (voir § 4) |
 | **Scénarios** | `scenarios/` | Scénarios personnels en YAML | **Oui** |
 
 Règle : **les couches *brut* et *référentiels* sont les seules sources de vérité.** Tout le reste
@@ -79,7 +79,7 @@ est limité et consommé à chaque clone.
 | Collecte SDMX (Eurostat, OCDE, BCE, INSEE) | `sdmx1` ou appels HTTP directs + `pandas`/`polars` |
 | Transformations | **dbt-duckdb** (SQL testé et documenté) — décision D1 |
 | Format | Parquet (`pyarrow`), compression ZSTD |
-| Qualité | tests dbt + contrats de schéma (`contracts/*.yml`) + règles métier SQL |
+| Qualité | tests dbt + contrats de modèles dbt (`contract: enforced`) + règles métier SQL ; tolérances dans `contracts/tolerances.yml` |
 | Tests de code | `pytest`, `ruff` |
 | Orchestration | GitHub Actions (planifié + manuel) |
 | Power BI | PBIP : modèle **TMDL**, rapport **PBIR** |
@@ -116,7 +116,8 @@ finances-publiques-france/
 │   ├── common/                   client HTTP, manifeste, archivage
 │   └── sources/<source>.py       un connecteur par source
 ├── transform/                    projet dbt (models/staging, models/marts, tests)
-├── contracts/                    contrats de schéma des tables du modèle (YAML)
+├── contracts/                    tolérances des contrôles qualité (les contrats de schéma sont dans transform/)
+├── scripts/                      construction (construire.sh), validation des scénarios
 ├── data/
 │   ├── reference/                référentiels versionnés (CSV)
 │   ├── raw/                      (ignoré par Git)
