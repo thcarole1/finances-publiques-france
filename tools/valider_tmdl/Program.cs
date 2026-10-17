@@ -29,7 +29,11 @@ try
 catch (Exception e)
 {
     Console.Error.WriteLine("TMDL invalide :");
-    Console.Error.WriteLine(e.Message);
-    if (e.InnerException is not null) Console.Error.WriteLine(e.InnerException.Message);
+    for (var ex = e; ex is not null; ex = ex.InnerException)
+    {
+        Console.Error.WriteLine($"[{ex.GetType().Name}] {ex.Message}");
+        var pile = (ex.StackTrace ?? "").Split('\n').Take(4);
+        foreach (var ligne in pile) Console.Error.WriteLine("    " + ligne.Trim());
+    }
     return 1;
 }
