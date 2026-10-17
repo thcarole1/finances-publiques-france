@@ -11,8 +11,9 @@
 | Paramètres What-if / tables déconnectées | `Param_<Sujet>` | `Param_Delta_TVA` |
 | Groupes de calcul | `CG_<Sujet>` | `CG_Unite` |
 | Paramètres de champ | `FP_<Sujet>` | `FP_Axe_Depense` |
-| Colonnes (Parquet et modèle) | `snake_case`, sans accents | `valeur_meur`, `date_id` |
-| Colonnes visibles dans le rapport | Nom d'affichage en français via la propriété de colonne | « Montant (M€) » |
+| Colonnes des fichiers (Parquet, dbt) | `snake_case`, sans accents | `valeur_meur`, `annee` |
+| Colonnes visibles du modèle Power BI | Nom en français ; la colonne source (`sourceColumn`) reste en `snake_case` | `Année` ← `annee` |
+| Colonnes techniques du modèle (clés, tris, drapeaux) | Nom `snake_case` d'origine, **masquées** | `date_id`, `ordre_tri` |
 | Mesures | Français, unité entre parenthèses | `Dette (% PIB)` |
 | Fichiers Python | `snake_case.py` | `eurostat.py` |
 

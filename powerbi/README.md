@@ -94,7 +94,8 @@ in
 ```
 
 Les requêtes 1 à 3 apparaissent avec une icône de paramètre, la 4 avec une icône de fonction
-(*fx*) : c'est normal.
+(*fx*) : c'est normal. Pour les requêtes 1 à 3, fais un clic droit → **décoche « Activer le
+chargement »** : sinon Power BI les charge comme de petites tables dans le modèle.
 
 **Si Power Query demande comment se connecter** à `https://raw.githubusercontent.com` : choisis
 **Anonyme** → **Se connecter** (le dépôt est public). **S'il demande des niveaux de

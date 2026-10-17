@@ -1,72 +1,79 @@
 table Dim_Sous_Secteur
 	lineageTag: 5c71d1e4-dd5c-4e7c-bcb6-31888f7fa483
 
-	column sous_secteur_code
+	/// Code SEC 2010 (S13, S1311…) ; S13_ELIM porte les éliminations de la consolidation
+	column 'Code sous-secteur'
 		dataType: string
 		lineageTag: 0caa77a2-9bee-4554-8f68-7641fb182e34
 		summarizeBy: none
 		sourceColumn: sous_secteur_code
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column libelle
+	column 'Sous-secteur'
 		dataType: string
 		lineageTag: 074a7352-7b72-41b7-9712-b1f80886324b
 		summarizeBy: none
 		sourceColumn: libelle
+		sortByColumn: ordre_tri
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column libelle_court
+	column 'Sous-secteur (court)'
 		dataType: string
 		lineageTag: 941475f6-14c3-413e-87f0-80626c29c0d7
 		summarizeBy: none
 		sourceColumn: libelle_court
+		sortByColumn: ordre_tri
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column niveau
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 73b890cc-f675-4f4d-8516-c798e062c8a1
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: niveau
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column parent_code
 		dataType: string
+		isHidden
 		lineageTag: 38520ea5-94df-4e56-85e8-c9ef5dfc63a9
 		summarizeBy: none
 		sourceColumn: parent_code
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
+	/// Vrai pour la ligne d'élimination ; exclue en vue non consolidée
 	column est_elimination
 		dataType: boolean
-		formatString: """TRUE"";""TRUE"";""FALSE"""
+		isHidden
 		lineageTag: 9bcc2c97-bee6-40d7-bb92-678d61ea8e44
 		summarizeBy: none
 		sourceColumn: est_elimination
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column ordre_tri
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 212f17e9-d127-49c6-902f-bd022a4913d1
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: ordre_tri
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
-	column definition_courte
+	column 'Définition'
 		dataType: string
 		lineageTag: 125ea89f-ceab-4abe-ae87-ce8e4c576339
 		summarizeBy: none
 		sourceColumn: definition_courte
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	partition Dim_Sous_Secteur = m
 		mode: import
@@ -79,4 +86,3 @@ table Dim_Sous_Secteur
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
-

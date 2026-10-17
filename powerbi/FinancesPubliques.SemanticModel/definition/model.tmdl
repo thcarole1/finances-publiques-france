@@ -13,9 +13,6 @@ annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLire
 
 annotation PBI_ProTooling = ["DevMode"]
 
-ref table ModeSource
-ref table DossierLocal
-ref table BrancheGitHub
 ref table Dim_Date
 ref table Dim_Sous_Secteur
 

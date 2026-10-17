@@ -1,3 +1,24 @@
+expression ModeSource = "GitHub" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true, List = {"GitHub", "Local"}, DefaultValue = "GitHub"]
+	lineageTag: 997caad2-ca8f-42a6-94f6-6cbf8fd536f6
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression DossierLocal = "C:\finances-publiques-france\data\curated\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 5b19b263-cb00-44d8-b325-b39aa36340be
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression BrancheGitHub = "main" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 545f394a-56d6-4870-8301-7a6bed9e3890
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
 expression fnLireParquet =
 		(nomTable as text) as table =>
 		let
