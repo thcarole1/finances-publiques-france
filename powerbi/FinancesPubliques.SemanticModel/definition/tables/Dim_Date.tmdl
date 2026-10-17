@@ -107,7 +107,7 @@ table Dim_Date
 
 		annotation SummarizationSetBy = User
 
-	column 'Est fin d'année'
+	column 'Est fin d''année'
 		dataType: boolean
 		isHidden
 		lineageTag: 93da6ad4-d34e-432e-8fec-e5b46d334662
