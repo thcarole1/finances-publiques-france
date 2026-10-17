@@ -1,0 +1,79 @@
+/// F11a — France : dette négociable de l'État en fin de mois, par durée et par type de taux. Ne jamais additionner deux axes.
+table Fait_Dette_Negociable_Etat
+	lineageTag: d9ec8c3b-3eee-4ff3-a2c1-6a7312d3c1ec
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 35bbaab3-f49c-4b4e-896f-1b75b37c545a
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 856d4d97-8dcb-4636-859b-b84e770f2c7e
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column composante_code
+		dataType: string
+		isHidden
+		lineageTag: 2577282d-5f2a-4c50-8847-a92bcbbb4e0e
+		summarizeBy: none
+		sourceColumn: composante_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 376cae98-041c-4c9d-b7b4-44cb9a0b9fe9
+		summarizeBy: sum
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (dette négociable)'
+		dataType: string
+		lineageTag: d349e4a3-7e30-40bf-80e2-7a59275db8ca
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: fd42779b-031e-4db7-ac0b-be411bc81a20
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 87c58e19-bdf9-43b7-97df-9bb39dbe51ae
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Dette_Negociable_Etat = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_dette_negociable_etat")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

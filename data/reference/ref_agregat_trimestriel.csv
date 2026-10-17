@@ -1,0 +1,5 @@
+agregat_code,na_item,libelle,ordre_tri
+DEPENSES,TE,Dépenses publiques,1
+RECETTES,TR,Recettes publiques,2
+SOLDE,B9,Solde public,3
+INTERETS,D41PAY,Charge d'intérêts,4

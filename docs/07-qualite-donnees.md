@@ -21,7 +21,9 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 | QC-B03 | **Exhaustivité des feuilles** : Σ feuilles de dépense = dépenses totales publiées (OTE) ; idem recettes (TR) | F01 | 0,05 % ou 1 M€ |
 | QC-B04 | **COFOG = total** : Σ fonctions = dépenses totales publiées dans le même jeu (`gov_10a_exp`) ; la cohérence avec F01 est l'avertissement QC-A04 | F02 | 0,05 % |
 | QC-B05 | **Consolidation** : Σ sous-secteurs + `S13_ELIM` = S13 publié | F01, F09 | 0,05 % |
-| QC-B06 | **Dette annuelle** : dette au T4 = dette annuelle notifiée | F09 | 0,1 % |
+| QC-B06 | **Dette annuelle** : dette au T4 = dette annuelle notifiée (avertissement depuis le lot 3b : les deux jeux ne sont pas publiés le même jour) | F09, F09t | 0,1 % |
+| QC-B14 | **Contributions INSEE** : Σ contributions des administrations = dette totale publiée | F09c | 0,1 % |
+| QC-B15 | **Dette négociable de l'État** : chaque axe (durée ; type de taux) = encours total (avertissement : écart ponctuel de la source en octobre 2017) | F11a | 0,05 % |
 | QC-B07 | **Échéancier AFT** : Σ encours par titre = encours total publié | F11 | 0,01 % |
 | QC-B08 | **Intégrité référentielle** : toute clé étrangère existe dans sa dimension (sinon `_NA` explicite, compté) | Toutes | 0 clé orpheline |
 | QC-B09 | **Pont payeur** : Σ coefficients = 1 par prélèvement et par convention | `Map_Prelevement_Payeur` | 0,001 |
@@ -40,6 +42,7 @@ détail. Un **avertissement** (A) laisse passer la collecte mais figure dans la 
 | QC-A04 | **Cohérence INSEE / Eurostat** (France, même agrégat, millésimes proches) | > 0,2 % |
 | QC-A05 | **Transferts** : matrice F06 cohérente avec les éliminations de F01 | > 2 % |
 | QC-A06 | **Fraîcheur** : une source n'a pas été mise à jour depuis plus longtemps que prévu | > 1,5 × la fréquence |
+| QC-A08 | **Dette trimestrielle France** : INSEE et Eurostat concordent | > 1 % |
 | QC-A07 | **Trimestriel vs annuel** : Σ trimestres bruts = année | > 0,5 % |
 | QC-A08 | **Collectivités** : collectivités disparues ou apparues sans fusion connue dans `Map_COG_Passage` | Toute occurrence |
 | QC-A09 | **Valeurs provisoires** : part des valeurs marquées provisoires ou estimées | Signalement |

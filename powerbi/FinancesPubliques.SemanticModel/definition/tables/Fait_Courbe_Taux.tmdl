@@ -1,0 +1,87 @@
+/// F12b — Courbe des taux de la zone euro (BCE), dernier jour ouvré du mois, par maturité. Non additive.
+table Fait_Courbe_Taux
+	lineageTag: 2103576b-b3c9-4a6c-9443-1779cada4c8c
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 3dd1f457-a234-4526-a6cc-dc4b4738e828
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a7cd9ed7-9e8a-48ea-8da7-a657710c2289
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column 'Maturité (ans)'
+		dataType: int64
+		formatString: 0
+		lineageTag: deb1e238-665a-42a5-88b5-478370ceec9d
+		summarizeBy: none
+		sourceColumn: maturite_ans
+
+		annotation SummarizationSetBy = User
+
+	column Notation
+		dataType: string
+		lineageTag: 180f0ba3-e923-4653-a078-c83a15e79bab
+		summarizeBy: none
+		sourceColumn: notation
+
+		annotation SummarizationSetBy = User
+
+	column taux_pct
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 606b809a-ba87-46e6-8bd8-de9f7b79a420
+		summarizeBy: none
+		sourceColumn: taux_pct
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (courbe des taux)'
+		dataType: string
+		lineageTag: 7bb1efd7-7543-4a02-8aae-f3683a68dfd6
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 05d2ff06-1133-4868-b2e7-4489d15d5c10
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 64614193-7a4c-45aa-ac11-5f297db236ae
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Courbe_Taux = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_courbe_taux")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

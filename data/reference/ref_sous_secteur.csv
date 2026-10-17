@@ -6,3 +6,5 @@ S1313,Administrations locales (collectivités locales),Collectivités locales,1,
 S1314,Administrations de sécurité sociale,Sécurité sociale,1,S13,false,40,"Assurance maladie, retraites de base et complémentaires, allocations familiales, assurance chômage, hôpitaux publics, appelés « administrations de sécurité sociale » (ASSO)"
 S13_ELIM,Transferts internes (éliminés),Transferts internes,1,S13,true,90,"Flux entre administrations retirés pour ne compter chaque euro qu'une fois"
 _NA,Non renseigné,Non renseigné,1,S13,false,99,"Administration non précisée dans la source"
+S13111,État,État,2,S1311,false,11,"Les ministères et le budget de l'État au sens strict"
+S13112,Agences et opérateurs de l'État,Agences de l'État,2,S1311,false,12,"Organismes financés par l'État : universités, CNRS, France Travail, Météo-France, Société du Grand Paris… (« organismes divers d'administration centrale », ODAC)"

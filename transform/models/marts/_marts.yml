@@ -1192,3 +1192,403 @@ models:
     data_type: varchar
   - name: ordre_tri
     data_type: integer
+- name: fait_dette_trimestrielle
+  description: F09t — Dette en fin de trimestre par sous-secteur, avec éliminations (semi-additive).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+- name: fait_macro_trimestriel
+  description: F08 — PIB trimestriel brut et CVS, et somme glissante sur quatre trimestres.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: correction
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - accepted_values:
+        arguments:
+          values: ['BRUT', 'CVS']
+  - name: pib_meur
+    data_type: double
+  - name: pib_mnac
+    data_type: double
+  - name: pib_4t_meur
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - correction
+- name: fait_comptes_apu_trimestriels
+  description: F07 — Dépenses, recettes, solde, intérêts trimestriels de S13, bruts et CVS.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: correction
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - accepted_values:
+        arguments:
+          values: ['BRUT', 'CVS']
+  - name: agregat_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_agregat_trimestriel')
+          field: agregat_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - correction
+        - agregat_code
+- name: fait_dette_contributions
+  description: 'F09c — France : contribution de chaque administration à la dette consolidée (INSEE).'
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: valeur_meur
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_code
+- name: fait_dette_negociable_etat
+  description: 'F11a — France : dette négociable de l''État par composante (durée, type de taux).'
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: composante_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_composante_dette_etat')
+          field: composante_code
+  - name: valeur_meur
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - composante_code
+- name: fait_courbe_taux
+  description: F12b — Courbe des taux de la zone euro (BCE), fin de mois.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: maturite_ans
+    data_type: integer
+    constraints:
+    - type: not_null
+  - name: notation
+    data_type: varchar
+    constraints:
+    - type: not_null
+  - name: taux_pct
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - maturite_ans
+        - notation
+- name: dim_composante_dette_etat
+  description: Composantes de la dette négociable de l'État.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: composante_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: axe
+    data_type: varchar
+  - name: definition
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
+- name: dim_agregat_trimestriel
+  description: Agrégats des comptes trimestriels.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: agregat_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer

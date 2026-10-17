@@ -15,12 +15,16 @@ les compare ou on les rapporte l'un à l'autre (ex. dépenses ÷ PIB).
 | F04 | `Fait_Macro_Annuel` | pays × année | Non additive | Eurostat, OCDE | 1 |
 | F05 | `Fait_Revisions` | pays × année × agrégat clé × millésime | Non additive entre millésimes | Eurostat, INSEE | 1 |
 | F06 | `Fait_Transferts_APU` | pays × année × sous-secteur versant × sous-secteur receveur × transaction | Additive | INSEE | 2 |
-| F07 | `Fait_Comptes_APU_Trimestriels` | pays × trimestre × sous-secteur × transaction × correction saisonnière | Additive (hors CVS/brut mélangés) | Eurostat `gov_10q_ggnfa`, INSEE | 3 |
-| F08 | `Fait_Macro_Trimestriel` | pays × trimestre | Non additive | Eurostat | 3 |
+| F07 | `Fait_Comptes_APU_Trimestriels` | pays × trimestre × correction × agrégat (S13 : dépenses, recettes, solde, intérêts) | Additive (hors CVS/brut mélangés) | Eurostat `gov_10q_ggnfa` | 3b |
+| F08 | `Fait_Macro_Trimestriel` | pays × trimestre × correction (PIB, PIB glissant sur 4 trimestres) | Non additive | Eurostat `namq_10_gdp` | 3b |
 | F09 | `Fait_Dette` | pays × fin d'année (fin de trimestre au lot 3b) × sous-secteur | **Semi-additive** (pas dans le temps) | Eurostat `gov_10dd_edpt1` (puis `gov_10q_ggdebt`) | 3a |
+| F09t | `Fait_Dette_Trimestrielle` | pays × fin de trimestre × sous-secteur (avec éliminations) | Semi-additive | Eurostat `gov_10q_ggdebt` | 3b |
+| F09c | `Fait_Dette_Contributions` | France × fin de trimestre × administration (État, agences, collectivités, Sécurité sociale) | Semi-additive | INSEE (BDM, `DETTE-TRIM-APU-2020`) | 3b |
 | F09b | `Fait_Dette_Instrument` | pays × fin d'année × instrument (S13 consolidé) | Semi-additive | Eurostat `gov_10dd_edpt1` | 3a |
 | F10 | `Fait_Detention_Dette` | pays × fin d'année × détenteur (S13 consolidé) | Semi-additive | Eurostat `gov_10dd_ggd` | 3a |
+| F11a | `Fait_Dette_Negociable_Etat` | France × fin de mois × composante (durée ; type de taux) | Semi-additive, additive à axe fixé | INSEE (BDM, `DETTE-NEGOCIABLE-ETAT`, d'après l'AFT) | 3b |
 | F11 | `Fait_Dette_Titres` | date d'instantané × titre (ISIN) | Semi-additive | AFT | 3 |
+| F12b | `Fait_Courbe_Taux` | zone euro × fin de mois × maturité × notation | Non additive | BCE (flux YC) | 3b |
 | F12 | `Fait_Taux_Marche` | pays × fin de mois × maturité | Non additive | Eurostat `irt_lt_mcby_m` (puis BCE, OCDE) | 3a |
 | F13 | `Fait_Hypotheses` | scénario × millésime × pays × année cible × variable | Non additive | Référentiel prévisions, AMECO, FMI, scénarios YAML | 4 |
 | F14 | `Fait_Projections` | scénario × pays × année × indicateur projeté | Non additive pour les ratios | Moteur de projection (Python) | 4 |
@@ -132,6 +136,17 @@ toutes les mesures en % du PIB, par habitant et en SPA.
   un autre est éliminée au niveau S13).
 - **Semi-additivité** : on additionne entre sous-secteurs et instruments, jamais entre dates.
 - **Règle** : la valeur au T4 est égale à la dette annuelle notifiée (QC-B06).
+
+### F09t et F09c — dette trimestrielle (lot 3b)
+
+- F09t suit F09 (Eurostat, tous pays, consolidation par `S13_ELIM`) au grain trimestriel. Elle est
+  séparée de F09 pour que les mesures semi-additives ne mélangent jamais une fin d'année annuelle
+  et un 4e trimestre. QC-B06 compare les deux (avertissement : dates de publication différentes).
+- F09c (France, INSEE) donne la **contribution** de chaque administration à la dette consolidée ;
+  Σ contributions = dette totale (QC-B14), sans ligne d'élimination. Elle détaille l'administration
+  centrale en État (S13111) et organismes (S13112), ajoutés au niveau 2 de `Dim_Sous_Secteur`.
+  L'INSEE publie environ un trimestre avant Eurostat ; les mesures « dernier trimestre connu »
+  prennent la source la plus récente.
 
 ### F10 — `Fait_Detention_Dette`
 

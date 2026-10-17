@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 3a (dette annuelle).
+Dernière mise à jour : 17/10/2026, après le lot 3b (dette trimestrielle et taux).
 
 ## 1. Où en est le projet
 
@@ -13,9 +13,9 @@ Dernière mise à jour : 17/10/2026, après le lot 3a (dette annuelle).
 | 2a | Transferts entre administrations (`Fait_Transferts_APU`) | ✅ fusionné (PR #7) |
 | 2b | Sankey « où va l'argent ? » (`Pres_Flux_Sankey`) | ✅ fusionné (PR #8) |
 | R1 | Rapport : 7 pages du parcours « Comprendre », glossaire, mesures en phrases | ✅ fusionné (PR #9) |
-| 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | PR ouverte (branche `feat/lot-3a-dette`) |
-| 3b | Dette et comptes trimestriels (`gov_10q_ggdebt`, `gov_10q_ggnfa`), courbe des taux BCE | à faire |
-| 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | **à faire** |
+| 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | ✅ fusionné (PR #10) |
+| 3b | Dette et comptes trimestriels, État / agences (INSEE), dette négociable de l'État, taux et courbe BCE ; pages 8 et 9 | PR ouverte (branche `feat/lot-3b-trimestriel`) |
+| 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | en partie : connecteur INSEE et détail État / agences pour la dette (lot 3b) ; reste les comptes annuels et les prélèvements |
 | 4 → 8 | Scénarios, redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
 Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
@@ -65,11 +65,14 @@ OCDE, BCE, OFGL, DG TAXUD (`taxation-customs.ec.europa.eu`, `webgate.ec.europa.e
 Bloqués constatés : `api.insee.fr`, `www.data.gouv.fr`, `www.aft.gouv.fr` (403). GitHub Actions a
 un accès Internet complet : en dernier recours, y faire tourner l'exploration.
 
-## 5. Prochaine étape : lot 2c (INSEE)
+## 5. Prochaine étape
 
-1. La BDM de l'INSEE (SDMX, `bdm.insee.fr/series/sdmx`, accessible) expose `CNA-2020-CSI`
-   (comptes des secteurs institutionnels, base 2020). Y chercher le détail État (S13111) /
-   organismes divers (S13112) et l'utiliser pour le niveau 2 de `Dim_Sous_Secteur`.
-2. Récupérer le taux de prélèvements obligatoires au sens de l'INSEE et documenter l'écart avec la
-   définition Eurostat (43,2 % contre 42,8 % en 2024, `docs/lots/lot-1.md`).
-3. Ensuite, selon le choix du propriétaire : lot 3 (dette), qui alimentera la page « La dette ».
+Connecteurs disponibles : Eurostat, DG TAXUD, INSEE (BDM, `ingestion/sources/insee.py`, une entrée
+par flux dans `JEUX`, séries choisies par IDBANK dans `ref_series_insee.csv`), BCE.
+
+1. **Lot 4 (scénarios et projections)** : les mesures de la dette (taux moyen payé, croissance en
+   valeur, effet boule de neige) sont la base du moteur de projection (`docs/08`).
+2. **Reste du lot 2c** : comptes annuels de l'État et des organismes (flux INSEE `CNA-2020-CSI`),
+   prélèvements obligatoires au sens de l'INSEE (43,2 % contre 42,8 % pour Eurostat en 2024).
+3. Échéancier titre par titre : AFT inaccessible depuis la session ; essai depuis GitHub Actions à
+   faire.

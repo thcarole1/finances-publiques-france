@@ -586,6 +586,246 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: 0476d441-2357-42db-ae65-e7d0d6a4b5f3
 
+	/// Dette de Maastricht à la dernière fin de trimestre de la période (Eurostat). Semi-additive.
+	measure 'Dette trimestrielle (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Dette_Trimestrielle[date_id] )
+			    RETURN CALCULATE ( SUM ( Fait_Dette_Trimestrielle[valeur_meur] ), Fait_Dette_Trimestrielle[date_id] = _d )
+			)
+		formatString: "#,0"
+		displayFolder: 07 Trimestriel
+		lineageTag: 15bc735e-783f-464e-8980-89bb36261ef3
+
+	/// Dette trimestrielle en milliards d'euros.
+	measure 'Dette trimestrielle (Md€)' = DIVIDE ( [Dette trimestrielle (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 07 Trimestriel
+		lineageTag: b887a808-0dac-44f8-864b-32e01a28dbce
+
+	/// Dette en fin de trimestre rapportée à la richesse produite sur les quatre derniers trimestres.
+	measure 'Dette trimestrielle (% PIB)' =
+			VAR _d = MAX ( Fait_Dette_Trimestrielle[date_id] )
+			VAR _pib = CALCULATE ( SUM ( Fait_Macro_Trimestriel[pib_4t_meur] ), REMOVEFILTERS ( Dim_Date ), Dim_Date[date_id] = _d, Fait_Macro_Trimestriel[correction] = "BRUT" )
+			RETURN DIVIDE ( [Dette trimestrielle (M€)], _pib )
+		formatString: "0.0 %"
+		displayFolder: 07 Trimestriel
+		lineageTag: 280057f6-3a25-4380-b7d1-ef0c5b5ef374
+
+	/// France : part de la dette consolidée portée par chaque administration, à la dernière fin de trimestre de la période (INSEE).
+	measure 'Contribution à la dette (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Dette_Contributions[date_id] )
+			    RETURN CALCULATE ( SUM ( Fait_Dette_Contributions[valeur_meur] ), Fait_Dette_Contributions[date_id] = _d )
+			)
+		formatString: "#,0"
+		displayFolder: 07 Trimestriel
+		lineageTag: a3afb8a0-ad6b-4e9b-81a3-6dae41cedd37
+
+	/// Contribution à la dette, en milliards d'euros.
+	measure 'Contribution à la dette (Md€)' = DIVIDE ( [Contribution à la dette (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 07 Trimestriel
+		lineageTag: 9d01931d-b40d-476a-85a0-8e53da9ccf5f
+
+	/// Date (AAAAMMJJ) du dernier trimestre publié pour le pays : INSEE pour la France, Eurostat sinon.
+	measure 'Date du dernier trimestre connu' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _insee = CALCULATE ( MAX ( Fait_Dette_Contributions[date_id] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ) )
+			    VAR _eurostat = CALCULATE ( MAX ( Fait_Dette_Trimestrielle[date_id] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ) )
+			    RETURN MAX ( _insee, _eurostat )
+			)
+		formatString: "0"
+		displayFolder: 07 Trimestriel
+		lineageTag: c5f5f138-3ba8-4c93-bd29-2fc0f2b38d9b
+
+	/// Dette au dernier trimestre publié, quelle que soit l'année choisie.
+	measure 'Dette au dernier trimestre connu (M€)' =
+			VAR _d = [Date du dernier trimestre connu]
+			VAR _insee = CALCULATE ( SUM ( Fait_Dette_Contributions[valeur_meur] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ), Fait_Dette_Contributions[date_id] = _d )
+			VAR _eurostat = CALCULATE ( SUM ( Fait_Dette_Trimestrielle[valeur_meur] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ), Fait_Dette_Trimestrielle[date_id] = _d )
+			RETURN IF ( NOT ISBLANK ( _d ), COALESCE ( _insee, _eurostat ) )
+		formatString: "#,0"
+		displayFolder: 07 Trimestriel
+		lineageTag: 09d0a682-0aff-4233-9136-b6013d46b6fb
+
+	/// Dette au dernier trimestre publié, en milliards d'euros.
+	measure 'Dette au dernier trimestre connu (Md€)' = DIVIDE ( [Dette au dernier trimestre connu (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 07 Trimestriel
+		lineageTag: 630ce1a9-f0b8-4ffa-9e32-9f468090b91d
+
+	/// Dette au dernier trimestre publié, rapportée à la richesse produite sur un an.
+	measure 'Dette au dernier trimestre connu (% PIB)' =
+			VAR _d = [Date du dernier trimestre connu]
+			VAR _pib = CALCULATE ( SUM ( Fait_Macro_Trimestriel[pib_4t_meur] ), REMOVEFILTERS ( Dim_Date ), Dim_Date[date_id] = _d, Fait_Macro_Trimestriel[correction] = "BRUT" )
+			RETURN DIVIDE ( [Dette au dernier trimestre connu (M€)], _pib )
+		formatString: "0.0 %"
+		displayFolder: 07 Trimestriel
+		lineageTag: e6f3d6f6-f066-4d6b-9efc-68fe7176e581
+
+	/// Hausse de la dette entre le même trimestre de l'année précédente et le dernier trimestre publié.
+	measure 'Hausse de la dette sur un an (Md€)' =
+			VAR _d = [Date du dernier trimestre connu]
+			VAR _avant_insee = CALCULATE ( SUM ( Fait_Dette_Contributions[valeur_meur] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ), Fait_Dette_Contributions[date_id] = _d - 10000 )
+			VAR _avant_eurostat = CALCULATE ( SUM ( Fait_Dette_Trimestrielle[valeur_meur] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ), Fait_Dette_Trimestrielle[date_id] = _d - 10000 )
+			VAR _avant = COALESCE ( _avant_insee, _avant_eurostat )
+			RETURN IF ( NOT ISBLANK ( _avant ), DIVIDE ( [Dette au dernier trimestre connu (M€)] - _avant, 1000 ) )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"""
+		displayFolder: 07 Trimestriel
+		lineageTag: 4f7e3b37-36e8-42e7-b792-90831885e7ae
+
+	/// Libellé du dernier trimestre publié (« 2e trimestre 2026 »).
+	measure 'Dernier trimestre connu' =
+			VAR _d = [Date du dernier trimestre connu]
+			VAR _t = MOD ( INT ( _d / 100 ), 100 ) / 3
+			RETURN
+			    IF (
+			        ISBLANK ( _d ),
+			        "Choisissez un pays",
+			        SWITCH ( _t, 1, "1er", 2, "2e", 3, "3e", "4e" ) & " trimestre " & INT ( _d / 10000 )
+			    )
+		displayFolder: 07 Trimestriel
+		lineageTag: bbb35a8d-f03f-4113-86bc-0261edba64e7
+
+	/// Solde public du trimestre, corrigé des variations saisonnières, en % de la richesse produite du trimestre.
+	measure 'Solde trimestriel (% PIB)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    DIVIDE (
+			        CALCULATE ( SUM ( Fait_Comptes_APU_Trimestriels[valeur_meur] ), Fait_Comptes_APU_Trimestriels[agregat_code] = "SOLDE", Fait_Comptes_APU_Trimestriels[correction] = "CVS" ),
+			        CALCULATE ( SUM ( Fait_Macro_Trimestriel[pib_meur] ), Fait_Macro_Trimestriel[correction] = "CVS" )
+			    )
+			)
+		formatString: "0.0 %"
+		displayFolder: 07 Trimestriel
+		lineageTag: ea3080b9-9588-4695-bc58-8c51c4948397
+
+	/// Taux des emprunts de l'État allemand à 10 ans, la référence de la zone euro.
+	measure 'Taux à 10 ans de l''Allemagne' = CALCULATE ( DIVIDE ( AVERAGE ( Fait_Taux_Marche[taux_pct] ), 100 ), REMOVEFILTERS ( Dim_Pays ), Dim_Pays[Code pays] = "DE" )
+		formatString: "0.00 %"
+		displayFolder: 06 Dette
+		lineageTag: 5dd16397-4d02-4f75-941f-384d62409d25
+
+	/// Supplément de taux payé par le pays par rapport à l'Allemagne, en points de pourcentage.
+	measure 'Écart de taux avec l''Allemagne (points)' =
+			VAR _pays = [Taux d'emprunt à 10 ans]
+			VAR _de = [Taux à 10 ans de l'Allemagne]
+			RETURN IF ( NOT ISBLANK ( _pays ) && NOT ISBLANK ( _de ), ( _pays - _de ) * 100 )
+		formatString: "+0.00 ""pt"";-0.00 ""pt"";0.00 ""pt"""
+		displayFolder: 06 Dette
+		lineageTag: 496adec7-63ed-4c4e-ad30-1ce83dd9e330
+
+	/// Taux moyens des emprunts d'État de la zone euro selon leur durée, au dernier jour connu de l'année choisie.
+	measure 'Courbe des taux (fin de l''année choisie)' =
+			VAR _an = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _d = CALCULATE ( MAX ( Fait_Courbe_Taux[date_id] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Pays ), Dim_Date[Année] = _an )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _an ),
+			        CALCULATE (
+			            DIVIDE ( AVERAGE ( Fait_Courbe_Taux[taux_pct] ), 100 ),
+			            REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Pays ),
+			            Fait_Courbe_Taux[date_id] = _d,
+			            Fait_Courbe_Taux[Notation] = "Ensemble des États de la zone euro"
+			        )
+			    )
+		formatString: "0.00 %"
+		displayFolder: 06 Dette
+		lineageTag: 75139eec-abec-474f-9de0-cfbf5f09426f
+
+	/// La même courbe, douze mois plus tôt.
+	measure 'Courbe des taux (un an plus tôt)' =
+			VAR _an = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _d = CALCULATE ( MAX ( Fait_Courbe_Taux[date_id] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Pays ), Dim_Date[Année] = _an ) - 10000
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _an ),
+			        CALCULATE (
+			            DIVIDE ( AVERAGE ( Fait_Courbe_Taux[taux_pct] ), 100 ),
+			            REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Pays ),
+			            Fait_Courbe_Taux[date_id] = _d,
+			            Fait_Courbe_Taux[Notation] = "Ensemble des États de la zone euro"
+			        )
+			    )
+		formatString: "0.00 %"
+		displayFolder: 06 Dette
+		lineageTag: 011f8b8d-b4e4-4c7f-92c9-6fdb9c8bb1b7
+
+	/// France : encours des titres émis par l'État, au dernier mois de la période.
+	measure 'Dette négociable de l''État (Md€)' =
+			VAR _d = MAX ( Fait_Dette_Negociable_Etat[date_id] )
+			RETURN DIVIDE ( CALCULATE ( SUM ( Fait_Dette_Negociable_Etat[valeur_meur] ), Fait_Dette_Negociable_Etat[date_id] = _d, Dim_Composante_Dette_Etat[Axe] = "Durée" ), 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 06 Dette
+		lineageTag: e264a048-075a-426c-bac8-f936ccf5d1c1
+
+	/// France : part de la dette négociable de l'État dont le remboursement suit l'inflation.
+	measure 'Part indexée sur l''inflation (%)' =
+			VAR _d = MAX ( Fait_Dette_Negociable_Etat[date_id] )
+			VAR _total = CALCULATE ( SUM ( Fait_Dette_Negociable_Etat[valeur_meur] ), REMOVEFILTERS ( Dim_Composante_Dette_Etat ), Fait_Dette_Negociable_Etat[date_id] = _d, Dim_Composante_Dette_Etat[Axe] = "Type de taux" )
+			VAR _indexee = CALCULATE ( SUM ( Fait_Dette_Negociable_Etat[valeur_meur] ), REMOVEFILTERS ( Dim_Composante_Dette_Etat ), Fait_Dette_Negociable_Etat[date_id] = _d, Dim_Composante_Dette_Etat[Code composante] = "INDEXEE" )
+			RETURN DIVIDE ( _indexee, _total )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: 24d7df2d-f9e4-4acd-8249-e4c9d2e35a86
+
+	/// France : part de la dette négociable de l'État à rembourser en un an ou moins à l'émission.
+	measure 'Part à court terme (%)' =
+			VAR _d = MAX ( Fait_Dette_Negociable_Etat[date_id] )
+			VAR _total = CALCULATE ( SUM ( Fait_Dette_Negociable_Etat[valeur_meur] ), REMOVEFILTERS ( Dim_Composante_Dette_Etat ), Fait_Dette_Negociable_Etat[date_id] = _d, Dim_Composante_Dette_Etat[Axe] = "Durée" )
+			VAR _court = CALCULATE ( SUM ( Fait_Dette_Negociable_Etat[valeur_meur] ), REMOVEFILTERS ( Dim_Composante_Dette_Etat ), Fait_Dette_Negociable_Etat[date_id] = _d, Dim_Composante_Dette_Etat[Code composante] = "COURT_TERME" )
+			RETURN DIVIDE ( _court, _total )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: f89ac3e6-09ce-4d9d-846a-ee52571e7414
+
+	/// Le dernier point de la dette, en une phrase.
+	measure 'Phrase : dette trimestrielle' =
+			VAR _md = [Dette au dernier trimestre connu (Md€)]
+			VAR _hausse = [Hausse de la dette sur un an (Md€)]
+			RETURN
+			    IF (
+			        ISBLANK ( _md ),
+			        "Choisissez un pays pour afficher les chiffres.",
+			        "Au " & [Dernier trimestre connu] & ", la dette publique atteint " & FORMAT ( _md, "#,0", "fr-FR" )
+			            & " milliards d'euros, soit " & FORMAT ( [Dette au dernier trimestre connu (% PIB)], "0.0 %", "fr-FR" )
+			            & " de la richesse produite sur un an"
+			            & IF ( NOT ISBLANK ( _hausse ),
+			                ". En un an, elle a " & IF ( _hausse >= 0, "augmenté", "diminué" ) & " de "
+			                    & FORMAT ( ABS ( _hausse ), "#,0", "fr-FR" ) & " milliards d'euros, soit environ "
+			                    & FORMAT ( ABS ( _hausse ) * 1000 / 365, "#,0", "fr-FR" ) & " millions d'euros par jour.",
+			                "." )
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 4227eac9-6914-49d7-8ee7-e97a30aef7aa
+
+	/// Le coût de l'emprunt, en une phrase.
+	measure 'Phrase : taux' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _taux = [Taux d'emprunt à 10 ans]
+			VAR _ecart = [Écart de taux avec l'Allemagne (points)]
+			VAR _index = [Part indexée sur l'inflation (%)]
+			RETURN
+			    IF (
+			        ISBLANK ( _taux ) || ISBLANK ( _annee ),
+			        "Choisissez un pays et une année pour afficher les chiffres.",
+			        "En " & _annee & ", l'État a emprunté à 10 ans au taux moyen de " & FORMAT ( _taux, "0.0 %", "fr-FR" )
+			            & IF ( NOT ISBLANK ( _ecart ) && SELECTEDVALUE ( Dim_Pays[Code pays] ) <> "DE",
+			                ", soit " & FORMAT ( ABS ( _ecart ), "0.00", "fr-FR" ) & " point "
+			                    & IF ( _ecart >= 0, "de plus", "de moins" ) & " que l'Allemagne",
+			                "" )
+			            & "."
+			            & IF ( NOT ISBLANK ( _index ),
+			                " " & FORMAT ( _index, "0 %", "fr-FR" )
+			                    & " des titres de l'État sont indexés sur l'inflation : quand les prix montent, leur coût augmente aussitôt.",
+			                "" )
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 8cda1e9d-ddcf-45a3-a2c7-0fdd0234b057
+
 	column Masquer
 		dataType: int64
 		isHidden
