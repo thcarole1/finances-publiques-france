@@ -1,0 +1,36 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Secrets et configuration locale ---
+.env
+.env.*
+!.env.example
+
+# --- Données ---
+# Les données brutes ne sont jamais versionnées dans Git :
+# elles sont archivées en instantanés datés dans les Releases GitHub.
+data/raw/
+data/staging/
+*.duckdb
+*.duckdb.wal
+
+# --- dbt ---
+transform/target/
+transform/dbt_packages/
+transform/logs/
+
+# --- Power BI (format PBIP) : fichiers locaux à ne pas versionner ---
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix.bak
+
+# --- Système ---
+.DS_Store
+Thumbs.db
+desktop.ini
