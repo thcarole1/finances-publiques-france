@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "33c108e498f75db344d6",
+  "displayName": "6. Comparer",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "8a278a287edb50128041",
+      "target": "05cc066ed5c0528dd508",
+      "type": "NoFilter"
+    },
+    {
+      "source": "8a278a287edb50128041",
+      "target": "a85701356aeb3afce518",
+      "type": "NoFilter"
+    }
+  ]
+}

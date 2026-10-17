@@ -27,6 +27,12 @@ Une **couche pédagogique** traverse les trois : info-bulles explicatives, encad
 | 10 | La France face aux autres | Sommes-nous une exception ? | Classements UE27 et OCDE, avertissements de comparabilité | 1 puis 8 |
 | 11 | Et demain ? | Où mène la trajectoire actuelle ? | Trajectoires officielles vs réalité passée (« spaghetti »), projections de dette | 4 |
 
+### Mise en œuvre (lot R1)
+
+Livrées : pages 1 à 5, page 10 (« Comparer ») et un glossaire (`powerbi/README.md`). Chaque page
+porte une phrase de synthèse calculée (mesures `Phrase : …`, dossier « 20 Pédagogie ») et un
+encadré « Comprendre ». Les segments Pays et Année sont synchronisés entre les pages.
+
 ## 3. Espace « Explorer »
 
 | Page | Contenu |

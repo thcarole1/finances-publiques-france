@@ -56,6 +56,29 @@ models:
     data_type: varchar
   - name: periode_historique
     data_type: varchar
+  - name: est_annee_disponible
+    data_type: boolean
+    description: Vrai si au moins un pays a des comptes annuels publiés pour cette année.
+- name: dim_glossaire
+  description: Glossaire pédagogique (source unique docs/glossaire.md).
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: glossaire_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: terme
+    data_type: varchar
+  - name: definition_courte
+    data_type: varchar
+  - name: definition_longue
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer
 - name: dim_sous_secteur
   description: Sous-secteurs des administrations publiques et ligne d'élimination.
   config:

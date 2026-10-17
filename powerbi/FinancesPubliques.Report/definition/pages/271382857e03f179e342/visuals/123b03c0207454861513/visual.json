@@ -1,0 +1,131 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "123b03c0207454861513",
+  "position": {
+    "x": 892,
+    "y": 128,
+    "z": 6000,
+    "height": 236,
+    "width": 372,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Sous_Secteur"
+                    }
+                  },
+                  "Property": "Sous-secteur (court)"
+                }
+              },
+              "queryRef": "Dim_Sous_Secteur.Sous-secteur (court)",
+              "nativeQueryRef": "Sous-secteur (court)",
+              "displayName": "Qui verse"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Sous_Secteur_Receveur"
+                    }
+                  },
+                  "Property": "Sous-secteur receveur (court)"
+                }
+              },
+              "queryRef": "Dim_Sous_Secteur_Receveur.Sous-secteur receveur (court)",
+              "nativeQueryRef": "Sous-secteur receveur (court)",
+              "displayName": "Qui reçoit"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Transferts entre administrations (Md€)"
+                }
+              },
+              "queryRef": "_Mesures.Transferts entre administrations (Md€)",
+              "nativeQueryRef": "Transferts entre administrations (Md€)",
+              "displayName": "Milliards d'euros"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Les versements entre administrations (en milliards d''euros)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12.0D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F4E79'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

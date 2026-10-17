@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "3f09344da9721d892859",
+  "displayName": "2. Combien ?",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "6370d366479bddd53a32",
+      "target": "8387c745ab9de0d65780",
+      "type": "NoFilter"
+    },
+    {
+      "source": "6370d366479bddd53a32",
+      "target": "a36a2d3474532330ae60",
+      "type": "NoFilter"
+    }
+  ]
+}

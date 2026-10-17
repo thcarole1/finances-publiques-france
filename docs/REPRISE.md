@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 2b.
+Dernière mise à jour : 17/10/2026, après le lot R1 (premières pages du rapport).
 
 ## 1. Où en est le projet
 
@@ -11,7 +11,8 @@ Dernière mise à jour : 17/10/2026, après le lot 2b.
 | 1 | Socle Eurostat : comptes APU, COFOG × nature, prélèvements, macro, révisions | ✅ fusionné (PR #5) |
 | 1b | Qui paie ? Bases économiques (DG TAXUD), lectures légale / économique | ✅ fusionné (PR #6) |
 | 2a | Transferts entre administrations (`Fait_Transferts_APU`) | ✅ fusionné (PR #7) |
-| 2b | Sankey « où va l'argent ? » (`Pres_Flux_Sankey`) | PR ouverte (branche `feat/lot-2b-sankey`) |
+| 2b | Sankey « où va l'argent ? » (`Pres_Flux_Sankey`) | ✅ fusionné (PR #8) |
+| R1 | Rapport : 7 pages du parcours « Comprendre », glossaire, mesures en phrases | PR ouverte (branche `feat/rapport-pages-pedagogiques`) |
 | 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | **à faire** |
 | 3 → 8 | Dette, scénarios, redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
@@ -46,6 +47,9 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 | Tri d'une colonne | Le libellé trié doit avoir une seule valeur de tri (tests `unicite_grain` sur les référentiels) |
 | Validation | Job CI `modele-powerbi` (bibliothèque TOM) ; message d'erreur lisible dans les **annotations** du check (`gh api …/check-runs/<id>/annotations`) — les journaux bruts ne sont pas accessibles depuis la session |
 | Paramètres Power Query | Créés en requête vide : décocher « Activer le chargement » |
+| Rapport (PBIR) | Les fichiers JSON de `powerbi/FinancesPubliques.Report/definition/` sont validés contre les schémas officiels (`scripts/valider_pbir.py`, étape CI) et contre le modèle (`tests/test_pbir.py` : champs existants, aucun sigle affiché). Les pages ont été générées une fois par script ; depuis, **les JSON sont la source** (le propriétaire peut les retoucher dans Desktop) |
+| Mesures | On n'additionne jamais des pays : les mesures de base renvoient vide si plusieurs pays sont sélectionnés. `CG_Unite` ne convertit que les mesures dont le nom contient « (M€) » |
+| Libellés | Aucun sigle ni code dans un visuel (`docs/09-rapport.md`, § 6) : libellés en clair dans les référentiels, sigles réservés au glossaire |
 | Avant chaque envoi | `uv run ruff format . && uv run ruff check . && uv run pytest` (le job `controles` vérifie la mise en forme) |
 
 ## 4. Accès réseau
@@ -62,4 +66,4 @@ un accès Internet complet : en dernier recours, y faire tourner l'exploration.
    organismes divers (S13112) et l'utiliser pour le niveau 2 de `Dim_Sous_Secteur`.
 2. Récupérer le taux de prélèvements obligatoires au sens de l'INSEE et documenter l'écart avec la
    définition Eurostat (43,2 % contre 42,8 % en 2024, `docs/lots/lot-1.md`).
-3. Ensuite, selon le choix du propriétaire : lot 3 (dette) ou premières pages du rapport.
+3. Ensuite, selon le choix du propriétaire : lot 3 (dette), qui alimentera la page « La dette ».

@@ -1,0 +1,59 @@
+/// Glossaire : les notions du rapport expliquées simplement (source : docs/glossaire.md).
+table Dim_Glossaire
+	lineageTag: ef171b10-274f-4e8c-8f82-063a52238da6
+
+	column glossaire_id
+		dataType: string
+		isHidden
+		lineageTag: 77a1c5d3-624a-407b-aa06-663e59307f55
+		summarizeBy: none
+		sourceColumn: glossaire_id
+
+		annotation SummarizationSetBy = User
+
+	column Terme
+		dataType: string
+		lineageTag: f64a57fe-8a89-4c2e-b6f9-8c54c32a3302
+		summarizeBy: none
+		sourceColumn: terme
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'En bref'
+		dataType: string
+		lineageTag: b3c712b6-dd9f-46b2-919f-ceb6ce1347c8
+		summarizeBy: none
+		sourceColumn: definition_courte
+
+		annotation SummarizationSetBy = User
+
+	column 'Pour aller plus loin'
+		dataType: string
+		lineageTag: 7f6b8376-526d-487b-8004-062871f86729
+		summarizeBy: none
+		sourceColumn: definition_longue
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7c8aeb3e-aa28-4c90-a73b-9ce5d6408b72
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Glossaire = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_glossaire")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
