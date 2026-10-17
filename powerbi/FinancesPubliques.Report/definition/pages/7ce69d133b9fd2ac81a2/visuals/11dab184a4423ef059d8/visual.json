@@ -3,9 +3,9 @@
   "name": "11dab184a4423ef059d8",
   "position": {
     "x": 652,
-    "y": 614,
+    "y": 618,
     "z": 10000,
-    "height": 90,
+    "height": 86,
     "width": 612,
     "tabOrder": 10000
   },
@@ -31,18 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "L'Allemagne sert de référence : c'est l'emprunteur jugé le plus sûr de la zone euro. L'écart mesure le supplément que les prêteurs demandent pour prêter à un autre pays.",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#595959"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Plus on prête longtemps, plus le taux est en général élevé : c'est la « courbe des taux ».",
+                    "value": "L'Allemagne, jugée l'emprunteur le plus sûr de la zone euro, sert de référence. Plus on prête longtemps, plus le taux est en général élevé : c'est la « courbe des taux ».",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"
