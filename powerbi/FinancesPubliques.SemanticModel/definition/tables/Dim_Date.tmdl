@@ -1,0 +1,139 @@
+table Dim_Date
+	lineageTag: 71c2ec82-c429-4abd-8a01-4dbf2cb3ab57
+	dataCategory: Time
+
+	column date_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a7fe500-71dc-48ee-b881-0c5a0a3102b8
+		summarizeBy: sum
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 5c4e3e76-ddb8-4d6c-825d-040d71b7fe7e
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column annee
+		dataType: int64
+		formatString: 0
+		lineageTag: e4c2cfdf-10b2-419d-b7d4-26106b6c4779
+		summarizeBy: sum
+		sourceColumn: annee
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 9fee0568-cb2b-41fa-bb0a-f7e5607ed841
+		summarizeBy: sum
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column mois
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b416c6d-f803-4d32-8bb7-4c218338b8d4
+		summarizeBy: sum
+		sourceColumn: mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_trimestre
+		dataType: string
+		lineageTag: 251fe374-21f1-4a87-aa23-ffa742237456
+		summarizeBy: none
+		sourceColumn: annee_trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee_mois
+		dataType: string
+		lineageTag: 08be1e2d-f447-4254-931b-1d46693fe067
+		summarizeBy: none
+		sourceColumn: annee_mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column mois_libelle
+		dataType: string
+		lineageTag: 7d420c3a-0310-4a8b-a974-172ef1ee488a
+		summarizeBy: none
+		sourceColumn: mois_libelle
+
+		annotation SummarizationSetBy = Automatic
+
+	column decennie
+		dataType: string
+		lineageTag: 85e5efb7-43be-446e-919a-1c718835fda1
+		summarizeBy: none
+		sourceColumn: decennie
+
+		annotation SummarizationSetBy = Automatic
+
+	column est_fin_mois
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e3b06ce0-e057-418e-9b72-c7e851cb454b
+		summarizeBy: none
+		sourceColumn: est_fin_mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column est_fin_trimestre
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: daf67634-6454-4834-9e89-347155636079
+		summarizeBy: none
+		sourceColumn: est_fin_trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column est_fin_annee
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 93da6ad4-d34e-432e-8fec-e5b46d334662
+		summarizeBy: none
+		sourceColumn: est_fin_annee
+
+		annotation SummarizationSetBy = Automatic
+
+	column periode_historique_code
+		dataType: string
+		lineageTag: d3a475e8-eb3a-4c8e-a69e-d04103547f96
+		summarizeBy: none
+		sourceColumn: periode_historique_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column periode_historique
+		dataType: string
+		lineageTag: b7c78f40-05de-4aca-b9b3-2e6381f7eee8
+		summarizeBy: none
+		sourceColumn: periode_historique
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Date = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_date")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

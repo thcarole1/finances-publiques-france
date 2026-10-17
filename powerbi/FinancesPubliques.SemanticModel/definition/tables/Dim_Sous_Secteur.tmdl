@@ -1,0 +1,82 @@
+table Dim_Sous_Secteur
+	lineageTag: 5c71d1e4-dd5c-4e7c-bcb6-31888f7fa483
+
+	column sous_secteur_code
+		dataType: string
+		lineageTag: 0caa77a2-9bee-4554-8f68-7641fb182e34
+		summarizeBy: none
+		sourceColumn: sous_secteur_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column libelle
+		dataType: string
+		lineageTag: 074a7352-7b72-41b7-9712-b1f80886324b
+		summarizeBy: none
+		sourceColumn: libelle
+
+		annotation SummarizationSetBy = Automatic
+
+	column libelle_court
+		dataType: string
+		lineageTag: 941475f6-14c3-413e-87f0-80626c29c0d7
+		summarizeBy: none
+		sourceColumn: libelle_court
+
+		annotation SummarizationSetBy = Automatic
+
+	column niveau
+		dataType: int64
+		formatString: 0
+		lineageTag: 73b890cc-f675-4f4d-8516-c798e062c8a1
+		summarizeBy: sum
+		sourceColumn: niveau
+
+		annotation SummarizationSetBy = Automatic
+
+	column parent_code
+		dataType: string
+		lineageTag: 38520ea5-94df-4e56-85e8-c9ef5dfc63a9
+		summarizeBy: none
+		sourceColumn: parent_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column est_elimination
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9bcc2c97-bee6-40d7-bb92-678d61ea8e44
+		summarizeBy: none
+		sourceColumn: est_elimination
+
+		annotation SummarizationSetBy = Automatic
+
+	column ordre_tri
+		dataType: int64
+		formatString: 0
+		lineageTag: 212f17e9-d127-49c6-902f-bd022a4913d1
+		summarizeBy: sum
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = Automatic
+
+	column definition_courte
+		dataType: string
+		lineageTag: 125ea89f-ceab-4abe-ae87-ce8e4c576339
+		summarizeBy: none
+		sourceColumn: definition_courte
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Sous_Secteur = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_sous_secteur")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
