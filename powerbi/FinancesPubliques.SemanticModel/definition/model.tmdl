@@ -30,7 +30,6 @@ ref table Fait_Macro_Annuel
 ref table Fait_Revisions
 ref table Dim_Fonction_Economique
 ref table Fait_Prelevements_Fonction
-ref table FP_Lecture_Payeur
 ref table _Mesures
 ref table CG_Unite
 ref table CG_Consolidation
