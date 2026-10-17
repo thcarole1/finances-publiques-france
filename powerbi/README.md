@@ -155,3 +155,19 @@ garantie valide (lot 1b).
 4. Renommer les trois lignes : « Qui verse (lecture légale) », « Qui supporte (lecture économique) »,
    « Base économique ». Laisser cochée l'option d'ajout d'un segment.
 5. Créer.
+
+## Diagramme de Sankey « où va l'argent ? » (lot 2b)
+
+Power BI n'a pas de Sankey natif : on utilise le visuel gratuit **Sankey Chart** publié par
+Microsoft sur AppSource.
+
+1. Volet **Visualisations** → **…** (Obtenir plus de visuels) → rechercher **Sankey** → choisir
+   **Sankey Chart** (éditeur : Microsoft Corporation) → **Ajouter**.
+2. Dans le visuel :
+   - **Source** : `Pres_Flux_Sankey` › **Source du flux** ;
+   - **Destination** : `Pres_Flux_Sankey` › **Destination du flux** ;
+   - **Weight** : mesure **Flux (M€)**.
+3. Segments indispensables (une seule valeur chacun) : `Dim_Pays` › **Pays**, `Dim_Date` › **Année**,
+   `Pres_Flux_Sankey` › **Lecture du payeur**.
+4. Facultatif : segment **Étape** pour n'afficher qu'une partie du parcours ; segment
+   **CG_Unite › Unité** pour lire les flux en % du PIB ou en € par habitant.

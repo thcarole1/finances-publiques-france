@@ -158,3 +158,11 @@ relationship eb3a9e94-bcf1-4b72-a154-2b2cf56c98e1
 	fromColumn: Fait_Transferts_APU.millesime_id
 	toColumn: Dim_Millesime.millesime_id
 
+relationship 9889854c-f0ff-4c12-ae9b-15d271bc3e97
+	fromColumn: Pres_Flux_Sankey.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 72e2a56e-4e22-4319-9fdf-580bb13a5525
+	fromColumn: Pres_Flux_Sankey.date_id
+	toColumn: Dim_Date.date_id
+

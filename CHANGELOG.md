@@ -2,6 +2,14 @@
 
 Format : une section par version ; une version mineure par lot livré (docs/10-conventions.md).
 
+## [0.5.0] — lot 2b : Sankey « où va l'argent ? »
+
+### Ajouté
+- `Pres_Flux_Sankey` : qui paie → qui encaisse → qui dépense → pour quoi, trois lectures du payeur.
+- Imputation des éliminations par fonction aux administrations versantes (ajustement RAS, modèle Python).
+- Contrôle QC-A06b (équilibre des nœuds, avertissement).
+- Power BI : table, relations, mesure « Flux (M€) » ; mode d'emploi du visuel Sankey Chart.
+
 ## [0.4.0] — lot 2a : transferts entre administrations
 
 ### Ajouté

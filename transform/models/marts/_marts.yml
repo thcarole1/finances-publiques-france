@@ -830,3 +830,66 @@ models:
     data_type: integer
   - name: definition_courte
     data_type: varchar
+- name: pres_flux_sankey
+  description: 'Table de présentation : flux du Sankey « où va l''argent ? » (3 étapes, 3 lectures).'
+  config:
+    contract:
+      enforced: true
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - lecture
+        - etape
+        - source
+        - cible
+        - sous_secteur_code
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: lecture
+    data_type: varchar
+    constraints:
+    - type: not_null
+  - name: etape
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - accepted_values:
+        arguments:
+          values:
+          - 1
+          - 2
+          - 3
+          quote: false
+  - name: source
+    data_type: varchar
+    constraints:
+    - type: not_null
+  - name: cible
+    data_type: varchar
+    constraints:
+    - type: not_null
+  - name: sous_secteur_code
+    data_type: varchar
+  - name: valeur_meur
+    data_type: double
