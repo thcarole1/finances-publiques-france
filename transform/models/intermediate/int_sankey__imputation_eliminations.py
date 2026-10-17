@@ -27,7 +27,8 @@ def model(dbt, session):
 
     elim = (
         dep[dep.sous_secteur_code == "S13_ELIM"]
-        .groupby(["pays_code", "date_id", "fonction"], as_index=False)["valeur_meur"].sum()
+        .groupby(["pays_code", "date_id", "fonction"], as_index=False)["valeur_meur"]
+        .sum()
     )
     graine = (
         dep[
@@ -59,8 +60,9 @@ def model(dbt, session):
 
         g = graine[(graine.pays_code == pays) & (graine.date_id == date)]
         m = (
-            g.pivot_table(index="sous_secteur_code", columns="fonction", values="valeur_meur",
-                          aggfunc="sum")
+            g.pivot_table(
+                index="sous_secteur_code", columns="fonction", values="valeur_meur", aggfunc="sum"
+            )
             .reindex(index=admins, columns=fonctions)
             .fillna(0.0)
             .clip(lower=0.0)
