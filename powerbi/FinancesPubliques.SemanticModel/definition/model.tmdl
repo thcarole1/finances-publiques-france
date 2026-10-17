@@ -1,0 +1,20 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Dim_Date
+ref table Dim_Sous_Secteur
+
+ref cultureInfo fr-FR
+
