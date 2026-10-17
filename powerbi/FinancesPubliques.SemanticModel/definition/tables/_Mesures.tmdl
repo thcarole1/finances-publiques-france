@@ -374,6 +374,218 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: 7992306f-6304-401c-b1d0-22d3fbcbc7b4
 
+	/// Dette publique (au sens de Maastricht) à la dernière fin d'année de la période. Semi-additive : jamais additionnée dans le temps.
+	measure 'Dette publique (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Dette[date_id] )
+			    RETURN CALCULATE ( SUM ( Fait_Dette[valeur_meur] ), Fait_Dette[date_id] = _d )
+			)
+		formatString: "#,0"
+		displayFolder: 06 Dette
+		lineageTag: d976c4fc-45bf-45e0-bf7b-addea53c45cf
+
+	/// Dette consolidée par instrument, à la dernière fin d'année de la période.
+	measure 'Dette par instrument (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Dette_Instrument[date_id] )
+			    RETURN CALCULATE ( SUM ( Fait_Dette_Instrument[valeur_meur] ), Fait_Dette_Instrument[date_id] = _d )
+			)
+		formatString: "#,0"
+		displayFolder: 06 Dette
+		lineageTag: d8ba8869-f0e5-4793-9756-20fb105b053d
+
+	/// Dette consolidée par détenteur, à la dernière fin d'année de la période.
+	measure 'Dette par détenteur (M€)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Detention_Dette[date_id] )
+			    RETURN CALCULATE ( SUM ( Fait_Detention_Dette[valeur_meur] ), Fait_Detention_Dette[date_id] = _d )
+			)
+		formatString: "#,0"
+		displayFolder: 06 Dette
+		lineageTag: c12d0008-bc64-408f-80f7-c7f7273b6d78
+
+	/// Dette publique en milliards d'euros.
+	measure 'Dette publique (Md€)' = DIVIDE ( [Dette publique (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 06 Dette
+		lineageTag: c8265af1-f0eb-4fa3-bf8b-572d1d8ca7b4
+
+	/// Dette par instrument, en milliards d'euros.
+	measure 'Dette par instrument (Md€)' = DIVIDE ( [Dette par instrument (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 06 Dette
+		lineageTag: 644e1090-5398-4124-80be-fd81f78b7aa1
+
+	/// Dette par détenteur, en milliards d'euros.
+	measure 'Dette par détenteur (Md€)' = DIVIDE ( [Dette par détenteur (M€)], 1000 )
+		formatString: "#,0 ""Md€"""
+		displayFolder: 06 Dette
+		lineageTag: e7c36604-6fb2-4256-80d2-5656033cc899
+
+	/// Dette rapportée à la richesse produite (PIB) de la même année.
+	measure 'Dette publique (% PIB)' =
+			VAR _d = MAX ( Fait_Dette[date_id] )
+			RETURN DIVIDE ( [Dette publique (M€)], CALCULATE ( [PIB (M€)], REMOVEFILTERS ( Dim_Date ), Dim_Date[date_id] = _d ) )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: 225f8549-4ca9-458c-bacf-e9187a9dbe2a
+
+	/// Dette publique divisée par le nombre d'habitants.
+	measure 'Dette publique par habitant (€)' =
+			VAR _d = MAX ( Fait_Dette[date_id] )
+			RETURN DIVIDE ( [Dette publique (M€)] * 1000000, CALCULATE ( [Population], REMOVEFILTERS ( Dim_Date ), Dim_Date[date_id] = _d ) )
+		formatString: "#,0 ""€"""
+		displayFolder: 06 Dette
+		lineageTag: 6698ad8d-2a0f-4e90-8e4f-d9a9fcdf4788
+
+	/// Part du détenteur dans la dette, à périmètre inchangé.
+	measure 'Part de la dette détenue (%)' = DIVIDE ( [Dette par détenteur (M€)], CALCULATE ( [Dette par détenteur (M€)], REMOVEFILTERS ( Dim_Detenteur ) ) )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: b16f0825-f846-4d88-8d06-afafe1cf1446
+
+	/// Part de la dette détenue par des investisseurs situés hors du pays.
+	measure 'Part détenue par l''étranger (%)' = CALCULATE ( [Part de la dette détenue (%)], Dim_Detenteur[Groupe de détenteurs] = "Étranger" )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: d999793a-6c25-4562-ae82-8cad37afb741
+
+	/// Taux auquel l'État emprunte à 10 ans sur les marchés, moyenne de la période.
+	measure 'Taux d''emprunt à 10 ans' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), DIVIDE ( AVERAGE ( Fait_Taux_Marche[taux_pct] ), 100 ) )
+		formatString: "0.00 %"
+		displayFolder: 06 Dette
+		lineageTag: 31b5a283-6cca-4ed3-abe6-bd997e8fa768
+
+	/// Dette au 31 décembre de l'année précédente (base du taux moyen payé).
+	measure 'Dette fin d''année précédente (M€)' =
+			VAR _an = SELECTEDVALUE ( Dim_Date[Année] )
+			RETURN
+			    IF ( NOT ISBLANK ( _an ), CALCULATE ( [Dette publique (M€)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an - 1 ) )
+		formatString: "#,0"
+		displayFolder: 06 Dette
+		lineageTag: 15987db5-d83c-4a17-9044-bdf43186dc8a
+
+	/// Taux apparent : intérêts de l'année rapportés à la dette de fin d'année précédente.
+	measure 'Taux moyen payé sur la dette' = IF ( NOT ISBLANK ( SELECTEDVALUE ( Dim_Date[Année] ) ), DIVIDE ( [Charge d'intérêts (M€)], [Dette fin d'année précédente (M€)] ) )
+		formatString: "0.00 %"
+		displayFolder: 06 Dette
+		lineageTag: 95b4f5e3-07b6-463a-8c67-1b7c4902a2d1
+
+	/// Croissance de la richesse produite, inflation comprise, par rapport à l'année précédente.
+	measure 'Croissance du PIB en valeur (%)' =
+			VAR _an = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _prec = CALCULATE ( [PIB (M€)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an - 1 )
+			RETURN IF ( NOT ISBLANK ( _an ) && NOT ISBLANK ( _prec ), DIVIDE ( [PIB (M€)], _prec ) - 1 )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: 2c30f939-f2cb-4dbc-8ccc-7d56bc1debb8
+
+	/// Ratio de dette au 31 décembre de l'année précédente.
+	measure 'Dette (% PIB) l''année précédente' =
+			VAR _an = SELECTEDVALUE ( Dim_Date[Année] )
+			RETURN
+			    IF ( NOT ISBLANK ( _an ), CALCULATE ( [Dette publique (% PIB)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an - 1 ) )
+		formatString: "0.0 %"
+		displayFolder: 06 Dette
+		lineageTag: 90fd8824-ff75-4610-bd5c-b74e2dbfb3a8
+
+	/// Hausse (ou baisse) du ratio de dette sur l'année, en points de richesse produite.
+	measure 'Variation de la dette (points de PIB)' =
+			VAR _avant = [Dette (% PIB) l'année précédente]
+			VAR _apres = [Dette publique (% PIB)]
+			RETURN IF ( NOT ISBLANK ( _avant ) && NOT ISBLANK ( _apres ) && NOT ISBLANK ( SELECTEDVALUE ( Dim_Date[Année] ) ), ( _apres - _avant ) * 100 )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 06 Dette
+		lineageTag: aabc7f02-1e05-411b-bde4-add5c4d3d5cd
+
+	/// Ce que le déficit hors intérêts ajoute à la dette (négatif : un excédent hors intérêts la réduit).
+	measure 'Déficit hors intérêts (points de PIB)' = IF ( NOT ISBLANK ( [Variation de la dette (points de PIB)] ), - DIVIDE ( [Solde primaire (M€)], [PIB (M€)] ) * 100 )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 06 Dette
+		lineageTag: 63aa30f3-ee01-47bc-a92b-e5b1ffe2dbcb
+
+	/// Ce que l'écart entre taux d'intérêt et croissance ajoute à la dette (négatif : la croissance l'allège).
+	measure 'Effet boule de neige (points de PIB)' =
+			VAR _i = [Taux moyen payé sur la dette]
+			VAR _g = [Croissance du PIB en valeur (%)]
+			VAR _d = [Dette (% PIB) l'année précédente]
+			RETURN IF ( NOT ISBLANK ( [Variation de la dette (points de PIB)] ), _d * DIVIDE ( _i - _g, 1 + _g ) * 100 )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 06 Dette
+		lineageTag: a2b38deb-755c-45f0-bfe2-837a8e9e5ffd
+
+	/// Résidu : achats d'actifs, trésorerie, écarts entre comptabilité et décaissements (ajustement stock-flux).
+	measure 'Autres facteurs (points de PIB)' =
+			VAR _var = [Variation de la dette (points de PIB)]
+			RETURN IF ( NOT ISBLANK ( _var ), _var - [Déficit hors intérêts (points de PIB)] - [Effet boule de neige (points de PIB)] )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 06 Dette
+		lineageTag: 9b6fac8a-1f5c-44c4-a437-f386aa950c85
+
+	/// La dette de l'année et son coût, en une phrase.
+	measure 'Phrase : dette' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _dette = [Dette publique (Md€)]
+			VAR _interets = DIVIDE ( [Charge d'intérêts (M€)], 1000 )
+			VAR _taux = [Taux moyen payé sur la dette]
+			RETURN
+			    IF (
+			        ISBLANK ( _annee ) || ISBLANK ( _dette ),
+			        "Choisissez un pays et une année pour afficher les chiffres.",
+			        "Fin " & _annee & ", la dette publique atteint " & FORMAT ( _dette, "#,0", "fr-FR" )
+			            & " milliards d'euros, soit " & FORMAT ( [Dette publique (% PIB)], "0 %", "fr-FR" )
+			            & " de la richesse produite en un an, ou " & FORMAT ( [Dette publique par habitant (€)], "#,0", "fr-FR" )
+			            & " € par habitant. Ses intérêts ont coûté " & FORMAT ( _interets, "#,0", "fr-FR" )
+			            & " milliards d'euros dans l'année"
+			            & IF ( NOT ISBLANK ( _taux ), ", soit un taux moyen de " & FORMAT ( _taux, "0.0 %", "fr-FR" ), "" ) & "."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: fc7ad1ca-fce4-47f8-8eb8-4a129989b52f
+
+	/// Pourquoi la dette a augmenté ou diminué, en une phrase.
+	measure 'Phrase : boule de neige' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _i = [Taux moyen payé sur la dette]
+			VAR _g = [Croissance du PIB en valeur (%)]
+			VAR _var = [Variation de la dette (points de PIB)]
+			VAR _def = [Déficit hors intérêts (points de PIB)]
+			RETURN
+			    IF (
+			        ISBLANK ( _var ) || ISBLANK ( _i ) || ISBLANK ( _g ),
+			        "",
+			        "En " & _annee & ", le taux moyen payé sur la dette (" & FORMAT ( _i, "0.0 %", "fr-FR" ) & ") est "
+			            & IF ( _i > _g, "supérieur", "inférieur" ) & " à la croissance de l'économie, inflation comprise ("
+			            & FORMAT ( _g, "0.0 %", "fr-FR" ) & ") : "
+			            & IF ( _i > _g, "la dette grossit d'elle-même (effet boule de neige). ", "la croissance allège le poids de la dette. " )
+			            & "Au total, la dette a " & IF ( _var >= 0, "augmenté", "diminué" ) & " de "
+			            & FORMAT ( ABS ( _var ), "0.0", "fr-FR" ) & " points de richesse produite"
+			            & IF ( _def > 0,
+			                ", notamment parce que les dépenses hors intérêts ont dépassé les recettes ("
+			                    & FORMAT ( _def, "0.0", "fr-FR" ) & " points).",
+			                "." )
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 4fdd1844-a0e2-40bd-97fd-3b4a332db895
+
+	/// À qui la dette est due, en une phrase.
+	measure 'Phrase : détenteurs' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _etr = [Part détenue par l'étranger (%)]
+			VAR _bc = CALCULATE ( [Part de la dette détenue (%)], Dim_Detenteur[Code détenteur] = "S121" )
+			RETURN
+			    IF (
+			        ISBLANK ( _etr ),
+			        "Le détail par détenteur n'est pas publié pour cette année (il l'est depuis 2020 pour la plupart des pays).",
+			        "Fin " & _annee & ", " & FORMAT ( _etr, "0 %", "fr-FR" ) & " de la dette est détenue par des investisseurs étrangers, "
+			            & FORMAT ( _bc, "0 %", "fr-FR" ) & " par la banque centrale et "
+			            & FORMAT ( 1 - _etr - _bc, "0 %", "fr-FR" ) & " par les autres prêteurs du pays (banques, assureurs, ménages…)."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 0476d441-2357-42db-ae65-e7d0d6a4b5f3
+
 	column Masquer
 		dataType: int64
 		isHidden

@@ -166,3 +166,78 @@ relationship 72e2a56e-4e22-4319-9fdf-580bb13a5525
 	fromColumn: Pres_Flux_Sankey.date_id
 	toColumn: Dim_Date.date_id
 
+relationship ed38abd9-1f6a-4800-abd9-0501b428a200
+	fromColumn: Fait_Dette.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship f25ca198-ab07-437f-9619-72e3d5d7f256
+	fromColumn: Fait_Dette.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 209647cf-3850-4946-9791-28eab35cb56c
+	fromColumn: Fait_Dette.sous_secteur_code
+	toColumn: Dim_Sous_Secteur.'Code sous-secteur'
+
+relationship 74223434-db77-477d-a922-ade30c3e243e
+	fromColumn: Fait_Dette.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 92e4ef97-1cb7-4588-90b7-9ae13d5852da
+	fromColumn: Fait_Dette.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 9eab7c63-010b-46c3-a0ab-7ebe9fe97633
+	fromColumn: Fait_Dette_Instrument.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship c15886b5-b660-4bff-8c19-67e79312d4c4
+	fromColumn: Fait_Dette_Instrument.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 3b0fb367-b58d-4173-9ca0-255fbd36188e
+	fromColumn: Fait_Dette_Instrument.instrument_code
+	toColumn: Dim_Instrument_Dette.'Code instrument'
+
+relationship f9706a21-6d3c-4ed0-9de2-b8f4e6724335
+	fromColumn: Fait_Dette_Instrument.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 8f817f3b-6fb5-4686-a69d-2717ccba376d
+	fromColumn: Fait_Dette_Instrument.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship 74284c48-4f86-40ee-b627-5a61e857ec38
+	fromColumn: Fait_Detention_Dette.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 462eca86-45c9-442f-a52b-0e10ac9d486b
+	fromColumn: Fait_Detention_Dette.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 51334f93-8480-46dc-9a33-b0ab3829072b
+	fromColumn: Fait_Detention_Dette.detenteur_code
+	toColumn: Dim_Detenteur.'Code détenteur'
+
+relationship 5fc673b8-9c89-4646-92a7-73344926db5d
+	fromColumn: Fait_Detention_Dette.source_id
+	toColumn: Dim_Source.source_id
+
+relationship 48286227-907a-4d85-a9d7-6fa247094a2f
+	fromColumn: Fait_Detention_Dette.millesime_id
+	toColumn: Dim_Millesime.millesime_id
+
+relationship b9d8e9c8-baf6-425e-885f-6940ef5b2b97
+	fromColumn: Fait_Taux_Marche.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 0e6936b0-7e13-4325-b227-ca6d95eea295
+	fromColumn: Fait_Taux_Marche.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 75eb7320-b5b2-417c-8ff9-458685e1ddbb
+	fromColumn: Fait_Taux_Marche.source_id
+	toColumn: Dim_Source.source_id
+
+relationship b7227b08-a494-4f7d-aa8d-5317de7f2530
+	fromColumn: Fait_Taux_Marche.millesime_id
+	toColumn: Dim_Millesime.millesime_id

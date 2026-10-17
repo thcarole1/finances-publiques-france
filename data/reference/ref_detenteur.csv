@@ -1,0 +1,8 @@
+detenteur_code,sector2,libelle,groupe,definition,ordre_tri
+S2,S2,Investisseurs étrangers,Étranger,"Banques, assureurs, fonds, banques centrales et autres investisseurs situés hors du pays.",1
+S121,S121,Banque centrale,Pays,"La banque centrale nationale (en France, la Banque de France, qui achète des titres pour le compte de l'Eurosystème).",2
+S122_S123,S122_S123,Banques,Pays,Banques et fonds monétaires du pays.,3
+S124-S129,S124-S129,"Assureurs, fonds et autres financiers",Pays,"Compagnies d'assurance (notamment l'assurance vie), caisses de retraite, fonds d'investissement et autres institutions financières du pays.",4
+S11_S14_S15,S11_S14_S15,Entreprises et ménages,Pays,Entreprises non financières et ménages du pays qui détiennent directement des titres.,5
+S1_NV,,Autres investisseurs du pays,Pays,Écart entre le total des détenteurs du pays et la somme des catégories détaillées.,6
+NV,,Non ventilé,Non ventilé,Écart entre la dette totale et la somme des détenteurs connus.,9

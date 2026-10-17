@@ -17,10 +17,11 @@ les compare ou on les rapporte l'un à l'autre (ex. dépenses ÷ PIB).
 | F06 | `Fait_Transferts_APU` | pays × année × sous-secteur versant × sous-secteur receveur × transaction | Additive | INSEE | 2 |
 | F07 | `Fait_Comptes_APU_Trimestriels` | pays × trimestre × sous-secteur × transaction × correction saisonnière | Additive (hors CVS/brut mélangés) | Eurostat `gov_10q_ggnfa`, INSEE | 3 |
 | F08 | `Fait_Macro_Trimestriel` | pays × trimestre | Non additive | Eurostat | 3 |
-| F09 | `Fait_Dette` | pays × fin de trimestre × sous-secteur × instrument × maturité | **Semi-additive** (pas dans le temps) | Eurostat `gov_10q_ggdebt`, INSEE | 3 |
-| F10 | `Fait_Detention_Dette` | pays × fin de trimestre × détenteur | Semi-additive | AFT, Banque de France | 3 |
+| F09 | `Fait_Dette` | pays × fin d'année (fin de trimestre au lot 3b) × sous-secteur | **Semi-additive** (pas dans le temps) | Eurostat `gov_10dd_edpt1` (puis `gov_10q_ggdebt`) | 3a |
+| F09b | `Fait_Dette_Instrument` | pays × fin d'année × instrument (S13 consolidé) | Semi-additive | Eurostat `gov_10dd_edpt1` | 3a |
+| F10 | `Fait_Detention_Dette` | pays × fin d'année × détenteur (S13 consolidé) | Semi-additive | Eurostat `gov_10dd_ggd` | 3a |
 | F11 | `Fait_Dette_Titres` | date d'instantané × titre (ISIN) | Semi-additive | AFT | 3 |
-| F12 | `Fait_Taux_Marche` | pays × fin de mois × maturité | Non additive | BCE, Eurostat, OCDE | 3 |
+| F12 | `Fait_Taux_Marche` | pays × fin de mois × maturité | Non additive | Eurostat `irt_lt_mcby_m` (puis BCE, OCDE) | 3a |
 | F13 | `Fait_Hypotheses` | scénario × millésime × pays × année cible × variable | Non additive | Référentiel prévisions, AMECO, FMI, scénarios YAML | 4 |
 | F14 | `Fait_Projections` | scénario × pays × année × indicateur projeté | Non additive pour les ratios | Moteur de projection (Python) | 4 |
 | F15 | `Fait_Redistribution` | année × décile × flux × approche × ménage type | Additive pour les montants totaux | INSEE, DREES | 5 |
@@ -118,6 +119,13 @@ toutes les mesures en % du PIB, par habitant et en SPA.
 
 ### F09 — `Fait_Dette`
 
+> **Mise en œuvre (lot 3a).** Eurostat ne croise pas sous-secteur et instrument : la dette par
+> instrument n'existe que pour l'ensemble consolidé (S13). F09 porte donc le sous-secteur, et
+> F09b (`Fait_Dette_Instrument`) l'instrument ; la durée à l'origine (court / long terme) est un
+> attribut de `Dim_Instrument_Dette` (court terme = dépôts + titres et prêts de court terme, ce qui
+> reproduit exactement la ventilation « 1 an ou moins » d'Eurostat). QC-B13 vérifie que les trois
+> tables de dette donnent le même total.
+
 - **Clés** : `pays_code`, `date_id` (fin de trimestre), `sous_secteur_code`, `instrument_code`, `maturite_code`.
 - **Valeur** : encours nominal en M€ (dette au sens de Maastricht : brute, consolidée, valeur nominale).
 - **Consolidation** : même mécanisme `S13_ELIM` que F01 (la dette d'un sous-secteur détenue par
@@ -131,7 +139,16 @@ Part et montant de la dette détenus par catégorie de détenteur (non-résident
 établissements de crédit, assurances…). Le périmètre (dette négociable de l'État ou dette de
 Maastricht) est porté par une colonne `perimetre`.
 
+> **Mise en œuvre (lot 3a).** Source Eurostat `gov_10dd_ggd` (dette de Maastricht consolidée, tous
+> pays européens) plutôt que l'AFT, dont le site refuse les accès automatisés. Feuilles exhaustives :
+> `S1_NV` (autres résidents) et `NV` complètent le total. Détail publié depuis 2020 pour la plupart
+> des pays (depuis 1995 pour l'Allemagne, la Belgique, les Pays-Bas…).
+
 ### F11 — `Fait_Dette_Titres` (échéancier AFT)
+
+> **Reporté.** Le site de l'AFT bloque les accès automatisés depuis la session (page de
+> vérification anti-robot) ; un essai depuis GitHub Actions reste à faire. Eurostat ne publie pas de ventilation par durée restante
+> pour la France. À reprendre si un fichier de l'AFT peut être déposé manuellement dans le dépôt.
 
 - **Clés** : `date_id` (date de l'instantané, fin de mois), `isin`.
 - **Valeurs** : `encours_nominal_meur`, `encours_indexe_meur` (y compris le supplément

@@ -137,7 +137,7 @@ locales et leurs organismes. ASSO : administrations de sécurité sociale (assur
 retraites, allocations familiales, assurance chômage, hôpitaux publics). Le dashboard les désigne en
 clair : « État et ses agences », « Collectivités locales », « Sécurité sociale ».
 
-### Taux apparent de la dette
+### Taux moyen payé sur la dette (taux apparent)
 
 **Court :** la charge d'intérêts d'une année rapportée à la dette de fin d'année précédente.
 
@@ -186,3 +186,34 @@ contrat, et des CP chaque année au fil des paiements.
 **Court :** le domaine d'action financé par une dépense : protection sociale, santé, enseignement, défense…
 
 **Long :** les dépenses sont classées selon une nomenclature internationale commune (COFOG), ce qui permet de comparer les pays. La protection sociale (retraites, famille, chômage, pauvreté) est de loin le premier poste en France.
+
+### Obligations
+
+**Court :** des titres de dette vendus sur les marchés financiers : l'État reçoit l'argent tout de suite, verse un intérêt chaque année et rembourse à une date fixée.
+
+**Long :** en France, ce sont surtout les obligations assimilables du Trésor (OAT), émises pour 2 à 50 ans. Elles représentent l'essentiel de la dette de l'État. Les emprunts de moins d'un an prennent la forme de bons du Trésor.
+
+### Détenteurs de la dette
+
+**Court :** ceux qui ont prêté aux administrations, en achetant leurs titres ou en leur accordant des prêts.
+
+**Long :** banques, assureurs (notamment via l'assurance vie des ménages), fonds, banque centrale et investisseurs étrangers. Une dette détenue à l'étranger n'est pas en soi plus risquée, mais ses intérêts sortent du pays.
+
+### Investisseurs étrangers (non-résidents)
+
+**Court :** les prêteurs situés hors du pays : banques, assureurs, fonds, banques centrales étrangères.
+
+**Long :** en France, ils détiennent environ la moitié de la dette publique. La part est élevée car les titres de l'État français sont très demandés comme placement sûr en euros.
+
+### Taux d'emprunt à 10 ans
+
+**Court :** le taux d'intérêt auquel l'État emprunte aujourd'hui sur les marchés pour 10 ans.
+
+**Long :** c'est le taux des nouveaux emprunts. Le taux moyen payé sur l'ensemble de la dette ne le suit que lentement, au rythme du remplacement des anciens emprunts par de nouveaux.
+
+### Banque centrale
+
+**Court :** l'institution qui émet la monnaie et fixe les taux directeurs ; en France, la Banque de France, membre de l'Eurosystème.
+
+**Long :** de 2015 à 2022, l'Eurosystème a acheté massivement des titres publics pour soutenir l'économie. La Banque de France en détient ainsi une part importante, qu'elle réduit depuis 2023.
+

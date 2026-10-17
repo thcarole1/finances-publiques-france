@@ -1,0 +1,89 @@
+/// F09b — Dette consolidée par instrument, en fin d'année. Semi-additive.
+table Fait_Dette_Instrument
+	lineageTag: 14677c8f-677d-4597-ad99-1b3716037820
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: 7d574180-829b-412a-bd0f-a6ea97e3b7bd
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 93dba9bc-90d9-4927-bd5b-a3975288008d
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column instrument_code
+		dataType: string
+		isHidden
+		lineageTag: b4d1d2ad-3733-4bb6-9aaa-703e783a1a1d
+		summarizeBy: none
+		sourceColumn: instrument_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur_meur
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: 2104e6c3-ea8f-429a-b874-fbab646e8f80
+		summarizeBy: sum
+		sourceColumn: valeur_meur
+
+		annotation SummarizationSetBy = User
+
+	column valeur_mnac
+		dataType: double
+		isHidden
+		formatString: #,0.0
+		lineageTag: d82239ca-f5f1-4dee-ad45-123ef6d07660
+		summarizeBy: sum
+		sourceColumn: valeur_mnac
+
+		annotation SummarizationSetBy = User
+
+	column 'Statut de la valeur (dette par instrument)'
+		dataType: string
+		lineageTag: ec6dd62c-cfd8-48cb-8441-09bd3bceff23
+		summarizeBy: none
+		sourceColumn: statut_valeur
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 6fb0d65b-0c12-4141-906f-262e8279eb2c
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	column millesime_id
+		dataType: string
+		isHidden
+		lineageTag: 1c4290a1-6acc-45de-85bd-50a94f5600d6
+		summarizeBy: none
+		sourceColumn: millesime_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Dette_Instrument = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_dette_instrument")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

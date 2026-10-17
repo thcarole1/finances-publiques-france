@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "8a308900ed6b6c1a3ca3",
+  "displayName": "6. La dette",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "d06392033e8a3defaba9",
+      "target": "167175d242da2e1e9c62",
+      "type": "NoFilter"
+    },
+    {
+      "source": "d06392033e8a3defaba9",
+      "target": "cb1d84544f559b0104e7",
+      "type": "NoFilter"
+    }
+  ]
+}

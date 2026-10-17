@@ -1,0 +1,77 @@
+/// Sous quelle forme les administrations empruntent : obligations, titres de court terme, prêts, dépôts.
+table Dim_Instrument_Dette
+	lineageTag: aa049dc2-6625-4d8f-afca-ceb3caa211c3
+
+	column 'Code instrument'
+		dataType: string
+		isHidden
+		lineageTag: 16038348-fd46-4375-9fd3-d10d2f112523
+		summarizeBy: none
+		sourceColumn: instrument_code
+
+		annotation SummarizationSetBy = User
+
+	column Instrument
+		dataType: string
+		lineageTag: 569b0505-83b0-4b95-9399-6832a1f8abc6
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Instrument (court)'
+		dataType: string
+		lineageTag: cc93a4fb-acbc-444d-8c7a-ea47c42c2154
+		summarizeBy: none
+		sourceColumn: libelle_court
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Famille d''instrument'
+		dataType: string
+		lineageTag: 81a18920-0750-42d1-a329-5585bb09f608
+		summarizeBy: none
+		sourceColumn: famille
+
+		annotation SummarizationSetBy = User
+
+	/// Court terme : un an ou moins à l'émission ; long terme : plus d'un an
+	column 'Durée à l''origine'
+		dataType: string
+		lineageTag: c3a93b5c-42d5-48fe-8ad4-4b902c5a680d
+		summarizeBy: none
+		sourceColumn: duree_origine
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition de l''instrument'
+		dataType: string
+		lineageTag: cff2dece-893f-4804-825c-91e6f82b33a6
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d7f8d0cc-9635-4590-a8e2-f4d8b38e80b2
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Instrument_Dette = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_instrument_dette")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

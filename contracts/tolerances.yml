@@ -12,6 +12,7 @@ tolerances:
   QC_B07_echeancier_aft:          {relative: 0.0001}
   QC_B09_pont_payeur:             {absolue: 0.001}
   QC_B10_identite_solde:          {relative: 0.0005, absolue_meur: 1}
+  QC_B13_coherence_dette:         {relative: 0.001, absolue_meur: 1}
   QC_B12_unites:                  {depenses_pct_pib_min: 20, depenses_pct_pib_max: 75}
   QC_A02_rupture:                 {ecarts_types: 4}
   QC_A03_revision:                {points_pib: 0.3}
