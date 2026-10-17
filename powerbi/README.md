@@ -158,11 +158,11 @@ garantie valide (lot 1b).
 
 ## Diagramme de Sankey « où va l'argent ? » (lot 2b)
 
-Power BI n'a pas de Sankey natif : on utilise le visuel gratuit **Sankey Chart** publié par
-Microsoft sur AppSource.
+Power BI n'a pas de Sankey natif. Le visuel **Sankey** de Microsoft est fourni compilé dans le
+dépôt (`powerbi/visuels/`), car AppSource exige un compte professionnel ou scolaire.
 
-1. Volet **Visualisations** → **…** (Obtenir plus de visuels) → rechercher **Sankey** → choisir
-   **Sankey Chart** (éditeur : Microsoft Corporation) → **Ajouter**.
+1. Volet **Visualisations** → **…** → **Importer un visuel à partir d'un fichier** →
+   `powerbi/visuels/sankey-3.5.0.0.pbiviz` (voir `powerbi/visuels/README.md`).
 2. Dans le visuel :
    - **Source** : `Pres_Flux_Sankey` › **Source du flux** ;
    - **Destination** : `Pres_Flux_Sankey` › **Destination du flux** ;
