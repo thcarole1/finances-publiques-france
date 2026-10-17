@@ -14,8 +14,8 @@ table CG_Unite
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE (), 1000 )
 				)
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0.0 ""Md€""" )
 			ordinal: 1
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0.0 ""Md€""" )
 
 		calculationItem '% du PIB' =
 				IF (
@@ -23,8 +23,8 @@ table CG_Unite
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE (), [PIB (M€)] )
 				)
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "0.0 %" )
 			ordinal: 2
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "0.0 %" )
 
 		calculationItem '€ par habitant' =
 				IF (
@@ -32,8 +32,8 @@ table CG_Unite
 				    SELECTEDMEASURE (),
 				    DIVIDE ( SELECTEDMEASURE () * 1000000, [Population] )
 				)
-			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0 ""€""" )
 			ordinal: 3
+			formatStringDefinition = IF ( ISSELECTEDMEASURE ( [Taux de prélèvements obligatoires], [Part de la dépense (%)], [Pour 1 000 € de dépense publique], [Croissance du PIB en volume (%)], [Population], [Solde public (% PIB)] ), SELECTEDMEASUREFORMATSTRING (), "#,0 ""€""" )
 
 	column 'Unité'
 		dataType: string
