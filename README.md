@@ -39,3 +39,8 @@ Commencer par [`docs/README.md`](docs/README.md).
 
 Les données proviennent de producteurs publics (INSEE, Eurostat, OCDE, AFT, DGFiP, OFGL…),
 réutilisées conformément à leurs licences. Voir [`docs/03-sources-et-licences.md`](docs/03-sources-et-licences.md).
+
+## Licence
+
+Le **code** est publié sous licence [MIT](LICENSE). Les **données** restent soumises aux licences
+de leurs producteurs respectifs (voir ci-dessus).
