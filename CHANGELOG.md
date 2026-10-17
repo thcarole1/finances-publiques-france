@@ -2,6 +2,14 @@
 
 Format : une section par version ; une version mineure par lot livré (docs/10-conventions.md).
 
+## [0.4.0] — lot 2a : transferts entre administrations
+
+### Ajouté
+- `Fait_Transferts_APU` (qui finance qui) et `Dim_Sous_Secteur_Receveur`, à partir d'Eurostat.
+- Contrôle QC-A05 : transferts cohérents avec les éliminations de la consolidation.
+- Power BI : 2 tables, 7 relations, mesure « Transferts entre administrations (M€) ».
+- Note de reprise `docs/REPRISE.md` pour les sessions suivantes.
+
 ## [0.3.0] — lot 1b : qui paie ?
 
 ### Ajouté

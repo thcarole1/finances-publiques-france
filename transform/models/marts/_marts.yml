@@ -728,3 +728,105 @@ models:
     data_type: varchar
   - name: ordre_tri
     data_type: integer
+- name: fait_transferts_apu
+  description: F06 — Transferts entre sous-secteurs des administrations (qui finance qui).
+  config:
+    contract:
+      enforced: true
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - pays_code
+        - date_id
+        - sous_secteur_versant_code
+        - sous_secteur_receveur_code
+        - transaction_code
+  columns:
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: sous_secteur_versant_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur')
+          field: sous_secteur_code
+  - name: sous_secteur_receveur_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_sous_secteur_receveur')
+          field: sous_secteur_code
+  - name: transaction_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_transaction')
+          field: transaction_code
+  - name: valeur_meur
+    data_type: double
+  - name: valeur_mnac
+    data_type: double
+  - name: statut_valeur
+    data_type: varchar
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  - name: millesime_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_millesime')
+          field: millesime_id
+- name: dim_sous_secteur_receveur
+  description: Rôle « receveur » de Dim_Sous_Secteur.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: sous_secteur_code
+    data_type: varchar
+  - name: libelle
+    data_type: varchar
+  - name: libelle_court
+    data_type: varchar
+  - name: niveau
+    data_type: integer
+  - name: parent_code
+    data_type: varchar
+  - name: est_elimination
+    data_type: boolean
+  - name: ordre_tri
+    data_type: integer
+  - name: definition_courte
+    data_type: varchar
