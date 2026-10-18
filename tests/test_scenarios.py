@@ -54,3 +54,16 @@ def test_ecart_et_valeur_sur_la_meme_annee_refuses(tmp_path):
 def test_identifiant_sans_prefixe_refuse(tmp_path):
     contenu = BASE.replace("PERSO_TEST", "TEST")
     assert valider_dossier(_dossier(tmp_path, contenu))
+
+
+def test_fichier_sans_extension_signale(tmp_path):
+    d = _dossier(tmp_path)
+    (d / "mon-scenario").write_text(BASE, encoding="utf-8")
+    erreurs = valider_dossier(d)
+    assert any("extension « .yml » manquante" in e for e in erreurs)
+
+
+def test_libelle_en_double_signale(tmp_path):
+    d = _dossier(tmp_path, BASE)
+    (d / "t.yml").write_text(BASE.replace("PERSO_TEST", "PERSO_AUTRE"), encoding="utf-8")
+    assert any("libellé « Test » déjà utilisé" in e for e in valider_dossier(d))

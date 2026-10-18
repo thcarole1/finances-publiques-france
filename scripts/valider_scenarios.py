@@ -21,6 +21,19 @@ def valider_dossier(dossier: Path) -> list[str]:
     validateur = Draft202012Validator(schema)
     erreurs: list[str] = []
     identifiants: dict[str, Path] = {}
+    libelles: dict[str, Path] = {}
+
+    # Un fichier sans l'extension .yml serait ignoré sans bruit : on le signale.
+    for fichier in sorted(dossier.iterdir()):
+        if (
+            fichier.is_file()
+            and fichier.name not in ("README.md", "_schema.json")
+            and fichier.suffix != ".yml"
+        ):
+            erreurs.append(
+                f"{fichier.name} : extension « .yml » manquante (le fichier serait ignoré) ; "
+                f"renommer en {fichier.stem}.yml"
+            )
 
     for fichier in sorted(dossier.glob("*.yml")):
         try:
@@ -43,6 +56,14 @@ def valider_dossier(dossier: Path) -> list[str]:
             )
         elif ident:
             identifiants[ident] = fichier
+        libelle = contenu.get("libelle")
+        if libelle in libelles:
+            erreurs.append(
+                f"{fichier.name} : libellé « {libelle} » déjà utilisé par {libelles[libelle].name} "
+                "(chaque scénario doit avoir un libellé distinct)"
+            )
+        elif libelle:
+            libelles[libelle] = fichier
 
         horizon = contenu.get("horizon")
         for variable, modes in (contenu.get("hypotheses") or {}).items():

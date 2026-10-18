@@ -5,7 +5,9 @@ Git est l'historique de tes scénarios.
 
 - Format et règles : `docs/08-scenarios-projections.md` (§ 4).
 - Schéma de validation : `_schema.json`, vérifié en CI par `scripts/valider_scenarios.py`.
-- Point de départ : dupliquer `exemple-choc-de-taux.yml`.
+- Point de départ : dupliquer `exemple-effort-progressif.yml`. Trois règles, vérifiées en CI :
+  le nom du fichier se termine par **`.yml`**, l'identifiant commence par **`PERSO_`**, et le
+  libellé est différent de celui des autres scénarios.
 
 Scénarios de base disponibles (`base`) :
 
