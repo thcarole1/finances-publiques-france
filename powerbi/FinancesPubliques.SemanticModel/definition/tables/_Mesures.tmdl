@@ -823,6 +823,237 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: 8cda1e9d-ddcf-45a3-a2c7-0fdd0234b057
 
+	/// Dernière année de dette publiée pour le pays : point de départ de la projection.
+	measure 'Année de départ' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    INT ( CALCULATE ( MAX ( Fait_Dette[date_id] ), REMOVEFILTERS ( Dim_Date ), REMOVEFILTERS ( Dim_Sous_Secteur ) ) / 10000 )
+			)
+		formatString: "0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 5602e6c0-64ed-47f4-9873-40370bda44fd
+
+	/// Dette en % de la richesse produite l'année de départ.
+	measure 'Dette de départ (% PIB)' =
+			VAR _t0 = [Année de départ]
+			RETURN CALCULATE ( [Dette publique (% PIB)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _t0 )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: c3b8d498-974a-43f7-a6f6-08d17f2e8502
+
+	/// Taux moyen payé sur la dette l'année de départ.
+	measure 'Taux moyen observé' =
+			VAR _t0 = [Année de départ]
+			RETURN CALCULATE ( [Taux moyen payé sur la dette], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _t0 )
+		formatString: "0.00 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 2fee9ef4-8b22-4322-a2c1-f3fe151504a7
+
+	/// Solde hors intérêts (solde primaire) l'année de départ ; négatif = déficit.
+	measure 'Solde hors intérêts observé (% PIB)' =
+			VAR _t0 = [Année de départ]
+			RETURN CALCULATE ( DIVIDE ( [Solde primaire (M€)], [PIB (M€)] ), REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _t0 )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 6d2f84bc-3c9b-412d-bb18-2c789b53cb35
+
+	/// Croissance hors inflation retenue (1 % par défaut).
+	measure 'Croissance réelle retenue' = SELECTEDVALUE ( 'Param Croissance'[Croissance réelle (% par an)], 1 ) / 100
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 71f348a1-2fec-4b99-9b00-2b9ab67ef4ff
+
+	/// Inflation retenue (1,8 % par défaut).
+	measure 'Inflation retenue' = SELECTEDVALUE ( 'Param Inflation'[Inflation (% par an)], 1.8 ) / 100
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 977448b0-080a-44d6-8873-16d8dc0ca93e
+
+	/// Croissance de la richesse produite, inflation comprise.
+	measure 'Croissance en valeur retenue' = ( 1 + [Croissance réelle retenue] ) * ( 1 + [Inflation retenue] ) - 1
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 719c7c9c-e4de-4591-99c0-51eadb0f86af
+
+	/// Taux moyen payé sur la dette retenu : taux observé + écart choisi.
+	measure 'Taux retenu' = [Taux moyen observé] + SELECTEDVALUE ( 'Param Ecart Taux'[Écart de taux (points)], 0 ) / 100
+		formatString: "0.00 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: cb3be95e-56e1-493c-acb1-8f5bcd4ec034
+
+	/// Solde hors intérêts retenu : solde observé + effort choisi.
+	measure 'Solde hors intérêts retenu (% PIB)' = [Solde hors intérêts observé (% PIB)] + SELECTEDVALUE ( 'Param Effort'[Effort sur le solde hors intérêts (points de PIB)], 0 ) / 100
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 7b5f019f-9800-4c3f-9ebe-955aa34a9f58
+
+	/// Dette projetée chaque année : d(t) = d(t−1) × (1 + taux) / (1 + croissance en valeur) − solde hors intérêts.
+	measure 'Dette projetée (% PIB)' =
+			VAR _t0 = [Année de départ]
+			VAR _n = SELECTEDVALUE ( Dim_Date[Année] ) - _t0
+			VAR _d0 = [Dette de départ (% PIB)]
+			VAR _f = DIVIDE ( 1 + [Taux retenu], 1 + [Croissance en valeur retenue] )
+			VAR _sp = [Solde hors intérêts retenu (% PIB)]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _d0 ) && _n >= 0 && _n <= 10,
+			        IF (
+			            ABS ( _f - 1 ) < 0.000001,
+			            _d0 - _sp * _n,
+			            _d0 * POWER ( _f, _n ) - _sp * DIVIDE ( POWER ( _f, _n ) - 1, _f - 1 )
+			        )
+			    )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 0cab5ba1-68aa-4792-922a-38fa0a565083
+
+	/// Dette projetée dix ans après l'année de départ.
+	measure 'Dette dans 10 ans (% PIB)' =
+			VAR _t0 = [Année de départ]
+			RETURN CALCULATE ( [Dette projetée (% PIB)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _t0 + 10 )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 2a3cc627-7c66-4d51-a756-a74374bb3d5a
+
+	/// Dernière année de la projection.
+	measure 'Année d''arrivée' = [Année de départ] + 10
+		formatString: "0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 453c3c20-b24f-4f87-b99b-29af3bab87eb
+
+	/// Solde hors intérêts nécessaire pour que le ratio de dette reste constant : d × (taux − croissance) / (1 + croissance).
+	measure 'Solde hors intérêts qui stabilise la dette (% PIB)' =
+			VAR _g = [Croissance en valeur retenue]
+			RETURN DIVIDE ( [Dette de départ (% PIB)] * ( [Taux retenu] - _g ), 1 + _g )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: e619ae4b-3995-4d2c-aff0-51d42da98f7e
+
+	/// Charge d'intérêts projetée la dernière année, en % de la richesse produite.
+	measure 'Intérêts dans 10 ans (% PIB)' =
+			VAR _t0 = [Année de départ]
+			VAR _d9 = CALCULATE ( [Dette projetée (% PIB)], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _t0 + 9 )
+			RETURN DIVIDE ( [Taux retenu] * _d9, 1 + [Croissance en valeur retenue] )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 27e5b9bd-5a93-4ba7-83b6-2daf12d3728d
+
+	/// Recettes de TVA supplémentaires si tous les taux varient dans la même proportion, sans effet sur la consommation.
+	measure 'Effet TVA (M€)' = CALCULATE ( [Montant APU (M€)], Dim_Transaction[Code nature] = "D211_REC" ) * SELECTEDVALUE ( 'Param TVA'[Hausse des taux de TVA (%)], 0 ) / 100
+		formatString: "#,0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 0144a7f2-3dfd-493b-b576-1cc5312d2580
+
+	/// Effet sur le solde d'une variation des dépenses du domaine choisi (tous les domaines si aucun n'est choisi).
+	measure 'Effet dépenses du domaine (M€)' =
+			- CALCULATE ( [Dépenses par fonction (M€)], TREATAS ( VALUES ( 'Choix Domaine'[Domaine] ), Dim_COFOG[Fonction] ) )
+			    * SELECTEDVALUE ( 'Param Depense Domaine'[Variation des dépenses du domaine (%)], 0 ) / 100
+		formatString: "#,0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 270edfef-1484-41ba-8f18-a4fa2bd0f6ff
+
+	/// Effet sur le solde d'une variation de la rémunération des agents publics.
+	measure 'Effet salaires publics (M€)' = - CALCULATE ( [Montant APU (M€)], Dim_Transaction[Code nature] = "D1_PAY" ) * SELECTEDVALUE ( 'Param Salaires'[Variation des salaires publics (%)], 0 ) / 100
+		formatString: "#,0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 0a9ed4c3-c57c-40f5-96bd-ba7f15adb9e0
+
+	/// Effet sur le solde d'une variation des prestations sociales (en espèces et en nature).
+	measure 'Effet prestations (M€)' = - CALCULATE ( [Montant APU (M€)], Dim_Transaction[Code nature] IN { "D62_PAY", "D632_PAY" } ) * SELECTEDVALUE ( 'Param Prestations'[Variation des prestations sociales (%)], 0 ) / 100
+		formatString: "#,0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 83e3fe98-70bd-40e7-98a2-027fedda5438
+
+	/// Somme des effets des leviers (positif : le solde s'améliore). Les leviers peuvent se recouper.
+	measure 'Effet total sur le solde (M€)' = [Effet TVA (M€)] + [Effet dépenses du domaine (M€)] + [Effet salaires publics (M€)] + [Effet prestations (M€)]
+		formatString: "#,0"
+		displayFolder: 30 Laboratoire
+		lineageTag: 1f731055-1ce2-4d15-93f7-7075fb91b228
+
+	/// Effet TVA, en milliards d'euros.
+	measure 'Effet TVA (Md€)' = DIVIDE ( [Effet TVA (M€)], 1000 )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"";0 ""Md€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: e59236e4-abc4-47cf-9b43-3630a2b4f6b9
+
+	/// Effet dépenses du domaine, en milliards d'euros.
+	measure 'Effet dépenses du domaine (Md€)' = DIVIDE ( [Effet dépenses du domaine (M€)], 1000 )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"";0 ""Md€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: 322f0b0d-0440-423a-8ffb-41154fbfd8aa
+
+	/// Effet salaires publics, en milliards d'euros.
+	measure 'Effet salaires publics (Md€)' = DIVIDE ( [Effet salaires publics (M€)], 1000 )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"";0 ""Md€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: c6890ea3-47bd-4176-8dd2-207ecd1445d1
+
+	/// Effet prestations, en milliards d'euros.
+	measure 'Effet prestations (Md€)' = DIVIDE ( [Effet prestations (M€)], 1000 )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"";0 ""Md€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: 791fbf0c-048f-4e25-9ad8-c43adf4ff547
+
+	/// Effet total sur le solde, en milliards d'euros.
+	measure 'Effet total sur le solde (Md€)' = DIVIDE ( [Effet total sur le solde (M€)], 1000 )
+		formatString: "+#,0 ""Md€"";-#,0 ""Md€"";0 ""Md€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: dcd09c90-1dcb-4181-8d8a-f22bffc92a0a
+
+	/// Effet total sur le solde, par habitant.
+	measure 'Effet total par habitant (€)' = DIVIDE ( [Effet total sur le solde (M€)] * 1000000, [Population] )
+		formatString: "+#,0 ""€"";-#,0 ""€"";0 ""€"""
+		displayFolder: 30 Laboratoire
+		lineageTag: b7d99b7f-728a-4cf7-841d-cd6cffe0521e
+
+	/// Solde public de l'année choisie après application des leviers.
+	measure 'Solde simulé (% PIB)' = DIVIDE ( [Solde public (M€)] + [Effet total sur le solde (M€)], [PIB (M€)] )
+		formatString: "0.0 %"
+		displayFolder: 30 Laboratoire
+		lineageTag: 141fec75-8af2-4ccd-9c2a-5da0c1220a16
+
+	/// Le résultat de la projection, en une phrase.
+	measure 'Phrase : projection' =
+			VAR _t0 = [Année de départ]
+			VAR _sp = [Solde hors intérêts retenu (% PIB)]
+			VAR _stab = [Solde hors intérêts qui stabilise la dette (% PIB)]
+			VAR _fin = [Dette dans 10 ans (% PIB)]
+			RETURN
+			    IF (
+			        ISBLANK ( _fin ),
+			        "Choisissez un pays pour lancer la projection.",
+			        "Avec une croissance de " & FORMAT ( [Croissance réelle retenue], "0.0 %", "fr-FR" )
+			            & " par an, une inflation de " & FORMAT ( [Inflation retenue], "0.0 %", "fr-FR" )
+			            & ", un taux moyen de " & FORMAT ( [Taux retenu], "0.0 %", "fr-FR" )
+			            & " et un " & IF ( _sp < 0, "déficit", "excédent" ) & " hors intérêts de "
+			            & FORMAT ( ABS ( _sp ), "0.0 %", "fr-FR" ) & " de la richesse produite, la dette passerait de "
+			            & FORMAT ( [Dette de départ (% PIB)], "0 %", "fr-FR" ) & " en " & _t0 & " à "
+			            & FORMAT ( _fin, "0 %", "fr-FR" ) & " en " & ( _t0 + 10 ) & ". Pour la stabiliser, il faudrait "
+			            & IF ( _stab < 0, "un déficit hors intérêts d'au plus ", "un excédent hors intérêts de " )
+			            & FORMAT ( ABS ( _stab ), "0.0 %", "fr-FR" ) & "."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: d199e7b2-84e8-42f5-8448-724ec21ffbf0
+
+	/// Le résultat de la simulation, en une phrase.
+	measure 'Phrase : simulation' =
+			VAR _annee = SELECTEDVALUE ( Dim_Date[Année] )
+			VAR _avant = [Solde public (% PIB)]
+			VAR _apres = [Solde simulé (% PIB)]
+			VAR _effet = [Effet total sur le solde (Md€)]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( _avant ) || ISBLANK ( _annee ), "Choisissez un pays et une année pour lancer la simulation.",
+			        _effet = 0, "Déplacez un curseur pour voir l'effet d'une mesure sur le solde de " & _annee & ".",
+			        "Avec ces mesures, le solde public de " & _annee & " passerait de "
+			            & FORMAT ( _avant, "0.0 %", "fr-FR" ) & " à " & FORMAT ( _apres, "0.0 %", "fr-FR" )
+			            & " de la richesse produite (" & FORMAT ( _effet, "+#,0;-#,0", "fr-FR" ) & " milliards d'euros, soit "
+			            & FORMAT ( [Effet total par habitant (€)], "+#,0;-#,0", "fr-FR" ) & " € par habitant)."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: f8763dcc-780d-488e-835b-7f179fcd9db5
+
 	column Masquer
 		dataType: int64
 		isHidden

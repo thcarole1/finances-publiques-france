@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'France : dette de l''État à un an ou moins'"
+                  "Value": "'État : part à un an ou moins'"
                 }
               }
             },

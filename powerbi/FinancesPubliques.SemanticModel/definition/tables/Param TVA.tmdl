@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Variation proportionnelle de tous les taux de TVA (20 % → 21 % = +5 %).
+table 'Param TVA'
+	lineageTag: 0b6a0af5-4f45-43cc-a690-f6f1ab359545
+
+	column 'Hausse des taux de TVA (%)'
+		dataType: double
+		formatString: +0;-0;0
+		lineageTag: b57e6b94-6570-4728-935b-caf22eb97b5c
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param TVA' = calculated
+		mode: import
+		source = GENERATESERIES(-20, 20, 1)
+
+	annotation PBI_Id = 9a60c4503c934442980c5b450f5a17a1

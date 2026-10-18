@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Amélioration du solde hors intérêts par rapport à l'année de départ (0 = solde observé).
+table 'Param Effort'
+	lineageTag: 5b88b0f4-cd04-4823-ad3f-3fb9f9fb73a7
+
+	column 'Effort sur le solde hors intérêts (points de PIB)'
+		dataType: double
+		formatString: +0.0;-0.0;0.0
+		lineageTag: 22bf5347-cbc9-46a4-b1d7-6dcde0d4f630
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Effort' = calculated
+		mode: import
+		source = GENERATESERIES(-3, 6, 0.1)
+
+	annotation PBI_Id = ecf0d507cf7f40108d728039f52a59cd

@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Croissance de l'économie hors inflation, chaque année de la projection.
+table 'Param Croissance'
+	lineageTag: 82be2417-2e5d-4ca9-a9ce-1fc5588781b3
+
+	column 'Croissance réelle (% par an)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: bf44c4c8-63d0-471c-9775-4a9ef1c4e9f8
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Croissance' = calculated
+		mode: import
+		source = GENERATESERIES(-2, 4, 0.1)
+
+	annotation PBI_Id = 9c15ab790e1c4365b605cf14ecd6cbf7

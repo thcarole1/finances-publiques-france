@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Écart au taux moyen payé l'année de départ (0 = taux observé).
+table 'Param Ecart Taux'
+	lineageTag: e251da29-bed4-49c4-877d-989fc04c46b9
+
+	column 'Écart de taux (points)'
+		dataType: double
+		formatString: +0.0;-0.0;0.0
+		lineageTag: 0f7f6ef7-bb6f-4dda-a613-daf1c784d70d
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Ecart Taux' = calculated
+		mode: import
+		source = GENERATESERIES(-3, 4, 0.1)
+
+	annotation PBI_Id = 00ea7dca692d4cbe93c640c9891f53ed

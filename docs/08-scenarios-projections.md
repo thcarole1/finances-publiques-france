@@ -9,6 +9,15 @@
 | **Personnel** | « Choc de taux », « Austérité 2027 », « Relance » | `scenarios/*.yml` → `Fait_Hypotheses` | Projection Python |
 | **Curseurs** | Réglages en direct dans le labo | Paramètres What-if (non sauvegardés) | DAX en direct |
 
+> **Mise en œuvre (lot 4a).** Pages « 11. Projeter la dette » et « 12. Et si… ? ». Paramètres
+> What-if : croissance réelle, inflation, **écart** au taux moyen payé observé et **effort** sur le
+> solde hors intérêts observé (0 = situation de la dernière année connue), puis variations des
+> dépenses d'un domaine (table déconnectée `Choix Domaine`), des salaires publics (D1), des
+> prestations sociales (D62 + D632) et des taux de TVA. La TVA est simulée comme une variation
+> **proportionnelle** de tous les taux (pas de taux normal par pays dans le modèle) ; l'élasticité
+> de l'assiette est reportée. Lots suivants : 4b (scénarios sauvegardés, projection Python), 4c
+> (prévisions officielles et erreurs).
+
 ## 2. Simulations statiques (« et si… ? »)
 
 Sans effet en retour sur l'économie : on modifie une recette ou une dépense, on lit l'effet

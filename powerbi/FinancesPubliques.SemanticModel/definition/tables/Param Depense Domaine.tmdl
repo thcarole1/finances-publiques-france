@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Variation des dépenses du domaine choisi.
+table 'Param Depense Domaine'
+	lineageTag: 978c9d21-94c2-47a1-9dfe-0cd40b7bdb8b
+
+	column 'Variation des dépenses du domaine (%)'
+		dataType: double
+		formatString: +0;-0;0
+		lineageTag: 8776a464-c9a4-4282-b708-98c42adf97f1
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Depense Domaine' = calculated
+		mode: import
+		source = GENERATESERIES(-20, 20, 1)
+
+	annotation PBI_Id = 494e411c7d6043768ae9987c00ba8b9d

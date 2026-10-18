@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'France : dette de l''État indexée sur l''inflation'"
+                  "Value": "'État : dette indexée sur les prix'"
                 }
               }
             },

@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Hausse des prix chaque année de la projection.
+table 'Param Inflation'
+	lineageTag: 1dc4cfc2-1510-488b-b617-8a4c4a8fd393
+
+	column 'Inflation (% par an)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: c4f8b807-c1d8-4351-9229-0e9c241f9797
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Inflation' = calculated
+		mode: import
+		source = GENERATESERIES(0, 6, 0.1)
+
+	annotation PBI_Id = 1d6c806900054508b0f4738a22fa7fbd
