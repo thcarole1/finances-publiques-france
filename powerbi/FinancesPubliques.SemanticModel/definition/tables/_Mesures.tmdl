@@ -1109,20 +1109,21 @@ table _Mesures
 	/// La dernière prévision publiée, en une phrase.
 	measure 'Phrase : dernière prévision' =
 			VAR _derniere = CALCULATE ( MAX ( Dim_Edition_Prevision[ordre_tri] ), REMOVEFILTERS ( Dim_Date ), Dim_Edition_Prevision[Est une prévision] = TRUE (), Fait_Previsions )
-			VAR _edition = CALCULATE ( MAX ( Dim_Edition_Prevision[Édition] ), REMOVEFILTERS ( Dim_Edition_Prevision[Édition] ), Dim_Edition_Prevision[ordre_tri] = _derniere )
+			VAR _edition = CALCULATE ( FIRSTNONBLANK ( Dim_Edition_Prevision[Édition], 1 ), REMOVEFILTERS ( Dim_Edition_Prevision ), Dim_Edition_Prevision[ordre_tri] = _derniere )
 			VAR _an = INT ( _derniere / 100 )
-			VAR _valeurs =
-			    ADDCOLUMNS (
-			        { _an, _an + 1, _an + 2 },
-			        "@v", CALCULATE ( [Valeur prévue], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = [Value], Dim_Edition_Prevision[ordre_tri] = _derniere )
-			    )
+			VAR _v0 = CALCULATE ( [Valeur prévue], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an, Dim_Edition_Prevision[ordre_tri] = _derniere )
+			VAR _v1 = CALCULATE ( [Valeur prévue], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an + 1, Dim_Edition_Prevision[ordre_tri] = _derniere )
+			VAR _v2 = CALCULATE ( [Valeur prévue], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _an + 2, Dim_Edition_Prevision[ordre_tri] = _derniere )
+			VAR _t0 = IF ( NOT ISBLANK ( _v0 ), FORMAT ( _v0, "0.0 %", "fr-FR" ) & " en " & _an )
+			VAR _t1 = IF ( NOT ISBLANK ( _v1 ), FORMAT ( _v1, "0.0 %", "fr-FR" ) & " en " & ( _an + 1 ) )
+			VAR _t2 = IF ( NOT ISBLANK ( _v2 ), FORMAT ( _v2, "0.0 %", "fr-FR" ) & " en " & ( _an + 2 ) )
+			VAR _liste = _t0 & IF ( _t0 <> "" && _t1 <> "", ", " ) & _t1 & IF ( ( _t0 <> "" || _t1 <> "" ) && _t2 <> "", ", " ) & _t2
 			RETURN
 			    IF (
-			        ISBLANK ( _derniere ) || NOT HASONEVALUE ( Dim_Variable_Prevision[Code variable] ),
+			        ISBLANK ( _derniere ) || NOT HASONEVALUE ( Dim_Variable_Prevision[Code variable] ) || _liste = "",
 			        "Choisissez un pays et un indicateur.",
 			        "Dernière prévision publiée (" & _edition & ") pour « " & SELECTEDVALUE ( Dim_Variable_Prevision[Indicateur prévu] ) & " » : "
-			            & CONCATENATEX ( FILTER ( _valeurs, NOT ISBLANK ( [@v] ) ), FORMAT ( [@v], "0.0 %", "fr-FR" ) & " en " & [Value], ", ", [Value], ASC )
-			            & "."
+			            & _liste & "."
 			    )
 		displayFolder: 20 Pédagogie
 		lineageTag: f038b4ec-c1e3-4ee0-bca5-caddc2112d99

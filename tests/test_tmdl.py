@@ -50,3 +50,32 @@ def test_regle_de_citation():
     assert _nom_valide("'Est fin d''année'")
     assert not _nom_valide("'Est fin d'année'")
     assert not _nom_valide("Année")
+
+
+def _types_colonnes() -> dict[tuple[str, str], str]:
+    """(table, colonne) → type de données, d'après les fichiers TMDL."""
+    types = {}
+    for f in FICHIERS:
+        table, colonne = None, None
+        for ligne in f.read_text(encoding="utf-8").splitlines():
+            if m := re.match(r"^table\s+(.+)$", ligne):
+                table = m.group(1).strip().strip("'").replace("''", "'")
+            elif m := re.match(r"^\tcolumn\s+(.+)$", ligne):
+                colonne = m.group(1).strip().strip("'").replace("''", "'")
+            elif (m := re.match(r"^\t\tdataType:\s*(\w+)", ligne)) and table and colonne:
+                types[(table, colonne)] = m.group(1)
+    return types
+
+
+def test_pas_de_max_ou_min_sur_une_colonne_de_texte():
+    """MAX et MIN n'acceptent que des nombres ou des dates : sur du texte, le visuel est en erreur
+    dans Desktop (« ne peut pas fonctionner avec des valeurs de type String »)."""
+    types = _types_colonnes()
+    fautes = []
+    for f in FICHIERS:
+        for m in re.finditer(
+            r"\b(MAX|MIN)\s*\(\s*'?([^'\[]+?)'?\[([^\]]+)\]\s*\)", f.read_text(encoding="utf-8")
+        ):
+            if types.get((m.group(2).strip(), m.group(3))) == "string":
+                fautes.append(f"{f.name} : {m.group(0)}")
+    assert not fautes, "MAX/MIN sur une colonne de texte :\n" + "\n".join(fautes)
