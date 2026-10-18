@@ -1146,6 +1146,85 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: cd5fb73f-ffdc-468a-83f3-2bb43a762193
 
+	/// Dette en fin d'année selon le scénario (observée pour « Observé »).
+	measure 'Dette selon le scénario (% PIB)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), DIVIDE ( AVERAGE ( Fait_Projections[dette_pib] ), 100 ) )
+		formatString: "0.0 %"
+		displayFolder: 32 Scénarios
+		lineageTag: 20949ea3-bdbd-47dd-83c2-c9eb588d6e10
+
+	/// Solde public selon le scénario.
+	measure 'Solde selon le scénario (% PIB)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), DIVIDE ( AVERAGE ( Fait_Projections[solde_pib] ), 100 ) )
+		formatString: "0.0 %"
+		displayFolder: 32 Scénarios
+		lineageTag: f0ad203d-5d1f-49de-822b-3b9f26b2a85d
+
+	/// Charge d'intérêts selon le scénario.
+	measure 'Intérêts selon le scénario (% PIB)' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), DIVIDE ( AVERAGE ( Fait_Projections[interets_pib] ), 100 ) )
+		formatString: "0.0 %"
+		displayFolder: 32 Scénarios
+		lineageTag: 521713c2-4330-4c5e-812e-129ef93d72ad
+
+	/// Taux moyen payé sur la dette selon le scénario.
+	measure 'Taux moyen payé selon le scénario' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), DIVIDE ( AVERAGE ( Fait_Projections[taux_apparent] ), 100 ) )
+		formatString: "0.00 %"
+		displayFolder: 32 Scénarios
+		lineageTag: 02884acf-5ba0-48c8-9d35-b32cda090333
+
+	/// Dernière année projetée.
+	measure 'Année de fin du scénario' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ), INT ( MAX ( Fait_Projections[date_id] ) / 10000 ) )
+		formatString: "0"
+		displayFolder: 32 Scénarios
+		lineageTag: 198e355e-8c6a-4412-89f5-5f5d7d122706
+
+	/// Dette la dernière année du scénario.
+	measure 'Dette en fin de scénario (% PIB)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Projections[date_id] )
+			    RETURN CALCULATE ( DIVIDE ( AVERAGE ( Fait_Projections[dette_pib] ), 100 ), Fait_Projections[date_id] = _d )
+			)
+		formatString: "0.0 %"
+		displayFolder: 32 Scénarios
+		lineageTag: 31605737-1c3e-4caa-a6d6-a9e6b2ff7300
+
+	/// Charge d'intérêts la dernière année du scénario.
+	measure 'Intérêts en fin de scénario (% PIB)' =
+			IF (
+			    HASONEVALUE ( Dim_Pays[Code pays] ),
+			    VAR _d = MAX ( Fait_Projections[date_id] )
+			    RETURN CALCULATE ( DIVIDE ( AVERAGE ( Fait_Projections[interets_pib] ), 100 ), Fait_Projections[date_id] = _d )
+			)
+		formatString: "0.0 %"
+		displayFolder: 32 Scénarios
+		lineageTag: cf0c5a69-24b3-4b3d-b3eb-d85c8c52435b
+
+	/// Le scénario choisi comparé au scénario tendanciel, en une phrase.
+	measure 'Phrase : scénarios' =
+			VAR _candidats =
+			    FILTER (
+			        VALUES ( Dim_Scenario[Code scénario] ),
+			        NOT ( Dim_Scenario[Code scénario] IN { "OBSERVE", "TENDANCIEL" } ) && NOT ISBLANK ( [Dette en fin de scénario (% PIB)] )
+			    )
+			VAR _code = CONCATENATEX ( TOPN ( 1, _candidats, CALCULATE ( MAX ( Dim_Scenario[ordre_tri] ) ), DESC ), Dim_Scenario[Code scénario] )
+			VAR _libelle = CALCULATE ( FIRSTNONBLANK ( Dim_Scenario[Scénario], 1 ), REMOVEFILTERS ( Dim_Scenario ), Dim_Scenario[Code scénario] = _code )
+			VAR _fin = CALCULATE ( [Année de fin du scénario], REMOVEFILTERS ( Dim_Scenario ), Dim_Scenario[Code scénario] = _code )
+			VAR _dette = CALCULATE ( [Dette en fin de scénario (% PIB)], REMOVEFILTERS ( Dim_Scenario ), Dim_Scenario[Code scénario] = _code )
+			VAR _tend = CALCULATE ( DIVIDE ( AVERAGE ( Fait_Projections[dette_pib] ), 100 ), REMOVEFILTERS ( Dim_Scenario ), Dim_Scenario[Code scénario] = "TENDANCIEL", REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = _fin )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        NOT HASONEVALUE ( Dim_Pays[Code pays] ), "Choisissez un pays.",
+			        _code = "", "Cochez un scénario (gouvernement ou personnel) pour le comparer à la situation actuelle prolongée.",
+			        "En " & _fin & ", la dette atteindrait " & FORMAT ( _dette, "0 %", "fr-FR" ) & " de la richesse produite dans le scénario « "
+			            & _libelle & " »"
+			            & IF ( NOT ISBLANK ( _tend ),
+			                ", contre " & FORMAT ( _tend, "0 %", "fr-FR" ) & " si la situation actuelle se prolonge (" & FORMAT ( ABS ( _dette - _tend ) * 100, "0", "fr-FR" )
+			                    & " points " & IF ( _dette <= _tend, "de moins", "de plus" ) & ").",
+			                "." )
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: 70a23ed9-ac4a-4430-8a40-8059ff2424ff
+
 	column Masquer
 		dataType: int64
 		isHidden

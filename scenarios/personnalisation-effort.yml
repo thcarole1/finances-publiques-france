@@ -1,0 +1,24 @@
+# Scénario proposé par thcarole1 : un effort budgétaire qui commence dès 2026.
+# Le solde hors intérêts s'améliore de 0,5 point de PIB en 2026, 0,75 en 2027, 1 en 2028,
+# 1,5 en 2029, puis 2 points à partir de 2030, par rapport à la situation de 2025 prolongée.
+id: PERSO_EFFORT_DES_2026
+libelle: "Mon scénario : effort dès 2026"
+auteur: thcarole1
+base: TENDANCIEL
+description: >
+  Amélioration du solde hors intérêts de 0,5 point de PIB dès 2026, portée à 2 points en 2030 puis
+  maintenue, par rapport à la situation de 2025 prolongée ; croissance et taux inchangés.
+horizon: 2035
+hypotheses:
+  solde_primaire:
+    ecart:
+      2026: 0.5
+      2027: 0.75
+      2028: 1.0
+      2029: 1.5
+      2030: 2.0
+      2031: 2.0
+      2032: 2.0
+      2033: 2.0
+      2034: 2.0
+      2035: 2.0

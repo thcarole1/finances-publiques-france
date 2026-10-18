@@ -6,7 +6,7 @@
 id: PERSO_EXEMPLE_CHOC_TAUX
 libelle: "Exemple : choc de taux en 2027"
 auteur: thcarole1
-base: GOUV_PLF_2026
+base: GOUV_PLF_2027
 description: >
   Hausse de 150 points de base du taux à 10 ans en 2027 et 2028, croissance ralentie en 2027.
 horizon: 2036

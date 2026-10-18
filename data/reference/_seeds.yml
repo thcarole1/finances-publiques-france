@@ -226,3 +226,16 @@ seeds:
     columns:
       - name: variable_code
         data_tests: [unique, not_null]
+
+  - name: ref_previsions_gouvernement
+    description: >
+      Trajectoires du gouvernement (France), saisies depuis les documents officiels : une ligne
+      par édition × variable × année, avec le document et son adresse. Pour en ajouter : une
+      ligne par chiffre, document cité (docs/08, § 5).
+    config:
+      column_types: {edition: varchar, variable_code: varchar, annee: integer, valeur: double, date_publication: date}
+    columns:
+      - name: variable_code
+        data_tests:
+          - relationships:
+              arguments: {to: ref('ref_variable_prevision'), field: variable_code}

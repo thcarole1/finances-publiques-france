@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "13cc8893a82b3eef1889",
+  "position": {
+    "x": 16,
+    "y": 470,
+    "z": 4000,
+    "height": 234,
+    "width": 300,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Comprendre",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#1F4E79",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Chaque scénario est un fichier du dossier « scenarios » du dépôt, recalculé à chaque mise à jour.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Les emprunts qui arrivent à échéance sont renouvelés au taux du marché : une hausse des taux ne pèse que progressivement sur le taux moyen payé.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EEF3F8'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

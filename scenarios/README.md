@@ -5,6 +5,16 @@ Git est l'historique de tes scénarios.
 
 - Format et règles : `docs/08-scenarios-projections.md` (§ 4).
 - Schéma de validation : `_schema.json`, vérifié en CI par `scripts/valider_scenarios.py`.
-- Point de départ : dupliquer `exemple-choc-de-taux.yml`.
+- Point de départ : dupliquer `exemple-effort-progressif.yml`. Trois règles, vérifiées en CI :
+  le nom du fichier se termine par **`.yml`**, l'identifiant commence par **`PERSO_`**, et le
+  libellé est différent de celui des autres scénarios.
 
-L'existence du scénario de base (`base`) dans `Dim_Scenario` sera vérifiée à partir du lot 4.
+Scénarios de base disponibles (`base`) :
+
+- `TENDANCIEL` : croissance 1 %, inflation 1,8 %, taux à 10 ans et solde hors intérêts de la
+  dernière année connue, maintenus ;
+- `GOUV_PLF_2027` : dernière trajectoire du gouvernement (croissance et solde public annoncés pour
+  2026 et 2027), puis solde hors intérêts maintenu.
+
+Les projections sont recalculées à chaque construction (`transform/models/marts/fait_projections.py`,
+moteur `projection/`) et s'affichent sur la page « Mes scénarios » du rapport.

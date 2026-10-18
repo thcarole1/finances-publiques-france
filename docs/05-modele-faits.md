@@ -199,6 +199,11 @@ maturité. L'écart avec l'Allemagne (*spread*) est calculé en DAX.
 
 ### F14 — `Fait_Projections`
 
+> **Mise en œuvre (lot 4b).** Format large (une colonne par indicateur : dette, solde, solde hors
+> intérêts, intérêts, taux apparent, taux à 10 ans, croissance, montants) plutôt qu'une ligne par
+> indicateur, plus simple pour les mesures. Scénario `OBSERVE` : années observées depuis 2000.
+> Dimension `Dim_Scenario`.
+
 - **Clés** : `scenario_id`, `pays_code`, `date_id`, `indicateur_code` (vers `Dim_Indicateur`).
 - **Indicateurs** : dette (M€ et % du PIB), charge d'intérêts, taux apparent, solde, solde
   primaire, effet boule de neige, besoin de financement, montant refinancé.

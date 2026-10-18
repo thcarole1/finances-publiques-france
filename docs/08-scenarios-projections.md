@@ -15,8 +15,17 @@
 > dépenses d'un domaine (table déconnectée `Choix Domaine`), des salaires publics (D1), des
 > prestations sociales (D62 + D632) et des taux de TVA. La TVA est simulée comme une variation
 > **proportionnelle** de tous les taux (pas de taux normal par pays dans le modèle) ; l'élasticité
-> de l'assiette est reportée. Lots suivants : 4b (scénarios sauvegardés, projection Python), 4c
-> (prévisions officielles et erreurs).
+> de l'assiette est reportée.
+>
+> **Mise en œuvre (lot 4b).** Moteur `projection/moteur.py`, appelé par le modèle dbt
+> `fait_projections.py`. Faute d'échéancier titre par titre (AFT inaccessible), la dette de départ
+> est amortie uniformément sur sa durée de vie moyenne (8 ans par défaut, `emission.duree_vie_stock`) ;
+> les échéances et le besoin de financement sont empruntés au taux du scénario (part à court terme
+> au taux à 10 ans − 0,5 point, sauf `taux_court`). Scénarios de base : `TENDANCIEL` (tous pays) et
+> la dernière trajectoire du gouvernement (`GOUV_PLF_2027` : cibles de solde public et de
+> croissance publiées, puis solde hors intérêts maintenu). Contrôle croisé avec la formule DAX :
+> `tests/test_projection.py`. Les trajectoires du gouvernement sont saisies dans
+> `data/reference/ref_previsions_gouvernement.csv` (une ligne par chiffre, document cité).
 
 ## 2. Simulations statiques (« et si… ? »)
 

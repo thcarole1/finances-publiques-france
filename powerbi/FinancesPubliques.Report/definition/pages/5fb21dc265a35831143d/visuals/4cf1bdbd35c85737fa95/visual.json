@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "En bleu : la Commission européenne (deux fois par an depuis 2011). En orange : le FMI, dont seule l'édition en cours est accessible ; les suivantes s'ajouteront à chaque collecte.",
+                    "value": "En bleu : la Commission européenne (deux fois par an depuis 2011). En rouge : le gouvernement. En orange : le FMI, dont seule l'édition en cours est accessible.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"
