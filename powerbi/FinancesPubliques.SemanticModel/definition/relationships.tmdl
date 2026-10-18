@@ -353,3 +353,23 @@ relationship 83739eb7-71b9-43ea-99d5-4d50c48ccd88
 relationship 44a2d83a-4ae3-40ad-bb2e-492118f585ca
 	fromColumn: Fait_Dette_Negociable_Etat.composante_code
 	toColumn: Dim_Composante_Dette_Etat.'Code composante'
+
+relationship 00046e12-b7c6-4ba2-a71d-0c784424e478
+	fromColumn: Fait_Previsions.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 5141b090-1e98-4e71-a7f0-c7e8d9bf4acb
+	fromColumn: Fait_Previsions.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 6fab0b3c-588a-420a-9985-66a14f860be0
+	fromColumn: Fait_Previsions.edition_id
+	toColumn: Dim_Edition_Prevision.'Code édition'
+
+relationship fc9ab839-15bf-4af1-af5a-931f9c3f0b50
+	fromColumn: Fait_Previsions.variable_code
+	toColumn: Dim_Variable_Prevision.'Code variable'
+
+relationship 4a7fc155-4327-496e-a231-153125b68d66
+	fromColumn: Fait_Previsions.source_id
+	toColumn: Dim_Source.source_id

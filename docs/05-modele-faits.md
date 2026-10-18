@@ -180,6 +180,16 @@ maturité. L'écart avec l'Allemagne (*spread*) est calculé en DAX.
 
 ### F13 — `Fait_Hypotheses`
 
+> **Mise en œuvre (lot 4c) : `Fait_Previsions`.** Prévisions de la Commission européenne (AMECO,
+> 36 éditions depuis le printemps 2011, page « AMECO archive » + édition courante) et du FMI
+> (API DataMapper, édition en vigueur seulement ; les éditions s'accumulent à chaque collecte).
+> Variables : dette, solde, solde hors intérêts (% du PIB), croissance en volume. Chaque ligne porte
+> la valeur réalisée (dernières données Eurostat du modèle), l'écart et l'écart orienté
+> (« biais d'optimisme »). Une édition « Réalité » porte les valeurs observées pour le graphique en
+> spaghetti. Dimensions : `Dim_Edition_Prevision`, `Dim_Variable_Prevision`. Les trajectoires du
+> gouvernement (saisie manuelle depuis ses documents) et les scénarios personnels (4b) viendront
+> compléter cette table.
+
 - **Clés** : `scenario_id`, `millesime_id` (date de publication de la trajectoire), `pays_code`,
   `date_id` (année cible), `variable_code`.
 - **Valeur** : `valeur` (en % ou % du PIB selon `Dim_Variable_Hypothese.unite`).

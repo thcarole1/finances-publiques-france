@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "a27eb8431a947eff3b06",
+  "displayName": "14. Qui se trompe ?",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "32ffc1a2a3d768e07991",
+      "target": "51c5d1df41c7568ae22f",
+      "type": "NoFilter"
+    }
+  ]
+}

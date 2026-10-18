@@ -82,8 +82,8 @@ Quand un même chiffre existe dans plusieurs sources :
 |---|---|---|---|---|
 | Gouvernement | Rapport économique, social et financier (PLF), plan budgétaire et structurel de moyen terme et rapports d'avancement | Trajectoire officielle | Annuelle | 4 |
 | HCFP | Avis sur les prévisions | Appréciation (qualitative + chiffres cités) | Annuelle | 4 |
-| Commission européenne | Prévisions économiques, base **AMECO** | Prévisions par pays, **millésimes conservés** | Semestrielle | 4 |
-| FMI | *World Economic Outlook* (avril, octobre) | Prévisions par pays, **millésimes historiques disponibles** | Semestrielle | 4 |
+| Commission européenne | Prévisions économiques, base **AMECO** (page « AMECO archive » : éditions depuis 2011, ZIP ; on ne conserve que les lignes des variables utilisées) | Prévisions par pays, **millésimes conservés** | Semestrielle | 4c |
+| FMI | *World Economic Outlook* (avril, octobre), API DataMapper | Prévisions par pays ; **édition en vigueur seulement** (les fichiers historiques ne sont pas accessibles depuis la session) | Semestrielle | 4c |
 | OCDE | *Economic Outlook* | Prévisions par pays | Semestrielle | 4 |
 | Banque de France | Projections macroéconomiques | Croissance, inflation | Trimestrielle | 4 |
 

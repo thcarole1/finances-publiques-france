@@ -10,7 +10,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction","Dim_Sous_Secteur_Receveur","Fait_Transferts_APU","Pres_Flux_Sankey","Dim_Glossaire","Dim_Instrument_Dette","Dim_Detenteur","Fait_Dette","Fait_Dette_Instrument","Fait_Detention_Dette","Fait_Taux_Marche","Fait_Dette_Trimestrielle","Fait_Macro_Trimestriel","Fait_Comptes_APU_Trimestriels","Dim_Agregat_Trimestriel","Fait_Dette_Contributions","Fait_Dette_Negociable_Etat","Dim_Composante_Dette_Etat","Fait_Courbe_Taux"]
+annotation PBI_QueryOrder = ["ModeSource","DossierLocal","BrancheGitHub","fnLireParquet","Dim_Date","Dim_Sous_Secteur","Dim_Pays","Dim_Transaction","Dim_COFOG","Dim_Prelevement","Dim_Source","Dim_Millesime","Dim_Indicateur","Fait_Comptes_APU_Annuels","Fait_Depenses_Fonction","Fait_Prelevements","Fait_Macro_Annuel","Fait_Revisions","Dim_Fonction_Economique","Fait_Prelevements_Fonction","Dim_Sous_Secteur_Receveur","Fait_Transferts_APU","Pres_Flux_Sankey","Dim_Glossaire","Dim_Instrument_Dette","Dim_Detenteur","Fait_Dette","Fait_Dette_Instrument","Fait_Detention_Dette","Fait_Taux_Marche","Fait_Dette_Trimestrielle","Fait_Macro_Trimestriel","Fait_Comptes_APU_Trimestriels","Dim_Agregat_Trimestriel","Fait_Dette_Contributions","Fait_Dette_Negociable_Etat","Dim_Composante_Dette_Etat","Fait_Courbe_Taux","Fait_Previsions","Dim_Edition_Prevision","Dim_Variable_Prevision"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -48,6 +48,9 @@ ref table Fait_Dette_Contributions
 ref table Fait_Dette_Negociable_Etat
 ref table Dim_Composante_Dette_Etat
 ref table Fait_Courbe_Taux
+ref table Fait_Previsions
+ref table Dim_Edition_Prevision
+ref table Dim_Variable_Prevision
 ref table 'Param Croissance'
 ref table 'Param Inflation'
 ref table 'Param Ecart Taux'

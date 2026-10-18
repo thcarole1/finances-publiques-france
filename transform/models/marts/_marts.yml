@@ -1592,3 +1592,122 @@ models:
     data_type: varchar
   - name: ordre_tri
     data_type: integer
+- name: fait_previsions
+  description: 'F13 — Prévisions (Commission, FMI) par édition, pays, année cible et variable, avec la valeur réalisée et l''écart.'
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: edition_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_edition_prevision')
+          field: edition_id
+  - name: pays_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_pays')
+          field: pays_code
+  - name: date_id
+    data_type: integer
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_date')
+          field: date_id
+  - name: variable_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_variable_prevision')
+          field: variable_code
+  - name: valeur
+    data_type: double
+  - name: horizon
+    data_type: integer
+  - name: libelle_horizon
+    data_type: varchar
+  - name: realise
+    data_type: double
+  - name: ecart
+    data_type: double
+  - name: ecart_optimisme
+    data_type: double
+  - name: source_id
+    data_type: varchar
+    data_tests:
+    - relationships:
+        arguments:
+          to: ref('dim_source')
+          field: source_id
+  data_tests:
+  - unicite_grain:
+      arguments:
+        colonnes:
+        - edition_id
+        - pays_code
+        - date_id
+        - variable_code
+- name: dim_edition_prevision
+  description: Éditions de prévisions (Commission, FMI) et ligne « Réalité ».
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: edition_id
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: institution
+    data_type: varchar
+  - name: libelle
+    data_type: varchar
+    data_tests:
+    - unique
+  - name: saison
+    data_type: varchar
+  - name: annee_publication
+    data_type: integer
+  - name: date_publication
+    data_type: date
+  - name: est_prevision
+    data_type: boolean
+  - name: ordre_tri
+    data_type: integer
+- name: dim_variable_prevision
+  description: Variables suivies dans les prévisions.
+  config:
+    contract:
+      enforced: true
+  columns:
+  - name: variable_code
+    data_type: varchar
+    constraints:
+    - type: not_null
+    data_tests:
+    - unique
+  - name: libelle
+    data_type: varchar
+  - name: unite
+    data_type: varchar
+  - name: sens_optimisme
+    data_type: integer
+  - name: definition
+    data_type: varchar
+  - name: ordre_tri
+    data_type: integer

@@ -172,7 +172,7 @@ Réglages utilisés (pour le refaire à la main au besoin) : **Source** = `Pres_
 **Source du flux** ; **Destination** = **Destination du flux** ; **Weight** = mesure **Flux (Md€)** ;
 segments Pays, Année et « Qui paie ? » (Lecture du payeur) avec une seule valeur chacun.
 
-## Pages du rapport (lots R1, 3a, 3b et 4a)
+## Pages du rapport (lots R1, 3a, 3b, 4a et 4c)
 
 | Page | Question | Contenu |
 |---|---|---|
@@ -188,7 +188,9 @@ segments Pays, Année et « Qui paie ? » (Lecture du payeur) avec une seule val
 | 10. Comparer | La France dépense-t-elle plus que ses voisins ? | Classements européens |
 | 11. Projeter la dette | Que deviendrait la dette dans 10 ans ? | Curseurs croissance, inflation, taux, solde hors intérêts ; trajectoire, solde qui stabilise la dette |
 | 12. Et si… ? | Que changerait une mesure sur le budget de l'année ? | Curseurs dépenses d'un domaine, salaires publics, prestations, TVA ; nouveau solde |
-| 13. Glossaire | Que veulent dire ces mots ? | Toutes les définitions (`docs/glossaire.md`) |
+| 13. Prévisions et réalité | Les prévisions annoncées se sont-elles réalisées ? | Graphique en spaghetti : chaque prévision de la Commission et du FMI, et la réalité |
+| 14. Qui se trompe ? | Les prévisions sont-elles trop optimistes ? | Biais selon l'horizon et par pays, erreur moyenne |
+| 15. Glossaire | Que veulent dire ces mots ? | Toutes les définitions (`docs/glossaire.md`) |
 
 Les segments **Pays** et **Année** sont synchronisés entre les pages (France et 2024 par défaut).
 Les courbes de la page 2 et les classements de la page 6 ignorent volontairement le segment

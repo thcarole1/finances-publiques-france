@@ -29,6 +29,9 @@ identiques produisent des fichiers identiques.
 | `fait_courbe_taux.parquet` | `Fait_Courbe_Taux` |
 | `dim_composante_dette_etat.parquet` | `Dim_Composante_Dette_Etat` |
 | `dim_agregat_trimestriel.parquet` | `Dim_Agregat_Trimestriel` |
+| `fait_previsions.parquet` | `Fait_Previsions` |
+| `dim_edition_prevision.parquet` | `Dim_Edition_Prevision` |
+| `dim_variable_prevision.parquet` | `Dim_Variable_Prevision` |
 | `dim_millesime.parquet` | `Dim_Millesime` |
 | `dim_indicateur.parquet` | `Dim_Indicateur` |
 | `fait_comptes_apu_annuels.parquet` | `Fait_Comptes_APU_Annuels` (F01) |

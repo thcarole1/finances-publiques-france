@@ -216,3 +216,13 @@ seeds:
     columns:
       - name: agregat_code
         data_tests: [unique, not_null]
+
+  - name: ref_variable_prevision
+    description: >
+      Variables suivies dans les prévisions (Commission, FMI). sens_optimisme = +1 si une
+      prévision trop haute est optimiste (solde, croissance), −1 si elle est pessimiste (dette).
+    config:
+      column_types: {variable_code: varchar, sens_optimisme: integer, code_ameco: varchar, code_fmi: varchar, ordre_tri: integer}
+    columns:
+      - name: variable_code
+        data_tests: [unique, not_null]

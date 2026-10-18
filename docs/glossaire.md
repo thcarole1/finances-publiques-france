@@ -247,3 +247,21 @@ contrat, et des CP chaque année au fil des paiements.
 
 **Long :** dans la réalité, une forte baisse des dépenses peut ralentir la croissance, et une dette qui grimpe peut faire monter les taux. Une projection mécanique ignore ces enchaînements : elle montre ce qui découle arithmétiquement des hypothèses, pas ce qui arrivera. C'est un outil pour comprendre les ordres de grandeur.
 
+### Prévisions de la Commission européenne et du FMI
+
+**Court :** les chiffres que ces institutions annoncent pour l'année en cours et les suivantes (croissance, déficit, dette).
+
+**Long :** la Commission européenne publie ses prévisions au printemps et à l'automne, le FMI en avril et en octobre. Elles servent de référence dans le débat budgétaire. Les comparer à ce qui s'est réellement passé montre leur fiabilité : une prévision n'est pas une promesse.
+
+### Biais d'optimisme
+
+**Court :** l'écart moyen entre la prévision et la réalité, compté positivement quand la prévision annonçait mieux (moins de déficit, moins de dette, plus de croissance).
+
+**Long :** un biais proche de zéro signifie que les erreurs se compensent ; un biais positif durable signifie que les prévisions sont systématiquement trop favorables. L'erreur absolue moyenne mesure, elle, la taille des erreurs, quel que soit leur sens.
+
+### Horizon de prévision
+
+**Court :** l'écart entre l'année prévue et l'année où la prévision est publiée : année en cours, année suivante, dans deux ans…
+
+**Long :** plus l'horizon est lointain, plus l'erreur est en général grande. Les comparaisons se font donc à horizon égal.
+
