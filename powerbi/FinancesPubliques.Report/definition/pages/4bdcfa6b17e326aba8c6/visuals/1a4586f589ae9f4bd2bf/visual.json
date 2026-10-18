@@ -3,9 +3,9 @@
   "name": "1a4586f589ae9f4bd2bf",
   "position": {
     "x": 16,
-    "y": 456,
+    "y": 544,
     "z": 7000,
-    "height": 248,
+    "height": 160,
     "width": 300,
     "tabOrder": 7000
   },
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Les curseurs à 0 reprennent la situation de la dernière année connue : même taux payé, même déficit hors intérêts.",
+                    "value": "Curseurs à 0 : situation de la dernière année connue. Valeurs en % de la richesse produite.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"
@@ -42,18 +42,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Chaque année, la dette est multipliée par (1 + taux) / (1 + croissance), puis on retire l'excédent hors intérêts (ou on ajoute le déficit).",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#595959"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Calcul mécanique, sans effet en retour : une économie budgétaire ne freine pas ici la croissance.",
+                    "value": "Calcul mécanique, sans effet en retour sur l'économie.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"

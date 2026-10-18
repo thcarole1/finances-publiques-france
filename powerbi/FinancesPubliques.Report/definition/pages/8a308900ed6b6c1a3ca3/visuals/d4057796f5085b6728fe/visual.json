@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dette en % de la richesse produite en un an'"
+                  "Value": "'Dette rapportée à la richesse'"
                 }
               }
             },

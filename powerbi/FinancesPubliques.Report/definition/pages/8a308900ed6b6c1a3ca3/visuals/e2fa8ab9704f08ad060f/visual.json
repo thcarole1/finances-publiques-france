@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Taux moyen payé sur la dette dans l''année'"
+                  "Value": "'Taux moyen payé sur la dette'"
                 }
               }
             },

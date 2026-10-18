@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Intérêts de la dette dans 10 ans (% de la richesse produite)'"
+                  "Value": "'Intérêts de la dette dans 10 ans'"
                 }
               }
             },
