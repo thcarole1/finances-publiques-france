@@ -1054,6 +1054,97 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: f8763dcc-780d-488e-835b-7f179fcd9db5
 
+	/// Valeur prévue (ou réalisée, pour la ligne « Réalité ») de l'indicateur choisi.
+	measure 'Valeur prévue' = IF ( HASONEVALUE ( Dim_Pays[Code pays] ) && HASONEVALUE ( Dim_Variable_Prevision[Code variable] ), DIVIDE ( AVERAGE ( Fait_Previsions[valeur] ), 100 ) )
+		formatString: "0.0 %"
+		displayFolder: 31 Prévisions
+		lineageTag: b2c80982-948f-4110-a503-44d3027342e6
+
+	/// Moyenne de (prévu − réalisé), en points.
+	measure 'Écart moyen (points)' = IF ( HASONEVALUE ( Dim_Variable_Prevision[Code variable] ), AVERAGE ( Fait_Previsions[ecart] ) )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 31 Prévisions
+		lineageTag: 331cec55-edb8-482d-b78a-7b247045e0f9
+
+	/// Écart moyen orienté : positif si les prévisions étaient trop optimistes (solde ou croissance trop hauts, dette trop basse).
+	measure 'Biais d''optimisme (points)' = IF ( HASONEVALUE ( Dim_Variable_Prevision[Code variable] ), AVERAGE ( Fait_Previsions[ecart_optimisme] ) )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 31 Prévisions
+		lineageTag: a7896755-e8d1-4a34-a2ae-abee9f56c128
+
+	/// Erreur moyenne, dans un sens ou dans l'autre, en points.
+	measure 'Erreur absolue moyenne (points)' =
+			IF (
+			    HASONEVALUE ( Dim_Variable_Prevision[Code variable] ),
+			    AVERAGEX ( FILTER ( Fait_Previsions, NOT ISBLANK ( Fait_Previsions[ecart] ) ), ABS ( Fait_Previsions[ecart] ) )
+			)
+		formatString: "0.0 ""pt"""
+		displayFolder: 31 Prévisions
+		lineageTag: 1cfbd182-53a4-4751-9ac9-5495de5c0351
+
+	/// Nombre de prévisions dont la valeur réalisée est connue.
+	measure 'Prévisions comparées' = COUNTROWS ( FILTER ( Fait_Previsions, NOT ISBLANK ( Fait_Previsions[ecart] ) ) )
+		formatString: "0"
+		displayFolder: 31 Prévisions
+		lineageTag: 1992da48-c370-4d3f-81ca-cd4d74d29ed1
+
+	/// Biais d'optimisme (points), pour les prévisions de l'année suivante.
+	measure 'Biais d''optimisme à un an (points)' = CALCULATE ( [Biais d'optimisme (points)], Fait_Previsions[Horizon (années)] = 1 )
+		formatString: "+0.0 ""pt"";-0.0 ""pt"";0.0 ""pt"""
+		displayFolder: 31 Prévisions
+		lineageTag: 014a2f87-26d2-4e6b-8291-c7f023dc5589
+
+	/// Erreur absolue moyenne (points), pour les prévisions de l'année suivante.
+	measure 'Erreur absolue moyenne à un an (points)' = CALCULATE ( [Erreur absolue moyenne (points)], Fait_Previsions[Horizon (années)] = 1 )
+		formatString: "0.0 ""pt"""
+		displayFolder: 31 Prévisions
+		lineageTag: b02859c8-08a6-49d3-a7d7-42d2976cc30a
+
+	/// Prévisions comparées, pour les prévisions de l'année suivante.
+	measure 'Prévisions comparées à un an' = CALCULATE ( [Prévisions comparées], Fait_Previsions[Horizon (années)] = 1 )
+		formatString: "0"
+		displayFolder: 31 Prévisions
+		lineageTag: e006e585-d186-4e15-8147-67f522bd4f73
+
+	/// La dernière prévision publiée, en une phrase.
+	measure 'Phrase : dernière prévision' =
+			VAR _derniere = CALCULATE ( MAX ( Dim_Edition_Prevision[ordre_tri] ), REMOVEFILTERS ( Dim_Date ), Dim_Edition_Prevision[Est une prévision] = TRUE (), Fait_Previsions )
+			VAR _edition = CALCULATE ( MAX ( Dim_Edition_Prevision[Édition] ), REMOVEFILTERS ( Dim_Edition_Prevision[Édition] ), Dim_Edition_Prevision[ordre_tri] = _derniere )
+			VAR _an = INT ( _derniere / 100 )
+			VAR _valeurs =
+			    ADDCOLUMNS (
+			        { _an, _an + 1, _an + 2 },
+			        "@v", CALCULATE ( [Valeur prévue], REMOVEFILTERS ( Dim_Date ), Dim_Date[Année] = [Value], Dim_Edition_Prevision[ordre_tri] = _derniere )
+			    )
+			RETURN
+			    IF (
+			        ISBLANK ( _derniere ) || NOT HASONEVALUE ( Dim_Variable_Prevision[Code variable] ),
+			        "Choisissez un pays et un indicateur.",
+			        "Dernière prévision publiée (" & _edition & ") pour « " & SELECTEDVALUE ( Dim_Variable_Prevision[Indicateur prévu] ) & " » : "
+			            & CONCATENATEX ( FILTER ( _valeurs, NOT ISBLANK ( [@v] ) ), FORMAT ( [@v], "0.0 %", "fr-FR" ) & " en " & [Value], ", ", [Value], ASC )
+			            & "."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: f038b4ec-c1e3-4ee0-bca5-caddc2112d99
+
+	/// Le biais des prévisions à un an, en une phrase.
+	measure 'Phrase : biais des prévisions' =
+			VAR _biais = [Biais d'optimisme à un an (points)]
+			VAR _abs = [Erreur absolue moyenne à un an (points)]
+			VAR _n = [Prévisions comparées à un an]
+			VAR _inst = SWITCH ( SELECTEDVALUE ( Dim_Edition_Prevision[Institution] ), "Commission européenne", "de la Commission européenne", "FMI", "du FMI", "de l'ensemble des institutions" )
+			RETURN
+			    IF (
+			        ISBLANK ( _biais ) || NOT HASONEVALUE ( Dim_Pays[Code pays] ),
+			        "Choisissez un pays et un indicateur : aucune prévision comparable à la réalité pour cette sélection.",
+			        "Pour l'année suivante, les prévisions " & _inst & " sur « " & SELECTEDVALUE ( Dim_Variable_Prevision[Indicateur prévu] )
+			            & " » ont été en moyenne " & IF ( _biais >= 0, "trop optimistes", "trop pessimistes" ) & " de "
+			            & FORMAT ( ABS ( _biais ), "0.0", "fr-FR" ) & " point (" & _n & " prévisions comparées). L'erreur moyenne, dans un sens ou dans l'autre, est de "
+			            & FORMAT ( _abs, "0.0", "fr-FR" ) & " point."
+			    )
+		displayFolder: 20 Pédagogie
+		lineageTag: cd5fb73f-ffdc-468a-83f3-2bb43a762193
+
 	column Masquer
 		dataType: int64
 		isHidden

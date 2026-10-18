@@ -1,0 +1,5 @@
+variable_code,libelle,unite,sens_optimisme,code_ameco,code_fmi,definition,ordre_tri
+DETTE,Dette publique (% du PIB),% du PIB,-1,UDGG,GGXWDG_NGDP,"Dette prévue en fin d'année. Une prévision trop basse est optimiste.",1
+SOLDE,Solde public (% du PIB),% du PIB,1,UBLGE,GGXCNL_NGDP,"Solde prévu (négatif = déficit). Une prévision trop haute est optimiste.",2
+SOLDE_PRIMAIRE,Solde hors intérêts (% du PIB),% du PIB,1,UBLGIE,,"Solde hors intérêts prévu. Une prévision trop haute est optimiste.",3
+CROISSANCE,Croissance de l'économie (%),%,1,OVGD,NGDP_RPCH,"Croissance du PIB en volume prévue. Une prévision trop haute est optimiste.",4

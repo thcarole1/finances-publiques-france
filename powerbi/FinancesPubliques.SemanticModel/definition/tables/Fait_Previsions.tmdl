@@ -1,0 +1,121 @@
+/// F13 — Prévisions (Commission européenne, FMI) par édition, pays, année cible et variable, rapprochées de la réalité. Non additive.
+table Fait_Previsions
+	lineageTag: dda45e6d-b462-4eb6-bad1-1cd5223d0148
+
+	column edition_id
+		dataType: string
+		isHidden
+		lineageTag: 2c3d21ed-4d6b-49c7-b247-f8d742971b83
+		summarizeBy: none
+		sourceColumn: edition_id
+
+		annotation SummarizationSetBy = User
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: d7f83435-6c9c-4f2a-9bc3-7ba5a79dd5c1
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 61d3d889-d008-4f77-9af1-88836c3b91a5
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column variable_code
+		dataType: string
+		isHidden
+		lineageTag: f8f8f2f2-3a73-403a-8317-af50a35741b3
+		summarizeBy: none
+		sourceColumn: variable_code
+
+		annotation SummarizationSetBy = User
+
+	column valeur
+		dataType: double
+		isHidden
+		formatString: 0.0
+		lineageTag: 02891206-3a79-4c24-a248-342dfbb3065b
+		summarizeBy: none
+		sourceColumn: valeur
+
+		annotation SummarizationSetBy = User
+
+	column 'Horizon (années)'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 907b28ad-000a-48ce-b194-bce10b579c5a
+		summarizeBy: none
+		sourceColumn: horizon
+
+		annotation SummarizationSetBy = User
+
+	/// Écart entre l'année prévue et l'année de publication
+	column Horizon
+		dataType: string
+		lineageTag: a030e572-9b7b-4ad6-9fc9-0e9b59749fd0
+		summarizeBy: none
+		sourceColumn: libelle_horizon
+		sortByColumn: 'Horizon (années)'
+
+		annotation SummarizationSetBy = User
+
+	column realise
+		dataType: double
+		isHidden
+		formatString: 0.0
+		lineageTag: 265fb990-bfdf-4c85-abdb-162983b5da41
+		summarizeBy: none
+		sourceColumn: realise
+
+		annotation SummarizationSetBy = User
+
+	column ecart
+		dataType: double
+		isHidden
+		formatString: 0.0
+		lineageTag: 998f351b-741a-48ab-9d9c-c1bff7f97483
+		summarizeBy: none
+		sourceColumn: ecart
+
+		annotation SummarizationSetBy = User
+
+	column ecart_optimisme
+		dataType: double
+		isHidden
+		formatString: 0.0
+		lineageTag: 084a8c51-9031-476b-9b9b-9ac962b6e6b6
+		summarizeBy: none
+		sourceColumn: ecart_optimisme
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 43001d56-d993-42ba-a19a-8e7eaefc7613
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Previsions = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_previsions")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

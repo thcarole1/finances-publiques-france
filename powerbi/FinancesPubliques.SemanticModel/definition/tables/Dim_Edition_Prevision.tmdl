@@ -1,0 +1,87 @@
+/// Éditions de prévisions (Commission européenne, FMI), plus la ligne « Réalité ».
+table Dim_Edition_Prevision
+	lineageTag: ad45a563-e623-429a-8824-11e8ac84b066
+
+	column 'Code édition'
+		dataType: string
+		isHidden
+		lineageTag: 5102af49-6952-4d67-bee8-f0c7842c6d93
+		summarizeBy: none
+		sourceColumn: edition_id
+
+		annotation SummarizationSetBy = User
+
+	column Institution
+		dataType: string
+		lineageTag: 26f2cf6f-39b5-419a-aa2e-91752e9ded13
+		summarizeBy: none
+		sourceColumn: institution
+
+		annotation SummarizationSetBy = User
+
+	column 'Édition'
+		dataType: string
+		lineageTag: b6cb2378-3c67-4949-943f-0704d47fe0bf
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column Saison
+		dataType: string
+		lineageTag: d71b6030-fcec-4539-9dc5-8d29fae4a79f
+		summarizeBy: none
+		sourceColumn: saison
+
+		annotation SummarizationSetBy = User
+
+	column 'Année de publication'
+		dataType: int64
+		formatString: 0
+		lineageTag: f0929c80-2543-4c52-acc7-636eebbbc54d
+		summarizeBy: none
+		sourceColumn: annee_publication
+
+		annotation SummarizationSetBy = User
+
+	column 'Date de publication (approchée)'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f11db747-cac0-4e85-896b-3b0bad5144b7
+		summarizeBy: none
+		sourceColumn: date_publication
+
+		annotation SummarizationSetBy = User
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Est une prévision'
+		dataType: boolean
+		lineageTag: de171d38-bb36-44f2-90a3-63631d97161a
+		summarizeBy: none
+		sourceColumn: est_prevision
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 19512391-43d2-4557-9a4e-e88df6897bc9
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Edition_Prevision = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_edition_prevision")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

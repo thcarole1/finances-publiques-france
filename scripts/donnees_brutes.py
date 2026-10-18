@@ -35,7 +35,11 @@ MOTIF_ASSET = re.compile(
     r"^(?P<source>[a-z0-9_]+)__(?P<jeu>[a-z0-9_-]+)__(?P<date>\d{4}-\d{2}-\d{2})\.tar\.gz$"
 )
 # Jeux dont tous les millésimes sont nécessaires (table des révisions, docs/05 F05).
-JEUX_TOUS_MILLESIMES = {("eurostat", "gov_10a_main"), ("eurostat", "nama_10_gdp")}
+JEUX_TOUS_MILLESIMES = {
+    ("eurostat", "gov_10a_main"),
+    ("eurostat", "nama_10_gdp"),
+    ("fmi", "weo"),  # une édition du FMI par collecte : toutes sont nécessaires (lot 4c)
+}
 
 
 def nom_asset(source: str, jeu: str, date: str) -> str:

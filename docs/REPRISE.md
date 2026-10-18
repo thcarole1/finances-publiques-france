@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 4a (laboratoire en direct).
+Dernière mise à jour : 17/10/2026, après le lot 4c (prévisions face à la réalité).
 
 ## 1. Où en est le projet
 
@@ -15,8 +15,9 @@ Dernière mise à jour : 17/10/2026, après le lot 4a (laboratoire en direct).
 | R1 | Rapport : 7 pages du parcours « Comprendre », glossaire, mesures en phrases | ✅ fusionné (PR #9) |
 | 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | ✅ fusionné (PR #10) |
 | 3b | Dette et comptes trimestriels, État / agences (INSEE), dette négociable de l'État, taux et courbe BCE ; pages 8 et 9 | ✅ fusionné (PR #11) |
-| 4a | Laboratoire en direct : projection de la dette sur 10 ans, « Et si… ? » ; pages 11 et 12 | PR ouverte (branche `feat/lot-4a-laboratoire`) |
-| 4b, 4c | Scénarios sauvegardés (projection Python) ; prévisions officielles et erreurs | à faire |
+| 4a | Laboratoire en direct : projection de la dette sur 10 ans, « Et si… ? » ; pages 11 et 12 | ✅ fusionné (PR #12) |
+| 4c | Prévisions de la Commission (AMECO, depuis 2011) et du FMI face à la réalité ; pages 13 et 14 | PR ouverte (branche `feat/lot-4c-previsions`) |
+| 4b | Scénarios sauvegardés (projection Python) ; trajectoires du gouvernement | à faire |
 | 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | en partie : connecteur INSEE et détail État / agences pour la dette (lot 3b) ; reste les comptes annuels et les prélèvements |
 | 5 → 8 | redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
@@ -52,6 +53,7 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 | Validation | Job CI `modele-powerbi` (bibliothèque TOM) ; message d'erreur lisible dans les **annotations** du check (`gh api …/check-runs/<id>/annotations`) — les journaux bruts ne sont pas accessibles depuis la session |
 | Paramètres What-if | Tables calculées `GENERATESERIES` avec `extendedProperty ParameterMetadata` (comme Desktop) ; segment en mode `Single`. Valeur par défaut dans `SELECTEDVALUE` (0 = situation observée) |
 | Paramètres Power Query | Créés en requête vide : décocher « Activer le chargement » |
+| Générateur de pages | Lancer avec `uv run python …/generer_pages.py` (il lit `dim_edition_prevision.parquet` pour les couleurs du graphique en spaghetti) |
 | Rapport (PBIR) | Les fichiers JSON de `powerbi/FinancesPubliques.Report/definition/` sont validés contre les schémas officiels (`scripts/valider_pbir.py`, étape CI) et contre le modèle (`tests/test_pbir.py` : champs existants, aucun sigle affiché). Les pages sont produites par un générateur (non versionné, dans le dossier de travail de la session) ; vérifier avant de régénérer que le générateur reproduit à l'identique les JSON de `main` (`git status` vide), sinon le propriétaire les a retouchées dans Desktop et ce sont **les JSON qui font foi** |
 | Phrases (cartes) | Une carte trop petite coupe le texte par « … » au lieu de le faire défiler. Le générateur de pages vérifie, pour chaque phrase, que la plus longue attendue tient dans la carte (police 12 pt). Étalonnage sur Desktop : environ 0,70 × taille de police par caractère, 1,5 × par ligne, 24 px de marge verticale (une phrase de 175 caractères ne tient pas dans 616 × 92). Agrandir la carte ou raccourcir la phrase |
 | Curseurs et cartes | Un curseur à une valeur demande 96 px de haut (titre, valeur saisie, curseur) : en dessous, le titre du suivant recouvre la poignée. Le générateur vérifie aussi que le titre d'une carte (11 pt) tient sur une ligne en plus de la valeur |
@@ -76,13 +78,13 @@ un accès Internet complet : en dernier recours, y faire tourner l'exploration.
 
 ## 5. Prochaine étape
 
-Connecteurs disponibles : Eurostat, DG TAXUD, INSEE (BDM, `ingestion/sources/insee.py`, une entrée
+Connecteurs disponibles : Eurostat, DG TAXUD, Commission européenne (AMECO : le site limite le débit,
+pause de 12 s entre archives et reprise en cas de coupure), FMI (DataMapper), INSEE (BDM, `ingestion/sources/insee.py`, une entrée
 par flux dans `JEUX`, séries choisies par IDBANK dans `ref_series_insee.csv`), BCE.
 
-1. **Lot 4b** (scénarios YAML → projection Python → `Fait_Projections`, refinancement selon une
-   durée moyenne) ou **4c** (FMI : API datamapper accessible, millésime courant seulement ; Commission
-   européenne : AMECO ; gouvernement : saisie manuelle). Le contrôle croisé DAX / Python est prévu
-   dans `docs/08`, § 3.
+1. **Lot 4b** : scénarios YAML → projection Python → `Fait_Projections` (refinancement selon une
+   durée moyenne) ; trajectoires du gouvernement saisies depuis ses documents. Contrôle croisé
+   DAX / Python (`docs/08`, § 3).
 2. **Reste du lot 2c** : comptes annuels de l'État et des organismes (flux INSEE `CNA-2020-CSI`),
    prélèvements obligatoires au sens de l'INSEE (43,2 % contre 42,8 % pour Eurostat en 2024).
 3. Échéancier titre par titre : AFT inaccessible depuis la session ; essai depuis GitHub Actions à

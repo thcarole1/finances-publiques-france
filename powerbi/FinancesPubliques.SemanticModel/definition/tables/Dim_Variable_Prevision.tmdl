@@ -1,0 +1,69 @@
+/// Variables suivies dans les prévisions.
+table Dim_Variable_Prevision
+	lineageTag: f66ffd27-2c17-4f4a-bf8c-f66bf614803e
+
+	column 'Code variable'
+		dataType: string
+		isHidden
+		lineageTag: 3ee09762-c099-4c85-accb-1751917c5bdc
+		summarizeBy: none
+		sourceColumn: variable_code
+
+		annotation SummarizationSetBy = User
+
+	column 'Indicateur prévu'
+		dataType: string
+		lineageTag: c3d682d9-9fc8-4859-94dd-feb1b177cefb
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Unité de l''indicateur prévu'
+		dataType: string
+		lineageTag: f812eb38-242f-47a8-89d5-f09dd5e5fcdd
+		summarizeBy: none
+		sourceColumn: unite
+
+		annotation SummarizationSetBy = User
+
+	column sens_optimisme
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3b42b641-808e-492b-a2e5-d25d895b37e0
+		summarizeBy: none
+		sourceColumn: sens_optimisme
+
+		annotation SummarizationSetBy = User
+
+	column 'Définition de l''indicateur prévu'
+		dataType: string
+		lineageTag: a3d1848a-8608-4862-8141-6a314a7c4ce2
+		summarizeBy: none
+		sourceColumn: definition
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 253ba0e7-d69c-4a26-b7cc-e78d5b9dc287
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Variable_Prevision = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_variable_prevision")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
