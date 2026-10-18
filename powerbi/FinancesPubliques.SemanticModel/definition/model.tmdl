@@ -48,6 +48,15 @@ ref table Fait_Dette_Contributions
 ref table Fait_Dette_Negociable_Etat
 ref table Dim_Composante_Dette_Etat
 ref table Fait_Courbe_Taux
+ref table 'Param Croissance'
+ref table 'Param Inflation'
+ref table 'Param Ecart Taux'
+ref table 'Param Effort'
+ref table 'Param TVA'
+ref table 'Param Depense Domaine'
+ref table 'Param Salaires'
+ref table 'Param Prestations'
+ref table 'Choix Domaine'
 ref table _Mesures
 ref table CG_Unite
 ref table CG_Consolidation

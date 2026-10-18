@@ -111,7 +111,7 @@ familiales, minima sociaux, aides au logement, par décile de niveau de vie.
 des services publics dont chaque ménage bénéficie (éducation, santé, logement…). Les résultats
 dépendent fortement des conventions d'attribution retenues.
 
-### Solde primaire
+### Solde hors intérêts (solde primaire)
 
 **Court :** le solde public hors charge d'intérêts de la dette.
 
@@ -240,4 +240,10 @@ contrat, et des CP chaque année au fil des paiements.
 **Court :** un calcul qui retire les effets du calendrier (fêtes, saisons, dates d'échéance des impôts) pour comparer un trimestre au précédent.
 
 **Long :** sans cette correction, certains trimestres paraissent toujours meilleurs ou pires que d'autres, simplement parce que des impôts sont encaissés ou des dépenses versées à date fixe. Les chiffres corrigés sont notés « CVS » par les statisticiens.
+
+### Projection mécanique
+
+**Court :** un calcul qui prolonge la dette à partir d'hypothèses fixées à l'avance (croissance, inflation, taux, solde), sans effet en retour sur l'économie.
+
+**Long :** dans la réalité, une forte baisse des dépenses peut ralentir la croissance, et une dette qui grimpe peut faire monter les taux. Une projection mécanique ignore ces enchaînements : elle montre ce qui découle arithmétiquement des hypothèses, pas ce qui arrivera. C'est un outil pour comprendre les ordres de grandeur.
 

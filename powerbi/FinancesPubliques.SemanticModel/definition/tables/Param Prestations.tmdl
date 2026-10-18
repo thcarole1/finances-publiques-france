@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Variation des prestations sociales (retraites, allocations, remboursements de soins).
+table 'Param Prestations'
+	lineageTag: de59a675-28c7-4e70-b0f6-7892e1364652
+
+	column 'Variation des prestations sociales (%)'
+		dataType: double
+		formatString: +0.0;-0.0;0.0
+		lineageTag: 9ca0239f-ec21-4e87-997e-e71f0feef5e4
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Prestations' = calculated
+		mode: import
+		source = GENERATESERIES(-10, 10, 0.5)
+
+	annotation PBI_Id = 60094496f25f45248b54977c35ac177e

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "00387b8ccc23db772087",
+  "position": {
+    "x": 16,
+    "y": 528,
+    "z": 9000,
+    "height": 176,
+    "width": 300,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Comprendre",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#1F4E79",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Effet mécanique sur une année, sans changement de comportement. Les leviers peuvent se recouper : les salaires d'un domaine sont aussi des dépenses de ce domaine.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Taxe sur la valeur ajoutée : tous les taux varient dans la même proportion (20 % → 21 % = +5 %).",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EEF3F8'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

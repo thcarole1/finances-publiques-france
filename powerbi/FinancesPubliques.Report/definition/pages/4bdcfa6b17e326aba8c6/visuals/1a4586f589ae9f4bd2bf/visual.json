@@ -1,0 +1,104 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "1a4586f589ae9f4bd2bf",
+  "position": {
+    "x": 16,
+    "y": 456,
+    "z": 7000,
+    "height": 248,
+    "width": 300,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Comprendre",
+                    "textStyle": {
+                      "fontSize": "12pt",
+                      "color": "#1F4E79",
+                      "fontWeight": "bold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Les curseurs à 0 reprennent la situation de la dernière année connue : même taux payé, même déficit hors intérêts.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Chaque année, la dette est multipliée par (1 + taux) / (1 + croissance), puis on retire l'excédent hors intérêts (ou on ajoute le déficit).",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Calcul mécanique, sans effet en retour : une économie budgétaire ne freine pas ici la croissance.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#595959"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#EEF3F8'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0.0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

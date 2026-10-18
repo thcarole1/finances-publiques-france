@@ -1,0 +1,23 @@
+/// Paramètre du laboratoire : Variation de la rémunération des agents publics.
+table 'Param Salaires'
+	lineageTag: 62079647-67e9-43f1-8d7b-17054400b01b
+
+	column 'Variation des salaires publics (%)'
+		dataType: double
+		formatString: +0.0;-0.0;0.0
+		lineageTag: e5bcc39a-c0b8-409c-818b-9964ab6ae5bb
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Param Salaires' = calculated
+		mode: import
+		source = GENERATESERIES(-10, 10, 0.5)
+
+	annotation PBI_Id = 115fff8a4a8a4372a08f4383e39d6391

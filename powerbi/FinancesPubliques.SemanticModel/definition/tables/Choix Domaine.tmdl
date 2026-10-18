@@ -1,0 +1,25 @@
+/// Liste des domaines (fonctions) pour le laboratoire, sans lien avec le reste du modèle :
+/// choisir un domaine ici ne filtre pas les autres visuels.
+table 'Choix Domaine'
+	lineageTag: 19a5bacf-ecf4-40a1-a842-57d81db29ddb
+
+	column Domaine
+		dataType: string
+		lineageTag: c1035a99-8eef-472c-b337-cd47fe4f9690
+		summarizeBy: none
+		sourceColumn: [Domaine]
+
+		annotation SummarizationSetBy = User
+
+	partition 'Choix Domaine' = calculated
+		mode: import
+		source =
+				SELECTCOLUMNS (
+				    FILTER (
+				        DISTINCT ( Dim_COFOG[Fonction] ),
+				        NOT ( Dim_COFOG[Fonction] IN { "Non renseigné", "Fonction non ventilée" } )
+				    ),
+				    "Domaine", Dim_COFOG[Fonction]
+				)
+
+	annotation PBI_Id = 3dc2c404f5454c609fdcad7e22ffe92c
