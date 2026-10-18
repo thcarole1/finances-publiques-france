@@ -3,9 +3,9 @@
   "name": "639fb21c1cf4687738be",
   "position": {
     "x": 16.0,
-    "y": 192,
+    "y": 180,
     "z": 5000,
-    "height": 112,
+    "height": 96,
     "width": 300.0,
     "tabOrder": 5000
   },
@@ -119,6 +119,33 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Canvas'"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'eec969eeca6263f8a063'"
                 }
               }
             }

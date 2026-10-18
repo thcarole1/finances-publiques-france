@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "bb6e2c57dde4991016dd",
+  "displayName": "Définition : Prélèvements obligatoires",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 360,
+  "pageBinding": {
+    "name": "5e5766c07b91b7a8d196",
+    "type": "Tooltip"
+  },
+  "type": "Tooltip",
+  "visibility": "HiddenInViewMode"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "e119a14c3b70c98bf64a",
+  "displayName": "Définition : Dette indexée sur l'inflation",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 360,
+  "pageBinding": {
+    "name": "a22e45fdd1dfb2f10eb5",
+    "type": "Tooltip"
+  },
+  "type": "Tooltip",
+  "visibility": "HiddenInViewMode"
+}

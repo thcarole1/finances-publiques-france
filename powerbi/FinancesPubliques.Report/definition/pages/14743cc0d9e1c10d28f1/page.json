@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "14743cc0d9e1c10d28f1",
+  "displayName": "Définition : Détenteurs de la dette",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 360,
+  "pageBinding": {
+    "name": "c0d0e3f7be968030f4ed",
+    "type": "Tooltip"
+  },
+  "type": "Tooltip",
+  "visibility": "HiddenInViewMode"
+}

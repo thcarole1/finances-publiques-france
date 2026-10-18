@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "ac1a3fbdc376f355b1bc",
+  "displayName": "Définition : Fonction (à quoi sert l'argent)",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 360,
+  "pageBinding": {
+    "name": "24721637eb2c29779e52",
+    "type": "Tooltip"
+  },
+  "type": "Tooltip",
+  "visibility": "HiddenInViewMode"
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "02a03d550bd142454b3b",
+  "displayName": "Définition : Taux moyen payé sur la dette (taux ",
+  "displayOption": "FitToPage",
+  "height": 240,
+  "width": 360,
+  "pageBinding": {
+    "name": "b0e5c4b55e7c28ad2fc0",
+    "type": "Tooltip"
+  },
+  "type": "Tooltip",
+  "visibility": "HiddenInViewMode"
+}

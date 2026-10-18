@@ -3,9 +3,9 @@
   "name": "1127649f231689b98b1c",
   "position": {
     "x": 648.0,
-    "y": 192,
+    "y": 180,
     "z": 7000,
-    "height": 112,
+    "height": 96,
     "width": 300.0,
     "tabOrder": 7000
   },
@@ -86,7 +86,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Solde (un chiffre négatif est un déficit)'"
+                  "Value": "'Solde (négatif : déficit)'"
                 }
               }
             },
@@ -119,6 +119,33 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "type": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Canvas'"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'c2a35bd085d328a512f3'"
                 }
               }
             }

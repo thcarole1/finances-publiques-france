@@ -37,6 +37,11 @@ Lot 3a : page 6 (« La dette »), en deux pages : « La dette » (montant, déco
 variation) et « À qui doit-on ? » (détenteurs, instruments, taux). L'échéancier titre par titre
 est reporté (source AFT inaccessible).
 
+**Finition (version 1.0)** : sommaire cliquable sur l'accueil, info-bulles de définition
+alimentées par le glossaire, repères des crises au survol des courbes annuelles, thème versionné
+(`StaticResources/RegisteredResources/FinancesPubliques.json`, en lieu et place de
+`powerbi/theme.json` prévu au § 6).
+
 ## 3. Espace « Explorer »
 
 | Page | Contenu |

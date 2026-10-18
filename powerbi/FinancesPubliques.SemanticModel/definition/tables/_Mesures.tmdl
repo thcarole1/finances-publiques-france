@@ -1225,6 +1225,13 @@ table _Mesures
 		displayFolder: 20 Pédagogie
 		lineageTag: 70a23ed9-ac4a-4430-8a40-8059ff2424ff
 
+	/// Crise ou période marquante de l'année (repères historiques), affichée au survol des courbes.
+	measure 'Repère historique' =
+			VAR _p = CONCATENATEX ( FILTER ( VALUES ( Dim_Date[Période historique] ), NOT ISBLANK ( Dim_Date[Période historique] ) ), Dim_Date[Période historique], " ; " )
+			RETURN IF ( _p = "", "—", _p )
+		displayFolder: 20 Pédagogie
+		lineageTag: 9770c5ec-39f9-44aa-a5d9-d531a6b597a1
+
 	column Masquer
 		dataType: int64
 		isHidden

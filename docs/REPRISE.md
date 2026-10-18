@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 4b (scénarios sauvegardés).
+Dernière mise à jour : 17/10/2026, après la passe de finition (version 1.0).
 
 ## 1. Où en est le projet
 
@@ -17,8 +17,8 @@ Dernière mise à jour : 17/10/2026, après le lot 4b (scénarios sauvegardés).
 | 3b | Dette et comptes trimestriels, État / agences (INSEE), dette négociable de l'État, taux et courbe BCE ; pages 8 et 9 | ✅ fusionné (PR #11) |
 | 4a | Laboratoire en direct : projection de la dette sur 10 ans, « Et si… ? » ; pages 11 et 12 | ✅ fusionné (PR #12) |
 | 4c | Prévisions de la Commission (AMECO, depuis 2011) et du FMI face à la réalité | ✅ fusionné (PR #13) |
-| 4b | Scénarios sauvegardés (moteur Python), trajectoires du gouvernement ; page « Mes scénarios » | PR ouverte (branche `feat/lot-4b-scenarios`) |
-| Finition | Accueil avec sommaire, info-bulles, repères de crises, thème, relecture : **fin de la version 1.0** | à faire |
+| 4b | Scénarios sauvegardés (moteur Python), trajectoires du gouvernement ; page « Mes scénarios » | ✅ fusionné (PR #14) |
+| Finition | Accueil avec sommaire, info-bulles de définition, repères de crises, thème : **version 1.0** | PR ouverte (branche `feat/finition-v1`) |
 | 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | en partie : connecteur INSEE et détail État / agences pour la dette (lot 3b) ; reste les comptes annuels et les prélèvements |
 | 5 → 8 | redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
@@ -54,6 +54,7 @@ Les notes de chaque lot (livré, vérifié, reporté) sont dans `docs/lots/`.
 | Validation | Job CI `modele-powerbi` (bibliothèque TOM) ; message d'erreur lisible dans les **annotations** du check (`gh api …/check-runs/<id>/annotations`) — les journaux bruts ne sont pas accessibles depuis la session |
 | Paramètres What-if | Tables calculées `GENERATESERIES` avec `extendedProperty ParameterMetadata` (comme Desktop) ; segment en mode `Single`. Valeur par défaut dans `SELECTEDVALUE` (0 = situation observée) |
 | Paramètres Power Query | Créés en requête vide : décocher « Activer le chargement » |
+| Info-bulles et thème | 22 pages d'info-bulle masquées (« Définition : … »), texte tiré de `ref_glossaire.csv` à la génération ; thème `StaticResources/RegisteredResources/FinancesPubliques.json` |
 | Générateur de pages | Lancer avec `uv run python …/generer_pages.py` (il lit `dim_edition_prevision.parquet` pour les couleurs du graphique en spaghetti) |
 | Rapport (PBIR) | Les fichiers JSON de `powerbi/FinancesPubliques.Report/definition/` sont validés contre les schémas officiels (`scripts/valider_pbir.py`, étape CI) et contre le modèle (`tests/test_pbir.py` : champs existants, aucun sigle affiché). Les pages sont produites par un générateur (non versionné, dans le dossier de travail de la session) ; vérifier avant de régénérer que le générateur reproduit à l'identique les JSON de `main` (`git status` vide), sinon le propriétaire les a retouchées dans Desktop et ce sont **les JSON qui font foi** |
 | Phrases (cartes) | Une carte trop petite coupe le texte par « … » au lieu de le faire défiler. Le générateur de pages vérifie, pour chaque phrase, que la plus longue attendue tient dans la carte (police 12 pt). Étalonnage sur Desktop : environ 0,70 × taille de police par caractère, 1,5 × par ligne, 24 px de marge verticale (une phrase de 175 caractères ne tient pas dans 616 × 92). Agrandir la carte ou raccourcir la phrase |
@@ -78,11 +79,13 @@ OCDE, BCE, OFGL, DG TAXUD (`taxation-customs.ec.europa.eu`, `webgate.ec.europa.e
 Bloqués constatés : `api.insee.fr`, `www.data.gouv.fr`, `www.aft.gouv.fr` (403). GitHub Actions a
 un accès Internet complet : en dernier recours, y faire tourner l'exploration.
 
-## 5. Prochaine étape : finition (version 1.0)
+## 5. Après la version 1.0
 
-Convenu avec le propriétaire : la version 1.0 s'arrête après la passe de finition (page d'accueil
-avec sommaire, info-bulles de définition, repères de crises, thème `powerbi/theme.json`, relecture
-des 16 pages). Les lots 5 à 8 et la fin du 2c sont optionnels.
+La version 1.0 est complète (convenu avec le propriétaire). Tout le reste est **optionnel** et ne
+démarre qu'à sa demande : lot 5 (redistribution), 6 (budgets votés), 7 (collectivités), 8 (OCDE),
+fin du 2c (comptes annuels État / agences, prélèvements au sens de l'INSEE), nouvelles trajectoires
+du gouvernement dans `ref_previsions_gouvernement.csv`. La collecte du lundi tourne seule ; en cas
+d'échec, une issue est ouverte automatiquement.
 
 Connecteurs disponibles : Eurostat, DG TAXUD, Commission européenne (AMECO : le site limite le débit,
 pause de 12 s entre archives et reprise en cas de coupure), FMI (DataMapper), INSEE (BDM, une entrée
