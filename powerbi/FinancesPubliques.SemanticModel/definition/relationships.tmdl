@@ -373,3 +373,19 @@ relationship fc9ab839-15bf-4af1-af5a-931f9c3f0b50
 relationship 4a7fc155-4327-496e-a231-153125b68d66
 	fromColumn: Fait_Previsions.source_id
 	toColumn: Dim_Source.source_id
+
+relationship 2afa041e-764d-47f5-95f6-8f58d71ff326
+	fromColumn: Fait_Projections.pays_code
+	toColumn: Dim_Pays.'Code pays'
+
+relationship 5be86b91-808a-422a-8dac-1a9d5daa0e41
+	fromColumn: Fait_Projections.date_id
+	toColumn: Dim_Date.date_id
+
+relationship 5e70f7a7-577e-4502-90b4-59af106bd784
+	fromColumn: Fait_Projections.scenario_id
+	toColumn: Dim_Scenario.'Code scénario'
+
+relationship d7e9e175-fc65-447d-9095-5ac4ee1ea8b7
+	fromColumn: Fait_Projections.source_id
+	toColumn: Dim_Source.source_id

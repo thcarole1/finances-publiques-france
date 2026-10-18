@@ -1,0 +1,75 @@
+/// Scénarios de projection : observé, tendanciel, gouvernement, personnels (scenarios/*.yml).
+table Dim_Scenario
+	lineageTag: cbf266ba-6f0c-4552-9135-543b625546dc
+
+	column 'Code scénario'
+		dataType: string
+		isHidden
+		lineageTag: f752e668-e6e1-43b9-acc9-2fe90d43df2b
+		summarizeBy: none
+		sourceColumn: scenario_id
+
+		annotation SummarizationSetBy = User
+
+	column 'Scénario'
+		dataType: string
+		lineageTag: 74bea83d-36d2-44e8-82b8-aac804790134
+		summarizeBy: none
+		sourceColumn: libelle
+		sortByColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	column 'Type de scénario'
+		dataType: string
+		lineageTag: faddb78b-7319-4ade-b5e1-64eb8dd8f3e3
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = User
+
+	column 'Scénario de base'
+		dataType: string
+		lineageTag: 4067077b-507e-4991-84cb-568d7d54da9f
+		summarizeBy: none
+		sourceColumn: base
+
+		annotation SummarizationSetBy = User
+
+	column 'Description du scénario'
+		dataType: string
+		lineageTag: 74766feb-57f8-4352-bd85-fae5e3cb60da
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = User
+
+	column Auteur
+		dataType: string
+		lineageTag: 34115d59-8ae4-4fd6-8df0-44d17a50f959
+		summarizeBy: none
+		sourceColumn: auteur
+
+		annotation SummarizationSetBy = User
+
+	column ordre_tri
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 564a120d-36b3-475d-8188-d228c74c3aaa
+		summarizeBy: none
+		sourceColumn: ordre_tri
+
+		annotation SummarizationSetBy = User
+
+	partition Dim_Scenario = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("dim_scenario")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

@@ -1,4 +1,4 @@
--- Prévisions de la Commission (AMECO) et du FMI, harmonisées : une ligne par institution ×
+-- Prévisions de la Commission (AMECO), du FMI et du gouvernement (France), harmonisées : une ligne par institution ×
 -- édition × pays × année cible × variable, valeur en % (du PIB ou de croissance).
 with variables as (select * from {{ ref('ref_variable_prevision') }}),
 pays as (select pays_code, code_iso3 from {{ ref('ref_pays') }} where code_iso3 is not null and code_iso3 <> ''),
@@ -22,10 +22,16 @@ fmi as (
     from {{ ref('stg_fmi__weo') }} as f
     join variables as v on v.code_fmi = f.variable
 ),
+gouvernement as (
+    select edition, 'FRA' as zone, annee, variable_code, valeur
+    from {{ ref('ref_previsions_gouvernement') }}
+),
 toutes as (
     select 'COMMISSION' as institution, * from ameco
     union all
     select 'FMI' as institution, * from fmi
+    union all
+    select 'GOUVERNEMENT' as institution, * from gouvernement
 )
 select
     t.institution,

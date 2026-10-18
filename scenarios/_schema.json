@@ -31,7 +31,7 @@
     "base": {
       "type": "string",
       "pattern": "^[A-Z][A-Z0-9_]+$",
-      "description": "Scénario de départ (Dim_Scenario), ex. une trajectoire officielle"
+      "description": "Scénario de départ : TENDANCIEL ou la trajectoire du gouvernement (ex. GOUV_PLF_2027)"
     },
     "description": {
       "type": "string"
@@ -50,8 +50,10 @@
           "deflateur_pib",
           "inflation",
           "taux_10_ans",
+          "taux_court",
           "taux_apparent",
           "solde_primaire",
+          "solde_public",
           "depense_publique",
           "prelevements_obligatoires",
           "ajustement_stock_flux"
@@ -99,8 +101,19 @@
           "type": "number",
           "minimum": 0.25,
           "maximum": 50
+        },
+        "duree_vie_stock": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 30,
+          "description": "Durée de vie moyenne restante de la dette de départ (8 ans par défaut)"
         }
       }
+    },
+    "pays": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "Pays (code ISO à deux lettres) ; FR par défaut"
     }
   }
 }

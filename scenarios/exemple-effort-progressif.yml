@@ -1,0 +1,23 @@
+# Exemple : un effort budgétaire progressif, à partir de la situation actuelle prolongée.
+# Le solde hors intérêts s'améliore de 0,5 point de PIB par an de 2027 à 2030, puis reste à ce niveau.
+id: PERSO_EXEMPLE_EFFORT
+libelle: "Exemple : effort de 0,5 point par an"
+auteur: thcarole1
+base: TENDANCIEL
+description: >
+  Amélioration du solde hors intérêts de 0,5 point de PIB par an de 2027 à 2030 (soit 2 points au
+  total), par rapport à la situation de 2025 prolongée ; croissance et taux inchangés.
+horizon: 2035
+hypotheses:
+  solde_primaire:
+    ecart:
+      2026: 0.0
+      2027: 0.5
+      2028: 1.0
+      2029: 1.5
+      2030: 2.0
+      2031: 2.0
+      2032: 2.0
+      2033: 2.0
+      2034: 2.0
+      2035: 2.0

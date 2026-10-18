@@ -1,7 +1,7 @@
 # Note de reprise
 
 À lire en premier par toute nouvelle session de travail sur ce dépôt.
-Dernière mise à jour : 17/10/2026, après le lot 4c (prévisions face à la réalité).
+Dernière mise à jour : 17/10/2026, après le lot 4b (scénarios sauvegardés).
 
 ## 1. Où en est le projet
 
@@ -16,8 +16,9 @@ Dernière mise à jour : 17/10/2026, après le lot 4c (prévisions face à la r�
 | 3a | Dette annuelle : montant, détenteurs, instruments, coût, effet boule de neige ; pages 6 et 7 | ✅ fusionné (PR #10) |
 | 3b | Dette et comptes trimestriels, État / agences (INSEE), dette négociable de l'État, taux et courbe BCE ; pages 8 et 9 | ✅ fusionné (PR #11) |
 | 4a | Laboratoire en direct : projection de la dette sur 10 ans, « Et si… ? » ; pages 11 et 12 | ✅ fusionné (PR #12) |
-| 4c | Prévisions de la Commission (AMECO, depuis 2011) et du FMI face à la réalité ; pages 13 et 14 | PR ouverte (branche `feat/lot-4c-previsions`) |
-| 4b | Scénarios sauvegardés (projection Python) ; trajectoires du gouvernement | à faire |
+| 4c | Prévisions de la Commission (AMECO, depuis 2011) et du FMI face à la réalité | ✅ fusionné (PR #13) |
+| 4b | Scénarios sauvegardés (moteur Python), trajectoires du gouvernement ; page « Mes scénarios » | PR ouverte (branche `feat/lot-4b-scenarios`) |
+| Finition | Accueil avec sommaire, info-bulles, repères de crises, thème, relecture : **fin de la version 1.0** | à faire |
 | 2c | INSEE : détail État/ODAC, prélèvements obligatoires au sens INSEE | en partie : connecteur INSEE et détail État / agences pour la dette (lot 3b) ; reste les comptes annuels et les prélèvements |
 | 5 → 8 | redistribution, budgets votés, collectivités, OCDE | à faire (`docs/01-cadrage.md`, § 5) |
 
@@ -77,16 +78,12 @@ OCDE, BCE, OFGL, DG TAXUD (`taxation-customs.ec.europa.eu`, `webgate.ec.europa.e
 Bloqués constatés : `api.insee.fr`, `www.data.gouv.fr`, `www.aft.gouv.fr` (403). GitHub Actions a
 un accès Internet complet : en dernier recours, y faire tourner l'exploration.
 
-## 5. Prochaine étape
+## 5. Prochaine étape : finition (version 1.0)
+
+Convenu avec le propriétaire : la version 1.0 s'arrête après la passe de finition (page d'accueil
+avec sommaire, info-bulles de définition, repères de crises, thème `powerbi/theme.json`, relecture
+des 16 pages). Les lots 5 à 8 et la fin du 2c sont optionnels.
 
 Connecteurs disponibles : Eurostat, DG TAXUD, Commission européenne (AMECO : le site limite le débit,
-pause de 12 s entre archives et reprise en cas de coupure), FMI (DataMapper), INSEE (BDM, `ingestion/sources/insee.py`, une entrée
+pause de 12 s entre archives et reprise en cas de coupure), FMI (DataMapper), INSEE (BDM, une entrée
 par flux dans `JEUX`, séries choisies par IDBANK dans `ref_series_insee.csv`), BCE.
-
-1. **Lot 4b** : scénarios YAML → projection Python → `Fait_Projections` (refinancement selon une
-   durée moyenne) ; trajectoires du gouvernement saisies depuis ses documents. Contrôle croisé
-   DAX / Python (`docs/08`, § 3).
-2. **Reste du lot 2c** : comptes annuels de l'État et des organismes (flux INSEE `CNA-2020-CSI`),
-   prélèvements obligatoires au sens de l'INSEE (43,2 % contre 42,8 % pour Eurostat en 2024).
-3. Échéancier titre par titre : AFT inaccessible depuis la session ; essai depuis GitHub Actions à
-   faire.

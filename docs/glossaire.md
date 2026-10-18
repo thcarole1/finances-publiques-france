@@ -265,3 +265,15 @@ contrat, et des CP chaque année au fil des paiements.
 
 **Long :** plus l'horizon est lointain, plus l'erreur est en général grande. Les comparaisons se font donc à horizon égal.
 
+### Scénario tendanciel
+
+**Court :** la projection qui prolonge la situation actuelle : même déficit hors intérêts, mêmes taux d'emprunt, une croissance ordinaire.
+
+**Long :** ce n'est pas une prévision, mais un point de comparaison : il montre où mènerait l'absence de changement. Les autres scénarios (trajectoire du gouvernement, scénarios personnels) se lisent par rapport à lui.
+
+### Refinancement de la dette
+
+**Court :** le remplacement des emprunts qui arrivent à échéance par de nouveaux emprunts, au taux du moment.
+
+**Long :** l'État ne rembourse presque jamais sa dette avec ses recettes : il réemprunte. Chaque année, environ un huitième de la dette est ainsi renouvelé. C'est pourquoi une hausse des taux met plusieurs années à se transmettre au taux moyen payé.
+

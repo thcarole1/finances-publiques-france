@@ -1,0 +1,170 @@
+/// F14 — Projections de la dette par scénario (moteur projection/), une ligne par scénario, pays et année. Non additive.
+table Fait_Projections
+	lineageTag: 2071632e-5206-4df8-af92-57deb7f37fe0
+
+	column scenario_id
+		dataType: string
+		isHidden
+		lineageTag: 704340d2-4a2d-488a-a9d4-c6e53f3fab7f
+		summarizeBy: none
+		sourceColumn: scenario_id
+
+		annotation SummarizationSetBy = User
+
+	column pays_code
+		dataType: string
+		isHidden
+		lineageTag: e1f24d23-b930-46b1-8967-cd5bac0374c4
+		summarizeBy: none
+		sourceColumn: pays_code
+
+		annotation SummarizationSetBy = User
+
+	column date_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2214b76f-f6ae-4802-bf0f-e3094201d734
+		summarizeBy: none
+		sourceColumn: date_id
+
+		annotation SummarizationSetBy = User
+
+	column dette_pib
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 1c8e9b00-2d42-453b-88a4-2704daf832fb
+		summarizeBy: none
+		sourceColumn: dette_pib
+
+		annotation SummarizationSetBy = User
+
+	column solde_pib
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 95ef10fa-36e5-4e85-993f-6b6ebc1f090e
+		summarizeBy: none
+		sourceColumn: solde_pib
+
+		annotation SummarizationSetBy = User
+
+	column solde_primaire_pib
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: ef27bdba-e773-415a-b1b0-df48f2e37098
+		summarizeBy: none
+		sourceColumn: solde_primaire_pib
+
+		annotation SummarizationSetBy = User
+
+	column interets_pib
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 143ae437-325e-4ff7-b0fa-deaa44bdc9b4
+		summarizeBy: none
+		sourceColumn: interets_pib
+
+		annotation SummarizationSetBy = User
+
+	column taux_apparent
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 3667dae9-1d99-477d-b406-35a07840248a
+		summarizeBy: none
+		sourceColumn: taux_apparent
+
+		annotation SummarizationSetBy = User
+
+	column taux_10_ans
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 405ce6fd-c61e-41d1-94c9-25fc21cfa15c
+		summarizeBy: none
+		sourceColumn: taux_10_ans
+
+		annotation SummarizationSetBy = User
+
+	column croissance_volume
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: cbfea3b0-d4df-41aa-8caf-c6cd90e908fa
+		summarizeBy: none
+		sourceColumn: croissance_volume
+
+		annotation SummarizationSetBy = User
+
+	column croissance_valeur
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 88139a63-7983-46f7-9a9a-f6f8f7ba9bd8
+		summarizeBy: none
+		sourceColumn: croissance_valeur
+
+		annotation SummarizationSetBy = User
+
+	column dette_meur
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: b3a684b0-ac39-4d73-bc64-46ebc38e2f59
+		summarizeBy: none
+		sourceColumn: dette_meur
+
+		annotation SummarizationSetBy = User
+
+	column interets_meur
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: fdc70a56-388e-407c-9108-1c171670d362
+		summarizeBy: none
+		sourceColumn: interets_meur
+
+		annotation SummarizationSetBy = User
+
+	column refinancement_meur
+		dataType: double
+		isHidden
+		formatString: 0.00
+		lineageTag: 27c3e085-c0de-4f7b-85ec-8dca46a95225
+		summarizeBy: none
+		sourceColumn: refinancement_meur
+
+		annotation SummarizationSetBy = User
+
+	column 'Est une projection'
+		dataType: boolean
+		lineageTag: 48d8e488-48ea-4379-b139-5cb6d9ef3261
+		summarizeBy: none
+		sourceColumn: est_projection
+
+		annotation SummarizationSetBy = User
+
+	column source_id
+		dataType: string
+		isHidden
+		lineageTag: 4a7b3f65-1bd1-4515-bb12-52a0fb4b7fc2
+		summarizeBy: none
+		sourceColumn: source_id
+
+		annotation SummarizationSetBy = User
+
+	partition Fait_Projections = m
+		mode: import
+		source =
+				let
+				    Source = fnLireParquet("fait_projections")
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table

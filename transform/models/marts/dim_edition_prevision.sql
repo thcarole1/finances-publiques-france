@@ -16,8 +16,9 @@ detail as (
 )
 select
     edition_id,
-    case institution when 'COMMISSION' then 'Commission européenne' else 'FMI' end as institution,
-    case institution when 'COMMISSION' then 'Commission' else 'FMI' end
+    case institution when 'COMMISSION' then 'Commission européenne' when 'FMI' then 'FMI'
+        else 'Gouvernement' end                                                    as institution,
+    case institution when 'COMMISSION' then 'Commission' when 'FMI' then 'FMI' else 'Gouvernement' end
         || ' – ' || saison || ' ' || annee_publication                              as libelle,
     saison,
     annee_publication,

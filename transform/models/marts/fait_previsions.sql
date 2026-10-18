@@ -21,7 +21,8 @@ select
     round(r.valeur, 4)                                             as realise,
     round(p.valeur - r.valeur, 4)                                  as ecart,
     round((p.valeur - r.valeur) * v.sens_optimisme, 4)             as ecart_optimisme,
-    case when p.institution = 'COMMISSION' then 'COMMISSION_AMECO' else 'FMI_WEO' end as source_id
+    case p.institution when 'COMMISSION' then 'COMMISSION_AMECO' when 'FMI' then 'FMI_WEO'
+        else 'GOUVERNEMENT_TRAJECTOIRES' end                       as source_id
 from p
 join v using (variable_code)
 left join r on r.pays_code = p.pays_code and r.annee = p.annee_cible and r.variable_code = p.variable_code
