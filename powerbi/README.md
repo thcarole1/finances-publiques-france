@@ -207,3 +207,9 @@ Année ou Pays.
 - **Thème** : `StaticResources/RegisteredResources/FinancesPubliques.json` (couleurs ; les polices restent celles de Power BI, pour lesquelles les cartes sont dimensionnées).
   Pour le modifier : **Affichage → Thèmes → Personnaliser le thème actuel**, puis enregistrer.
 
+### Régénérer les pages
+
+Les pages sont produites par `scripts/generer_rapport.py` (après `./scripts/construire.sh`).
+Il réécrit toutes les pages : une retouche faite à la main dans Power BI Desktop sur une page
+générée doit être reportée dans le script, sinon elle sera écrasée à la génération suivante.
+
