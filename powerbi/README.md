@@ -204,6 +204,6 @@ Année ou Pays.
   survol (22 pages d'info-bulle masquées, nommées « Définition : … »).
 - **Repères de crises** : au survol des courbes annuelles des pages 2 et 6, la période marquante
   de l'année (crise financière, crise des dettes souveraines, crise sanitaire, choc énergétique).
-- **Thème** : `StaticResources/RegisteredResources/FinancesPubliques.json` (couleurs, polices).
+- **Thème** : `StaticResources/RegisteredResources/FinancesPubliques.json` (couleurs ; les polices restent celles de Power BI, pour lesquelles les cartes sont dimensionnées).
   Pour le modifier : **Affichage → Thèmes → Personnaliser le thème actuel**, puis enregistrer.
 
