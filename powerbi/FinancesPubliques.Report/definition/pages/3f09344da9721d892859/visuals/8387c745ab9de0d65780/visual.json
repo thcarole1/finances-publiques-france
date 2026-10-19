@@ -64,6 +64,25 @@
               "displayName": "Recettes"
             }
           ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Repère historique"
+                }
+              },
+              "queryRef": "_Mesures.Repère historique",
+              "nativeQueryRef": "Repère historique",
+              "displayName": "Période"
+            }
+          ]
         }
       },
       "sortDefinition": {

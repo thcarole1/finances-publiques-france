@@ -102,3 +102,29 @@ def test_aucun_sigle_dans_les_textes_affiches(fichier):
     collecter(doc.get("visual", {}).get("visualContainerObjects", {}))
     fautifs = [t for t in textes if SIGLES_INTERDITS.search(t) and not t.startswith("Source")]
     assert not fautifs, f"Sigles ou codes dans un texte affiché : {fautifs}"
+
+
+def test_boutons_affichent_leur_texte():
+    """Bouton : « show » doit être hors sélecteur d'état, sinon le texte reste invisible."""
+    boutons = 0
+    for f in RAPPORT.glob("pages/*/visuals/*/visual.json"):
+        v = json.loads(f.read_text(encoding="utf-8"))["visual"]
+        if v["visualType"] != "actionButton":
+            continue
+        boutons += 1
+        texte = v["objects"]["text"]
+        assert any("selector" not in e and "show" in e["properties"] for e in texte), f
+        assert any("text" in e["properties"] for e in texte), f
+    assert boutons >= 15
+
+
+def test_theme_sans_police_imposee():
+    """Le thème ne change pas les polices : les cartes et étiquettes sont dimensionnées pour
+    les polices par défaut (une autre police coupe les chiffres en haut et en bas)."""
+    theme = json.loads(
+        (
+            RACINE / "powerbi/FinancesPubliques.Report/StaticResources/RegisteredResources/"
+            "FinancesPubliques.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert "textClasses" not in theme

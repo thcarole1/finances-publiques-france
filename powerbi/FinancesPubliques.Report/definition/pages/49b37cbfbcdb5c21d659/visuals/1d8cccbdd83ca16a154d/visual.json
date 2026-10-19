@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
-  "name": "f82fb8dd9f1fad15b72e",
+  "name": "1d8cccbdd83ca16a154d",
   "position": {
-    "x": 16,
-    "y": 488,
-    "z": 11000,
-    "height": 216,
-    "width": 1248,
-    "tabOrder": 11000
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "height": 240,
+    "width": 360,
+    "tabOrder": 0
   },
   "visual": {
     "visualType": "textbox",
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Comprendre",
+                    "value": "Biais d'optimisme",
                     "textStyle": {
                       "fontSize": "12pt",
                       "color": "#1F4E79",
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Les administrations publiques regroupent l'État et ses agences, les collectivités locales (communes, départements, régions) et la Sécurité sociale (retraites, assurance maladie, allocations familiales, assurance chômage).",
+                    "value": "L'écart moyen entre la prévision et la réalité, compté positivement quand la prévision annonçait mieux (moins de déficit, moins de dette, plus de croissance).",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"
@@ -42,29 +42,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Une grande partie de la dépense publique ne « disparaît » pas : elle est reversée aux ménages sous forme de retraites, d'allocations ou de remboursements de soins.",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#595959"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Les montants sont consolidés : un euro versé par l'État à une commune, puis dépensé par celle-ci, n'est compté qu'une fois.",
-                    "textStyle": {
-                      "fontSize": "11pt",
-                      "color": "#595959"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Source : Eurostat, comptes des administrations publiques. Les deux dernières années sont provisoires.",
+                    "value": "Plus de détails : page Glossaire.",
                     "textStyle": {
                       "fontSize": "9pt",
                       "color": "#595959"

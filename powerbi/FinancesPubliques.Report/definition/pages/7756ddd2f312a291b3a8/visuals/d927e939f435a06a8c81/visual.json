@@ -5,7 +5,7 @@
     "x": 16,
     "y": 128,
     "z": 4000,
-    "height": 52,
+    "height": 44,
     "width": 1248,
     "tabOrder": 4000
   },
@@ -19,7 +19,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Ce rapport répond à des questions simples sur l'argent public : combien est dépensé, qui paie, où va l'argent, et comment la France se situe parmi ses voisins. Choisissez un pays et une année en haut à droite, puis passez d'une page à l'autre avec les onglets ci-dessus.",
+                    "value": "Ce rapport répond à des questions simples sur l'argent public. Choisissez un pays et une année en haut à droite, puis une question dans le sommaire. Les montants sont consolidés : un euro versé par l'État à une commune n'est compté qu'une fois. Survolez un chiffre pour voir sa définition.",
                     "textStyle": {
                       "fontSize": "11pt",
                       "color": "#595959"

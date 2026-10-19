@@ -172,7 +172,7 @@ Réglages utilisés (pour le refaire à la main au besoin) : **Source** = `Pres_
 **Source du flux** ; **Destination** = **Destination du flux** ; **Weight** = mesure **Flux (Md€)** ;
 segments Pays, Année et « Qui paie ? » (Lecture du payeur) avec une seule valeur chacun.
 
-## Pages du rapport (lots R1 à 4c)
+## Pages du rapport (version 1.0)
 
 | Page | Question | Contenu |
 |---|---|---|
@@ -196,3 +196,14 @@ segments Pays, Année et « Qui paie ? » (Lecture du payeur) avec une seule val
 Les segments **Pays** et **Année** sont synchronisés entre les pages (France et 2024 par défaut).
 Les courbes de la page 2 et les classements de la page 6 ignorent volontairement le segment
 Année ou Pays.
+
+### Finition (version 1.0)
+
+- **Accueil** : un sommaire de 15 boutons, un par question ; cliquer ouvre la page.
+- **Définitions au survol** : 25 chiffres et graphiques affichent la définition du glossaire au
+  survol (22 pages d'info-bulle masquées, nommées « Définition : … »).
+- **Repères de crises** : au survol des courbes annuelles des pages 2 et 6, la période marquante
+  de l'année (crise financière, crise des dettes souveraines, crise sanitaire, choc énergétique).
+- **Thème** : `StaticResources/RegisteredResources/FinancesPubliques.json` (couleurs ; les polices restent celles de Power BI, pour lesquelles les cartes sont dimensionnées).
+  Pour le modifier : **Affichage → Thèmes → Personnaliser le thème actuel**, puis enregistrer.
+

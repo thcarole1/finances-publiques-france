@@ -6,7 +6,26 @@ Ce dépôt construit un modèle de données ouvert et versionné sur les finance
 comparées à l'Union européenne et aux grands pays de l'OCDE, ainsi qu'un rapport Power BI
 pédagogique pour l'explorer et y tester des scénarios budgétaires.
 
-## Périmètre
+## Version 1.0 (octobre 2026)
+
+Le rapport compte 16 pages, du plus simple au plus détaillé :
+
+| Thème | Pages |
+|---|---|
+| Comprendre | 1. Accueil (sommaire) · 2. Combien ? · 3. Qui paie ? · 4. Où va l'argent ? · 5. Qui fait quoi ? |
+| La dette | 6. La dette · 7. À qui doit-on ? · 8. Les derniers trimestres · 9. Les taux d'intérêt |
+| Comparer | 10. Comparer (pays européens) |
+| Simuler | 11. Projeter la dette · 12. Et si… ? · 13. Mes scénarios |
+| Prévoir | 14. Prévisions et réalité · 15. Qui se trompe ? |
+| Glossaire | 16. Glossaire (et définitions au survol des chiffres) |
+
+Sources : Eurostat, INSEE, Banque centrale européenne, Commission européenne (prévisions AMECO
+depuis 2011, listes nationales des impôts), FMI, documents budgétaires du gouvernement. Les
+données se mettent à jour chaque lundi (GitHub Actions). Le reste du périmètre ci-dessous
+(redistribution, budgets votés, collectivités, pays hors UE) est prévu pour des versions
+ultérieures (`docs/REPRISE.md`).
+
+## Périmètre visé
 
 - **Toutes les administrations publiques** (État et organismes centraux, collectivités locales,
   Sécurité sociale), en vues consolidée et non consolidée, avec les transferts entre elles.
