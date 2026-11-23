@@ -1,5 +1,11 @@
 -- QC-B13 — La dette totale est la même dans les trois tables : par sous-secteur (consolidée),
 -- par instrument et par détenteur (quand le détail par détenteur existe).
+-- Avertissement : Eurostat publie ces tables à des dates différentes. Après la notification
+-- d'octobre (procédure de déficit excessif), la dette par sous-secteur est révisée environ un mois
+-- avant le détail par instrument et par détenteur (2026 : 21 octobre, puis 18 novembre). Pendant
+-- ce décalage, les totaux diffèrent sans erreur de notre part : bloquer la collecte priverait le
+-- rapport de toutes les autres mises à jour (quatre semaines en 2026).
+{{ config(severity = 'warn') }}
 with s as (
     select pays_code, date_id, sum(valeur_meur) as par_sous_secteur
     from {{ ref('fait_dette') }} group by all

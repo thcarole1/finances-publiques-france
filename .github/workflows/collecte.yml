@@ -68,7 +68,9 @@ jobs:
           uv run python -m ingestion.sources.fmi --ignorer-existants
 
       - name: Construire le modèle et exécuter les contrôles qualité
-        run: ./scripts/construire.sh
+        run: |
+          set -o pipefail
+          ./scripts/construire.sh 2>&1 | tee construire.log
 
       - name: Archiver les instantanés bruts (Releases)
         run: uv run python scripts/donnees_brutes.py publier
@@ -108,6 +110,17 @@ jobs:
       - name: Ouvrir une issue d'alerte
         if: failure() && github.event_name == 'schedule'
         run: |
+          controles=$(grep -ao "in test [a-z0-9_]*" construire.log 2>/dev/null | sed 's/in test /- /' | sort -u || true)
+          {
+            echo "La collecte planifiée a échoué (source indisponible ou contrôle qualité bloquant)."
+            echo
+            echo "Journal : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            if [ -n "${controles}" ]; then
+              echo
+              echo "Contrôles qualité en échec :"
+              echo "${controles}"
+            fi
+          } > corps_issue.md
           gh issue create \
             --title "Échec de la collecte du $(date -u +%Y-%m-%d)" \
-            --body "La collecte planifiée a échoué (source indisponible ou contrôle qualité bloquant). Journal : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            --body-file corps_issue.md
