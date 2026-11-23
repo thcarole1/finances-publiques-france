@@ -52,7 +52,18 @@ ultérieures (`docs/REPRISE.md`).
 | `scripts/` | Construction du modèle, validation des scénarios |
 | `contracts/` | Tolérances des contrôles qualité |
 
-## Démarrage rapide
+## Ouvrir le rapport
+
+Aucune installation n'est nécessaire, à part Power BI Desktop :
+
+1. Sur GitHub : bouton vert **Code** → **Download ZIP**, puis décompresser l'archive.
+2. Ouvrir `powerbi\FinancesPubliques.pbip` dans Power BI Desktop.
+3. **Accueil** → **Actualiser** : les données à jour sont téléchargées depuis GitHub.
+
+Lire les fichiers du ZIP sans connexion, ou tester une branche : voir
+[`powerbi/README.md`](powerbi/README.md#consulter-les-données-dans-power-bi-desktop).
+
+## Démarrage rapide (développement)
 
 Prérequis : [uv](https://docs.astral.sh/uv/) (installe Python 3.12 et les dépendances).
 
