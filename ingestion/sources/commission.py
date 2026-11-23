@@ -79,16 +79,54 @@ def editions_archive(page_html: str) -> list[Edition]:
     return list(editions.values())
 
 
+MOIS = {
+    m: i
+    for i, m in enumerate(
+        [
+            "january",
+            "february",
+            "march",
+            "april",
+            "may",
+            "june",
+            "july",
+            "august",
+            "september",
+            "october",
+            "november",
+            "december",
+        ],
+        start=1,
+    )
+}
+
+
+def saison_du_mois(mois: int) -> str:
+    """Hiver (janvier-mars), printemps (avril-août), automne (septembre-décembre)."""
+    return "hiver" if mois <= 3 else "printemps" if mois <= 8 else "automne"
+
+
 def edition_courante(page_html: str) -> Edition:
+    """Édition en ligne : d'après la mention « Last update: … - Autumn 2026 » ou, depuis
+    novembre 2026 (mention retirée de la page), d'après la date du fichier « All zipped TXT »."""
     texte = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", page_html))
-    m = re.search(r"Last update:[^-]*-\s*((Spring|Autumn|Winter)\s+\d{4})", texte, re.IGNORECASE)
     lien = re.search(
         r'<a href="(/document/download/[^"]+)"[^>]*data-untranslated-label="AMECO - All zipped TXT',
         page_html,
     )
-    if not (m and lien):
+    m = re.search(r"Last update:[^-]*-\s*((Spring|Autumn|Winter)\s+\d{4})", texte, re.IGNORECASE)
+    ident = identifiant(m[1]) if m else None
+    if not ident:
+        d = re.search(
+            r"All zipped TXT files</div>.*?primary-meta-item\">\s*\d{1,2}\s+([A-Za-z]+)\s+(\d{4})",
+            page_html,
+            re.DOTALL,
+        )
+        if d and d[1].lower() in MOIS:
+            ident = f"{d[2]}-{saison_du_mois(MOIS[d[1].lower()])}"
+    if not (ident and lien):
         raise RuntimeError("Édition courante d'AMECO introuvable sur la page de téléchargement.")
-    return Edition(identifiant(m[1]), urljoin(SITE, lien[1]))
+    return Edition(ident, urljoin(SITE, lien[1]))
 
 
 def extraire(contenu_zip: bytes) -> bytes:
