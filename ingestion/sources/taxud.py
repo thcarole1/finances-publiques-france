@@ -7,6 +7,10 @@ annuelle, sous une URL qui change : on la retrouve sur la page « Data on Taxati
 
 Usage :
     uv run python -m ingestion.sources.taxud
+    uv run python -m ingestion.sources.taxud --fichier "NTL edition 2026 web.xlsx" --edition 2026
+
+Le site de la Commission refuse parfois les téléchargements automatiques (erreur 429) : le
+fichier, téléchargé à la main depuis la page ci-dessous, s'intègre alors avec --fichier.
 """
 
 from __future__ import annotations
@@ -55,10 +59,32 @@ def collecter(date_collecte: date | None = None, racine: Path = RACINE_RAW) -> P
     return inst.dossier
 
 
+def integrer_fichier(
+    fichier: Path, edition: str | None, date_collecte: date | None = None, racine: Path = RACINE_RAW
+) -> Path:
+    """Instantané à partir d'un fichier téléchargé à la main."""
+    contenu = fichier.read_bytes()
+    if contenu[:2] != b"PK":
+        raise RuntimeError(f"{fichier} n'est pas un classeur Excel.")
+    with Instantane(SOURCE, JEU, date_collecte, None, racine) as inst:
+        inst.ajouter(
+            "ntl.xlsx",
+            contenu,
+            url=PAGE,
+            parametres={"edition": edition, "telechargement": "manuel"},
+        )
+    return inst.dossier
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--ignorer-existants", action="store_true")
+    parser.add_argument("--fichier", type=Path, help="Classeur NTL téléchargé à la main.")
+    parser.add_argument("--edition", help="Année d'édition du classeur (avec --fichier).")
     args = parser.parse_args(argv)
+    if args.fichier:
+        print(f"  → {integrer_fichier(args.fichier, args.edition)}", file=sys.stderr)
+        return 0
     if args.ignorer_existants and dossier_instantane(SOURCE, JEU, date.today()).exists():
         print("Collecte DG TAXUD : déjà collectée aujourd'hui, ignorée", file=sys.stderr)
         return 0
