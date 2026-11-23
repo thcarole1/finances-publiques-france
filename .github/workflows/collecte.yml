@@ -53,19 +53,33 @@ jobs:
       - name: Collecter Eurostat
         run: uv run python -m ingestion.sources.eurostat --ignorer-existants ${{ inputs.jeux }}
 
+      # Sources secondaires : une source indisponible n'empêche pas la mise à jour des autres ;
+      # le modèle est alors construit avec son dernier instantané publié (Releases), et une issue
+      # « Collecte partielle » le signale. Eurostat, source principale, reste bloquante.
       - name: Collecter la DG TAXUD (listes nationales des impôts)
+        id: taxud
+        continue-on-error: true
         run: uv run python -m ingestion.sources.taxud --ignorer-existants
 
       - name: Collecter l'INSEE (dette trimestrielle, dette négociable de l'État)
+        id: insee
+        continue-on-error: true
         run: uv run python -m ingestion.sources.insee --ignorer-existants
 
       - name: Collecter la BCE (courbe des taux de la zone euro)
+        id: bce
+        continue-on-error: true
         run: uv run python -m ingestion.sources.bce --ignorer-existants
 
-      - name: Collecter les prévisions (Commission européenne, FMI)
-        run: |
-          uv run python -m ingestion.sources.commission
-          uv run python -m ingestion.sources.fmi --ignorer-existants
+      - name: Collecter les prévisions de la Commission européenne
+        id: commission
+        continue-on-error: true
+        run: uv run python -m ingestion.sources.commission
+
+      - name: Collecter les prévisions du FMI
+        id: fmi
+        continue-on-error: true
+        run: uv run python -m ingestion.sources.fmi --ignorer-existants
 
       - name: Construire le modèle et exécuter les contrôles qualité
         run: |
@@ -97,6 +111,32 @@ jobs:
           else
             git commit -m "${message}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Signaler les sources indisponibles
+        if: >-
+          !cancelled() && (steps.taxud.outcome == 'failure' || steps.insee.outcome == 'failure'
+          || steps.bce.outcome == 'failure' || steps.commission.outcome == 'failure'
+          || steps.fmi.outcome == 'failure')
+        run: |
+          {
+            echo "Collecte du $(date -u +%Y-%m-%d) : ces sources n'ont pas pu être téléchargées."
+            echo "Le rapport utilise leur dernière version publiée ; les autres sources sont à jour."
+            echo
+            [ "${{ steps.taxud.outcome }}" = failure ] && echo "- Commission européenne (fiscalité) : listes nationales des impôts"
+            [ "${{ steps.insee.outcome }}" = failure ] && echo "- INSEE : dette trimestrielle, dette négociable de l'État"
+            [ "${{ steps.bce.outcome }}" = failure ] && echo "- Banque centrale européenne : courbe des taux"
+            [ "${{ steps.commission.outcome }}" = failure ] && echo "- Commission européenne : prévisions (AMECO)"
+            [ "${{ steps.fmi.outcome }}" = failure ] && echo "- FMI : prévisions"
+            echo
+            echo "Journal : ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          } > corps_partielle.md || true
+          cat corps_partielle.md
+          if [ "${GITHUB_EVENT_NAME}" = schedule ]; then
+            gh issue create --title "Collecte partielle du $(date -u +%Y-%m-%d)" \
+              --body-file corps_partielle.md
+          else
+            echo "::warning::Collecte partielle : voir le détail ci-dessus."
           fi
 
       - name: Conserver les données brutes pour diagnostic

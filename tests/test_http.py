@@ -18,3 +18,18 @@ def test_retry_after_entier_et_illisible():
 def test_session_utilise_retry_tolerant():
     adaptateur = creer_session().get_adapter("https://exemple.org")
     assert isinstance(adaptateur.max_retries, RetryTolerant)
+
+
+def test_taxud_integrer_fichier(tmp_path):
+    import io
+    import zipfile
+
+    from ingestion.sources.taxud import integrer_fichier
+
+    tampon = io.BytesIO()
+    with zipfile.ZipFile(tampon, "w") as z:
+        z.writestr("x.xml", "<a/>")
+    classeur = tmp_path / "ntl.xlsx"
+    classeur.write_bytes(tampon.getvalue())
+    dossier = integrer_fichier(classeur, "2026", racine=tmp_path / "raw")
+    assert (dossier / "ntl.xlsx").read_bytes() == tampon.getvalue()
