@@ -134,11 +134,45 @@ L'envoi par le site GitHub ignore le `.gitignore` : les fichiers locaux `.pbi/lo
 et `.pbi/cache.abf` partiront aussi. Pas d'inquiétude, je les retirerai de la branche avant fusion
 (ils restent sur ton PC).
 
-## Passer en mode local (plus tard)
+## Consulter les données dans Power BI Desktop
 
-Utile quand tu auras cloné le dépôt et voudras tester des données construites sur ton poste :
-**Accueil → Gérer les paramètres** → `ModeSource` = `Local`, `DossierLocal` = chemin du dossier
-`data\curated\` de ton clone, **terminé par `\`**.
+Le rapport lit les tables `data/curated/*.parquet` à l'un de deux endroits, selon le paramètre
+`ModeSource` : sur GitHub (réglage par défaut) ou dans un dossier de l'ordinateur.
+
+### Méthode 1 — depuis GitHub (par défaut)
+
+1. Ouvrir `powerbi\FinancesPubliques.pbip` dans Power BI Desktop.
+2. Ruban **Accueil** → **Actualiser**.
+
+Les données de la branche `main` sont téléchargées : ce sont celles de la dernière collecte
+fusionnée (chaque lundi).
+
+### Méthode 2 — depuis les fichiers du ZIP (sans connexion)
+
+1. Télécharger le ZIP du dépôt (**Code** → **Download ZIP**) et le décompresser, par exemple dans
+   `C:\finances-publiques-france-main\`.
+2. Ouvrir `powerbi\FinancesPubliques.pbip` depuis ce dossier.
+3. Ruban **Accueil** → **Transformer les données** (flèche ▾) → **Modifier les paramètres**.
+4. Régler :
+   - **ModeSource** : `Local` ;
+   - **DossierLocal** : le chemin du dossier `data\curated\` du ZIP, **terminé par `\`**,
+     par exemple `C:\finances-publiques-france-main\data\curated\`.
+5. **OK**, puis **Appliquer les modifications** (bandeau jaune) ou **Actualiser**.
+
+Même principe avec un clone Git : `DossierLocal` = dossier `data\curated\` du clone.
+
+### Tester une branche pas encore fusionnée
+
+En mode `GitHub`, mettre le nom de la branche dans le paramètre **BrancheGitHub** (par exemple
+`fix/collecte-robuste`), puis actualiser. Remettre `main` ensuite.
+
+### Pièges fréquents
+
+| Symptôme | Cause | Solution |
+|---|---|---|
+| « Fichier introuvable » (`…curatedDim_Date.parquet`) | `DossierLocal` sans `\` final | Ajouter `\` à la fin du chemin |
+| Les données ne changent plus | Mode `Local` : le dossier du ZIP est figé au jour du téléchargement | Repasser en mode `GitHub`, ou télécharger un nouveau ZIP |
+| Erreur après un test de branche | Branche fusionnée puis supprimée | Remettre `main` dans **BrancheGitHub** |
 
 Aucune transformation métier dans Power Query : les types viennent du Parquet, la logique vit
 dans `transform/` (dbt).
