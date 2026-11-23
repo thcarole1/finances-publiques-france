@@ -139,25 +139,30 @@ et `.pbi/cache.abf` partiront aussi. Pas d'inquiétude, je les retirerai de la b
 Le rapport lit les tables `data/curated/*.parquet` à l'un de deux endroits, selon le paramètre
 `ModeSource` : sur GitHub (réglage par défaut) ou dans un dossier de l'ordinateur.
 
-### Méthode 1 — depuis GitHub (par défaut)
+### Avant tout : récupérer le projet complet
 
-1. Ouvrir `powerbi\FinancesPubliques.pbip` dans Power BI Desktop.
+Le fichier `FinancesPubliques.pbip` n'est qu'un raccourci vers les dossiers
+`FinancesPubliques.Report` (pages) et `FinancesPubliques.SemanticModel` (modèle), qui doivent se
+trouver à côté de lui. Télécharger donc tout le dépôt : sur GitHub, **Code** → **Download ZIP**,
+puis décompresser l'archive, par exemple dans `C:\finances-publiques-france-main\`.
+
+### Méthode 1 — données lues sur GitHub (par défaut)
+
+1. Ouvrir `powerbi\FinancesPubliques.pbip` depuis le dossier décompressé.
 2. Ruban **Accueil** → **Actualiser**.
 
 Les données de la branche `main` sont téléchargées : ce sont celles de la dernière collecte
-fusionnée (chaque lundi).
+fusionnée (chaque lundi). Les fichiers de données du ZIP ne servent pas dans ce mode.
 
-### Méthode 2 — depuis les fichiers du ZIP (sans connexion)
+### Méthode 2 — données lues dans le ZIP (sans connexion)
 
-1. Télécharger le ZIP du dépôt (**Code** → **Download ZIP**) et le décompresser, par exemple dans
-   `C:\finances-publiques-france-main\`.
-2. Ouvrir `powerbi\FinancesPubliques.pbip` depuis ce dossier.
-3. Ruban **Accueil** → **Transformer les données** (flèche ▾) → **Modifier les paramètres**.
-4. Régler :
+1. Ouvrir `powerbi\FinancesPubliques.pbip` depuis le dossier décompressé.
+2. Ruban **Accueil** → **Transformer les données** (flèche ▾) → **Modifier les paramètres**.
+3. Régler :
    - **ModeSource** : `Local` ;
    - **DossierLocal** : le chemin du dossier `data\curated\` du ZIP, **terminé par `\`**,
      par exemple `C:\finances-publiques-france-main\data\curated\`.
-5. **OK**, puis **Appliquer les modifications** (bandeau jaune) ou **Actualiser**.
+4. **OK**, puis **Appliquer les modifications** (bandeau jaune) ou **Actualiser**.
 
 Même principe avec un clone Git : `DossierLocal` = dossier `data\curated\` du clone.
 
